@@ -16,7 +16,6 @@ protocol DetailGameDataStore: ObservableObject  {
     var game: MLBGame? { get set }
     var headerViewModel: DetailGame.DetailGame.ViewModel.DetailGameHeader { get set }
     var infoViewModel: DetailGame.DetailGame.ViewModel.InfoViewModel { get set }
-    var title: String { get set }
 }
 
 extension DetailGameDataStore {
@@ -26,8 +25,7 @@ extension DetailGameDataStore {
     }
     
     var title: String {
-        get { return "" }
-        set { self.title = newValue }
+        get { return game?.abbreviation ?? "" }
     }
     
     var headerViewModel: DetailGame.DetailGame.ViewModel.DetailGameHeader {

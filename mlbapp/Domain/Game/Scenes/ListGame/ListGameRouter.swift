@@ -23,6 +23,7 @@ class ListGameRouter: ObservableObject, ListGameRoutingLogic {
         let view = DetailGameView(interactor: interactor)
 
         interactor.game = game
+        //interactor.title = game.abbreviation
         interactor.presenter = presenter
         presenter.view = view
         
