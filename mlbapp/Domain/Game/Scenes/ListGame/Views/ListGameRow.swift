@@ -17,6 +17,14 @@ struct ListGameRow: View {
     private var awayRecord: String {
         return "\(viewModel.game.awayTeamWins)-\(viewModel.game.awayTeamLosses)"
     }
+    
+    private var awayTeamDidWin: Bool {
+        return viewModel.game.awayTeamScore > viewModel.game.homeTeamScore
+    }
+    
+    private var homeTeamDidWin: Bool {
+        return viewModel.game.awayTeamScore < viewModel.game.homeTeamScore
+    }
 
     var body: some View {
         VStack() {
@@ -78,7 +86,9 @@ struct ListGameRow: View {
                     .lineLimit(1)
                     .frame(width: 56)
                     .background(
-                        Color.secondary.opacity(0.1)
+                        Color
+                            .secondary
+                            .opacity(0.1)
                             .frame(maxWidth: .infinity)
                     )
                     .cornerRadius(12)
@@ -86,6 +96,7 @@ struct ListGameRow: View {
             }
             .font(.system(size: 17, weight: .medium, design: .default))
         }
+        .padding()
     }
 
 }
@@ -103,7 +114,8 @@ struct ListGameRow_Previews: PreviewProvider {
                                                awayTeamScore: 2,
                                                awayTeamWins: 4,
                                                awayTeamLosses: 120,
-                                               venueName: "Dodgers Stadium")
+                                               venueName: "Dodgers Stadium",
+                                               gameType: "R")
         let viewModel = ListGame.GameLookupItem.ViewModel(game: game)
         ListGameRow(viewModel: viewModel)
             .previewLayout(.fixed(width: 400, height: 200))

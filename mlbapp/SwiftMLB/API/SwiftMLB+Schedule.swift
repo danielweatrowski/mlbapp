@@ -10,14 +10,26 @@ import Combine
 
 public extension SwiftMLB {
     
-    static func schedule(from startDate: Date, to endDate: Date, teamIdentifier: Int, opponentIdentifier: Int?) -> AnyPublisher<GameLookupResponse, Error> {
+    struct ScheduleParameters {
+        var startDate: Date
+        var endDate: Date
+        var teamIdentifier: Int
+        var opponentIdentifier: Int?
+        var gameType: String?
+    }
+    
+    static func schedule(parameters: ScheduleParameters) -> AnyPublisher<GameLookupResponse, Error> {
         // format dates
-        let startDateFormatted = startDate.formatted(date: .numeric, time: .omitted)
-        let endDateFormatted = endDate.formatted(date: .numeric, time: .omitted)
-        var urlString = "https://statsapi.mlb.com/api/v1/schedule?startDate=\(startDateFormatted)&endDate=\(endDateFormatted)&teamId=\(teamIdentifier)"
+        let startDateFormatted = parameters.startDate.formatted(date: .numeric, time: .omitted)
+        let endDateFormatted = parameters.endDate.formatted(date: .numeric, time: .omitted)
+        var urlString = "https://statsapi.mlb.com/api/v1/schedule?startDate=\(startDateFormatted)&endDate=\(endDateFormatted)&teamId=\(parameters.teamIdentifier)"
         
-        if let opponentIdentifier = opponentIdentifier {
+        if let opponentIdentifier = parameters.opponentIdentifier {
             urlString.append("&opponentId=\(opponentIdentifier)")
+        }
+        
+        if let gameType = parameters.gameType {
+            urlString.append("&gameType=\(gameType)")
         }
         
         urlString.append("&sportId=1")

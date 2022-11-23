@@ -14,6 +14,7 @@ enum LookupGame {
             var awayTeamIndex: Int
             var startDate: Date
             var endDate: Date
+            var onlyRegularSeason: Bool
         }
         
         struct Response {
@@ -37,7 +38,7 @@ enum LookupGame {
             }
         }
     }
-    
+    // Domain model
     struct LookupGameResult: Identifiable {
         
         var id: Int
@@ -52,6 +53,22 @@ enum LookupGame {
         var awayTeamWins: Int
         var awayTeamLosses: Int
         var venueName: String
+        var gameType: String
+        
+//        init() {
+//            self.id = 0
+//            self.link = ""
+//            self.homeTeam = .any
+//            self.homeTeamWins = 0
+//            self.homeTeamLosses = 0
+//            self.homeTeamScore = 0
+//            self.awayTeam = .any
+//            self.awayTeamWins = 0
+//            self.awayTeamLosses = 0
+//            self.awayTeamScore = 0
+//            self.venueName = ""
+//            self.gameType = "U"
+//        }
         
     }
 }
@@ -86,7 +103,8 @@ extension GameLookupResponse {
                                                                awayTeamScore: teams.away.score,
                                                                awayTeamWins: teams.away.leagueRecord.wins,
                                                                awayTeamLosses: teams.away.leagueRecord.losses,
-                                                               venueName: game.venue.name)
+                                                               venueName: game.venue.name,
+                                                               gameType: game.gameType)
             
             domainGames.append(domainGameResult)
         }

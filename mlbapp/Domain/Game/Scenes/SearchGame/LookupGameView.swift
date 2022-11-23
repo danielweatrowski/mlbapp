@@ -12,7 +12,7 @@ protocol SearchGameDisplayLogic {
 }
 struct LookupGameView: View {
     var interactor: SearchGameBusinessLogic?
-    @ObservedObject var router: SearchGameRouter
+    @ObservedObject var router: LookupGameRouter
     
     @State private var selectedStartDate = Date()
     @State private var selectedEndDate = Date()
@@ -27,6 +27,7 @@ struct LookupGameView: View {
     @State private var showingEndDatePicker = false
     
     @State private var hideScores = false
+    @State private var isRegularSeason = true
     
     // Navigation
     @State private var showingLookupGameResults: Bool = false
@@ -69,6 +70,10 @@ struct LookupGameView: View {
                         Text("Hide Scores")
                     }
                     
+                    Toggle(isOn: $isRegularSeason) {
+                        Text("Regular Season Only")
+                    }
+                    
                 } header: {
                     Text("Options")
                 }
@@ -99,7 +104,8 @@ struct LookupGameView: View {
         let request = LookupGame.LookupGame.Request(homeTeamIndex: selectedHomeTeamIndex,
                                                     awayTeamIndex: selectedAwayTeamIndex,
                                                     startDate: selectedStartDate,
-                                                    endDate: selectedEndDate)
+                                                    endDate: selectedEndDate,
+                                                    onlyRegularSeason: isRegularSeason)
         
         interactor?.createSearchGame(request: request)
     }
@@ -119,7 +125,7 @@ extension LookupGameView: SearchGameDisplayLogic {
 
 struct GameSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        let router = SearchGameRouter()
+        let router = LookupGameRouter()
         LookupGameView(router: router)
     }
 }

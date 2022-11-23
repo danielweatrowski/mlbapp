@@ -11,7 +11,7 @@ import SwiftUI
 struct mlbappApp: App {
     var body: some Scene {
         WindowGroup {
-            let router = SearchGameRouter()
+            let router = LookupGameRouter()
 
             LookupGameView(router: router).configureView()
         }

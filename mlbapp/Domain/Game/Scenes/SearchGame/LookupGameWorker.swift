@@ -25,8 +25,16 @@ class LookupGameWorker {
     func lookupGames(for request: LookupGame.LookupGame.Request) {
         let team = MLBTeam(rawValue: request.homeTeamIndex)!
         let opponent = MLBTeam(rawValue: request.awayTeamIndex)!
+        let gameType = request.onlyRegularSeason ? "R" : nil
 
-        cancellation = SwiftMLB.schedule(from: request.startDate, to: request.endDate, teamIdentifier: team.id, opponentIdentifier: opponent == .any ? nil : opponent.id)
+        
+        let searchParameters = SwiftMLB.ScheduleParameters(startDate: request.startDate,
+                                                           endDate: request.endDate,
+                                                           teamIdentifier: team.id,
+                                                           opponentIdentifier: opponent == .any ? nil : opponent.id,
+                                                           gameType: gameType)
+
+        cancellation = SwiftMLB.schedule(parameters: searchParameters)
             .sink(
                 receiveCompletion: { completion in
                     switch(completion) {

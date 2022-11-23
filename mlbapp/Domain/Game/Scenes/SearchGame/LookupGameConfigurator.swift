@@ -8,11 +8,13 @@
 import SwiftUI
 
 extension LookupGameView {
+    // TODO: Remove
     func configureView() -> some View {
         var view = self
         let interactor = SearchGameInteractor()
         let presenter = SearchGamePresenter()
-        let router = SearchGameRouter()
+        let router = LookupGameRouter()
+        router.dataStore = interactor
         view.interactor = interactor
         view.router = router
         interactor.presenter = presenter

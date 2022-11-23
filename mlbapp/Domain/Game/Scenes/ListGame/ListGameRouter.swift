@@ -8,5 +8,27 @@
 import Foundation
 
 protocol ListGameRoutingLogic {
+    func routeToDetailGame(game: LookupGame.LookupGameResult) -> DetailGameView<DetailGameInteractor> 
+}
+
+protocol ListGameDataPassing {
+    var dataStore: ListGameDataStore? { get }
+}
+
+class ListGameRouter: ObservableObject, ListGameRoutingLogic {
+    
+    func routeToDetailGame(game: LookupGame.LookupGameResult) -> DetailGameView<DetailGameInteractor> {
+        let presenter = DetailGamePresenter()
+        let interactor = DetailGameInteractor()
+        let view = DetailGameView(interactor: interactor)
+
+        interactor.game = game
+        interactor.presenter = presenter
+        presenter.view = view
+        
+        return view
+        
+    }
+
     
 }

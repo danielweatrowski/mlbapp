@@ -16,15 +16,18 @@ protocol SearchGameBusinessLogic {
 }
 
 protocol SearchGameDataStore {
-    
+    var lookupResults: [LookupGame.LookupGameResult] { get set }
 }
 
-class SearchGameInteractor: SearchGameBusinessLogic {
+class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
     
     var presenter: LookupGamePresentationLogic?
     private var worker: LookupGameWorker = LookupGameWorker()
     private var cancellable: AnyCancellable?
     
+    // Data store
+    var lookupResults: [LookupGame.LookupGameResult] = []
+
     init() {
         // subscribe to worker publisher to receive the lookup results
         subscribeToWorker()
@@ -42,6 +45,7 @@ class SearchGameInteractor: SearchGameBusinessLogic {
             if games.isEmpty {
                 self?.presenter?.presentLookupError(error: .noGamesFound)
             } else {
+                self?.lookupResults = games
                 let response = LookupGame.LookupGame.Response(results: games)
                 self?.presenter?.presentLookupGames(response: response)
             }
