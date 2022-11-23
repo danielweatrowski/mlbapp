@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ListGameRoutingLogic {
-    func routeToDetailGame(game: LookupGame.LookupGameResult) -> DetailGameView<DetailGameInteractor> 
+    func routeToDetailGame(game: MLBGame) -> DetailGameView<DetailGameInteractor>
 }
 
 protocol ListGameDataPassing {
@@ -17,7 +17,7 @@ protocol ListGameDataPassing {
 
 class ListGameRouter: ObservableObject, ListGameRoutingLogic {
     
-    func routeToDetailGame(game: LookupGame.LookupGameResult) -> DetailGameView<DetailGameInteractor> {
+    func routeToDetailGame(game: MLBGame) -> DetailGameView<DetailGameInteractor> {
         let presenter = DetailGamePresenter()
         let interactor = DetailGameInteractor()
         let view = DetailGameView(interactor: interactor)

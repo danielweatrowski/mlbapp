@@ -11,13 +11,13 @@ import Combine
 protocol ListGameBusinessLogic {}
 
 protocol ListGameDataStore {
-    var lookupResults: [LookupGame.LookupGameResult] { get set }
+    var lookupResults: [MLBGame] { get set }
 }
 
 class ListGameInteractor: ListGameBusinessLogic, ListGameDataStore {
-    var lookupResults: [LookupGame.LookupGameResult]
+    var lookupResults: [MLBGame]
     
-    init(lookupResults: [LookupGame.LookupGameResult]) {
+    init(lookupResults: [MLBGame]) {
         self.lookupResults = lookupResults
     }
 }

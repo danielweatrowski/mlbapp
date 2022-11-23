@@ -9,18 +9,18 @@ import Foundation
 import Combine
 
 class LookupGameWorker {
-    typealias LookupGameResult = LookupGame.LookupGameResult
+    //typealias LookupGameResult = MLBGame
     private var cancellation: AnyCancellable?
     
     // Creates a read only publisher
-    var publisher: AnyPublisher<[LookupGameResult], Error> {
+    var publisher: AnyPublisher<[MLBGame], Error> {
         // Here we're "erasing" the information of which type
         // that our subject actually is, only letting our outside
         // code know that it's a read-only publisher:
         subject.eraseToAnyPublisher()
     }
     
-    let subject = PassthroughSubject<[LookupGameResult],Error>()
+    let subject = PassthroughSubject<[MLBGame],Error>()
     
     func lookupGames(for request: LookupGame.LookupGame.Request) {
         let team = MLBTeam(rawValue: request.homeTeamIndex)!

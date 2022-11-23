@@ -10,13 +10,13 @@ import Foundation
 enum ListGame {
     enum ListGameLookupResults {
         struct ViewModel {
-            var games: [LookupGame.LookupGameResult]
+            var games: [MLBGame]
         }
     }
     
     enum GameLookupItem {
         struct ViewModel {
-            var game: LookupGame.LookupGameResult
+            var game: MLBGame
         }
     }
 }

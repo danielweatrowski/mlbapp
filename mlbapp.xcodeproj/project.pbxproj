@@ -42,6 +42,7 @@
 		66EBDF36291CB8CD00BEF1A5 /* DetailGameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EBDF35291CB8CD00BEF1A5 /* DetailGameInfoView.swift */; };
 		66EBDF382921CFA500BEF1A5 /* LineScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EBDF372921CFA500BEF1A5 /* LineScore.swift */; };
 		66EBDF3A2921D0E900BEF1A5 /* SwiftMLB+LineScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EBDF392921D0E900BEF1A5 /* SwiftMLB+LineScore.swift */; };
+		66EBDF3D292EAA5900BEF1A5 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EBDF3C292EAA5900BEF1A5 /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 		66EBDF35291CB8CD00BEF1A5 /* DetailGameInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGameInfoView.swift; sourceTree = "<group>"; };
 		66EBDF372921CFA500BEF1A5 /* LineScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineScore.swift; sourceTree = "<group>"; };
 		66EBDF392921D0E900BEF1A5 /* SwiftMLB+LineScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMLB+LineScore.swift"; sourceTree = "<group>"; };
+		66EBDF3C292EAA5900BEF1A5 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		66291E2A2908DCB50055DC93 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				66EBDF3B292EAA4100BEF1A5 /* Models */,
 				66291E2B2908DCBD0055DC93 /* Scenes */,
 			);
 			path = Game;
@@ -272,6 +275,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		66EBDF3B292EAA4100BEF1A5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				66EBDF3C292EAA5900BEF1A5 /* Game.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -355,6 +366,7 @@
 				66A4B55E2900F11500D74067 /* TeamList.swift in Sources */,
 				66A4B5522900DBBB00D74067 /* Team.swift in Sources */,
 				66A4B5412900D80600D74067 /* ContentView.swift in Sources */,
+				66EBDF3D292EAA5900BEF1A5 /* Game.swift in Sources */,
 				66878121291619390086A07E /* LookupGameWorker.swift in Sources */,
 				66EBDF382921CFA500BEF1A5 /* LineScore.swift in Sources */,
 				66EBDF312918924400BEF1A5 /* DetailGameModel.swift in Sources */,

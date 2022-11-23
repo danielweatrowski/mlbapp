@@ -11,7 +11,7 @@ enum DetailGame {
 
     enum DetailGame {
         struct Response {
-            var game: LookupGame.LookupGameResult
+            var game: MLBGame
         }
         
         struct ViewModel {

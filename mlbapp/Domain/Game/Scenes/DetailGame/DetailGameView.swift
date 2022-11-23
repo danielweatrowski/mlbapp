@@ -73,19 +73,19 @@ extension DetailGameView: DetailGameDisplayLogic {
 
 struct DetailGameView_Previews: PreviewProvider {
     static var previews: some View {
-        let game1 = LookupGame.LookupGameResult(id: 1,
-                                               link: "",
-                                               date: Date(),
-                                               homeTeam: .dodgers,
-                                               homeTeamWins: 111,
-                                               homeTeamLosses: 2,
-                                               homeTeamScore: 9,
-                                               awayTeam: .padres,
-                                               awayTeamScore: 2,
-                                               awayTeamWins: 4,
-                                               awayTeamLosses: 120,
-                                               venueName: "Dodgers Stadium",
-                                               gameType: "R")
+        let game1 = MLBGame(id: 1,
+                           link: "",
+                           date: Date(),
+                           homeTeam: .dodgers,
+                           homeTeamWins: 111,
+                           homeTeamLosses: 2,
+                           homeTeamScore: 9,
+                           awayTeam: .padres,
+                           awayTeamScore: 2,
+                           awayTeamWins: 4,
+                           awayTeamLosses: 120,
+                           venueName: "Dodgers Stadium",
+                           gameType: "R")
         
         let interactor = DetailGameInteractor()
         DetailGameView(interactor: interactor)

@@ -13,14 +13,14 @@ protocol DetailGameBusinessLogic {
 }
 
 protocol DetailGameDataStore: ObservableObject  {
-    var game: LookupGame.LookupGameResult? { get set }
+    var game: MLBGame? { get set }
     var headerViewModel: DetailGame.DetailGame.ViewModel.DetailGameHeader { get set }
     var infoViewModel: DetailGame.DetailGame.ViewModel.InfoViewModel { get set }
     var title: String { get set }
 }
 
 extension DetailGameDataStore {
-    var game: LookupGame.LookupGameResult? {
+    var game: MLBGame? {
         get { return nil }
         set { self.game = newValue }
     }
@@ -44,7 +44,7 @@ extension DetailGameDataStore {
 class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore {
     var presenter: DetailGamePresentationLogic?
 
-    var game: LookupGame.LookupGameResult?
+    var game: MLBGame?
     
     @Published var headerViewModel: DetailGame.DetailGame.ViewModel.DetailGameHeader = DetailGame.DetailGame.ViewModel.DetailGameHeader()
     @Published var infoViewModel: DetailGame.DetailGame.ViewModel.InfoViewModel = DetailGame.DetailGame.ViewModel.InfoViewModel()

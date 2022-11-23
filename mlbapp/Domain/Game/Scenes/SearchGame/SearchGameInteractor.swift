@@ -16,7 +16,7 @@ protocol SearchGameBusinessLogic {
 }
 
 protocol SearchGameDataStore {
-    var lookupResults: [LookupGame.LookupGameResult] { get set }
+    var lookupResults: [MLBGame] { get set }
 }
 
 class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
@@ -26,7 +26,7 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
     private var cancellable: AnyCancellable?
     
     // Data store
-    var lookupResults: [LookupGame.LookupGameResult] = []
+    var lookupResults: [MLBGame] = []
 
     init() {
         // subscribe to worker publisher to receive the lookup results
