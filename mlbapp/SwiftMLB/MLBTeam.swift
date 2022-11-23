@@ -38,6 +38,7 @@ enum MLBTeam: Int, CaseIterable, Identifiable {
     case astros
     case orioles
     case athletics
+    case redSox
 
     var id: Int {
         switch(self) {
@@ -71,6 +72,7 @@ enum MLBTeam: Int, CaseIterable, Identifiable {
         case .astros: return 117
         case .orioles: return 110
         case .athletics: return 133
+        case .redSox: return 9
         }
     }
     
@@ -106,6 +108,43 @@ enum MLBTeam: Int, CaseIterable, Identifiable {
         case .astros: return "Houston Astros"
         case .orioles: return "Baltimore Orioles"
         case .athletics: return "Oakland Athletics"
+        case .redSox: return "Boston Red Sox"
+        }
+    }
+    
+    var abbreviation : String {
+        switch(self) {
+        case .any: return "NA"
+        case .dodgers: return "LAD"
+        case .mets: return "NYM"
+        case .rangers: return "TEX"
+        case .pirates: return "PIT"
+        case .mariners: return "SEA"
+        case .padres: return "SD"
+        case .cardinals: return "STL"
+        case .giants: return "SF"
+        case .rays: return "TB"
+        case .blueJays: return "TOR"
+        case .twins: return "MIN"
+        case .phillies: return "PHI"
+        case .braves: return "ATL"
+        case .whiteSox: return "CWS"
+        case .marlins: return "MIA"
+        case .yankees: return "NYY"
+        case .brewers: return "MIL"
+        case .diamondbacks: return "ARI"
+        case .rockies: return "COL"
+        case .angels: return "LAA"
+        case .guardians: return "CLE"
+        case .cubs: return "CHC"
+        case .reds: return "CIN"
+        case .nationals: return "WSH"
+        case .tigers: return "DET"
+        case .royals: return "KC"
+        case .astros: return "HOU"
+        case .orioles: return "BAL"
+        case .athletics: return "OAK"
+        case .redSox: return "BOS"
         }
     }
 }
@@ -126,6 +165,10 @@ extension MLBTeam {
     
     static var allTeamsAlphabetized: [MLBTeam] {
         MLBTeam.allTeams.sorted(by: { $0.name < $1.name })
+    }
+    
+    static func gameAbbreviation(homeTeam: MLBTeam, awayTeam: MLBTeam) -> String {
+        return awayTeam.abbreviation + " @ " + homeTeam.abbreviation
     }
 }
 
