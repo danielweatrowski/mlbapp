@@ -16,6 +16,7 @@ protocol DetailGameDataStore: ObservableObject  {
     var game: MLBGame? { get set }
     var headerViewModel: DetailGame.DetailGame.ViewModel.DetailGameHeader { get set }
     var infoViewModel: DetailGame.DetailGame.ViewModel.InfoViewModel { get set }
+    var lineScoreViewModel: LineScoreViewModel { get set }
 }
 
 extension DetailGameDataStore {
@@ -37,6 +38,11 @@ extension DetailGameDataStore {
         get { return DetailGame.DetailGame.ViewModel.InfoViewModel() }
         set { self.infoViewModel = newValue }
     }
+    
+    var lineScoreViewModel: LineScoreViewModel {
+        get { return LineScoreViewModel(headers: LineScoreViewModel.empty, homeLineItems: LineScoreViewModel.empty, awayLineItems: LineScoreViewModel.empty) }
+        set { self.lineScoreViewModel = newValue }
+    }
 }
 
 class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore {
@@ -46,14 +52,21 @@ class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore {
     
     @Published var headerViewModel: DetailGame.DetailGame.ViewModel.DetailGameHeader = DetailGame.DetailGame.ViewModel.DetailGameHeader()
     @Published var infoViewModel: DetailGame.DetailGame.ViewModel.InfoViewModel = DetailGame.DetailGame.ViewModel.InfoViewModel()
-
+    @Published var lineScoreViewModel: LineScoreViewModel = LineScoreViewModel(headers: LineScoreViewModel.empty,
+                                                                               homeLineItems: LineScoreViewModel.empty,
+                                                                               awayLineItems: LineScoreViewModel.empty)
     
     func getViewModel() {
         
         guard let game = game else {
             return
         }
-        let response = DetailGame.DetailGame.Response(game: game)
-        presenter?.presentGame(response: response)
+        
+        Task {
+            let linescore = try await SwiftMLB.gameDetail(forGameIdentifier: game.id)
+            
+            let response = DetailGame.DetailGame.Response(game: game, linescore: linescore)
+            presenter?.presentGame(response: response)
+        }
     }
 }

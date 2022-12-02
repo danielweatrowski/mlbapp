@@ -12,6 +12,7 @@ enum DetailGame {
     enum DetailGame {
         struct Response {
             var game: MLBGame
+            var linescore: LineScore
         }
         
         struct ViewModel {
@@ -33,7 +34,7 @@ enum DetailGame {
             
             var headerViewModel: DetailGameHeader
             var infoViewModel: InfoViewModel
-            
+            var lineScoreViewModel: LineScoreViewModel
         }
     }
 }

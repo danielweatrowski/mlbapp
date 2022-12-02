@@ -16,6 +16,7 @@ class DetailGamePresenter: DetailGamePresentationLogic {
     
     func presentGame(response: DetailGame.DetailGame.Response) {
         let game = response.game
+        
         let headerViewModel = DetailGame.DetailGame.ViewModel.DetailGameHeader(homeTeam: game.homeTeam,
                                                           homeTeamScore: String(game.homeTeamScore),
                                                           homeTeamRecord: "\(game.homeTeamWins)-\(game.homeTeamLosses)",
@@ -26,10 +27,93 @@ class DetailGamePresenter: DetailGamePresentationLogic {
         let infoViewModel = DetailGame.DetailGame.ViewModel.InfoViewModel(gameDate: game.date.formatted(),
                                                                           venueName: game.venueName)
         
+        let lineScoreViewModel = formatLineScore(linescore: response.linescore,
+                                                 homeTeam: game.homeTeam,
+                                                 awayTeam: game.awayTeam)
+        
         let viewModel = DetailGame.DetailGame.ViewModel(headerViewModel: headerViewModel,
-                                                        infoViewModel: infoViewModel)
+                                                        infoViewModel: infoViewModel,
+                                                        lineScoreViewModel: lineScoreViewModel)
         view?.displayGame(viewModel: viewModel)
     }
     
+    private func formatLineScore(linescore: LineScore, homeTeam: MLBTeam, awayTeam: MLBTeam) -> LineScoreViewModel {
+        
+        var spacer: LineScoreViewItem {
+            LineScoreViewItem(id: UUID(), type: .none, value: "")
+        }
+        
+        var awayLineItems = [LineScoreViewItem]()
+        var homeLineItems = [LineScoreViewItem]()
+        var headerLineItems = [LineScoreViewItem]()
+    
+        let a_nameAbbreviation = LineScoreViewItem(id: UUID(), type: .team, value: awayTeam.abbreviation)
+        let h_nameAbbreviation = LineScoreViewItem(id: UUID(), type: .team, value: homeTeam.abbreviation)
+        
+        // Teams
+        awayLineItems.append(a_nameAbbreviation)
+        homeLineItems.append(h_nameAbbreviation)
+        headerLineItems.append(spacer)
+                
+        // Innings
+        for inning in linescore.innings {
+            let homeInningRuns = inning.homeTeam.runs ?? 0
+            let awayInningRuns = inning.awayTeam.runs ?? 0
+
+            let h_runItem = LineScoreViewItem(id: UUID(), type: .run, value: String(homeInningRuns))
+            let a_runItem = LineScoreViewItem(id: UUID(), type: .run, value: String(awayInningRuns))
+            let headerItem = LineScoreViewItem(id: UUID(), type: .header, value: String(inning.num))
+            
+            awayLineItems.append(a_runItem)
+            homeLineItems.append(h_runItem)
+            headerLineItems.append(headerItem)
+        }
+        
+        // Spacer
+        awayLineItems.append(spacer)
+        homeLineItems.append(spacer)
+        headerLineItems.append(spacer)
+        
+        // Runs
+        let runsHeaderItem = LineScoreViewItem(id: UUID(), type: .header, value: "R")
+        headerLineItems.append(runsHeaderItem)
+        
+        let h_runsTotal = linescore.homeLine.runs ?? 0
+        let h_runsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(h_runsTotal))
+        homeLineItems.append(h_runsTotalItem)
+        
+        let a_runsTotal = linescore.awayLine.runs ?? 0
+        let a_runsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(a_runsTotal))
+        awayLineItems.append(a_runsTotalItem)
+        
+        // Hits
+        let hitsHeaderItem = LineScoreViewItem(id: UUID(), type: .header, value: "H")
+        headerLineItems.append(hitsHeaderItem)
+        
+        let h_hitsTotal = linescore.homeLine.hits ?? 0
+        let h_hitsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(h_hitsTotal))
+        homeLineItems.append(h_hitsTotalItem)
+        
+        let a_hitsTotal = linescore.awayLine.hits ?? 0
+        let a_hitsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(a_hitsTotal))
+        awayLineItems.append(a_hitsTotalItem)
+        
+        // Errors
+        let errorsHeaderItem = LineScoreViewItem(id: UUID(), type: .header, value: "E")
+        headerLineItems.append(errorsHeaderItem)
+        
+        let h_errorsTotal = linescore.homeLine.errors ?? 0
+        let h_errorsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(h_errorsTotal))
+        homeLineItems.append(h_errorsTotalItem)
+        
+        let a_errorsTotal = linescore.awayLine.errors ?? 0
+        let a_errorsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(a_errorsTotal))
+        awayLineItems.append(a_errorsTotalItem)
+        
+        return LineScoreViewModel(headers: headerLineItems,
+                                  homeLineItems: homeLineItems,
+                                  awayLineItems: awayLineItems)
+        
+    }
     
 }

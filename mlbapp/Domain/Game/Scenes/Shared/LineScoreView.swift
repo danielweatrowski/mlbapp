@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LineScoreItem: Identifiable {
+struct LineScoreViewItem: Identifiable {
     enum ItemType {
         case team, header, run, stat, none
     }
@@ -15,65 +15,15 @@ struct LineScoreItem: Identifiable {
     var id = UUID()
     var type: ItemType
     var value: String
+    
+    mutating func setValue(_ value: String) {
+        self.value = value
+    }
 }
 
 struct LineScoreView: View {
-    let headers: [LineScoreItem] = [
-        LineScoreItem(type: .none, value: ""),
-        LineScoreItem(type: .header, value: "1"),
-        LineScoreItem(type: .header, value: "2"),
-        LineScoreItem(type: .header, value: "3"),
-        LineScoreItem(type: .header, value: "4"),
-        LineScoreItem(type: .header, value: "5"),
-        LineScoreItem(type: .header, value: "6"),
-        LineScoreItem(type: .header, value: "7"),
-        LineScoreItem(type: .header, value: "8"),
-        LineScoreItem(type: .header, value: "9"),
-        LineScoreItem(type: .none, value: ""),
-        LineScoreItem(type: .header, value: "R"),
-        LineScoreItem(type: .header, value: "H"),
-        LineScoreItem(type: .header, value: "E"),
-
-    ]
-//    let headers = ["", "1", "2","3","4","5","6","7","8","9", "", "R", "H", "E"]
-    let homeTeamData: [LineScoreItem] = [
-        LineScoreItem(type: .team, value: "LAD"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .none, value: ""),
-        LineScoreItem(type: .stat, value: "0"),
-        LineScoreItem(type: .stat, value: "0"),
-        LineScoreItem(type: .stat, value: "0")
-    ]
     
-    let awayTeamData: [LineScoreItem] = [
-        LineScoreItem(type: .team, value: "OAK"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .run, value: "0"),
-        LineScoreItem(type: .none, value: ""),
-        LineScoreItem(type: .stat, value: "0"),
-        LineScoreItem(type: .stat, value: "0"),
-        LineScoreItem(type: .stat, value: "0")
-    ]
-//    let awayTeamData = ["OAK", "j", "k","l","m","n","o","p","q","r", "", "X", "Y", "Z"]
-    
-    var data: [LineScoreItem] {
-        return homeTeamData + awayTeamData
-    }
+    @Binding var viewModel: LineScoreViewModel
     
     let columns = [
         GridItem(.flexible(minimum: 60, maximum: 100)),
@@ -95,7 +45,7 @@ struct LineScoreView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 8) {
-                ForEach(headers, id: \.id) { item in
+                ForEach(viewModel.headers, id: \.id) { item in
                     switch(item.type) {
                     case .team:
                         Text(item.value)
@@ -111,7 +61,7 @@ struct LineScoreView: View {
             .padding(.horizontal)
             Divider()
             LazyVGrid(columns: columns, spacing: 8) {
-                ForEach(data, id: \.id) { item in
+                ForEach(viewModel.data, id: \.id) { item in
                     switch(item.type) {
                     case .team:
                         Text(item.value)
@@ -130,9 +80,9 @@ struct LineScoreView: View {
     }
 }
 
-struct LineScoreView_Previews: PreviewProvider {
-    static var previews: some View {
-        LineScoreView()
-            .previewLayout(.fixed(width: 400, height: 100))
-    }
-}
+//struct LineScoreView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LineScoreView()
+//            .previewLayout(.fixed(width: 400, height: 100))
+//    }
+//}

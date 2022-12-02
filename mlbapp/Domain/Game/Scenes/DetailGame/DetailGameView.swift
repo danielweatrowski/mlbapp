@@ -25,7 +25,7 @@ struct DetailGameView<I>: View where I: DetailGameBusinessLogic & DetailGameData
             DetailGameInfoView(viewModel: $interactor.infoViewModel)
 
             VStack() {
-                LineScoreView()
+                LineScoreView(viewModel: $interactor.lineScoreViewModel)
                     .padding()
                     .background()
                     .cornerRadius(16)
@@ -68,6 +68,7 @@ extension DetailGameView: DetailGameDisplayLogic {
     func displayGame(viewModel: DetailGame.DetailGame.ViewModel) {
         interactor.headerViewModel = viewModel.headerViewModel
         interactor.infoViewModel = viewModel.infoViewModel
+        interactor.lineScoreViewModel = viewModel.lineScoreViewModel
     }
 }
 
