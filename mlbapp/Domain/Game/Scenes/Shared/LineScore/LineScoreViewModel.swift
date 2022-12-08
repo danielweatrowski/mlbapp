@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct LineScoreViewModel {
     
@@ -28,6 +29,17 @@ struct LineScoreViewModel {
     
     var data: [LineScoreViewItem] {
         return homeLineItems + awayLineItems
+    }
+    
+    var columns: [GridItem] {
+        let firstColumn = [GridItem(.fixed(40))]
+        
+        let innings = homeLineItems.map({$0.type}).filter({$0 == .run})
+        let totalInnings = innings.count
+        let inningColumns = Array(repeating: GridItem(.flexible()), count: totalInnings)
+        let statColumns = [GridItem(.fixed(8)), GridItem(.fixed(16)), GridItem(.fixed(16)), GridItem(.fixed(16))]
+        
+        return firstColumn + inningColumns + statColumns
     }
     
     var headers: [LineScoreViewItem]

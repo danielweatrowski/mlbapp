@@ -25,64 +25,41 @@ struct LineScoreView: View {
     
     @Binding var viewModel: LineScoreViewModel
     
-    let columns = [
-        GridItem(.flexible(minimum: 60, maximum: 100)),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
-
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: columns, spacing: 8) {
+            LazyVGrid(columns: viewModel.columns, spacing: 8) {
                 ForEach(viewModel.headers, id: \.id) { item in
                     switch(item.type) {
                     case .team:
                         Text(item.value)
                             .bold()
+                            .fixedSize(horizontal: true, vertical: false)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     default:
                         Text(item.value)
                             .font(.subheadline)
+                            .fixedSize(horizontal: true, vertical: false)
 
                     }
                 }
             }
-            .padding(.horizontal)
             Divider()
-            LazyVGrid(columns: columns, spacing: 8) {
+            LazyVGrid(columns: viewModel.columns, spacing: 8) {
                 ForEach(viewModel.data, id: \.id) { item in
                     switch(item.type) {
                     case .team:
                         Text(item.value)
                             .bold()
+                            .fixedSize(horizontal: true, vertical: false)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     default:
                         Text(item.value)
                             .font(.subheadline)
+                            .fixedSize(horizontal: true, vertical: false)
 
                     }
                 }
             }
-            .padding(.horizontal)
         }
-        .frame(maxHeight: 300)
     }
 }
-
-//struct LineScoreView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LineScoreView()
-//            .previewLayout(.fixed(width: 400, height: 100))
-//    }
-//}

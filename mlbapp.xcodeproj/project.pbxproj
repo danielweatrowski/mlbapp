@@ -12,6 +12,7 @@
 		660472DC2916FCEA00AD9A42 /* ListGameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660472DB2916FCEA00AD9A42 /* ListGameInteractor.swift */; };
 		660472DE2916FD2800AD9A42 /* ListGameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660472DD2916FD2800AD9A42 /* ListGameRouter.swift */; };
 		660472E02916FE1B00AD9A42 /* ListGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660472DF2916FE1B00AD9A42 /* ListGameModel.swift */; };
+		661F20C32941A18B00D925C7 /* LineScoreViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661F20C22941A18B00D925C7 /* LineScoreViewItem.swift */; };
 		66291E26290783000055DC93 /* LookupGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66291E25290783000055DC93 /* LookupGameView.swift */; };
 		66291E282908D83A0055DC93 /* GameSearchTeamRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66291E272908D8390055DC93 /* GameSearchTeamRow.swift */; };
 		66291E2F2908DDF10055DC93 /* SearchGameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66291E2E2908DDF10055DC93 /* SearchGameInteractor.swift */; };
@@ -55,6 +56,7 @@
 		660472DB2916FCEA00AD9A42 /* ListGameInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameInteractor.swift; sourceTree = "<group>"; };
 		660472DD2916FD2800AD9A42 /* ListGameRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameRouter.swift; sourceTree = "<group>"; };
 		660472DF2916FE1B00AD9A42 /* ListGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameModel.swift; sourceTree = "<group>"; };
+		661F20C22941A18B00D925C7 /* LineScoreViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineScoreViewItem.swift; sourceTree = "<group>"; };
 		66291E25290783000055DC93 /* LookupGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookupGameView.swift; sourceTree = "<group>"; };
 		66291E272908D8390055DC93 /* GameSearchTeamRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSearchTeamRow.swift; sourceTree = "<group>"; };
 		66291E2E2908DDF10055DC93 /* SearchGameInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGameInteractor.swift; sourceTree = "<group>"; };
@@ -104,6 +106,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		661F20C42941A19100D925C7 /* LineScore */ = {
+			isa = PBXGroup;
+			children = (
+				66EBDF282918547500BEF1A5 /* LineScoreView.swift */,
+				66598E3F292EF36E0099E18D /* LineScoreViewModel.swift */,
+				661F20C22941A18B00D925C7 /* LineScoreViewItem.swift */,
+			);
+			path = LineScore;
+			sourceTree = "<group>";
+		};
 		66291E292908DC9C0055DC93 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,8 +292,7 @@
 		66EBDF2C29188C8700BEF1A5 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				66EBDF282918547500BEF1A5 /* LineScoreView.swift */,
-				66598E3F292EF36E0099E18D /* LineScoreViewModel.swift */,
+				661F20C42941A19100D925C7 /* LineScore */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -402,6 +413,7 @@
 				66291E282908D83A0055DC93 /* GameSearchTeamRow.swift in Sources */,
 				660472E02916FE1B00AD9A42 /* ListGameModel.swift in Sources */,
 				66291E332908DFE10055DC93 /* LookupGameRouter.swift in Sources */,
+				661F20C32941A18B00D925C7 /* LineScoreViewItem.swift in Sources */,
 				660472DC2916FCEA00AD9A42 /* ListGameInteractor.swift in Sources */,
 				660472DE2916FD2800AD9A42 /* ListGameRouter.swift in Sources */,
 				66EBDF3329189EAA00BEF1A5 /* DetailGamePresenter.swift in Sources */,
