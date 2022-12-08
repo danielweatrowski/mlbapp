@@ -7,20 +7,6 @@
 
 import SwiftUI
 
-struct LineScoreViewItem: Identifiable {
-    enum ItemType {
-        case team, header, run, stat, none
-    }
-    
-    var id = UUID()
-    var type: ItemType
-    var value: String
-    
-    mutating func setValue(_ value: String) {
-        self.value = value
-    }
-}
-
 struct LineScoreView: View {
     
     @Binding var viewModel: LineScoreViewModel
