@@ -14,6 +14,7 @@ protocol DetailGamePresentationLogic {
 class DetailGamePresenter: DetailGamePresentationLogic {
     var view: DetailGameDisplayLogic?
     
+    @MainActor
     func presentGame(response: DetailGame.DetailGame.Response) {
         let game = response.game
         

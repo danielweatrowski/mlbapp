@@ -10,6 +10,7 @@ import Combine
 
 protocol DetailGameBusinessLogic {
     func getViewModel()
+    func startGame()
 }
 
 protocol DetailGameDataStore: ObservableObject  {
@@ -56,6 +57,10 @@ class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore {
                                                                                homeLineItems: LineScoreViewModel.empty,
                                                                                awayLineItems: LineScoreViewModel.empty)
     
+    init(game: MLBGame? = nil) {
+        self.game = game
+    }
+    
     func getViewModel() {
         
         guard let game = game else {
@@ -67,6 +72,16 @@ class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore {
             
             let response = DetailGame.DetailGame.Response(game: game, linescore: linescore)
             presenter?.presentGame(response: response)
+        }
+    }
+    
+    func startGame() {
+        Task {
+            do {
+                let data = try await SwiftMLB.gameScoringPlayData(for: 565997)
+            } catch let error {
+                print(error)
+            }
         }
     }
 }
