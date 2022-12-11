@@ -13,6 +13,8 @@ enum SwiftMLBError: Error {
     case keyNotFound(key: String)
     
     case invalidData
+    
+    case notFound
 }
 
 extension SwiftMLBError: CustomStringConvertible {
@@ -29,6 +31,10 @@ extension SwiftMLBError: CustomStringConvertible {
             
         case .invalidData:
             return "The data returned to SwiftMLB was invalid"
+            
+        case .notFound:
+            return "The resource is currently unavailable or does not exist"
+        }
         }
     }
     

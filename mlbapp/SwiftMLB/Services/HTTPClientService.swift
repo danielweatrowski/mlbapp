@@ -42,7 +42,7 @@ protocol HTTPRequestProtocol {
     var scheme: String { get }
     var host: String { get }
     var path: String { get }
-    var query: String? { get }
+    var queryItems: [URLQueryItem]? { get }
     var method: HTTPMethod { get }
     var headers: [String: String]? { get }
     var body: [String: String]? { get }
@@ -61,6 +61,7 @@ extension HTTPClient {
         urlComponents.scheme = request.scheme
         urlComponents.host = request.host
         urlComponents.path = request.path
+        
         
         guard let url = urlComponents.url else {
             throw HTTPError.invalidURL
@@ -219,6 +220,8 @@ struct HTTPClientService: HTTPClient {
         urlComponents.scheme = request.scheme
         urlComponents.host = request.host
         urlComponents.path = request.path
+        urlComponents.queryItems = request.queryItems
+
                 
         guard let url = urlComponents.url else {
             throw HTTPError.invalidURL
@@ -308,7 +311,7 @@ struct HTTPClientService: HTTPClient {
         urlComponents.scheme = request.scheme
         urlComponents.host = request.host
         urlComponents.path = request.path
-        urlComponents.query = request.query
+        urlComponents.queryItems = request.queryItems
         
         guard let url = urlComponents.url else {
             completion(.failure(.invalidURL))
