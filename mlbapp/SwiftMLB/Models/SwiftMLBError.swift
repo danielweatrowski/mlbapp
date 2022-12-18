@@ -35,8 +35,5 @@ extension SwiftMLBError: CustomStringConvertible {
         case .notFound:
             return "The resource is currently unavailable or does not exist"
         }
-        }
     }
-    
-    
 }

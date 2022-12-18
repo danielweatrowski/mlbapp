@@ -11,9 +11,13 @@ import SwiftUI
 struct mlbappApp: App {
     var body: some Scene {
         WindowGroup {
-            let router = LookupGameRouter()
-
-            LookupGameView(router: router).configureView()
+//            let router = LookupGameRouter()
+//
+//            LookupGameView(router: router).configureView()
+            let viewModel = DetailPlayerViewModel()
+            let presenter = DetailPlayerPresenter(viewModel: viewModel)
+            let interactor = DetailPlayerInteractor(personID: 571448, presenter: presenter)
+            DetailPlayerView(viewModel: viewModel, interactor: interactor)
         }
     }
 }

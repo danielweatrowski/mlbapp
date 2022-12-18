@@ -147,6 +147,10 @@ enum MLBTeam: Int, CaseIterable, Identifiable {
         case .redSox: return "BOS"
         }
     }
+    
+    var primaryColor: String {
+        return "C41E3A"
+    }
 }
 
 // MARK: Helpers

@@ -10,7 +10,7 @@ import Foundation
 extension SwiftMLB {
     
     static func person(withIdentifier personID: Int) async throws -> [String: Any] {
-        let request: MLBRequest = .person(personID)
+        let request: SwiftMLBRequest = .person(personID)
         let data = try await networkService.load(request)
         
         // parse the data
@@ -34,6 +34,10 @@ extension SwiftMLB {
             throw SwiftMLBError.keyNotFound(key: "lastName")
         }
         
+        guard let nickName = person["nickName"] as? String else {
+            throw SwiftMLBError.keyNotFound(key: "nickName")
+        }
+        
         guard let primaryNumber = person["primaryNumber"] as? String else {
             throw SwiftMLBError.keyNotFound(key: "primaryNumber")
         }
@@ -41,15 +45,8 @@ extension SwiftMLB {
         return [
             "firstName": firstName,
             "lastName": lastName,
+            "nickName": nickName,
             "primaryNumber": primaryNumber
         ]
-    }
-    
-    static func headshot(forPersonIdentifier personID: Int) async throws -> Data {
-        let request: MLBRequest = .headshot(personID)
-        
-        let data = try await networkService.load(request)
-        
-        return data
     }
 }

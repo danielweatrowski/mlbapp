@@ -10,7 +10,7 @@ import Foundation
 extension SwiftMLB {
     
     static func gameScoringPlayData(for gameID: Int) async throws -> [String: Any] {
-        let request: MLBRequest = .scoringPlays(gameID)
+        let request: SwiftMLBRequest = .scoringPlays(gameID)
         let data = try await networkService.load(request)
         
         // parse the data
