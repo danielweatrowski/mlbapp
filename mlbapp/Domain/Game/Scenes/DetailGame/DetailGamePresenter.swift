@@ -26,7 +26,7 @@ class DetailGamePresenter: DetailGamePresentationLogic {
                                                           awayTeamRecord: "\(game.awayTeamWins)-\(game.awayTeamLosses)")
         
         let infoViewModel = DetailGame.DetailGame.ViewModel.InfoViewModel(gameDate: game.date.formatted(),
-                                                                          venueName: game.venueName)
+                                                                          venueName: game.venue.name)
         
         let lineScoreViewModel = formatLineScore(linescore: response.linescore,
                                                  homeTeam: game.homeTeam,

@@ -9,6 +9,7 @@ import Foundation
 
 enum MLBTeam: Int, CaseIterable, Identifiable {
     case any
+    case unknown
     case dodgers
     case yankees
     case rangers
@@ -43,6 +44,7 @@ enum MLBTeam: Int, CaseIterable, Identifiable {
     var id: Int {
         switch(self) {
         case .any: return 0
+        case .unknown: return Int.max
         case .dodgers: return 119
         case .rangers: return 140
         case .mets: return 121
@@ -79,6 +81,7 @@ enum MLBTeam: Int, CaseIterable, Identifiable {
     var name: String {
         switch(self) {
         case .any: return "Any"
+        case .unknown: return "Unknown"
         case .dodgers: return "Los Angeles Dodgers"
         case .mets: return "New York Mets"
         case .rangers: return "Texas Rangers"
@@ -114,7 +117,8 @@ enum MLBTeam: Int, CaseIterable, Identifiable {
     
     var abbreviation : String {
         switch(self) {
-        case .any: return "NA"
+        case .unknown: return "NA"
+        case .any: return "ANY"
         case .dodgers: return "LAD"
         case .mets: return "NYM"
         case .rangers: return "TEX"

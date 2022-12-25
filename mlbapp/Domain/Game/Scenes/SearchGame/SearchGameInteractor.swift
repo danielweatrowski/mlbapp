@@ -8,9 +8,6 @@
 import Foundation
 import Combine
 
-// TODO:
-// - Custom errors with combine
-
 protocol SearchGameBusinessLogic {
     func createSearchGame(request: LookupGame.LookupGame.Request)
 }
@@ -27,31 +24,8 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
     
     // Data store
     var lookupResults: [MLBGame] = []
-
-    init() {
-        // subscribe to worker publisher to receive the lookup results
-        subscribeToWorker()
-    }
     
-    func subscribeToWorker() {
-        cancellable = worker.publisher.sink { completion in
-            switch(completion) {
-            case .failure(let error):
-                print(error)
-            case .finished:
-                break
-            }
-        } receiveValue: { [weak self] games in
-            if games.isEmpty {
-                self?.presenter?.presentLookupError(error: .noGamesFound)
-            } else {
-                self?.lookupResults = games
-                let response = LookupGame.LookupGame.Response(results: games)
-                self?.presenter?.presentLookupGames(response: response)
-            }
-        }
-    }
-    
+    @MainActor
     func createSearchGame(request: LookupGame.LookupGame.Request) {
         
         if request.homeTeamIndex == .max {
@@ -59,7 +33,22 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
             return
         }
         
-        worker.lookupGames(for: request)
+        Task {
+            do {
+                let games = try await worker.lookupGames(for: request)
+                
+                guard games.isEmpty == false else {
+                    presenter?.presentLookupError(error: .noGamesFound)
+                    return
+                }
+                
+                // present games
+                let response = LookupGame.LookupGame.Response(results: games)
+                presenter?.presentLookupGames(response: response)
+                lookupResults = games
+            } catch let error {
+                presenter?.presentLookupError(error: .unknown(error.localizedDescription))
+            }
+        }
     }
-    
 }

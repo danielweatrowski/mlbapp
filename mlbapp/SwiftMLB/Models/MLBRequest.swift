@@ -7,12 +7,13 @@
 
 import Foundation
 
-enum SwiftMLBRequest: HTTPRequestProtocol {
+public enum SwiftMLBRequest: HTTPRequestProtocol {
 
     case scoringPlays(_ gameID: Int)
     case players(_ season: String)
     case person(_ personID: Int)
     case headshot(_ personID: Int)
+    case schedule(_ parameters: ScheduleParameters)
 
     var scheme: String {
         return "https"
@@ -29,6 +30,8 @@ enum SwiftMLBRequest: HTTPRequestProtocol {
     
     var path: String {
         switch self {
+        case .schedule(_):
+            return "/api/v1/schedule"
         case let .scoringPlays(gameID):
             return "/api/v1.1/game/\(gameID)/feed/live"
         case .players(_):
@@ -53,6 +56,16 @@ enum SwiftMLBRequest: HTTPRequestProtocol {
                              value: season),
                 URLQueryItem(name: "fields",
                              value: "people,id,fullName,firstName,lastName,primaryNumber,currentTeam,id,primaryPosition,code,abbreviation,useName,boxscoreName,nickName,mlbDebutDate,nameFirstLast,firstLastName,lastFirstName,lastInitName,initLastName,fullFMLName,fullLFMName")
+            ]
+        case let .schedule(parameters):
+            return [
+                URLQueryItem(name: "startDate", value: parameters.startDate?.formatted(date: .numeric, time: .omitted)),
+                URLQueryItem(name: "endDate", value: parameters.endDate?.formatted(date: .numeric, time: .omitted)),
+                URLQueryItem(name: "teamId", value: parameters.teamIdentifier),
+                URLQueryItem(name: "opponentId", value: parameters.opponentIdentifier),
+                URLQueryItem(name: "gameType", value: parameters.gameType),
+                URLQueryItem(name: "sportId", value: "1")
+
             ]
         case .person(_), .headshot(_):
             return nil

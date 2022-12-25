@@ -10,39 +10,28 @@ import Combine
 
 public extension SwiftMLB {
     
-    struct ScheduleParameters {
-        var startDate: Date
-        var endDate: Date
-        var teamIdentifier: Int
-        var opponentIdentifier: Int?
-        var gameType: String?
-    }
-    
-    static func schedule(parameters: ScheduleParameters) -> AnyPublisher<GameLookupResponse, Error> {
-        // format dates
-        let startDateFormatted = parameters.startDate.formatted(date: .numeric, time: .omitted)
-        let endDateFormatted = parameters.endDate.formatted(date: .numeric, time: .omitted)
-        var urlString = "https://statsapi.mlb.com/api/v1/schedule?startDate=\(startDateFormatted)&endDate=\(endDateFormatted)&teamId=\(parameters.teamIdentifier)"
-        
-        if let opponentIdentifier = parameters.opponentIdentifier {
-            urlString.append("&opponentId=\(opponentIdentifier)")
+    static func schedule(parameters: SwiftMLBRequest.ScheduleParameters) async throws -> [[String: Any]] {
+        let request: SwiftMLBRequest = .schedule(parameters)
+        let data = try await networkService.load(request)
+
+        guard let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+            throw SwiftMLBError.invalidData
         }
         
-        if let gameType = parameters.gameType {
-            urlString.append("&gameType=\(gameType)")
+        guard let dates = dict["dates"] as? [[String: Any]] else {
+            throw SwiftMLBError.keyNotFound(key: "dates")
         }
         
-        urlString.append("&sportId=1")
-        // https://statsapi.mlb.com/api/v1/schedule?startDate=07/01/2018&endDate=07/31/2018&teamId=143&opponentId=121&sportId=1
-        print(urlString)
-        let url = URL(string: urlString)!
-        //"https://statsapi.mlb.com/api/v1/schedule?startDate=\(startDateFormatted)&endDate=\(endDateFormatted)&teamId=\(teamIdentifier)&opponentId=\(opponentIdentifier)&sportId=1")!
-        
-        return URLSession.shared.dataTaskPublisher(for: url)
-            .map(\.data)
-            .decode(type: GameLookupResponse.self,
-                    decoder: JSONDecoder())
-            .eraseToAnyPublisher()
+        var allGames = [[String: Any]]()
+        for date in dates {
+            guard let games = date["games"] as? [[String: Any]] else {
+                throw SwiftMLBError.keyNotFound(key: "games")
+            }
+            
+            for game in games {
+                allGames.append(game)
+            }
+        }
+        return allGames
     }
 }
-

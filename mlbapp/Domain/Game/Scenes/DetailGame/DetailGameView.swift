@@ -65,20 +65,7 @@ extension DetailGameView: DetailGameDisplayLogic {
 }
 
 struct DetailGameView_Previews: PreviewProvider {
-    static let game1 = MLBGame(id: 1,
-                       link: "",
-                       date: Date(),
-                       homeTeam: .dodgers,
-                       homeTeamWins: 111,
-                       homeTeamLosses: 2,
-                       homeTeamScore: 9,
-                       awayTeam: .padres,
-                       awayTeamScore: 2,
-                       awayTeamWins: 4,
-                       awayTeamLosses: 120,
-                       venueName: "Dodgers Stadium",
-                       gameType: "R")
-    
+    static let game1 = MLBGame.test_0
     static var previews: some View {
         
         let interactor = DetailGameInteractor(game: game1)

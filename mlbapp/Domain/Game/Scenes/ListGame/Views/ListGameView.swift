@@ -48,34 +48,9 @@ struct ListGameView: View {
 
 struct ListGameView_Previews: PreviewProvider {
     static var previews: some View {
-        let game1 = MLBGame(id: 1,
-                           link: "",
-                           date: Date(),
-                           homeTeam: .dodgers,
-                           homeTeamWins: 111,
-                           homeTeamLosses: 2,
-                           homeTeamScore: 9,
-                           awayTeam: .padres,
-                           awayTeamScore: 2,
-                           awayTeamWins: 4,
-                           awayTeamLosses: 120,
-                           venueName: "Dodgers Stadium",
-                           gameType: "R")
-        let game2 = MLBGame(id: 2,
-                           link: "",
-                           date: Date(),
-                           homeTeam: .angels,
-                           homeTeamWins: 80,
-                           homeTeamLosses: 2,
-                           homeTeamScore: 3,
-                           awayTeam: .athletics,
-                           awayTeamScore: 2,
-                           awayTeamWins: 93,
-                           awayTeamLosses: 120,
-                           venueName: "Angel Stadium",
-                           gameType: "R")
+        let game1 = MLBGame.test_0
         
-        let viewModel = ListGame.ListGameLookupResults.ViewModel(games: [game1, game2])
+        let viewModel = ListGame.ListGameLookupResults.ViewModel(games: [game1])
         ListGameView(viewModel: viewModel, router: ListGameRouter())
     }
 }

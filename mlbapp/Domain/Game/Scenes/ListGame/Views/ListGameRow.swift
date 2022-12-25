@@ -32,7 +32,7 @@ struct ListGameRow: View {
                 
                 Text(viewModel.game.date.formatted())
                 Spacer()
-                Text(viewModel.game.venueName)
+                Text(viewModel.game.venue.name)
             }
             .foregroundColor(.secondary)
             .font(.footnote)
@@ -103,19 +103,7 @@ struct ListGameRow: View {
 
 struct ListGameRow_Previews: PreviewProvider {
     static var previews: some View {
-        let game = MLBGame(id: 1,
-                           link: "",
-                           date: Date(),
-                           homeTeam: .dodgers,
-                           homeTeamWins: 111,
-                           homeTeamLosses: 2,
-                           homeTeamScore: 99,
-                           awayTeam: .padres,
-                           awayTeamScore: 2,
-                           awayTeamWins: 4,
-                           awayTeamLosses: 120,
-                           venueName: "Dodgers Stadium",
-                           gameType: "R")
+        let game = MLBGame.test_0
         let viewModel = ListGame.GameLookupItem.ViewModel(game: game)
         ListGameRow(viewModel: viewModel)
             .previewLayout(.fixed(width: 400, height: 200))

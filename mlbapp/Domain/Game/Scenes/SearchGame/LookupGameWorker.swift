@@ -22,34 +22,25 @@ class LookupGameWorker {
     
     let subject = PassthroughSubject<[MLBGame],Error>()
     
-    func lookupGames(for request: LookupGame.LookupGame.Request) {
+    func lookupGames(for request: LookupGame.LookupGame.Request) async throws -> [MLBGame] {
         let team = MLBTeam(rawValue: request.homeTeamIndex)!
         let opponent = MLBTeam(rawValue: request.awayTeamIndex)!
         let gameType = request.onlyRegularSeason ? "R" : nil
 
         
-        let searchParameters = SwiftMLB.ScheduleParameters(startDate: request.startDate,
-                                                           endDate: request.endDate,
-                                                           teamIdentifier: team.id,
-                                                           opponentIdentifier: opponent == .any ? nil : opponent.id,
-                                                           gameType: gameType)
-
-        cancellation = SwiftMLB.schedule(parameters: searchParameters)
-            .sink(
-                receiveCompletion: { completion in
-                    switch(completion) {
-                    case .failure(let error):
-                        print(error)
-                    case .finished:
-                        break
-                    }
-                },
-                receiveValue: { [weak self] response in
-                    guard let self = self else { return }
-                    
-                    let games = response.toLookupGameResultDomain()
-                    self.subject.send(games)
-            })
+        let searchParameters = SwiftMLBRequest.ScheduleParameters(startDate: request.startDate,
+                                                                  endDate: request.endDate,
+                                                                  teamIdentifier: String(team.id),
+                                                                  opponentIdentifier: opponent == .any ? nil : String(opponent.id),
+                                                                  gameType: gameType)
+        
+        
+        let dict = try await SwiftMLB.schedule(parameters: searchParameters)
+        let games = dict.map { gameDict in
+            MLBGame(from: gameDict)
+        }
+        
+        return games
     }
     
 }
