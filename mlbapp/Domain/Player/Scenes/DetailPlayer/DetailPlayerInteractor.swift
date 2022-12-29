@@ -24,18 +24,18 @@ struct DetailPlayerInteractor: DetailPlayerBusinessLogic, DetailPlayerDataStore 
     var presenter: DetailPlayerPresentationLogic
     
     func getPlayer(request: DetailPlayer.Request) {
-        Task {
-            do {
-                let playerDict = try await SwiftMLB.person(withIdentifier: personID)
-                let player = MLBPlayer(personID: personID, responseDict: playerDict)
-                
-                
-                let response = DetailPlayer.Response(player: player)
-                presenter.presentPlayer(response: response)
-                
-            } catch {
-                print(error)
-            }
-        }
+//        Task {
+//            do {
+//                let playerDict = try await SwiftMLB.person(withIdentifier: personID)
+//                let player = MLBPlayer(personID: personID, responseDict: playerDict)
+//                
+//                
+//                let response = DetailPlayer.Response(player: player)
+//                presenter.presentPlayer(response: response)
+//                
+//            } catch {
+//                print(error)
+//            }
+//        }
     }
 }

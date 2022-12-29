@@ -24,9 +24,9 @@ extension Logger {
             return
         }
         
-        Logger.http.debug("[\(method, privacy: .public)] URL \(url.absoluteString, privacy: .public)")
-        Logger.http.debug("[\(method, privacy: .public)] Body \(request.body?.json ?? "{}", privacy: .public)")
-        Logger.http.debug("[\(method, privacy: .public)] Headers \(request.headers?.json ?? "{}", privacy: .public)")
+        Logger.http.debug("[Request] \(method, privacy: .public) \(url.absoluteString, privacy: .public)")
+        Logger.http.debug("[Request] Body \(request.body?.json ?? "{}", privacy: .public)")
+        Logger.http.debug("[Request] Headers \(request.headers?.json ?? "{}", privacy: .public)")
     }
     
     static func log(request: HTTPRequestProtocol, response: URLResponse) {
@@ -40,6 +40,6 @@ extension Logger {
             return
         }
         
-        Logger.http.debug("[\(request.method.rawValue, privacy: .public)] \(httpResponse.statusCode, privacy: .public) \(url.absoluteString, privacy: .public)")
+        Logger.http.debug("[Response] \(request.method.rawValue, privacy: .public) \(httpResponse.statusCode, privacy: .public) \(url.absoluteString, privacy: .public)")
     }
 }
