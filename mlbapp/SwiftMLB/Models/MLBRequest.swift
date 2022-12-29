@@ -11,9 +11,9 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
 
     case scoringPlays(_ gameID: Int)
     case players(_ season: String)
-    case person(_ personID: Int)
     case headshot(_ personID: Int)
     case schedule(_ parameters: ScheduleParameters)
+    case player(_ parameters: PersonParameters)
 
     var scheme: String {
         return "https"
@@ -36,8 +36,8 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
             return "/api/v1.1/game/\(gameID)/feed/live"
         case .players(_):
             return "/api/v1.1/sports/1/players"
-        case let .person(personID):
-            return "/api/v1/people/\(personID)"
+        case let .player(parameters):
+            return "/api/v1/people/\(parameters.personIdentifier)"
         case let .headshot(personID):
             return "/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_213,q_auto:best/v1/people/\(personID)/headshot/67/current"
         }
@@ -67,7 +67,9 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
                 URLQueryItem(name: "sportId", value: "1")
 
             ]
-        case .person(_), .headshot(_):
+        case let .player(parameters):
+            return parameters.toQueryItems()
+        case .headshot(_):
             return nil
         }
     }

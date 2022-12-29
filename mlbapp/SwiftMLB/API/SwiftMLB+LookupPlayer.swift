@@ -13,7 +13,6 @@ extension SwiftMLB {
         if season == nil {
             // TODO: Get current season year
         }
-        let request: SwiftMLBRequest = .players("2022")
         
     }
 }

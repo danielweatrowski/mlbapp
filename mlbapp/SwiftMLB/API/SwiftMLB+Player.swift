@@ -2,15 +2,14 @@
 //  SwiftMLB+Player.swift
 //  mlbapp
 //
-//  Created by Daniel Weatrowski on 12/11/22.
+//  Created by Daniel Weatrowski on 12/25/22.
 //
 
 import Foundation
 
 extension SwiftMLB {
-    
-    static func person(withIdentifier personID: Int) async throws -> [String: Any] {
-        let request: SwiftMLBRequest = .person(personID)
+    static func player(parameters: SwiftMLBRequest.PersonParameters) async throws -> [String: Any] {
+        let request: SwiftMLBRequest = .player(parameters)
         let data = try await networkService.load(request)
         
         // parse the data
@@ -49,4 +48,6 @@ extension SwiftMLB {
             "primaryNumber": primaryNumber
         ]
     }
+
 }
+
