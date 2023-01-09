@@ -14,6 +14,7 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
     case headshot(_ personID: Int)
     case schedule(_ parameters: ScheduleParameters)
     case player(_ parameters: PersonParameters)
+    case boxscore(_ gameID: Int)
 
     var scheme: String {
         return "https"
@@ -40,12 +41,14 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
             return "/api/v1/people/\(parameters.personIdentifier)"
         case let .headshot(personID):
             return "/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_213,q_auto:best/v1/people/\(personID)/headshot/67/current"
+        case let .boxscore(gameID):
+            return "/api/v1.1/game/\(gameID)/feed/live"
         }
     }
     
     var queryItems: [URLQueryItem]? {
         switch self {
-        case .scoringPlays(_):
+        case .scoringPlays:
             return [
                 URLQueryItem(name: "fields",
                              value: "gamePk,link,gameData,game,pk,teams,away,id,name,teamCode,fileCode,abbreviation,teamName,locationName,shortName,home,liveData,plays,allPlays,scoringPlays,scoringPlays,atBatIndex,result,description,awayScore,homeScore,about,halfInning,inning,endTime")
@@ -66,6 +69,10 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
                 URLQueryItem(name: "gameType", value: parameters.gameType),
                 URLQueryItem(name: "sportId", value: "1")
 
+            ]
+        case .boxscore:
+            return [
+                URLQueryItem(name: "fields", value: "gameData,game,teams,teamName,shortName,teamStats,batting,atBats,runs,hits,doubles,triples,homeRuns,rbi,stolenBases,strikeOuts,baseOnBalls,leftOnBase,pitching,inningsPitched,earnedRuns,homeRuns,players,boxscoreName,liveData,boxscore,teams,players,id,fullName,allPositions,abbreviation,seasonStats,batting,avg,ops,obp,slg,era,pitchesThrown,numberOfPitches,strikes,battingOrder,info,title,fieldList,note,label,value,wins,losses,holds,blownSaves")
             ]
         case let .player(parameters):
             return parameters.toQueryItems()
