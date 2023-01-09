@@ -74,7 +74,7 @@ enum MLBTeam: Int, CaseIterable, Identifiable {
         case .astros: return 117
         case .orioles: return 110
         case .athletics: return 133
-        case .redSox: return 9
+        case .redSox: return 111
         }
     }
     

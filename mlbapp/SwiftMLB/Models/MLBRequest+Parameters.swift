@@ -14,6 +14,17 @@ public extension SwiftMLBRequest {
         var teamIdentifier: String?
         var opponentIdentifier: String?
         var gameType: String?
+        
+        func toQueryItems() -> [URLQueryItem] {
+            return [
+                URLQueryItem(name: "startDate", value: startDate?.formatted(date: .numeric, time: .omitted)),
+                URLQueryItem(name: "endDate", value: endDate?.formatted(date: .numeric, time: .omitted)),
+                URLQueryItem(name: "teamId", value: teamIdentifier),
+                URLQueryItem(name: "opponentId", value: opponentIdentifier),
+                URLQueryItem(name: "gameType", value: gameType),
+                URLQueryItem(name: "sportId", value: "1")
+            ]
+        }
     }
     
     struct PersonParameters {

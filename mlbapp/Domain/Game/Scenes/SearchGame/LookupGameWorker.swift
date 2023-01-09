@@ -36,7 +36,8 @@ class LookupGameWorker {
         
         
         let dict = try await SwiftMLB.schedule(parameters: searchParameters)
-        let games = dict.map { gameDict in
+        let gameItems = dict["games"] as! [[String: Any]]
+        let games = gameItems.map { gameDict in
             MLBGame(from: gameDict)
         }
         

@@ -8,7 +8,7 @@
 import Foundation
 
 extension SwiftMLB {
-    static func player(parameters: SwiftMLBRequest.PersonParameters) async throws -> [String: Any] {
+    static func playerData(parameters: SwiftMLBRequest.PersonParameters) async throws -> [String: Any] {
         let request: SwiftMLBRequest = .player(parameters)
         let data = try await networkService.load(request)
         
