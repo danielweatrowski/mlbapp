@@ -7,11 +7,9 @@
 
 import Foundation
 
-struct GameScoringPlayParser: Parser {
-    var data: Data
+struct GameScoringPlayBuilder: JSONBuilder {
     
-    func parse() throws -> [String : Any] {
-        // parse the data
+    func build(with data: Data) throws -> [String : Any] {
         guard let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
             throw SwiftMLBError.invalidData
         }
@@ -68,7 +66,7 @@ struct GameScoringPlayParser: Parser {
             "away": awayTeamDict
         ]
     }
-    
+
     private func sorted(plays: [[String: Any]]) throws -> [[String: Any]] {
         return try plays.sorted { (lhs, rhs) -> Bool in
             guard let lhsAboutDict = lhs["about"] as? [String: Any] else {

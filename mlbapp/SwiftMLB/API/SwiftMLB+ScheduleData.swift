@@ -10,12 +10,12 @@ import Combine
 
 public extension SwiftMLB {
     
-    static func schedule(parameters: SwiftMLBRequest.ScheduleParameters) async throws -> [String: Any] {
+    static func scheduleData(parameters: SwiftMLBRequest.ScheduleParameters) async throws -> [String: Any] {
         let request: SwiftMLBRequest = .schedule(parameters)
         let data = try await networkService.load(request)
 
-        let parser = ScheduleParser(data: data)
-        let schedule = try parser.parse()
+        let serializer = SwiftMLBSerialization(data: data, builder: ScheduleBuilder())
+        let schedule = try serializer.jsonObject()
         
         return schedule
     }

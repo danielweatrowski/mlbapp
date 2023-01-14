@@ -7,11 +7,8 @@
 
 import Foundation
 
-struct LinescoreParser: Parser {
-    var data: Data
-    
-    func parse() throws -> [String: Any] {
-        
+struct LinescoreBuilder: JSONBuilder {
+    func build(with data: Data) throws -> [String : Any] {
         guard let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
             throw SwiftMLBError.invalidData
         }
@@ -21,9 +18,15 @@ struct LinescoreParser: Parser {
         guard let linescore = liveData["linescore"] as? [String: Any] else {
             throw SwiftMLBError.keyNotFound(key: "liveData")
         }
+        guard let teams = linescore["teams"] as? [String: Any] else {
+            throw SwiftMLBError.keyNotFound(key: "teams")
+        }
         
-        return linescore
+        return [
+            "innings": linescore["innings"] ?? [:],
+            "homeTotal": teams["home"] ?? [:],
+            "awayTotal": teams["away"] ?? [:]
+        ]
     }
-
-    
 }
+

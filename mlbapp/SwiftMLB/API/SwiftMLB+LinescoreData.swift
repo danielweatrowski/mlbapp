@@ -12,10 +12,9 @@ extension SwiftMLB {
         let request: SwiftMLBRequest = .linescore(gameIdentifier)
         
         let data = try await networkService.load(request)
-        
-        let parser = LinescoreParser(data: data)
-        let linescore = try parser.parse()
+        let serializer = SwiftMLBSerialization(data: data, builder: LinescoreBuilder())
 
+        let linescore = try serializer.jsonObject()
         return linescore
     }
 }

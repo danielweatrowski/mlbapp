@@ -79,8 +79,8 @@ class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore {
         Task {
             do {
                 let parameters = SwiftMLBRequest.PersonParameters(personIdentifier: 571448, hydrate: .init(group: [.pitching, .hitting, .fielding], type: [.career]))
-                let data = try await SwiftMLB.linescoreData(gameIdentifier: 565997)
-                data.printPretty()
+                let data = try await SwiftMLB.linescore(gameIdentifier: 565997)
+                print("SHIT")
             } catch let error {
                 print(error)
             }

@@ -13,26 +13,27 @@ extension SwiftMLB {
     
     
     static func gameDetail(forGameIdentifier gameID: Int) async throws -> LineScore {
-        let urlString = "https://statsapi.mlb.com/api/v1.1/game/\(gameID)/feed/live" + gameScoreParameters
-        
-        guard let url = URL(string: urlString) else {
-
-            throw SwiftMLBError.invalidURL(urlString: urlString)
-        }
-        
-        let (data, _) = try await URLSession.shared.data(from: url)
-        
-        // parse the data
-        guard let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-            throw SwiftMLBError.invalidData
-        }
-        guard let liveData = dict["liveData"] as? [String: Any] else {
-            throw SwiftMLBError.keyNotFound(key: "liveData")
-        }
-        guard let linescore = liveData["linescore"] as? [String: Any] else {
-            throw SwiftMLBError.keyNotFound(key: "linescore")
-        }
-    
-        return try LineScore(dictionary: linescore)
+//        let urlString = "https://statsapi.mlb.com/api/v1.1/game/\(gameID)/feed/live" + gameScoreParameters
+//
+//        guard let url = URL(string: urlString) else {
+//
+//            throw SwiftMLBError.invalidURL(urlString: urlString)
+//        }
+//
+//        let (data, _) = try await URLSession.shared.data(from: url)
+//
+//        // parse the data
+//        guard let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+//            throw SwiftMLBError.invalidData
+//        }
+//        guard let liveData = dict["liveData"] as? [String: Any] else {
+//            throw SwiftMLBError.keyNotFound(key: "liveData")
+//        }
+//        guard let linescore = liveData["linescore"] as? [String: Any] else {
+//            throw SwiftMLBError.keyNotFound(key: "linescore")
+//        }
+//
+//        return try LineScore(dictionary: linescore)
+        return try await linescore(gameIdentifier: gameID)
     }
 }

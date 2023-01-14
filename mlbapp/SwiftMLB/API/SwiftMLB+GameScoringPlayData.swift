@@ -13,8 +13,8 @@ extension SwiftMLB {
         let request: SwiftMLBRequest = .scoringPlays(gameID)
         let data = try await networkService.load(request)
         
-        let parser = GameScoringPlayParser(data: data)
-        let plays = try parser.parse()
+        let serializer = SwiftMLBSerialization(data: data, builder: GameScoringPlayBuilder())
+        let plays = try serializer.jsonObject()
         
         return plays
     }

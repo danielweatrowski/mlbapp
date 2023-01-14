@@ -7,11 +7,8 @@
 
 import Foundation
 
-struct ScheduleParser: Parser {
-    var data: Data
-    
-    func parse() throws -> [String: Any] {
-        
+struct ScheduleBuilder: JSONBuilder {
+    func build(with data: Data) throws -> [String : Any] {
         guard let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
             throw SwiftMLBError.invalidData
         }

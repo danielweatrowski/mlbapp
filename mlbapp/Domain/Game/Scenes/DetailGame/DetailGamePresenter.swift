@@ -58,8 +58,8 @@ class DetailGamePresenter: DetailGamePresentationLogic {
                 
         // Innings
         for inning in linescore.innings {
-            let homeInningRuns = inning.homeTeam.runs ?? 0
-            let awayInningRuns = inning.awayTeam.runs ?? 0
+            let homeInningRuns = inning.away.runs ?? 0
+            let awayInningRuns = inning.home.runs ?? 0
 
             let h_runItem = LineScoreViewItem(id: UUID(), type: .run, value: String(homeInningRuns))
             let a_runItem = LineScoreViewItem(id: UUID(), type: .run, value: String(awayInningRuns))
@@ -79,11 +79,11 @@ class DetailGamePresenter: DetailGamePresentationLogic {
         let runsHeaderItem = LineScoreViewItem(id: UUID(), type: .header, value: "R")
         headerLineItems.append(runsHeaderItem)
         
-        let h_runsTotal = linescore.homeLine.runs ?? 0
+        let h_runsTotal = linescore.homeTotal.runs ?? 0
         let h_runsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(h_runsTotal))
         homeLineItems.append(h_runsTotalItem)
         
-        let a_runsTotal = linescore.awayLine.runs ?? 0
+        let a_runsTotal = linescore.awayTotal.runs ?? 0
         let a_runsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(a_runsTotal))
         awayLineItems.append(a_runsTotalItem)
         
@@ -91,11 +91,11 @@ class DetailGamePresenter: DetailGamePresentationLogic {
         let hitsHeaderItem = LineScoreViewItem(id: UUID(), type: .header, value: "H")
         headerLineItems.append(hitsHeaderItem)
         
-        let h_hitsTotal = linescore.homeLine.hits ?? 0
+        let h_hitsTotal = linescore.homeTotal.hits ?? 0
         let h_hitsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(h_hitsTotal))
         homeLineItems.append(h_hitsTotalItem)
         
-        let a_hitsTotal = linescore.awayLine.hits ?? 0
+        let a_hitsTotal = linescore.awayTotal.hits ?? 0
         let a_hitsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(a_hitsTotal))
         awayLineItems.append(a_hitsTotalItem)
         
@@ -103,11 +103,11 @@ class DetailGamePresenter: DetailGamePresentationLogic {
         let errorsHeaderItem = LineScoreViewItem(id: UUID(), type: .header, value: "E")
         headerLineItems.append(errorsHeaderItem)
         
-        let h_errorsTotal = linescore.homeLine.errors ?? 0
+        let h_errorsTotal = linescore.homeTotal.errors ?? 0
         let h_errorsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(h_errorsTotal))
         homeLineItems.append(h_errorsTotalItem)
         
-        let a_errorsTotal = linescore.awayLine.errors ?? 0
+        let a_errorsTotal = linescore.awayTotal.errors ?? 0
         let a_errorsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(a_errorsTotal))
         awayLineItems.append(a_errorsTotalItem)
         
