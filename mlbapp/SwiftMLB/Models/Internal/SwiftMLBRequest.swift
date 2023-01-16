@@ -16,6 +16,7 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
     case player(_ parameters: PersonParameters)
     case boxscore(_ gameID: Int)
     case linescore(_ gameID: Int)
+    case game(_ gameID: Int)
 
     var scheme: String {
         return "https"
@@ -46,6 +47,8 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
             return "/api/v1.1/game/\(gameID)/feed/live"
         case let .linescore(gameID):
             return "/api/v1.1/game/\(gameID)/feed/live"
+        case let .game(gameID):
+            return "/api/v1.1/game/\(gameID)/feed/live"
         }
     }
     
@@ -75,7 +78,7 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
             ]
         case let .player(parameters):
             return parameters.toQueryItems()
-        case .headshot(_):
+        case .headshot, .game:
             return nil
         }
     }

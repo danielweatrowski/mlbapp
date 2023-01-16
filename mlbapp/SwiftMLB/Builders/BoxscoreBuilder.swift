@@ -23,18 +23,6 @@ struct BoxscoreBuilder: JSONBuilder {
         guard let gameInfo = gameData["game"] as? [String: Any] else {
             throw SwiftMLBError.keyNotFound(key: "game")
         }
-        guard let teamData = gameData["teams"] as? [String: Any] else {
-            throw SwiftMLBError.keyNotFound(key: "teams")
-        }
-        guard let homeData = teamData["home"] as? [String: Any] else {
-            throw SwiftMLBError.keyNotFound(key: "teams.home")
-        }
-        guard let awayData = teamData["away"] as? [String: Any] else {
-            throw SwiftMLBError.keyNotFound(key: "teams.away")
-        }
-        guard let playerData = gameData["players"] as? [String: Any] else {
-            throw SwiftMLBError.keyNotFound(key: "players")
-        }
         guard let liveData = dict["liveData"] as? [String: Any] else {
             throw SwiftMLBError.keyNotFound(key: "liveData")
         }

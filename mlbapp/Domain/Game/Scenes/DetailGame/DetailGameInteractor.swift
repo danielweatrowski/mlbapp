@@ -68,10 +68,15 @@ class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore {
         }
         
         Task {
-            let linescore = try await SwiftMLB.gameDetail(forGameIdentifier: game.id)
-            
-            let response = DetailGame.DetailGame.Response(game: game, linescore: linescore)
-            presenter?.presentGame(response: response)
+            do {
+                let gameDTO = try await SwiftMLB.game(gameIdentifier: game.id)
+                
+                let response = DetailGame.DetailGame.Response(game: game, linescore: gameDTO.linescore)
+                presenter?.presentGame(response: response)
+            } catch {
+                print(error)
+            }
+
         }
     }
     

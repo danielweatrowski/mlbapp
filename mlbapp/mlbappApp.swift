@@ -13,7 +13,6 @@ struct mlbappApp: App {
         WindowGroup {
             let router = LookupGameRouter()
             LookupGameView(router: router).configureView()
-
         }
     }
 }

@@ -11,7 +11,7 @@ struct Batter: Codable {
     let personID: Int
     let fullName: String
     let positionAbbreviation: String
-    let battingOrder: String
+    let battingOrder: String?
     let stats: BattingStats?
 }
 

@@ -17,10 +17,13 @@ struct SwiftMLBSerialization {
         self.data = data
     }
     
-    func data(options: JSONSerialization.WritingOptions = []) throws -> Data {
-        let object = try builder.build(with: data)
-        object.printPretty()
-        return try JSONSerialization.data(withJSONObject: object, options: options)
+    func data(options opt: JSONSerialization.WritingOptions = []) throws -> Data {
+        let obj = try builder.build(with: data)
+        return try JSONSerialization.data(withJSONObject: obj, options: opt)
+    }
+    
+    func data(withJSONObject obj: Any, options opt: JSONSerialization.WritingOptions = []) throws -> Data {
+        return try JSONSerialization.data(withJSONObject: obj, options: opt)
     }
     
     func jsonObject() throws -> [String: Any] {
