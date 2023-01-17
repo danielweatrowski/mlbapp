@@ -8,7 +8,7 @@
 import Foundation
 
 extension SwiftMLB {
-    static func boxscore(gameIdentifier: Int) async throws -> Boxscore {
+    static func boxscore(gameIdentifier: Int) async throws -> MLBBoxscore {
         let request: SwiftMLBRequest = .boxscore(gameIdentifier)
 
         let data = try await networkService.load(request)
@@ -17,7 +17,7 @@ extension SwiftMLB {
         let boxscoreData = try serializer.data()
 
         let decoder = JSONDecoder()
-        let boxscore = try decoder.decode(Boxscore.self, from: boxscoreData)
+        let boxscore = try decoder.decode(MLBBoxscore.self, from: boxscoreData)
         return boxscore
     }
 }

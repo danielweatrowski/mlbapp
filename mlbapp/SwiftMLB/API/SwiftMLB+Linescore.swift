@@ -8,7 +8,7 @@
 import Foundation
 
 extension SwiftMLB {
-    static func linescore(gameIdentifier: Int) async throws -> LineScore {
+    static func linescore(gameIdentifier: Int) async throws -> MLBLinescore {
         let request: SwiftMLBRequest = .linescore(gameIdentifier)
         
         let data = try await networkService.load(request)
@@ -17,7 +17,7 @@ extension SwiftMLB {
         let linescoreData = try serializer.data()
 
         let decoder = JSONDecoder()
-        let linescore = try decoder.decode(LineScore.self, from: linescoreData)
+        let linescore = try decoder.decode(MLBLinescore.self, from: linescoreData)
         return linescore
     }
 }

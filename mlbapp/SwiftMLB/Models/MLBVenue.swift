@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Venue: Codable {
+struct MLBVenue: Codable {
     let id: Int
     let name: String
     let link: String

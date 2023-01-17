@@ -48,7 +48,7 @@ struct ListGameView: View {
 
 struct ListGameView_Previews: PreviewProvider {
     static var previews: some View {
-        let game1 = MLBGame.test_0
+        let game1 = Game.test_0
         
         let viewModel = ListGame.ListGameLookupResults.ViewModel(games: [game1])
         ListGameView(viewModel: viewModel, router: ListGameRouter())

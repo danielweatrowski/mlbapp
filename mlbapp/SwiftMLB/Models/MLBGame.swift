@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct Game: Codable {
+struct MLBGame: Codable {
     let id: Int
     let gameID: String
     let type: String
     let season: String
-    let venue: Venue
+    let venue: MLBVenue
     let gameDate: Date
-    let linescore: LineScore
-    let boxscore: Boxscore
+    let linescore: MLBLinescore
+    let boxscore: MLBBoxscore
     let teams: GameTeams
     
     struct GameTeams: Codable {
-        let away: Team
-        let home: Team
+        let away: MLBTeam
+        let home: MLBTeam
     }
 }
 

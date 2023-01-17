@@ -11,17 +11,17 @@ enum DetailGame {
 
     enum DetailGame {
         struct Response {
-            var game: MLBGame
-            var linescore: LineScore
+            var game: Game
+            var linescore: MLBLinescore
         }
         
         struct ViewModel {
             struct DetailGameHeader {
                 
-                var homeTeam: MLBTeam = .any
+                var homeTeam: Team = .any
                 var homeTeamScore: String = ""
                 var homeTeamRecord: String = ""
-                var awayTeam: MLBTeam = .any
+                var awayTeam: Team = .any
                 var awayTeamScore: String = ""
                 var awayTeamRecord: String = ""
                 

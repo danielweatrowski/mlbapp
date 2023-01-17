@@ -103,7 +103,7 @@ struct ListGameRow: View {
 
 struct ListGameRow_Previews: PreviewProvider {
     static var previews: some View {
-        let game = MLBGame.test_0
+        let game = Game.test_0
         let viewModel = ListGame.GameLookupItem.ViewModel(game: game)
         ListGameRow(viewModel: viewModel)
             .previewLayout(.fixed(width: 400, height: 200))

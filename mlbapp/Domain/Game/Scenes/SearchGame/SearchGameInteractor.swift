@@ -13,7 +13,7 @@ protocol SearchGameBusinessLogic {
 }
 
 protocol SearchGameDataStore {
-    var lookupResults: [MLBGame] { get set }
+    var lookupResults: [Game] { get set }
 }
 
 class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
@@ -23,7 +23,7 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
     private var cancellable: AnyCancellable?
     
     // Data store
-    var lookupResults: [MLBGame] = []
+    var lookupResults: [Game] = []
     
     @MainActor
     func createSearchGame(request: LookupGame.LookupGame.Request) {

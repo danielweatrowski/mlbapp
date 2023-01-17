@@ -65,7 +65,7 @@ extension DetailGameView: DetailGameDisplayLogic {
 }
 
 struct DetailGameView_Previews: PreviewProvider {
-    static let game1 = MLBGame.test_0
+    static let game1 = Game.test_0
     static var previews: some View {
         
         let interactor = DetailGameInteractor(game: game1)

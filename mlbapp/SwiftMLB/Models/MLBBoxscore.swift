@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Boxscore: Codable {
+struct MLBBoxscore: Codable {
     let gameId: String
-    let homeBatters: [Batter]
-    let awayBatters: [Batter]
-    let homePitchers: [Pitcher]
-    let awayPitchers: [Pitcher]
+    let homeBatters: [MLBBatter]
+    let awayBatters: [MLBBatter]
+    let homePitchers: [MLBPitcher]
+    let awayPitchers: [MLBPitcher]
     let homeBattingTotals: BattingStats
     let awayBattingTotals: BattingStats
     let homePitchingTotals: PitchingStats

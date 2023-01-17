@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Team: Codable {
+struct MLBTeam: Codable {
+    
     let id: Int
     let name: String
     let abbreviation: String
@@ -17,26 +18,26 @@ struct Team: Codable {
     let locationName: String
     let firstYearOfPlay: String
     let active: Bool
-    let venue: Venue
-    let division: Division
-    let league: League
-    let springLeague: League
+    let venue: MLBVenue
+    let division: MLBDivision
+    let league: MLBLeague
+    let springLeague: MLBLeague
     let record: TeamRecord?
+    
+    struct TeamRecord: Codable {
+        let gamesPlayed: Int
+        let wins: Int
+        let losses: Int
+        let winningPercentage: String
+    }
 }
 
-struct TeamRecord: Codable {
-    let gamesPlayed: Int
-    let wins: Int
-    let losses: Int
-    let winningPercentage: String
-}
-
-struct Division: Codable {
+struct MLBDivision: Codable {
     let id: Int
     let name: String
 }
 
-struct League: Codable {
+struct MLBLeague: Codable {
     let id: Int
     let name: String
 }

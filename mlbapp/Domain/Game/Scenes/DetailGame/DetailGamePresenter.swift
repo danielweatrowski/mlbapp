@@ -38,7 +38,7 @@ class DetailGamePresenter: DetailGamePresentationLogic {
         view?.displayGame(viewModel: viewModel)
     }
     
-    private func formatLineScore(linescore: LineScore, homeTeam: MLBTeam, awayTeam: MLBTeam) -> LineScoreViewModel {
+    private func formatLineScore(linescore: MLBLinescore, homeTeam: Team, awayTeam: Team) -> LineScoreViewModel {
         
         var spacer: LineScoreViewItem {
             LineScoreViewItem(id: UUID(), type: .none, value: "")

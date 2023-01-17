@@ -9,7 +9,7 @@ import Foundation
 
 extension SwiftMLB {
     
-    static func game(gameIdentifier: Int) async throws -> Game {
+    static func game(gameIdentifier: Int) async throws -> MLBGame {
         let request: SwiftMLBRequest = .game(gameIdentifier)
         let data = try await networkService.load(request)
         
@@ -18,7 +18,7 @@ extension SwiftMLB {
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        let game = try decoder.decode(Game.self, from: gameData)
+        let game = try decoder.decode(MLBGame.self, from: gameData)
         
         return game
     }

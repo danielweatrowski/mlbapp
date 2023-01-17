@@ -21,7 +21,7 @@ struct LookupGameView: View {
     @State private var selectedHomeTeamIndex: Int = .max
 
     //@State private var selectedAwayTeam: MLBTeam = MLBTeam.any
-    @State private var selectedAwayTeamIndex: Int = MLBTeam.any.rawValue
+    @State private var selectedAwayTeamIndex: Int = Team.any.rawValue
 
     @State private var showingStartDatePicker = false
     @State private var showingEndDatePicker = false
@@ -39,14 +39,14 @@ struct LookupGameView: View {
                 Section {
                     Picker(selection: $selectedHomeTeamIndex,
                            label: Text("Team")) {
-                        ForEach(MLBTeam.allTeams, id: \.id) {
+                        ForEach(Team.allTeams, id: \.id) {
                             Text($0.name)
                                 .tag($0.rawValue)
                         }
                     }
                     Picker(selection: $selectedAwayTeamIndex,
                            label: Text("Opponent")) {
-                        ForEach(MLBTeam.allCases, id: \.id) {
+                        ForEach(Team.allCases, id: \.id) {
                             Text($0.name)
                                 .tag($0.rawValue)
                         }

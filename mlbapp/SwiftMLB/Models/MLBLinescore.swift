@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LineScore: Codable {
+struct MLBLinescore: Codable {
     
     struct Inning: Codable {
         

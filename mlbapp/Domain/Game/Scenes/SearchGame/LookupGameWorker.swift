@@ -13,18 +13,18 @@ class LookupGameWorker {
     private var cancellation: AnyCancellable?
     
     // Creates a read only publisher
-    var publisher: AnyPublisher<[MLBGame], Error> {
+    var publisher: AnyPublisher<[Game], Error> {
         // Here we're "erasing" the information of which type
         // that our subject actually is, only letting our outside
         // code know that it's a read-only publisher:
         subject.eraseToAnyPublisher()
     }
     
-    let subject = PassthroughSubject<[MLBGame],Error>()
+    let subject = PassthroughSubject<[Game],Error>()
     
-    func lookupGames(for request: LookupGame.LookupGame.Request) async throws -> [MLBGame] {
-        let team = MLBTeam(rawValue: request.homeTeamIndex)!
-        let opponent = MLBTeam(rawValue: request.awayTeamIndex)!
+    func lookupGames(for request: LookupGame.LookupGame.Request) async throws -> [Game] {
+        let team = Team(rawValue: request.homeTeamIndex)!
+        let opponent = Team(rawValue: request.awayTeamIndex)!
         let gameType = request.onlyRegularSeason ? "R" : nil
 
         
@@ -35,13 +35,13 @@ class LookupGameWorker {
                                                                   gameType: gameType)
         
         
-        let dict = try await SwiftMLB.schedule(parameters: searchParameters)
-//        let gameItems = dict["games"] as! [[String: Any]]
-//        let games = gameItems.map { gameDict in
-//            MLBGame(from: gameDict)
-//        }
+        let schedule = try await SwiftMLB.schedule(parameters: searchParameters)
         
-        return []
+        let games = schedule.games.map { game in
+            Game(with: game)
+        }
+        
+        return games
     }
     
 }

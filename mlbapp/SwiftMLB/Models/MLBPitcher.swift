@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Pitcher: Codable {
+struct MLBPitcher: Codable {
     let personID: Int
     let fullName: String
     let stats: PitchingStats?

@@ -9,7 +9,7 @@ import Foundation
 
 extension SwiftMLB {
     
-    static func schedule(parameters: SwiftMLBRequest.ScheduleParameters) async throws -> Schedule {
+    static func schedule(parameters: SwiftMLBRequest.ScheduleParameters) async throws -> MLBSchedule {
         let request: SwiftMLBRequest = .schedule(parameters)
         let data = try await networkService.load(request)
 
@@ -18,7 +18,7 @@ extension SwiftMLB {
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        let schedule = try decoder.decode(Schedule.self, from: scheduleData)
+        let schedule = try decoder.decode(MLBSchedule.self, from: scheduleData)
         
         return schedule
     }

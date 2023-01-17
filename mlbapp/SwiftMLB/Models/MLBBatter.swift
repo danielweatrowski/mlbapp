@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Batter: Codable {
+struct MLBBatter: Codable {
     let personID: Int
     let fullName: String
     let positionAbbreviation: String

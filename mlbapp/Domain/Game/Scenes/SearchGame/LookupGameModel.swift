@@ -18,11 +18,11 @@ enum LookupGame {
         }
         
         struct Response {
-            var results: [MLBGame]
+            var results: [Game]
         }
         
         struct ViewModel {
-            var results: [MLBGame]
+            var results: [Game]
         }
     }
     

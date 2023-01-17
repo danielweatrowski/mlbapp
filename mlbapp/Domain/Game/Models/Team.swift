@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MLBTeam: Int, CaseIterable, Identifiable {
+enum Team: Int, CaseIterable, Identifiable {
     case any
     case unknown
     case dodgers
@@ -158,24 +158,24 @@ enum MLBTeam: Int, CaseIterable, Identifiable {
 }
 
 // MARK: Helpers
-extension MLBTeam {
-    static var allTeams: [MLBTeam] {
-        MLBTeam.allCases.filter( { $0 != .any} )
+extension Team {
+    static var allTeams: [Team] {
+        Team.allCases.filter( { $0 != .any} )
     }
     
-    static func team(withIdentifier id: Int) -> MLBTeam? {
-        return MLBTeam.allCases.first(where: {$0.id == id})
+    static func team(withIdentifier id: Int) -> Team? {
+        return Team.allCases.first(where: {$0.id == id})
     }
     
-    static var allAlphabetized: [MLBTeam] {
-        MLBTeam.allTeams.sorted(by: { $0.name < $1.name })
+    static var allAlphabetized: [Team] {
+        Team.allTeams.sorted(by: { $0.name < $1.name })
     }
     
-    static var allTeamsAlphabetized: [MLBTeam] {
-        MLBTeam.allTeams.sorted(by: { $0.name < $1.name })
+    static var allTeamsAlphabetized: [Team] {
+        Team.allTeams.sorted(by: { $0.name < $1.name })
     }
     
-    static func gameAbbreviation(homeTeam: MLBTeam, awayTeam: MLBTeam) -> String {
+    static func gameAbbreviation(homeTeam: Team, awayTeam: Team) -> String {
         return awayTeam.abbreviation + " @ " + homeTeam.abbreviation
     }
 }
