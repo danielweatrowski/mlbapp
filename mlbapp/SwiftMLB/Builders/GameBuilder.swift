@@ -52,7 +52,7 @@ struct GameBuilder: JSONBuilder {
             "gameID": gameInfo["id"] as? String,
             "type": gameInfo["type"] as? String,
             "season": gameInfo["season"] as? String,
-            "dateString": dateInfo["dateTime"],
+            "gameDate": dateInfo["dateTime"],
             "venue": venueJSON,
             "boxscore": boxscoreJSON,
             "linescore": linescoreJSON,

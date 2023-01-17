@@ -13,7 +13,7 @@ struct Game: Codable {
     let type: String
     let season: String
     let venue: Venue
-    let dateString: String
+    let gameDate: Date
     let linescore: LineScore
     let boxscore: Boxscore
     let teams: GameTeams

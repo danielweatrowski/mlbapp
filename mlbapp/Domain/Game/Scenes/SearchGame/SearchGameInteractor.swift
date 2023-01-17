@@ -46,8 +46,9 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
                 let response = LookupGame.LookupGame.Response(results: games)
                 presenter?.presentLookupGames(response: response)
                 lookupResults = games
-            } catch let error {
-                presenter?.presentLookupError(error: .unknown(error.localizedDescription))
+            } catch {
+                print(error)
+                //presenter?.presentLookupError(error: .unknown(error.localizedDescription))
             }
         }
     }

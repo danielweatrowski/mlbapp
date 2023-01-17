@@ -17,6 +17,7 @@ extension SwiftMLB {
         let gameData = try serializer.data()
         
         let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
         let game = try decoder.decode(Game.self, from: gameData)
         
         return game
