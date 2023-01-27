@@ -30,10 +30,11 @@ struct DetailGameView<I>: View where I: DetailGameBusinessLogic & DetailGameData
                     .background()
                     .cornerRadius(16)
                 
-                    // TODO: Pitching Line
-                
-                Button("Start", action: startGame)
-                    .buttonStyle(.borderedProminent)
+                BoxscoreView(viewModel: BoxscoreViewModel.Seed.viewModel)
+                    .padding()
+                    .background()
+                    .cornerRadius(16)
+
             }
             .padding([.leading, .trailing])
             

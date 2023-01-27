@@ -21,7 +21,7 @@ struct MLBTeam: Codable {
     let venue: MLBVenue
     let division: MLBDivision
     let league: MLBLeague
-    let springLeague: MLBLeague
+    let springLeague: MLBLeague?
     let record: TeamRecord?
     
     struct TeamRecord: Codable {
