@@ -7,25 +7,21 @@
 
 import SwiftUI
 
-protocol DetailGameDisplayLogic {
-    func displayGame(viewModel: DetailGame.DetailGame.ViewModel)
-}
-
-
-struct DetailGameView<I>: View where I: DetailGameBusinessLogic & DetailGameDataStore {
+struct DetailGameView: View {
     
-    //@ObservedObject var dataStore: DetailGameViewDataStore
-    @ObservedObject var interactor: I
+    var interactor: DetailGameInteractor
+    @ObservedObject var viewModel: DetailGame.ViewModel
     
     var body: some View {
         ScrollView {
             
-            DetailGameHeaderView(viewModel: $interactor.headerViewModel)
+            DetailGameHeaderView(viewModel: $viewModel.headerViewModel)
+                .padding(.horizontal)
             
-            DetailGameInfoView(viewModel: $interactor.infoViewModel)
-
+            DetailGameInfoView(viewModel: $viewModel.infoViewModel)
+            
             VStack() {
-                LineScoreView(viewModel: $interactor.lineScoreViewModel)
+                LineScoreView(viewModel: $viewModel.lineScoreViewModel)
                     .padding()
                     .background()
                     .cornerRadius(16)
@@ -34,14 +30,11 @@ struct DetailGameView<I>: View where I: DetailGameBusinessLogic & DetailGameData
                     .padding()
                     .background()
                     .cornerRadius(16)
-
+                
             }
             .padding([.leading, .trailing])
-            
-            
-            
         }
-        .navigationTitle(interactor.title)
+        .navigationTitle($viewModel.navigationTitle)
         .background(Color(uiColor: .systemGroupedBackground))
         .onAppear {
             interactor.getViewModel()
@@ -53,25 +46,13 @@ struct DetailGameView<I>: View where I: DetailGameBusinessLogic & DetailGameData
     }
 }
 
-extension DetailGameView: DetailGameDisplayLogic {
-    
-    @MainActor
-    func displayGame(viewModel: DetailGame.DetailGame.ViewModel) {
-        DispatchQueue.main.async {
-            interactor.headerViewModel = viewModel.headerViewModel
-            interactor.infoViewModel = viewModel.infoViewModel
-            interactor.lineScoreViewModel = viewModel.lineScoreViewModel
-        }
-    }
-}
-
-struct DetailGameView_Previews: PreviewProvider {
-    static let game1 = Game.test_0
-    static var previews: some View {
-        
-        let interactor = DetailGameInteractor(game: game1)
-        DetailGameView(interactor: interactor)
-    }
-}
+//struct DetailGameView_Previews: PreviewProvider {
+//    static let game1 = Game.test_0
+//    static var previews: some View {
+//
+//        let interactor = DetailGameInteractor(game: game1)
+//        DetailGameView(interactor: interactor, viewModel: )
+//    }
+//}
 
 

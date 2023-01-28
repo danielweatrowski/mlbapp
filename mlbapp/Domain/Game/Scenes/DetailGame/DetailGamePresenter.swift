@@ -11,31 +11,32 @@ protocol DetailGamePresentationLogic {
     func presentGame(response: DetailGame.DetailGame.Response)
 }
 
-class DetailGamePresenter: DetailGamePresentationLogic {
-    var view: DetailGameDisplayLogic?
-    
+struct DetailGamePresenter: DetailGamePresentationLogic {
+    var viewModel: DetailGame.ViewModel
+
     @MainActor
     func presentGame(response: DetailGame.DetailGame.Response) {
         let game = response.game
         
-        let headerViewModel = DetailGame.DetailGame.ViewModel.DetailGameHeader(homeTeam: game.homeTeam,
+        let headerViewModel = DetailGame.HeaderViewModel(homeTeam: game.homeTeam,
                                                           homeTeamScore: String(game.homeTeamScore),
                                                           homeTeamRecord: "\(game.homeTeamWins)-\(game.homeTeamLosses)",
                                                           awayTeam: game.awayTeam,
                                                           awayTeamScore: String(game.awayTeamScore),
                                                           awayTeamRecord: "\(game.awayTeamWins)-\(game.awayTeamLosses)")
         
-        let infoViewModel = DetailGame.DetailGame.ViewModel.InfoViewModel(gameDate: game.date.formatted(),
+        let infoViewModel = DetailGame.InfoViewModel(gameDate: game.date.formatted(),
                                                                           venueName: game.venue.name)
         
         let lineScoreViewModel = formatLineScore(linescore: response.linescore,
                                                  homeTeam: game.homeTeam,
                                                  awayTeam: game.awayTeam)
         
-        let viewModel = DetailGame.DetailGame.ViewModel(headerViewModel: headerViewModel,
-                                                        infoViewModel: infoViewModel,
-                                                        lineScoreViewModel: lineScoreViewModel)
-        view?.displayGame(viewModel: viewModel)
+        DispatchQueue.main.async {
+            viewModel.headerViewModel = headerViewModel
+            viewModel.infoViewModel = infoViewModel
+            viewModel.lineScoreViewModel = lineScoreViewModel
+        }
     }
     
     private func formatLineScore(linescore: MLBLinescore, homeTeam: Team, awayTeam: Team) -> LineScoreViewModel {

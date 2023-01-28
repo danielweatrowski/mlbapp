@@ -20,16 +20,13 @@ struct mlbappApp: App {
 
     }
     
-    func routeToDetailGame(game: Game) -> DetailGameView<DetailGameInteractor> {
-        let presenter = DetailGamePresenter()
-        let interactor = DetailGameInteractor()
-        let view = DetailGameView(interactor: interactor)
-
-        interactor.game = game
-        interactor.presenter = presenter
-        presenter.view = view
+    func routeToDetailGame(game: Game) -> DetailGameView {
+        
+        let viewModel = DetailGame.ViewModel(navigationTitle: game.abbreviation)
+        let presenter = DetailGamePresenter(viewModel: viewModel)
+        let interactor = DetailGameInteractor(presenter: presenter, game: game)
+        let view = DetailGameView(interactor: interactor, viewModel: viewModel)
         
         return view
-        
     }
 }

@@ -8,22 +8,26 @@
 import SwiftUI
 
 struct DetailGameInfoView: View {
-    @Binding var viewModel: DetailGame.DetailGame.ViewModel.InfoViewModel
+    @Binding var viewModel: DetailGame.InfoViewModel?
     
     var body: some View {
-        VStack(alignment: .center) {
-            Text("Final")
-            Text(viewModel.gameDate)
-            Text(viewModel.venueName)
+        if let viewModel = viewModel {
+            VStack(alignment: .center) {
+                Text("Final")
+                Text(viewModel.gameDate)
+                Text(viewModel.venueName)
+            }
+            .font(.subheadline)
+            .foregroundColor(.secondary)
+        } else {
+            EmptyView()
         }
-        .font(.subheadline)
-        .foregroundColor(.secondary)
     }
 }
 
 struct DetailGameInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = DetailGame.DetailGame.ViewModel.InfoViewModel(gameDate: "Wednesday, November 9, 2022", venueName: "Dan's Pad")
+        let viewModel = DetailGame.InfoViewModel(gameDate: "Wednesday, November 9, 2022", venueName: "Dan's Pad")
         DetailGameInfoView(viewModel: .constant(viewModel))
     }
 }
