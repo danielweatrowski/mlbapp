@@ -28,7 +28,9 @@ struct DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore {
             do {
                 let gameDTO = try await SwiftMLB.game(gameIdentifier: game.id)
                 
-                let response = DetailGame.DetailGame.Response(game: game, linescore: gameDTO.linescore)
+                let response = DetailGame.DetailGame.Response(game: game,
+                                                              linescore: gameDTO.linescore,
+                                                              boxscore: gameDTO.boxscore)
                 presenter.presentGame(response: response)
             } catch {
                 print(error)

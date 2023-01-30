@@ -47,7 +47,7 @@ struct BoxscoreRowView: View {
     @ViewBuilder
     var nameField: some View {
         if viewModel.substitution {
-            Text("  ")
+            Text("    ")
             + Text(viewModel.name)
                 .bold()
             + Text("  \(viewModel.positionAbbreviation)")

@@ -26,17 +26,47 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                                           awayTeamRecord: "\(game.awayTeamWins)-\(game.awayTeamLosses)")
         
         let infoViewModel = DetailGame.InfoViewModel(gameDate: game.date.formatted(),
-                                                                          venueName: game.venue.name)
+                                                     venueName: game.venue.name)
         
         let lineScoreViewModel = formatLineScore(linescore: response.linescore,
                                                  homeTeam: game.homeTeam,
                                                  awayTeam: game.awayTeam)
         
+        let boxscoreViewModel = formatBoxscore(boxscore: response.boxscore, team: game.homeTeam)
+        
         DispatchQueue.main.async {
             viewModel.headerViewModel = headerViewModel
             viewModel.infoViewModel = infoViewModel
             viewModel.lineScoreViewModel = lineScoreViewModel
+            viewModel.boxscoreViewModel = boxscoreViewModel
         }
+    }
+    
+    private func formatBoxscore(boxscore: MLBBoxscore, team: Team) -> BoxscoreViewModel {
+        var homeBoxItems = [BoxscoreViewModel.Item]()
+        
+        for batter in boxscore.homeBatters {
+            let battingOrder = Int(batter.battingOrder ?? "100") ?? 100
+            let boxscoreItem: BoxscoreViewModel.Item = BoxscoreViewModel.Item(name: batter.fullName,
+                                                      positionAbbreviation: batter.positionAbbreviation,
+                                                      atBats: String(batter.stats?.atBats ?? 0),
+                                                      runs: String(batter.stats?.runs ?? 0),
+                                                      hits: String(batter.stats?.hits ?? 0),
+                                                      runsBattedIn: String(batter.stats?.rbi ?? 0),
+                                                      baseOnBalls: String(batter.stats?.baseOnBalls ?? 0),
+                                                      strikeOuts: String(batter.stats?.strikeOuts ?? 0),
+                                                      leftOnBase: String(batter.stats?.leftOnBase ?? 0),
+                                                      average: batter.stats?.avg ?? "xxx",
+                                                      substitution: battingOrder % 100 != 0)
+            homeBoxItems.append(boxscoreItem)
+        }
+        
+        
+        let boxscoreViewModel = BoxscoreViewModel(teamAbbreviation: team.abbreviation,
+                                                  notes: boxscore.homeNotes,
+                                                  items: homeBoxItems,
+                                                  battingTotals: ["32", "0", "6", "0", "3", "9", "19"])
+        return boxscoreViewModel
     }
     
     private func formatLineScore(linescore: MLBLinescore, homeTeam: Team, awayTeam: Team) -> LineScoreViewModel {

@@ -18,37 +18,42 @@ struct EmptyGridItem: View {
 
 struct BoxscoreView: View {
     
-    var viewModel: BoxscoreViewModel
+    @Binding var viewModel: BoxscoreViewModel?
     
     var body: some View {
-        VStack {
-            ScrollView(.horizontal) {
-                Grid {
-                    BoxscoreHeaderView(teamAbbreviation: viewModel.teamAbbreviation)
-                    Divider()
-                    ForEach(viewModel.items, id: \.id) { item in
-                        BoxscoreRowView(viewModel: item)
-                            .padding(.bottom, 4)
+        if let viewModel = viewModel {
+            VStack {
+                ScrollView(.horizontal) {
+                    Grid {
+                        BoxscoreHeaderView(teamAbbreviation: viewModel.teamAbbreviation)
+                        Divider()
+                        ForEach(viewModel.items, id: \.id) { item in
+                            BoxscoreRowView(viewModel: item)
+                                .padding(.bottom, 4)
+                        }
+                        BoxscoreTotalsView(viewModel: viewModel.battingTotals)
                     }
-                    BoxscoreTotalsView(viewModel: viewModel.battingTotals)
+                }
+                .padding(.bottom, 16)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    ForEach(viewModel.notes, id: \.self) {
+                        Text($0)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
                 }
             }
-            .padding(.bottom, 16)
-            
-            VStack(alignment: .leading, spacing: 4) {
-                ForEach(viewModel.notes, id: \.self) {
-                    Text($0)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-            }
+        }
+        else {
+            EmptyView()
         }
     }
 }
 
 struct BoxscoreView_Previews: PreviewProvider {
     static var previews: some View {
-        BoxscoreView(viewModel: BoxscoreViewModel.Seed.viewModel)
+        BoxscoreView(viewModel: .constant(BoxscoreViewModel.Seed.viewModel))
     }
 }

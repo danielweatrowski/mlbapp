@@ -26,7 +26,7 @@ struct DetailGameView: View {
                     .background()
                     .cornerRadius(16)
                 
-                BoxscoreView(viewModel: BoxscoreViewModel.Seed.viewModel)
+                BoxscoreView(viewModel: $viewModel.boxscoreViewModel)
                     .padding()
                     .background()
                     .cornerRadius(16)
@@ -39,10 +39,6 @@ struct DetailGameView: View {
         .onAppear {
             interactor.getViewModel()
         }
-    }
-    
-    func startGame() {
-        interactor.startGame()
     }
 }
 

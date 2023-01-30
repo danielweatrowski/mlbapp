@@ -30,7 +30,7 @@ enum DetailGame {
         @Published var headerViewModel: HeaderViewModel?
         @Published var infoViewModel: InfoViewModel?
         @Published var lineScoreViewModel: LineScoreViewModel?
-        //@Published var boxscoreViewModel: BoxscoreViewModel?
+        @Published var boxscoreViewModel: BoxscoreViewModel?
         
         init(navigationTitle: String) {
             self.navigationTitle = navigationTitle
@@ -41,28 +41,7 @@ enum DetailGame {
         struct Response {
             var game: Game
             var linescore: MLBLinescore
+            var boxscore: MLBBoxscore
         }
-        
-//        struct ViewModel {
-//            struct DetailGameHeader {
-//                
-//                var homeTeam: Team = .any
-//                var homeTeamScore: String = ""
-//                var homeTeamRecord: String = ""
-//                var awayTeam: Team = .any
-//                var awayTeamScore: String = ""
-//                var awayTeamRecord: String = ""
-//                
-//            }
-//            
-//            struct InfoViewModel {
-//                var gameDate: String = ""
-//                var venueName: String = ""
-//            }
-//            
-//            var headerViewModel: DetailGameHeader
-//            var infoViewModel: InfoViewModel
-//            var lineScoreViewModel: LineScoreViewModel
-//        }
     }
 }
