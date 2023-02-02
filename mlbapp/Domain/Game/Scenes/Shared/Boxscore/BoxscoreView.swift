@@ -19,25 +19,32 @@ struct EmptyGridItem: View {
 struct BoxscoreView: View {
     
     @Binding var viewModel: BoxscoreViewModel?
-    
+    @State private var teamBoxSelection = 0
+
     var body: some View {
         if let viewModel = viewModel {
             VStack {
+                Picker("Teams", selection: $teamBoxSelection) {
+                    Text("NYM").tag(0)
+                    Text(viewModel.homeTeamAbbreviation).tag(1)
+                }
+                .pickerStyle(.segmented)
+                .padding(.bottom)
+                
                 ScrollView(.horizontal) {
-                    Grid {
-                        BoxscoreHeaderView(teamAbbreviation: viewModel.teamAbbreviation)
+                    Grid(verticalSpacing: 16) {
+                        BoxscoreHeaderView(teamAbbreviation: viewModel.homeTeamAbbreviation)
                         Divider()
-                        ForEach(viewModel.items, id: \.id) { item in
-                            BoxscoreRowView(viewModel: item)
-                                .padding(.bottom, 4)
+                        ForEach(viewModel.homeBatters, id: \.id) { batter in
+                            BoxscoreRowView(viewModel: batter)
                         }
-                        BoxscoreTotalsView(viewModel: viewModel.battingTotals)
+                        BoxscoreTotalsView(viewModel: viewModel.homeBattingTotals)
                     }
                 }
                 .padding(.bottom, 16)
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    ForEach(viewModel.notes, id: \.self) {
+                    ForEach(viewModel.homeNotes, id: \.self) {
                         Text($0)
                             .font(.subheadline)
                             .foregroundColor(.secondary)

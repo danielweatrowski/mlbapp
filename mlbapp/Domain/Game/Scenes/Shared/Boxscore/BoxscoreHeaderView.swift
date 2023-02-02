@@ -15,6 +15,8 @@ struct BoxscoreHeaderView: View {
         GridRow {
             Text("Batters - \(teamAbbreviation)")
                 .bold()
+                .font(.subheadline)
+
             EmptyGridItem()
 
             Text("AB")

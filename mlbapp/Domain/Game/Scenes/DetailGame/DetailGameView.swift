@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DetailGameView: View {
-    
+        
     var interactor: DetailGameInteractor
     @ObservedObject var viewModel: DetailGame.ViewModel
     

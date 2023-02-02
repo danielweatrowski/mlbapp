@@ -28,6 +28,6 @@ struct BoxscoreTotalsView: View {
 
 struct BoxscoreTotalsView_Previews: PreviewProvider {
     static var previews: some View {
-        BoxscoreTotalsView(viewModel: BoxscoreViewModel.Seed.viewModel.battingTotals)
+        BoxscoreTotalsView(viewModel: BoxscoreViewModel.Seed.viewModel.homeBattingTotals)
     }
 }

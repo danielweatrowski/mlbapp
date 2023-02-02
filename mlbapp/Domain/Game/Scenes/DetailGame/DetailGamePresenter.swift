@@ -43,11 +43,17 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
     }
     
     private func formatBoxscore(boxscore: MLBBoxscore, team: Team) -> BoxscoreViewModel {
-        var homeBoxItems = [BoxscoreViewModel.Item]()
+        var homeBoxItems = [BoxscoreViewModel.Batter]()
         
         for batter in boxscore.homeBatters {
             let battingOrder = Int(batter.battingOrder ?? "100") ?? 100
-            let boxscoreItem: BoxscoreViewModel.Item = BoxscoreViewModel.Item(name: batter.fullName,
+            var name = batter.fullName
+            
+            if let note = batter.stats?.note {
+                name = note + name
+            }
+            
+            let boxscoreItem: BoxscoreViewModel.Batter = BoxscoreViewModel.Batter(name: name,
                                                       positionAbbreviation: batter.positionAbbreviation,
                                                       atBats: String(batter.stats?.atBats ?? 0),
                                                       runs: String(batter.stats?.runs ?? 0),
@@ -62,10 +68,10 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         }
         
         
-        let boxscoreViewModel = BoxscoreViewModel(teamAbbreviation: team.abbreviation,
-                                                  notes: boxscore.homeNotes,
-                                                  items: homeBoxItems,
-                                                  battingTotals: ["32", "0", "6", "0", "3", "9", "19"])
+        let boxscoreViewModel = BoxscoreViewModel(homeTeamAbbreviation: team.abbreviation,
+                                                  homeNotes: boxscore.homeNotes,
+                                                  homeBatters: homeBoxItems,
+                                                  homeBattingTotals: ["32", "0", "6", "0", "3", "9", "19"])
         return boxscoreViewModel
     }
     

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BoxscoreRowView: View {
     
-    var viewModel: BoxscoreViewModel.Item
+    var viewModel: BoxscoreViewModel.Batter
     
     var body: some View {
         GridRow {
@@ -50,12 +50,14 @@ struct BoxscoreRowView: View {
             Text("    ")
             + Text(viewModel.name)
                 .bold()
+                .font(.subheadline)
             + Text("  \(viewModel.positionAbbreviation)")
                 .font(.footnote)
                 .foregroundColor(.secondary)
         } else {
             Text(viewModel.name)
                 .bold()
+                .font(.subheadline)
             + Text("  \(viewModel.positionAbbreviation)")
                 .font(.footnote)
                 .foregroundColor(.secondary)

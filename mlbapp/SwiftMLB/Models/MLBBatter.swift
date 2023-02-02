@@ -9,6 +9,7 @@ import Foundation
 
 struct MLBBatter: Codable {
     let personID: Int
+    // TODO: Get last name
     let fullName: String
     let positionAbbreviation: String
     let battingOrder: String?
