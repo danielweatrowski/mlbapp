@@ -9,38 +9,51 @@ import SwiftUI
 
 struct BoxscoreRowView: View {
     
+    enum RowType {
+        case batter, total
+    }
+    
     var viewModel: BoxscoreViewModel.Batter
+    var type: RowType
     
     var body: some View {
         GridRow {
             nameField
                 .gridColumnAlignment(.leading)
+                
             EmptyGridItem()
             
             Text(viewModel.atBats)
                 .font(.subheadline)
+                .bold(type == .total)
             
             Text(viewModel.runs)
                 .font(.subheadline)
+                .bold(type == .total)
 
             Text(viewModel.hits)
                 .font(.subheadline)
+                .bold(type == .total)
 
             Text(viewModel.runsBattedIn)
                 .font(.subheadline)
+                .bold(type == .total)
 
             Text(viewModel.baseOnBalls)
                 .font(.subheadline)
+                .bold(type == .total)
 
             Text(viewModel.strikeOuts)
                 .font(.subheadline)
+                .bold(type == .total)
 
             Text(viewModel.leftOnBase)
                 .font(.subheadline)
+                .bold(type == .total)
 
             Text(viewModel.average)
                 .font(.subheadline)
-
+                .bold(type == .total)
         }
     }
     
@@ -68,7 +81,7 @@ struct BoxscoreRowView: View {
 struct BoxscoreRowView_Previews: PreviewProvider {
     static var previews: some View {
         Grid {
-            BoxscoreRowView(viewModel: BoxscoreViewModel.Seed.harper_20190424)
+            BoxscoreRowView(viewModel: BoxscoreViewModel.Seed.harper_20190424, type: .batter)
         }
     }
 }

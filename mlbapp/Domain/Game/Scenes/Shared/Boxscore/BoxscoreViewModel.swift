@@ -27,7 +27,27 @@ struct BoxscoreViewModel {
     var homeTeamAbbreviation: String
     var homeNotes: [String]
     var homeBatters: [Batter]
-    var homeBattingTotals: [String]
+    var homeBattingTotals: Batter
+    var awayTeamAbbreviation: String
+    var awayNotes: [String]
+    var awayBatters: [Batter]
+    var awayBattingTotals: Batter
+}
+
+extension BoxscoreViewModel {
+    static func buildBattingTotals(atBats: String, runs: String, hits: String, runsBattedIn: String, baseOnBalls: String, strikeOuts: String, leftOnBase: String) -> Batter {
+        return .init(name: "Totals",
+                     positionAbbreviation: "",
+                     atBats: atBats,
+                     runs: runs,
+                     hits: hits,
+                     runsBattedIn: runsBattedIn,
+                     baseOnBalls: baseOnBalls,
+                     strikeOuts: strikeOuts,
+                     leftOnBase: leftOnBase,
+                     average: "",
+                     substitution: false)
+    }
 }
 
 extension BoxscoreViewModel {
@@ -75,11 +95,17 @@ extension BoxscoreViewModel {
                                                             leftOnBase: "1",
                                                             average: ".306",
                                                             substitution: true)
+        
+        static let totals = BoxscoreViewModel.buildBattingTotals(atBats: "9", runs: "9", hits: "9", runsBattedIn: "9", baseOnBalls: "9", strikeOuts: "9", leftOnBase: "9")
 
         
         static let viewModel = BoxscoreViewModel(homeTeamAbbreviation: "PHI",
                                                  homeNotes: ["c-Struck out for Smith, Do in the 8th", "d-Struck out for Rhame in the 9th."],
                                                  homeBatters: [mccutchen_20190424, realmuto_20190424, alonso_20190424, harper_20190424],
-                                                 homeBattingTotals: ["32", "0", "6", "0", "3", "9", "19"])
+                                                 homeBattingTotals: totals,
+                                                 awayTeamAbbreviation: "PHI",
+                                                 awayNotes: ["c-Struck out for Smith, Do in the 8th", "d-Struck out for Rhame in the 9th."],
+                                                 awayBatters: [mccutchen_20190424, realmuto_20190424, alonso_20190424, harper_20190424],
+                                                 awayBattingTotals: totals)
     }
 }

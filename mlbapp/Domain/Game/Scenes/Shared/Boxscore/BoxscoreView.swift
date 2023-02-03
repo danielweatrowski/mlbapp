@@ -36,9 +36,9 @@ struct BoxscoreView: View {
                         BoxscoreHeaderView(teamAbbreviation: viewModel.homeTeamAbbreviation)
                         Divider()
                         ForEach(viewModel.homeBatters, id: \.id) { batter in
-                            BoxscoreRowView(viewModel: batter)
+                            BoxscoreRowView(viewModel: batter, type: .batter)
                         }
-                        BoxscoreTotalsView(viewModel: viewModel.homeBattingTotals)
+                        BoxscoreRowView(viewModel: viewModel.homeBattingTotals, type: .total)
                     }
                 }
                 .padding(.bottom, 16)
