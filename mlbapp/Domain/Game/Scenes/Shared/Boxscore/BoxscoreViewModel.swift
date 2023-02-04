@@ -48,6 +48,14 @@ extension BoxscoreViewModel {
                      average: "",
                      substitution: false)
     }
+    
+    static let emptyTotals = BoxscoreViewModel.buildBattingTotals(atBats: "0",
+                                                                  runs: "0",
+                                                                  hits: "0",
+                                                                  runsBattedIn: "0",
+                                                                  baseOnBalls: "0",
+                                                                  strikeOuts: "0",
+                                                                  leftOnBase: "0")
 }
 
 extension BoxscoreViewModel {

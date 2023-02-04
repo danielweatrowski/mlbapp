@@ -12,11 +12,18 @@ struct EmptyGridItem: View {
     
     var body: some View {
         color
-        .frame(width: 20, height: 20)
+            .frame(width: 20, height: 20)
     }
 }
 
 struct BoxscoreView: View {
+    
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
+    
+    var interfaceSize: InterfaceSize {
+        return InterfaceSize(horizontalSizeClass: horizontalSizeClass, verticalSizeClass: verticalSizeClass)
+    }
     
     @Binding var viewModel: BoxscoreViewModel?
     @State private var teamBoxSelection = 0
@@ -24,24 +31,23 @@ struct BoxscoreView: View {
     var body: some View {
         if let viewModel = viewModel {
             VStack {
+                
                 Picker("Teams", selection: $teamBoxSelection) {
-                    Text("NYM").tag(0)
-                    Text(viewModel.homeTeamAbbreviation).tag(1)
+                    Text(viewModel.homeTeamAbbreviation).tag(0)
+                    Text(viewModel.awayTeamAbbreviation).tag(1)
                 }
                 .pickerStyle(.segmented)
                 .padding(.bottom)
                 
-                ScrollView(.horizontal) {
-                    Grid(verticalSpacing: 16) {
-                        BoxscoreHeaderView(teamAbbreviation: viewModel.homeTeamAbbreviation)
-                        Divider()
-                        ForEach(viewModel.homeBatters, id: \.id) { batter in
-                            BoxscoreRowView(viewModel: batter, type: .batter)
-                        }
-                        BoxscoreRowView(viewModel: viewModel.homeBattingTotals, type: .total)
+                // boxscore content
+                if interfaceSize.portrait {
+                    ScrollView(.horizontal) {
+                        boxscore(for: viewModel)
                     }
+                    .padding(.bottom, 16)
+                } else {
+                    boxscore(for: viewModel)
                 }
-                .padding(.bottom, 16)
                 
                 VStack(alignment: .leading, spacing: 4) {
                     ForEach(viewModel.homeNotes, id: \.self) {
@@ -52,10 +58,49 @@ struct BoxscoreView: View {
                     }
                 }
             }
+//            .onAppear {
+//                print("Horizontal: \(horizontalSizeClass)")
+//                print("Vertical: \(verticalSizeClass)")
+//            }
         }
         else {
             EmptyView()
         }
+    }
+    
+    @ViewBuilder
+    private func boxscore(for viewModel: BoxscoreViewModel) -> some View {
+        Grid(verticalSpacing: 16) {
+            
+            BoxscoreHeaderView(teamAbbreviation: selectedTeamAbbreviation)
+            
+            Divider()
+            
+            ForEach(selectedBatters, id: \.id) { batter in
+                BoxscoreRowView(viewModel: batter, type: .batter)
+            }
+            
+            BoxscoreRowView(viewModel: viewModel.homeBattingTotals, type: .total)
+                .padding(.top)
+        }
+    }
+    
+    private var selectedTeamAbbreviation: String {
+        return teamBoxSelection == 0
+        ? viewModel?.homeTeamAbbreviation ?? ""
+        : viewModel?.awayTeamAbbreviation ?? ""
+    }
+    
+    private var selectedBatters: [BoxscoreViewModel.Batter] {
+        return teamBoxSelection == 0
+        ? viewModel?.homeBatters ?? []
+        : viewModel?.awayBatters ?? []
+    }
+    
+    private var selectedTotals: BoxscoreViewModel.Batter {
+        return teamBoxSelection == 0
+        ? viewModel?.homeBattingTotals ?? BoxscoreViewModel.emptyTotals
+        : viewModel?.awayBattingTotals ?? BoxscoreViewModel.emptyTotals
     }
 }
 
