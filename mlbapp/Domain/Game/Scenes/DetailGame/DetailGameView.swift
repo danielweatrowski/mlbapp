@@ -34,7 +34,7 @@ struct DetailGameView: View {
             }
             .padding([.leading, .trailing])
         }
-        .navigationTitle($viewModel.navigationTitle)
+        .navigationTitle(viewModel.navigationTitle)
         .background(Color(uiColor: .systemGroupedBackground))
         .onAppear {
             interactor.getViewModel()

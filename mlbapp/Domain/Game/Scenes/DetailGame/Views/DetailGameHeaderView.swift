@@ -13,6 +13,8 @@ struct DetailGameHeaderView: View {
     var body: some View {
         if let viewModel = viewModel {
             HStack() {
+                Spacer()
+
                 Image("\(viewModel.homeTeam)")
                     .resizable()
                     .scaledToFit()
@@ -27,9 +29,7 @@ struct DetailGameHeaderView: View {
                         .font(.caption2)
                 }
 
-                Spacer()
                 Text("-")
-                Spacer()
 
                 VStack() {
                     Text(viewModel.awayTeamScore)
@@ -43,6 +43,8 @@ struct DetailGameHeaderView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 80, height: 80)
+                
+                Spacer()
                 
             }
             .cornerRadius(16)

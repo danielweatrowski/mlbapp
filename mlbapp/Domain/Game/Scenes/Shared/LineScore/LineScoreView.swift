@@ -15,36 +15,47 @@ struct LineScoreView: View {
         if let viewModel = viewModel {
 
             ScrollView {
-                LazyVGrid(columns: viewModel.columns, spacing: 8) {
-                    ForEach(viewModel.headers, id: \.id) { item in
-                        switch(item.type) {
-                        case .team:
-                            Text(item.value)
-                                .bold()
-                                .fixedSize(horizontal: true, vertical: false)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        default:
-                            Text(item.value)
-                                .font(.subheadline)
-                                .fixedSize(horizontal: true, vertical: false)
-                            
+                Grid {
+                    GridRow {
+                        ForEach(viewModel.headers, id: \.id) { item in
+                            switch(item.type) {
+                            case .team:
+                                Text(item.value)
+                                    .bold()
+                            default:
+                                Text(item.value)
+                                    .font(.subheadline)
+                            }
                         }
                     }
-                }
-                Divider()
-                LazyVGrid(columns: viewModel.columns, spacing: 8) {
-                    ForEach(viewModel.data, id: \.id) { item in
-                        switch(item.type) {
-                        case .team:
-                            Text(item.value)
-                                .bold()
-                                .fixedSize(horizontal: true, vertical: false)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        default:
-                            Text(item.value)
-                                .font(.subheadline)
-                                .fixedSize(horizontal: true, vertical: false)
-                            
+                    Divider()
+                    GridRow {
+                        ForEach(viewModel.homeLineItems, id: \.id) { item in
+                            switch(item.type) {
+                            case .team:
+                                Text(item.value)
+                                    .bold()
+                            case .none:
+                                EmptyGridItem()
+                            default:
+                                Text(item.value)
+                                    .font(.subheadline)
+                            }
+                        }
+                    }
+                    
+                    GridRow {
+                        ForEach(viewModel.awayLineItems, id: \.id) { item in
+                            switch(item.type) {
+                            case .team:
+                                Text(item.value)
+                                    .bold()
+                            case .none:
+                                EmptyGridItem()
+                            default:
+                                Text(item.value)
+                                    .font(.subheadline)
+                            }
                         }
                     }
                 }
