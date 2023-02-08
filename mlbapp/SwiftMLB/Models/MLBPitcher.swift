@@ -8,7 +8,7 @@
 import Foundation
 
 struct MLBPitcher: Codable {
-    let personID: Int
+    let id: Int
     let fullName: String
     let stats: PitchingStats?
 }

@@ -30,7 +30,9 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         
         let lineScoreViewModel = formatLineScore(linescore: response.linescore,
                                                  homeTeam: game.homeTeam,
-                                                 awayTeam: game.awayTeam)
+                                                 awayTeam: game.awayTeam,
+                                                 winner: response.boxscore.winningPitcher,
+                                                 loser: response.boxscore.losingPitcher)
         
         let boxscoreViewModel = formatBoxscore(boxscore: response.boxscore,
                                                homeTeamAbbreviation: game.homeTeam.abbreviation,
@@ -110,6 +112,14 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                                                            strikeOuts: String(aBattingTotals.strikeOuts),
                                                                            leftOnBase: String(aBattingTotals.leftOnBase))
         
+        let homeBattingInfo = boxscore.homeBattingInfo.map({
+            BoxscoreViewModel.Info(title: $0.label, description: $0.value)
+        })
+        
+        let homeFieldingInfo = boxscore.homeFieldingInfo.map({
+            BoxscoreViewModel.Info(title: $0.label, description: $0.value)
+        })
+        
         let boxscoreViewModel = BoxscoreViewModel(homeTeamAbbreviation: homeTeamAbbreviation,
                                                   homeNotes: boxscore.homeNotes,
                                                   homeBatters: homeBoxItems,
@@ -117,11 +127,13 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                                   awayTeamAbbreviation: awayTeamAbbreviation,
                                                   awayNotes: boxscore.awayNotes,
                                                   awayBatters: awayBoxBatters,
-                                                  awayBattingTotals: aBattingTotalsViewModel)
+                                                  awayBattingTotals: aBattingTotalsViewModel,
+                                                  homeBattingInfo: homeBattingInfo,
+                                                  homeFieldingInfo: homeFieldingInfo)
         return boxscoreViewModel
     }
     
-    private func formatLineScore(linescore: MLBLinescore, homeTeam: Team, awayTeam: Team) -> LineScoreViewModel {
+    private func formatLineScore(linescore: MLBLinescore, homeTeam: Team, awayTeam: Team, winner: MLBPitcher?, loser: MLBPitcher?) -> LineScoreViewModel {
         
         var spacer: LineScoreViewItem {
             LineScoreViewItem(id: UUID(), type: .none, value: "")
@@ -193,10 +205,16 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         let a_errorsTotal = linescore.awayTotal.errors ?? 0
         let a_errorsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(a_errorsTotal))
         awayLineItems.append(a_errorsTotalItem)
-        
+                
         return LineScoreViewModel(headers: headerLineItems,
                                   homeLineItems: homeLineItems,
-                                  awayLineItems: awayLineItems)
+                                  awayLineItems: awayLineItems,
+                                  winningPitcherName: winner?.fullName,
+                                  winningPitcherRecord: "NIL",
+                                  winningPitcherERA: winner?.stats?.era,
+                                  losingPitcherName: loser?.fullName,
+                                  losingPitcherRecord: "NIL",
+                                  losingPitcherERA: loser?.stats?.era)
         
     }
     

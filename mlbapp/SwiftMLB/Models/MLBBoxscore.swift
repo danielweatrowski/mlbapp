@@ -19,4 +19,40 @@ struct MLBBoxscore: Codable {
     let awayPitchingTotals: PitchingStats
     let homeNotes: [String]
     let awayNotes: [String]
+    let homeBattingInfo: [BoxscoreInfo]
+    let awayBattingInfo: [BoxscoreInfo]
+    let homeFieldingInfo: [BoxscoreInfo]
+    let awayFieldingInfo: [BoxscoreInfo]
+    
+    struct BoxscoreInfo: Codable {
+        let label: String
+        let value: String
+    }
+    
+    var winningPitcher: MLBPitcher? {
+        let homePitcher = homePitchers.first(where: {$0.stats?.wins == 1})
+        if let pitcher = homePitcher {
+            return pitcher
+        }
+        
+        let awayPitcher = awayPitchers.first(where: {$0.stats?.wins == 1})
+        if let pitcher = awayPitcher {
+            return pitcher
+        }
+        return nil
+    }
+    
+    var losingPitcher: MLBPitcher? {
+        let homePitcher = homePitchers.first(where: {$0.stats?.losses == 1})
+        if let pitcher = homePitcher {
+            return pitcher
+        }
+        
+        let awayPitcher = awayPitchers.first(where: {$0.stats?.losses == 1})
+        if let pitcher = awayPitcher {
+            return pitcher
+        }
+        
+        return nil
+    }
 }

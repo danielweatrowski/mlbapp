@@ -15,35 +15,54 @@ struct DetailGameHeaderView: View {
             HStack() {
                 Spacer()
 
-                Image("\(viewModel.homeTeam)")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 80, height: 80)
-                
-                VStack() {
-                    Text(viewModel.homeTeamScore)
-                        .font(.system(size: 66))
-                        .fontWeight(.bold)
-                        .padding([.leading, .trailing])
+                VStack(alignment: .center) {
+                    Image("\(viewModel.homeTeam)")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 80, maxHeight: 80)
+                    Text("Mets")
+                        .font(.subheadline)
+                        .bold()
                     Text(viewModel.homeTeamRecord)
                         .font(.caption2)
                 }
+                
+                VStack() {
+                    Text(viewModel.homeTeamScore)
+                        .font(.system(size: 56))
+                        .scaledToFill()
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
+                        .bold()
+                        .padding([.leading, .trailing])
 
-                Text("-")
+                }
+
+                Text("FINAL")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
 
                 VStack() {
                     Text(viewModel.awayTeamScore)
-                        .font(.system(size: 66))
-                        .fontWeight(.bold)
+                        .font(.system(size: 56))
+                        .scaledToFill()
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
+                        .bold()
                         .padding([.leading, .trailing])
+                }
+                VStack(alignment: .center) {
+                    Image("\(viewModel.awayTeam)")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 80, maxHeight: 80)
+                    Text("Phillies")
+                        .font(.subheadline)
+                        .bold()
                     Text(viewModel.awayTeamRecord)
                         .font(.caption2)
                 }
-                Image("\(viewModel.awayTeam)")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 80, height: 80)
-                
+
                 Spacer()
                 
             }

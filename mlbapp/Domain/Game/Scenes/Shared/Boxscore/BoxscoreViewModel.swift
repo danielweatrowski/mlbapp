@@ -24,6 +24,11 @@ struct BoxscoreViewModel {
         var label: String?
     }
     
+    struct Info {
+        var title: String
+        var description: String
+    }
+    
     var homeTeamAbbreviation: String
     var homeNotes: [String]
     var homeBatters: [Batter]
@@ -32,6 +37,8 @@ struct BoxscoreViewModel {
     var awayNotes: [String]
     var awayBatters: [Batter]
     var awayBattingTotals: Batter
+    var homeBattingInfo: [Info]
+    var homeFieldingInfo: [Info]
 }
 
 extension BoxscoreViewModel {
@@ -114,6 +121,8 @@ extension BoxscoreViewModel {
                                                  awayTeamAbbreviation: "PHI",
                                                  awayNotes: ["c-Struck out for Smith, Do in the 8th", "d-Struck out for Rhame in the 9th."],
                                                  awayBatters: [mccutchen_20190424, realmuto_20190424, alonso_20190424, harper_20190424],
-                                                 awayBattingTotals: totals)
+                                                 awayBattingTotals: totals,
+                                                 homeBattingInfo: [],
+                                                 homeFieldingInfo: [])
     }
 }

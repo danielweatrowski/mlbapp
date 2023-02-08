@@ -30,5 +30,10 @@ struct LineScoreViewModel {
     var headers: [LineScoreViewItem]
     var homeLineItems: [LineScoreViewItem]
     var awayLineItems: [LineScoreViewItem]
-
+    var winningPitcherName: String?
+    var winningPitcherRecord: String?
+    var winningPitcherERA: String?
+    var losingPitcherName: String?
+    var losingPitcherRecord: String?
+    var losingPitcherERA: String?
 }

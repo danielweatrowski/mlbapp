@@ -49,7 +49,8 @@ struct BoxscoreView: View {
                     boxscore(for: viewModel)
                 }
                 
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 8) {
+                    
                     ForEach(viewModel.homeNotes, id: \.self) {
                         Text($0)
                             .font(.subheadline)
@@ -57,6 +58,49 @@ struct BoxscoreView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
+                .padding(.vertical)
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    
+                    Text("Batting")
+                        .font(.subheadline)
+                        .bold()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    ForEach(viewModel.homeBattingInfo, id: \.title) { item in
+                        Group {
+                            Text(item.title)
+                                .font(.subheadline)
+                                .bold()
+                            + Text(" ")
+                            + Text(item.description)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+                .padding(.vertical)
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    
+                    Text("Fielding")
+                        .font(.subheadline)
+                        .bold()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    ForEach(viewModel.homeFieldingInfo, id: \.title) { item in
+                        Group {
+                            Text(item.title)
+                                .font(.subheadline)
+                                .bold()
+                            + Text(" ")
+                            + Text(item.description)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+                .padding(.vertical)
             }
 //            .onAppear {
 //                print("Horizontal: \(horizontalSizeClass)")

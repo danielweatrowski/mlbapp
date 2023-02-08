@@ -12,7 +12,7 @@ struct DetailGameInfoView: View {
     
     var body: some View {
         if let viewModel = viewModel {
-            VStack(alignment: .center) {
+            VStack(alignment: .leading) {
                 Text("Final")
                 Text(viewModel.gameDate)
                 Text(viewModel.venueName)

@@ -8,7 +8,7 @@
 import Foundation
 
 struct MLBBatter: Codable {
-    let personID: Int
+    let id: Int
     // TODO: Get last name
     let fullName: String
     let positionAbbreviation: String

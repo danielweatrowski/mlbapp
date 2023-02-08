@@ -74,7 +74,7 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
             ]
         case .linescore:
             return [
-                URLQueryItem(name: "fields", value: "gameData,teams,teamName,shortName,status,abstractGameState,liveData,linescore,innings,num,home,away,runs,hits,errors")
+                URLQueryItem(name: "fields", value: "gameData,teams,teamName,shortName,status,abstractGameState,liveData,linescore,innings,num,home,away,runs,hits,errors,decisions,winner,loser,id,fullName")
             ]
         case let .player(parameters):
             return parameters.toQueryItems()

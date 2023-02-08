@@ -27,13 +27,15 @@ enum DetailGame {
     
     class ViewModel: ObservableObject {
         @Published var navigationTitle: String
+        @Published var gameDate: String
         @Published var headerViewModel: HeaderViewModel?
         @Published var infoViewModel: InfoViewModel?
         @Published var lineScoreViewModel: LineScoreViewModel?
         @Published var boxscoreViewModel: BoxscoreViewModel?
         
-        init(navigationTitle: String) {
+        init(navigationTitle: String, gameDate: String) {
             self.navigationTitle = navigationTitle
+            self.gameDate = gameDate
         }
     }
 

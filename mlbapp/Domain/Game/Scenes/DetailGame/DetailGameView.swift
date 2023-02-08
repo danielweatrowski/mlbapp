@@ -11,14 +11,28 @@ struct DetailGameView: View {
         
     var interactor: DetailGameInteractor
     @ObservedObject var viewModel: DetailGame.ViewModel
+    @State private var teamBoxSelection = 0
     
     var body: some View {
         ScrollView {
             
-            DetailGameHeaderView(viewModel: $viewModel.headerViewModel)
-                .padding(.horizontal)
+            Text(viewModel.gameDate)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .bold()
+                .font(.subheadline)
+                .padding(.leading)
+                .padding(.top, -4)
             
-            DetailGameInfoView(viewModel: $viewModel.infoViewModel)
+            VStack() {
+
+                DetailGameHeaderView(viewModel: $viewModel.headerViewModel)
+                    .padding()
+                    .padding(.vertical)
+                    .background()
+                    .cornerRadius(16)
+                
+            }
+            .padding([.leading, .trailing])
             
             VStack() {
                 LineScoreView(viewModel: $viewModel.lineScoreViewModel)
@@ -31,9 +45,36 @@ struct DetailGameView: View {
                     .background()
                     .cornerRadius(16)
                 
+                VStack {
+                    
+                    HStack {
+                        Image(systemName: "mappin.circle.fill")
+                        Text("Stadium")
+                            .font(.subheadline)
+                        Spacer()
+                        
+                        Text(viewModel.infoViewModel?.venueName ?? "")
+                            .font(.subheadline)
+                    }
+                    Divider()
+                    HStack {
+                        Image(systemName: "calendar.circle.fill")
+                        Text("Date")
+                            .font(.subheadline)
+                        Spacer()
+                        
+                        Text(viewModel.infoViewModel?.gameDate ?? "")
+                            .font(.subheadline)
+                    }
+                }
+                .padding()
+                .background()
+                .cornerRadius(16)
+                
             }
             .padding([.leading, .trailing])
         }
+
         .navigationTitle(viewModel.navigationTitle)
         .background(Color(uiColor: .systemGroupedBackground))
         .onAppear {
