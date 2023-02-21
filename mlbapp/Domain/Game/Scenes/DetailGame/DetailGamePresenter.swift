@@ -210,10 +210,12 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                   homeLineItems: homeLineItems,
                                   awayLineItems: awayLineItems,
                                   winningPitcherName: winner?.fullName,
-                                  winningPitcherRecord: "NIL",
+                                  winningPitcherWins: winner?.stats?.seasonWins,
+                                  winningPitcherLosses: winner?.stats?.seasonLosses,
                                   winningPitcherERA: winner?.stats?.era,
                                   losingPitcherName: loser?.fullName,
-                                  losingPitcherRecord: "NIL",
+                                  losingPitcherWins: loser?.stats?.seasonWins,
+                                  losingPitcherLosses: loser?.stats?.seasonLosses,
                                   losingPitcherERA: loser?.stats?.era)
         
     }

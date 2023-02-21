@@ -260,9 +260,15 @@ struct BoxscoreBuilder: JSONBuilder {
         if let seasonStatsDict = dict["seasonStats"] as? [String: Any] {
             if let pitchingStatsDict = seasonStatsDict["pitching"] as? [String: Any] {
                 pitcherStatsDict["era"] = pitchingStatsDict["era"] as? String ?? "0"
+                pitcherStatsDict["seasonWins"] = pitchingStatsDict["wins"] as? Int ?? 0
+                pitcherStatsDict["seasonLosses"] = pitchingStatsDict["losses"] as? Int ?? 0
+                pitcherStatsDict["seasonSaves"] = pitchingStatsDict["saves"] as? Int ?? 0
 
             } else {
                 pitcherStatsDict["era"] = "0"
+                pitcherStatsDict["seasonWins"] = 0
+                pitcherStatsDict["seasonLosses"] = 0
+                pitcherStatsDict["seasonSaves"] = 0
             }
         }
             

@@ -31,9 +31,11 @@ struct LineScoreViewModel {
     var homeLineItems: [LineScoreViewItem]
     var awayLineItems: [LineScoreViewItem]
     var winningPitcherName: String?
-    var winningPitcherRecord: String?
+    var winningPitcherWins: Int?
+    var winningPitcherLosses: Int?
     var winningPitcherERA: String?
     var losingPitcherName: String?
-    var losingPitcherRecord: String?
+    var losingPitcherWins: Int?
+    var losingPitcherLosses: Int?
     var losingPitcherERA: String?
 }

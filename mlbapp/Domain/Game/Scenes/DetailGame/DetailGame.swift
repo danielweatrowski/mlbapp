@@ -26,17 +26,27 @@ enum DetailGame {
     }
     
     class ViewModel: ObservableObject {
+        
         @Published var navigationTitle: String
         @Published var gameDate: String
+        @Published var homeTeamAbbreviation: String
+        @Published var awayTeamAbbreviation: String
         @Published var headerViewModel: HeaderViewModel?
         @Published var infoViewModel: InfoViewModel?
         @Published var lineScoreViewModel: LineScoreViewModel?
         @Published var boxscoreViewModel: BoxscoreViewModel?
         
-        init(navigationTitle: String, gameDate: String) {
+        init(navigationTitle: String, gameDate: String, homeTeamAbbreviation: String, awayTeamAbbreviation: String, headerViewModel: HeaderViewModel? = nil, infoViewModel: InfoViewModel? = nil, lineScoreViewModel: LineScoreViewModel? = nil, boxscoreViewModel: BoxscoreViewModel? = nil) {
             self.navigationTitle = navigationTitle
             self.gameDate = gameDate
+            self.homeTeamAbbreviation = homeTeamAbbreviation
+            self.awayTeamAbbreviation = awayTeamAbbreviation
+            self.headerViewModel = headerViewModel
+            self.infoViewModel = infoViewModel
+            self.lineScoreViewModel = lineScoreViewModel
+            self.boxscoreViewModel = boxscoreViewModel
         }
+        
     }
 
     enum DetailGame {

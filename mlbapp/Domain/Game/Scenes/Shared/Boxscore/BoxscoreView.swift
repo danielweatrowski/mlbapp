@@ -26,18 +26,18 @@ struct BoxscoreView: View {
     }
     
     @Binding var viewModel: BoxscoreViewModel?
-    @State private var teamBoxSelection = 0
+    @Binding var teamBoxSelection: Int
 
     var body: some View {
         if let viewModel = viewModel {
             VStack {
                 
-                Picker("Teams", selection: $teamBoxSelection) {
-                    Text(viewModel.homeTeamAbbreviation).tag(0)
-                    Text(viewModel.awayTeamAbbreviation).tag(1)
-                }
-                .pickerStyle(.segmented)
-                .padding(.bottom)
+//                Picker("Teams", selection: $teamBoxSelection) {
+//                    Text(viewModel.homeTeamAbbreviation).tag(0)
+//                    Text(viewModel.awayTeamAbbreviation).tag(1)
+//                }
+//                .pickerStyle(.segmented)
+//                .padding(.bottom)
                 
                 // boxscore content
                 if interfaceSize.portrait {
@@ -150,6 +150,6 @@ struct BoxscoreView: View {
 
 struct BoxscoreView_Previews: PreviewProvider {
     static var previews: some View {
-        BoxscoreView(viewModel: .constant(BoxscoreViewModel.Seed.viewModel))
+        BoxscoreView(viewModel: .constant(BoxscoreViewModel.Seed.viewModel), teamBoxSelection: .constant(0))
     }
 }

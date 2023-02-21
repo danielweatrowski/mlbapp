@@ -78,10 +78,12 @@ struct LineScoreView: View {
     var pitchersBox: some View {
         if let winnersName = viewModel?.winningPitcherName,
            let winningERA = viewModel?.winningPitcherERA,
-           let winningRecord = viewModel?.winningPitcherRecord,
+           let winningSeasonWins = viewModel?.winningPitcherWins,
+           let winningSeasonLosses = viewModel?.winningPitcherLosses,
            let losingName = viewModel?.losingPitcherName,
            let losingERA = viewModel?.losingPitcherERA,
-           let losingRecord = viewModel?.losingPitcherRecord {
+           let losingSeasonWins = viewModel?.losingPitcherWins,
+           let losingSeasonLosses = viewModel?.losingPitcherLosses {
             
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
@@ -96,7 +98,7 @@ struct LineScoreView: View {
                         Spacer()
                     }
                     HStack {
-                        Text(winningRecord)
+                        Text("\(winningSeasonWins)-\(winningSeasonLosses)")
                             .font(.footnote)
                         Divider()
                         Text("\(winningERA) ERA")
@@ -117,7 +119,7 @@ struct LineScoreView: View {
                         Spacer()
                     }
                     HStack {
-                        Text(losingRecord)
+                        Text("\(losingSeasonWins)-\(losingSeasonLosses)")
                             .font(.footnote)
                         Divider()
                         Text("\(losingERA) ERA")

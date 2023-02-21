@@ -18,6 +18,7 @@ struct PitchingStats: Codable {
     let strikeOuts, baseOnBalls, stolenBases: Int
     let atBats, rbi, runs: Int
     let strikes, balls, numberOfPitches, battersFaced: Int
+    let seasonWins, seasonLosses, seasonSaves: Int?
     let inningsPitched, era: String
     let wins, holds, losses, blownSaves, saves: Int?
     let note: String?

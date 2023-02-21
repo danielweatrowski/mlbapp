@@ -7,6 +7,33 @@
 
 import Foundation
 
+struct TeamDO {
+    let id: Int
+    let name: String
+    let abbreviation: String
+    let teamName: String
+    let locationName: String
+    let venue: MetaData
+    let division: MetaData
+    let league: MetaData
+    
+    let record: SeasonRecord?
+    
+    struct MetaData {
+        let id: Int
+        let name: String
+        let link: String
+    }
+    
+    struct SeasonRecord {
+        let gamesPlayed: Int
+        let wins: Int
+        let losses: Int
+        let ties: Int
+        let winningPercentage: String
+    }
+}
+
 enum Team: Int, CaseIterable, Identifiable {
     case any
     case unknown

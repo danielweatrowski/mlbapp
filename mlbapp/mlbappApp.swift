@@ -22,10 +22,7 @@ struct mlbappApp: App {
     
     func routeToDetailGame(game: Game) -> DetailGameView {
         
-        let viewModel = DetailGame.ViewModel(navigationTitle: game.abbreviation, gameDate: game.date.formatted())
-        let presenter = DetailGamePresenter(viewModel: viewModel)
-        let interactor = DetailGameInteractor(presenter: presenter, game: game)
-        let view = DetailGameView(interactor: interactor, viewModel: viewModel)
+        let view = DetailGameConfigurator.configure(for: game)
         
         return view
     }

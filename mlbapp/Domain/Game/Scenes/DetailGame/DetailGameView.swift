@@ -15,14 +15,6 @@ struct DetailGameView: View {
     
     var body: some View {
         ScrollView {
-            
-            Text(viewModel.gameDate)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .bold()
-                .font(.subheadline)
-                .padding(.leading)
-                .padding(.top, -4)
-            
             VStack() {
 
                 DetailGameHeaderView(viewModel: $viewModel.headerViewModel)
@@ -40,7 +32,7 @@ struct DetailGameView: View {
                     .background()
                     .cornerRadius(16)
                 
-                BoxscoreView(viewModel: $viewModel.boxscoreViewModel)
+                BoxscoreView(viewModel: $viewModel.boxscoreViewModel, teamBoxSelection: $teamBoxSelection)
                     .padding()
                     .background()
                     .cornerRadius(16)
@@ -74,7 +66,16 @@ struct DetailGameView: View {
             }
             .padding([.leading, .trailing])
         }
-
+        .toolbar {
+            ToolbarItem(placement: .bottomBar) {
+                Picker("Teams", selection: $teamBoxSelection) {
+                    Text(viewModel.homeTeamAbbreviation).tag(0)
+                    Text(viewModel.awayTeamAbbreviation).tag(1)
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal)
+            }
+        }
         .navigationTitle(viewModel.navigationTitle)
         .background(Color(uiColor: .systemGroupedBackground))
         .onAppear {
@@ -83,13 +84,13 @@ struct DetailGameView: View {
     }
 }
 
-//struct DetailGameView_Previews: PreviewProvider {
-//    static let game1 = Game.test_0
-//    static var previews: some View {
-//
-//        let interactor = DetailGameInteractor(game: game1)
-//        DetailGameView(interactor: interactor, viewModel: )
-//    }
-//}
+struct DetailGameView_Previews: PreviewProvider {
+    static let game1 = Game.test_0
+    static var previews: some View {
+        NavigationView {
+            DetailGameConfigurator.configure(for: game1)
+        }
+    }
+}
 
 

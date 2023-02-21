@@ -13,23 +13,24 @@ struct DetailGameHeaderView: View {
     var body: some View {
         if let viewModel = viewModel {
             HStack() {
-                Spacer()
+                //Spacer()
 
-                VStack(alignment: .center) {
+                VStack(alignment: .center, spacing: 2) {
                     Image("\(viewModel.homeTeam)")
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 80, maxHeight: 80)
-                    Text("Mets")
+                    Text(viewModel.homeTeam.name)
                         .font(.subheadline)
                         .bold()
+                        .multilineTextAlignment(.center)
                     Text(viewModel.homeTeamRecord)
                         .font(.caption2)
                 }
                 
                 VStack() {
                     Text(viewModel.homeTeamScore)
-                        .font(.system(size: 56))
+                        .font(.system(size: 40))
                         .scaledToFill()
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
@@ -44,26 +45,27 @@ struct DetailGameHeaderView: View {
 
                 VStack() {
                     Text(viewModel.awayTeamScore)
-                        .font(.system(size: 56))
+                        .font(.system(size: 40))
                         .scaledToFill()
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
                         .bold()
                         .padding([.leading, .trailing])
                 }
-                VStack(alignment: .center) {
+                VStack(alignment: .center, spacing: 2) {
                     Image("\(viewModel.awayTeam)")
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 80, maxHeight: 80)
-                    Text("Phillies")
+                    Text(viewModel.awayTeam.name)
                         .font(.subheadline)
                         .bold()
+                        .multilineTextAlignment(.center)
                     Text(viewModel.awayTeamRecord)
                         .font(.caption2)
                 }
 
-                Spacer()
+                //Spacer()
                 
             }
             .cornerRadius(16)
