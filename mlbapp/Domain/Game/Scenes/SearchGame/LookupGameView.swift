@@ -8,7 +8,7 @@
 import SwiftUI
 protocol SearchGameDisplayLogic {
     func displayLookupError(error: LookupGame.LookupGameError)
-    func displayLookupResults(viewModel: LookupGame.LookupGame.ViewModel)
+    func displayLookupResults(viewModel: ListGame.ViewModel)
 }
 struct LookupGameView: View {
     var interactor: SearchGameBusinessLogic?
@@ -116,9 +116,8 @@ extension LookupGameView: SearchGameDisplayLogic {
         router.showErrorAlert(error: error)
     }
     
-    func displayLookupResults(viewModel: LookupGame.LookupGame.ViewModel) {
-        let listViewModel = ListGame.ListGameLookupResults.ViewModel(games: viewModel.results)
-        router.routeToListGame(viewModel: listViewModel)
+    func displayLookupResults(viewModel: ListGame.ViewModel) {
+        router.routeToListGame(viewModel: viewModel)
     }
     
 }

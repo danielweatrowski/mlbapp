@@ -7,50 +7,57 @@
 
 import SwiftUI
 
+struct ListGameRowViewModel {
+    let gameID: Int
+    let gameDate: String
+    let gameVenueName: String
+    let homeTeamName: String
+    let homeTeamScore: String
+    let homeTeamRecord: String
+    let homeTeamLogoName: String
+    let awayTeamName: String
+    let awayTeamScore: String
+    let awayTeamRecord: String
+    let awayTeamLogoName: String
+    
+    var awayTeamDidWin: Bool {
+        return awayTeamScore > homeTeamScore
+    }
+    
+    var homeTeamDidWin: Bool {
+        return awayTeamScore < homeTeamScore
+    }
+}
+
 struct ListGameRow: View {
     
-    var viewModel: ListGame.GameLookupItem.ViewModel
-    
-    private var homeRecord: String {
-        return "\(viewModel.game.homeTeamWins)-\(viewModel.game.homeTeamLosses)"
-    }
-    private var awayRecord: String {
-        return "\(viewModel.game.awayTeamWins)-\(viewModel.game.awayTeamLosses)"
-    }
-    
-    private var awayTeamDidWin: Bool {
-        return viewModel.game.awayTeamScore > viewModel.game.homeTeamScore
-    }
-    
-    private var homeTeamDidWin: Bool {
-        return viewModel.game.awayTeamScore < viewModel.game.homeTeamScore
-    }
+    var viewModel: ListGameRowViewModel
 
     var body: some View {
         VStack() {
             HStack() {
                 
-                Text(viewModel.game.date.formatted())
+                Text(viewModel.gameDate)
                 Spacer()
-                Text(viewModel.game.venue.name)
+                Text(viewModel.gameVenueName)
             }
             .foregroundColor(.secondary)
             .font(.footnote)
                         
             HStack() {
-                Image("\(viewModel.game.homeTeam)")
+                Image(viewModel.awayTeamLogoName)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30, height: 40)
                 VStack(alignment: .leading) {
-                    Text(viewModel.game.homeTeam.name)
-                    Text(homeRecord)
+                    Text(viewModel.homeTeamName)
+                    Text(viewModel.homeTeamRecord)
                         .font(.caption)
                 }
                 
                 Spacer()
                 
-                Text(String(viewModel.game.homeTeamScore))
+                Text(String(viewModel.homeTeamScore))
                     .padding()
                     .font(.title3)
                     .minimumScaleFactor(0.8)
@@ -67,19 +74,19 @@ struct ListGameRow: View {
             .font(.system(size: 17, weight: .medium, design: .default))
 
             HStack() {
-                Image("\(viewModel.game.awayTeam)")
+                Image("\(viewModel.awayTeamLogoName)")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30, height: 40)
                 VStack(alignment: .leading) {
-                    Text(viewModel.game.awayTeam.name)
-                    Text(awayRecord)
+                    Text(viewModel.awayTeamName)
+                    Text(viewModel.awayTeamRecord)
                         .font(.caption)
                 }
                 
                 Spacer()
                 
-                Text(String(viewModel.game.awayTeamScore))
+                Text(String(viewModel.awayTeamScore))
                     .padding()
                     .font(.title3)
                     .minimumScaleFactor(0.8)
@@ -104,7 +111,16 @@ struct ListGameRow: View {
 struct ListGameRow_Previews: PreviewProvider {
     static var previews: some View {
         let game = Game.test_0
-        let viewModel = ListGame.GameLookupItem.ViewModel(game: game)
+        let viewModel = ListGameRowViewModel(gameID: 1, gameDate: "June 22, 2004",
+                                             gameVenueName: "The Sandlot",
+                                             homeTeamName: "Rockstars",
+                                             homeTeamScore: "9",
+                                             homeTeamRecord: "10-1",
+                                             homeTeamLogoName: "",
+                                             awayTeamName: "Dancers",
+                                             awayTeamScore: "3",
+                                             awayTeamRecord: "3-7",
+                                             awayTeamLogoName: "")
         ListGameRow(viewModel: viewModel)
             .previewLayout(.fixed(width: 400, height: 200))
     }

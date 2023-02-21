@@ -16,7 +16,8 @@ enum LookupGame {
             let gameDate: Date
             let venueName: String
             let awayTeam: Team
-            
+            let homeTeam: Team
+
             
             struct Team {
                 let id: Int
@@ -29,6 +30,23 @@ enum LookupGame {
                     return "\(wins)-\(losses)"
                 }
             }
+            
+            init(dto: MLBSchedule.Game) {
+                self.id = dto.gamePk
+                self.gameDate = dto.gameDate
+                self.venueName = dto.venue.name
+                
+                self.homeTeam = Team(id: dto.teams.home.team.id,
+                                     name: dto.teams.home.team.name,
+                                     score: dto.teams.home.score,
+                                     wins: dto.teams.home.leagueRecord.wins,
+                                     losses: dto.teams.home.leagueRecord.losses)
+                self.awayTeam = Team(id: dto.teams.away.team.id,
+                                     name: dto.teams.away.team.name,
+                                     score: dto.teams.away.score,
+                                     wins: dto.teams.away.leagueRecord.wins,
+                                     losses: dto.teams.away.leagueRecord.losses)
+            }
         }
         
         struct Request {
@@ -40,11 +58,11 @@ enum LookupGame {
         }
         
         struct Response {
-            var results: [Game]
+            var results: [Result]
         }
         
         struct ViewModel {
-            var results: [Game]
+            var results: [Result]
         }
     }
     

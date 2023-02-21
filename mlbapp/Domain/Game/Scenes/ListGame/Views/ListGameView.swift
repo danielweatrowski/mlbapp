@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ListGameView: View {
     
-    var viewModel: ListGame.ListGameLookupResults.ViewModel
+    var viewModel: ListGame.ViewModel
     
     var interactor: ListGameBusinessLogic?
     @ObservedObject var router: ListGameRouter
@@ -22,14 +22,11 @@ struct ListGameView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 0) {
-                ForEach(viewModel.games, id: \.id) { game in
+                ForEach(viewModel.rows, id: \.gameID) { row in
                     
-                    NavigationLink(destination: router.routeToDetailGame(game: game)) {
-                        let viewModel = ListGame.GameLookupItem.ViewModel(game: game)
-                        ListGameRow(viewModel: viewModel)
-                            .background()
-                            .cornerRadius(20)
-                    }                    
+                    ListGameRow(viewModel: row)
+                        .background()
+                        .cornerRadius(20)
                 }
                 .padding([
                     .bottom,
@@ -47,10 +44,8 @@ struct ListGameView: View {
 }
 
 struct ListGameView_Previews: PreviewProvider {
-    static var previews: some View {
-        let game1 = Game.test_0
-        
-        let viewModel = ListGame.ListGameLookupResults.ViewModel(games: [game1])
+    static var previews: some View {        
+        let viewModel = ListGame.ViewModel(rows: [])
         ListGameView(viewModel: viewModel, router: ListGameRouter())
     }
 }

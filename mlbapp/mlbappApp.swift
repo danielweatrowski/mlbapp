@@ -11,11 +11,11 @@ import SwiftUI
 struct mlbappApp: App {
     var body: some Scene {
         WindowGroup {
-//            let router = LookupGameRouter()
-//            LookupGameView(router: router).configureView()
-            NavigationView {
-                routeToDetailGame(game: Seeds.Games.PHI_NYM_20190424)
-            }
+            let router = LookupGameRouter()
+            LookupGameView(router: router).configureView()
+//            NavigationView {
+//                routeToDetailGame(game: Seeds.Games.PHI_NYM_20190424)
+//            }
         }
 
     }

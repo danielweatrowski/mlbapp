@@ -22,7 +22,7 @@ class LookupGameWorker {
     
     let subject = PassthroughSubject<[Game],Error>()
     
-    func lookupGames(for request: LookupGame.LookupGame.Request) async throws -> [Game] {
+    func lookupGames(for request: LookupGame.LookupGame.Request) async throws -> [LookupGame.LookupGame.Result] {
         let team = Team(rawValue: request.homeTeamIndex)!
         let opponent = Team(rawValue: request.awayTeamIndex)!
         let gameType = request.onlyRegularSeason ? "R" : nil
@@ -38,7 +38,7 @@ class LookupGameWorker {
         let schedule = try await SwiftMLB.schedule(parameters: searchParameters)
         
         let games = schedule.games.map { game in
-            Game(with: game)
+            LookupGame.LookupGame.Result(dto: game)
         }
         
         return games

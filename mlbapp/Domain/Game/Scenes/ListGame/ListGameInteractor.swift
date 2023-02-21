@@ -10,14 +10,8 @@ import Combine
 
 protocol ListGameBusinessLogic {}
 
-protocol ListGameDataStore {
-    var lookupResults: [Game] { get set }
-}
+protocol ListGameDataStore {}
 
 class ListGameInteractor: ListGameBusinessLogic, ListGameDataStore {
-    var lookupResults: [Game]
-    
-    init(lookupResults: [Game]) {
-        self.lookupResults = lookupResults
-    }
+
 }

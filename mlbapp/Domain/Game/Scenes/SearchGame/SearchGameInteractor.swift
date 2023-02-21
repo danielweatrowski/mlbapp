@@ -13,7 +13,7 @@ protocol SearchGameBusinessLogic {
 }
 
 protocol SearchGameDataStore {
-    var lookupResults: [Game] { get set }
+    var lookupResults: [LookupGame.LookupGame.Result] { get set }
 }
 
 class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
@@ -23,7 +23,7 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
     private var cancellable: AnyCancellable?
     
     // Data store
-    var lookupResults: [Game] = []
+    var lookupResults: [LookupGame.LookupGame.Result] = []
     
     @MainActor
     func createSearchGame(request: LookupGame.LookupGame.Request) {
@@ -35,17 +35,17 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
         
         Task {
             do {
-                let games = try await worker.lookupGames(for: request)
+                let lookupResults = try await worker.lookupGames(for: request)
                 
-                guard games.isEmpty == false else {
+                guard lookupResults.isEmpty == false else {
                     presenter?.presentLookupError(error: .noGamesFound)
                     return
                 }
                 
                 // present games
-                let response = LookupGame.LookupGame.Response(results: games)
+                let response = LookupGame.LookupGame.Response(results: lookupResults)
                 presenter?.presentLookupGames(response: response)
-                lookupResults = games
+                self.lookupResults = lookupResults
             } catch {
                 print(error)
                 //presenter?.presentLookupError(error: .unknown(error.localizedDescription))

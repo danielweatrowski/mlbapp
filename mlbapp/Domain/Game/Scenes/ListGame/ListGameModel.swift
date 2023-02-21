@@ -8,6 +8,11 @@
 import Foundation
 
 enum ListGame {
+    
+    struct ViewModel {
+        var rows: [ListGameRowViewModel]
+    }
+    
     enum ListGameLookupResults {
         struct ViewModel {
             var games: [Game]
