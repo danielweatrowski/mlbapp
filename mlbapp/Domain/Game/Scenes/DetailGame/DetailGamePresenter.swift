@@ -18,31 +18,28 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
     func presentGame(response: DetailGame.DetailGame.Response) {
         let game = response.game
         
-        let headerViewModel = DetailGame.HeaderViewModel(homeTeam: game.homeTeam,
-                                                          homeTeamScore: String(game.homeTeamScore),
-                                                          homeTeamRecord: "\(game.homeTeamWins)-\(game.homeTeamLosses)",
-                                                          awayTeam: game.awayTeam,
-                                                          awayTeamScore: String(game.awayTeamScore),
-                                                          awayTeamRecord: "\(game.awayTeamWins)-\(game.awayTeamLosses)")
+        guard let homeTeamRecord = game.homeTeam.record, let awayTeamRecord = game.awayTeam.record else {
+            // TODO: Present error
+            return
+        }
         
-        let infoViewModel = DetailGame.InfoViewModel(gameDate: game.date.formatted(),
-                                                     venueName: game.venue.name)
-        
-        let lineScoreViewModel = formatLineScore(linescore: response.linescore,
-                                                 homeTeam: game.homeTeam,
-                                                 awayTeam: game.awayTeam,
-                                                 winner: response.boxscore.winningPitcher,
-                                                 loser: response.boxscore.losingPitcher)
-        
-        let boxscoreViewModel = formatBoxscore(boxscore: response.boxscore,
-                                               homeTeamAbbreviation: game.homeTeam.abbreviation,
-                                               awayTeamAbbreviation: game.awayTeam.abbreviation)
-        
+        let headerViewModel = DetailGameHeaderViewModel(homeTeamName: game.homeTeam.name,
+                                                        homeTeamScore: String(game.homeTeamScore),
+                                                        homeTeamRecord: homeTeamRecord.formatted(),
+                                                        awayTeamName: game.awayTeam.name,
+                                                        awayTeamScore: String(game.awayTeamScore),
+                                                        awayTeamRecord: awayTeamRecord.formatted())
+
+        let lineScoreViewModel = formatLineScore(for: game)
+
+//        let boxscoreViewModel = formatBoxscore(boxscore: response.boxscore,
+//                                               homeTeamAbbreviation: game.homeTeam.abbreviation,
+//                                               awayTeamAbbreviation: game.awayTeam.abbreviation)
+
         DispatchQueue.main.async {
             viewModel.headerViewModel = headerViewModel
-            viewModel.infoViewModel = infoViewModel
             viewModel.lineScoreViewModel = lineScoreViewModel
-            viewModel.boxscoreViewModel = boxscoreViewModel
+            //viewModel.boxscoreViewModel = boxscoreViewModel
         }
     }
     
@@ -133,11 +130,19 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         return boxscoreViewModel
     }
     
-    private func formatLineScore(linescore: MLBLinescore, homeTeam: Team, awayTeam: Team, winner: MLBPitcher?, loser: MLBPitcher?) -> LineScoreViewModel {
+    
+    private func formatLineScore(for game: Game) -> LineScoreViewModel? {
+        
+        guard let linescore = game.linescore else {
+            return nil
+        }
         
         var spacer: LineScoreViewItem {
             LineScoreViewItem(id: UUID(), type: .none, value: "")
         }
+        
+        let homeTeam = game.homeTeam
+        let awayTeam = game.awayTeam
         
         var awayLineItems = [LineScoreViewItem]()
         var homeLineItems = [LineScoreViewItem]()
@@ -153,8 +158,8 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                 
         // Innings
         for inning in linescore.innings {
-            let homeInningRuns = inning.away.runs ?? 0
-            let awayInningRuns = inning.home.runs ?? 0
+            let homeInningRuns = inning.away.runs
+            let awayInningRuns = inning.home.runs
 
             let h_runItem = LineScoreViewItem(id: UUID(), type: .run, value: String(homeInningRuns))
             let a_runItem = LineScoreViewItem(id: UUID(), type: .run, value: String(awayInningRuns))
@@ -174,11 +179,11 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         let runsHeaderItem = LineScoreViewItem(id: UUID(), type: .header, value: "R")
         headerLineItems.append(runsHeaderItem)
         
-        let h_runsTotal = linescore.homeTotal.runs ?? 0
+        let h_runsTotal = linescore.homeTotal.runs
         let h_runsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(h_runsTotal))
         homeLineItems.append(h_runsTotalItem)
         
-        let a_runsTotal = linescore.awayTotal.runs ?? 0
+        let a_runsTotal = linescore.awayTotal.runs
         let a_runsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(a_runsTotal))
         awayLineItems.append(a_runsTotalItem)
         
@@ -186,11 +191,11 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         let hitsHeaderItem = LineScoreViewItem(id: UUID(), type: .header, value: "H")
         headerLineItems.append(hitsHeaderItem)
         
-        let h_hitsTotal = linescore.homeTotal.hits ?? 0
+        let h_hitsTotal = linescore.homeTotal.hits
         let h_hitsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(h_hitsTotal))
         homeLineItems.append(h_hitsTotalItem)
         
-        let a_hitsTotal = linescore.awayTotal.hits ?? 0
+        let a_hitsTotal = linescore.awayTotal.hits
         let a_hitsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(a_hitsTotal))
         awayLineItems.append(a_hitsTotalItem)
         
@@ -198,26 +203,25 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         let errorsHeaderItem = LineScoreViewItem(id: UUID(), type: .header, value: "E")
         headerLineItems.append(errorsHeaderItem)
         
-        let h_errorsTotal = linescore.homeTotal.errors ?? 0
+        let h_errorsTotal = linescore.homeTotal.errors
         let h_errorsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(h_errorsTotal))
         homeLineItems.append(h_errorsTotalItem)
         
-        let a_errorsTotal = linescore.awayTotal.errors ?? 0
+        let a_errorsTotal = linescore.awayTotal.errors
         let a_errorsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(a_errorsTotal))
         awayLineItems.append(a_errorsTotalItem)
                 
         return LineScoreViewModel(headers: headerLineItems,
                                   homeLineItems: homeLineItems,
                                   awayLineItems: awayLineItems,
-                                  winningPitcherName: winner?.fullName,
-                                  winningPitcherWins: winner?.stats?.seasonWins,
-                                  winningPitcherLosses: winner?.stats?.seasonLosses,
-                                  winningPitcherERA: winner?.stats?.era,
-                                  losingPitcherName: loser?.fullName,
-                                  losingPitcherWins: loser?.stats?.seasonWins,
-                                  losingPitcherLosses: loser?.stats?.seasonLosses,
-                                  losingPitcherERA: loser?.stats?.era)
-        
+                                  winningPitcherName: "dan",
+                                  winningPitcherWins: 10,
+                                  winningPitcherLosses: 0,
+                                  winningPitcherERA: "0.1",
+                                  losingPitcherName: "ian",
+                                  losingPitcherWins: 0,
+                                  losingPitcherLosses: 10,
+                                  losingPitcherERA: "15")
     }
     
 }

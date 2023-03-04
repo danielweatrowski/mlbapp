@@ -8,19 +8,17 @@
 import SwiftUI
 
 struct DetailGameHeaderView: View {
-    @Binding var viewModel: DetailGame.HeaderViewModel?
+    @Binding var viewModel: DetailGameHeaderViewModel?
     
     var body: some View {
         if let viewModel = viewModel {
             HStack() {
-                //Spacer()
-
                 VStack(alignment: .center, spacing: 2) {
-                    Image("\(viewModel.homeTeam)")
+                    Image("\(viewModel.homeTeamName)")
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 80, maxHeight: 80)
-                    Text(viewModel.homeTeam.name)
+                    Text(viewModel.homeTeamName)
                         .font(.subheadline)
                         .bold()
                         .multilineTextAlignment(.center)
@@ -53,20 +51,17 @@ struct DetailGameHeaderView: View {
                         .padding([.leading, .trailing])
                 }
                 VStack(alignment: .center, spacing: 2) {
-                    Image("\(viewModel.awayTeam)")
+                    Image("\(viewModel.awayTeamName)")
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 80, maxHeight: 80)
-                    Text(viewModel.awayTeam.name)
+                    Text(viewModel.awayTeamName)
                         .font(.subheadline)
                         .bold()
                         .multilineTextAlignment(.center)
                     Text(viewModel.awayTeamRecord)
                         .font(.caption2)
                 }
-
-                //Spacer()
-                
             }
             .cornerRadius(16)
         }
@@ -79,7 +74,7 @@ struct DetailGameHeaderView: View {
 struct DetailGameHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let viewModel = DetailGame.HeaderViewModel(homeTeam: .dodgers, homeTeamScore: "7", homeTeamRecord: "10-2", awayTeam: .braves, awayTeamScore: "2", awayTeamRecord: "2-10")
+        let viewModel = DetailGameHeaderViewModel(homeTeamName: "Dodgers", homeTeamScore: "10", homeTeamRecord: "10-0", awayTeamName: "Giants", awayTeamScore: "2", awayTeamRecord: "0-10")
 
         DetailGameHeaderView(viewModel: .constant(viewModel))
     }

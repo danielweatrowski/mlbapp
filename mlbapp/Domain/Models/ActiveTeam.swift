@@ -1,40 +1,14 @@
 //
-//  TeamData.swift
+//  ActiveTeam.swift
 //  mlbapp
 //
-//  Created by Daniel Weatrowski on 10/19/22.
+//  Created by Daniel Weatrowski on 3/3/23.
 //
 
 import Foundation
 
-struct TeamDO {
-    let id: Int
-    let name: String
-    let abbreviation: String
-    let teamName: String
-    let locationName: String
-    let venue: MetaData
-    let division: MetaData
-    let league: MetaData
-    
-    let record: SeasonRecord?
-    
-    struct MetaData {
-        let id: Int
-        let name: String
-        let link: String
-    }
-    
-    struct SeasonRecord {
-        let gamesPlayed: Int
-        let wins: Int
-        let losses: Int
-        let ties: Int
-        let winningPercentage: String
-    }
-}
 
-enum Team: Int, CaseIterable, Identifiable {
+enum ActiveTeam: Int, CaseIterable, Identifiable {
     case any
     case unknown
     case dodgers
@@ -185,25 +159,24 @@ enum Team: Int, CaseIterable, Identifiable {
 }
 
 // MARK: Helpers
-extension Team {
-    static var allTeams: [Team] {
-        Team.allCases.filter( { $0 != .any} )
+extension ActiveTeam {
+    static var allTeams: [ActiveTeam] {
+        ActiveTeam.allCases.filter( { $0 != .any} )
     }
     
-    static func team(withIdentifier id: Int) -> Team? {
-        return Team.allCases.first(where: {$0.id == id})
+    static func team(withIdentifier id: Int) -> ActiveTeam? {
+        return ActiveTeam.allCases.first(where: {$0.id == id})
     }
     
-    static var allAlphabetized: [Team] {
-        Team.allTeams.sorted(by: { $0.name < $1.name })
+    static var allAlphabetized: [ActiveTeam] {
+        ActiveTeam.allTeams.sorted(by: { $0.name < $1.name })
     }
     
-    static var allTeamsAlphabetized: [Team] {
-        Team.allTeams.sorted(by: { $0.name < $1.name })
+    static var allTeamsAlphabetized: [ActiveTeam] {
+        ActiveTeam.allTeams.sorted(by: { $0.name < $1.name })
     }
     
-    static func gameAbbreviation(homeTeam: Team, awayTeam: Team) -> String {
+    static func gameAbbreviation(homeTeam: ActiveTeam, awayTeam: ActiveTeam) -> String {
         return awayTeam.abbreviation + " @ " + homeTeam.abbreviation
     }
 }
-

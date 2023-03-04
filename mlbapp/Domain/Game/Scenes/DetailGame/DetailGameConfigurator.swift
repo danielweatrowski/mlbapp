@@ -8,10 +8,11 @@
 import Foundation
 
 struct DetailGameConfigurator {
-    static func configure(for game: Game) -> DetailGameView {
-        let viewModel = DetailGame.ViewModel(navigationTitle: game.abbreviation, gameDate: game.date.formatted(), homeTeamAbbreviation: game.homeTeam.abbreviation, awayTeamAbbreviation: game.awayTeam.abbreviation)
+    
+    static func configure(for gameID: Int) -> DetailGameView {
+        let viewModel = DetailGame.ViewModel(gameID: gameID)
         let presenter = DetailGamePresenter(viewModel: viewModel)
-        let interactor = DetailGameInteractor(presenter: presenter, game: game)
+        let interactor = DetailGameInteractor(presenter: presenter, gameID: gameID)
         let view = DetailGameView(interactor: interactor, viewModel: viewModel)
         
         return view

@@ -45,8 +45,6 @@ struct DetailGameView: View {
                             .font(.subheadline)
                         Spacer()
                         
-                        Text(viewModel.infoViewModel?.venueName ?? "")
-                            .font(.subheadline)
                     }
                     Divider()
                     HStack {
@@ -55,8 +53,6 @@ struct DetailGameView: View {
                             .font(.subheadline)
                         Spacer()
                         
-                        Text(viewModel.infoViewModel?.gameDate ?? "")
-                            .font(.subheadline)
                     }
                 }
                 .padding()
@@ -79,16 +75,15 @@ struct DetailGameView: View {
         .navigationTitle(viewModel.navigationTitle)
         .background(Color(uiColor: .systemGroupedBackground))
         .onAppear {
-            interactor.getViewModel()
+            interactor.loadGame()
         }
     }
 }
 
 struct DetailGameView_Previews: PreviewProvider {
-    static let game1 = Game.test_0
     static var previews: some View {
         NavigationView {
-            DetailGameConfigurator.configure(for: game1)
+            DetailGameConfigurator.configure(for: Seeds.Games.PHI_NYM_20190424.id)
         }
     }
 }

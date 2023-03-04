@@ -23,10 +23,17 @@ struct ListGameView: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(viewModel.rows, id: \.gameID) { row in
-                    
                     ListGameRow(viewModel: row)
                         .background()
                         .cornerRadius(20)
+//                    NavigationSplitView {
+//                        ListGameRow(viewModel: row)
+//                            .background()
+//                            .cornerRadius(20)
+//                    } detail: {
+//                        DetailGameConfigurator.configure(for: row.gameID)
+//                    }
+                    
                 }
                 .padding([
                     .bottom,
@@ -44,7 +51,8 @@ struct ListGameView: View {
 }
 
 struct ListGameView_Previews: PreviewProvider {
-    static var previews: some View {        
+    static var previews: some View {
+        
         let viewModel = ListGame.ViewModel(rows: [])
         ListGameView(viewModel: viewModel, router: ListGameRouter())
     }

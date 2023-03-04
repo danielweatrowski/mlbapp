@@ -19,11 +19,4 @@ struct mlbappApp: App {
         }
 
     }
-    
-    func routeToDetailGame(game: Game) -> DetailGameView {
-        
-        let view = DetailGameConfigurator.configure(for: game)
-        
-        return view
-    }
 }

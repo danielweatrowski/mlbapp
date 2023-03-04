@@ -9,11 +9,11 @@ import Foundation
 import Combine
 
 protocol SearchGameBusinessLogic {
-    func createSearchGame(request: LookupGame.LookupGame.Request)
+    func createSearchGame(request: LookupGame.Request)
 }
 
 protocol SearchGameDataStore {
-    var lookupResults: [LookupGame.LookupGame.Result] { get set }
+    var lookupResults: [LookupGame.Result] { get set }
 }
 
 class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
@@ -23,12 +23,12 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
     private var cancellable: AnyCancellable?
     
     // Data store
-    var lookupResults: [LookupGame.LookupGame.Result] = []
+    var lookupResults: [LookupGame.Result] = []
     
     @MainActor
-    func createSearchGame(request: LookupGame.LookupGame.Request) {
+    func createSearchGame(request: LookupGame.Request) {
         
-        if request.homeTeamIndex == .max {
+        if request.parameters.homeTeamIndex == .max {
             presenter?.presentLookupError(error: .missingTeamID)
             return
         }
@@ -43,12 +43,11 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
                 }
                 
                 // present games
-                let response = LookupGame.LookupGame.Response(results: lookupResults)
+                let response = LookupGame.Response(results: lookupResults)
                 presenter?.presentLookupGames(response: response)
                 self.lookupResults = lookupResults
             } catch {
-                print(error)
-                //presenter?.presentLookupError(error: .unknown(error.localizedDescription))
+                presenter?.presentLookupError(error: .unknown(error.localizedDescription))
             }
         }
     }

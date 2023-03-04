@@ -8,7 +8,7 @@
 import Foundation
 
 protocol LookupGamePresentationLogic {
-    func presentLookupGames(response: LookupGame.LookupGame.Response)
+    func presentLookupGames(response: LookupGame.Response)
     func presentLookupError(error: LookupGame.LookupGameError)
 }
 
@@ -16,7 +16,7 @@ class SearchGamePresenter: LookupGamePresentationLogic {
     
     var view: SearchGameDisplayLogic?
     
-    func presentLookupGames(response: LookupGame.LookupGame.Response) {
+    func presentLookupGames(response: LookupGame.Response) {
         
         let listGameRows = response.results.map({
             ListGameRowViewModel(gameID: $0.id,

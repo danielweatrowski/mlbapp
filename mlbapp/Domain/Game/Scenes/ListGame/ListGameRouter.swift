@@ -8,16 +8,12 @@
 import Foundation
 
 protocol ListGameRoutingLogic {
-    func routeToDetailGame(game: Game) -> DetailGameView
-}
-
-protocol ListGameDataPassing {
-    var dataStore: ListGameDataStore? { get }
+    func routeToDetailGame(gameID: Int) -> DetailGameView
 }
 
 class ListGameRouter: ObservableObject, ListGameRoutingLogic {
     
-    func routeToDetailGame(game: Game) -> DetailGameView {
-        return DetailGameConfigurator.configure(for: game)
+    func routeToDetailGame(gameID: Int) -> DetailGameView {
+        return DetailGameConfigurator.configure(for: gameID)
     }
 }

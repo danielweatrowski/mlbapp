@@ -12,16 +12,4 @@ enum ListGame {
     struct ViewModel {
         var rows: [ListGameRowViewModel]
     }
-    
-    enum ListGameLookupResults {
-        struct ViewModel {
-            var games: [Game]
-        }
-    }
-    
-    enum GameLookupItem {
-        struct ViewModel {
-            var game: Game
-        }
-    }
 }

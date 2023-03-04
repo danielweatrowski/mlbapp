@@ -10,6 +10,7 @@ protocol SearchGameDisplayLogic {
     func displayLookupError(error: LookupGame.LookupGameError)
     func displayLookupResults(viewModel: ListGame.ViewModel)
 }
+
 struct LookupGameView: View {
     var interactor: SearchGameBusinessLogic?
     @ObservedObject var router: LookupGameRouter
@@ -21,7 +22,7 @@ struct LookupGameView: View {
     @State private var selectedHomeTeamIndex: Int = .max
 
     //@State private var selectedAwayTeam: MLBTeam = MLBTeam.any
-    @State private var selectedAwayTeamIndex: Int = Team.any.rawValue
+    @State private var selectedAwayTeamIndex: Int = ActiveTeam.any.rawValue
 
     @State private var showingStartDatePicker = false
     @State private var showingEndDatePicker = false
@@ -39,14 +40,14 @@ struct LookupGameView: View {
                 Section {
                     Picker(selection: $selectedHomeTeamIndex,
                            label: Text("Team")) {
-                        ForEach(Team.allTeams, id: \.id) {
+                        ForEach(ActiveTeam.allTeams, id: \.id) {
                             Text($0.name)
                                 .tag($0.rawValue)
                         }
                     }
                     Picker(selection: $selectedAwayTeamIndex,
                            label: Text("Opponent")) {
-                        ForEach(Team.allCases, id: \.id) {
+                        ForEach(ActiveTeam.allCases, id: \.id) {
                             Text($0.name)
                                 .tag($0.rawValue)
                         }
@@ -100,13 +101,13 @@ struct LookupGameView: View {
     }
     
     private func createGameSearch() {
+        let parameters = LookupGame.SearchParameters(homeTeamIndex: selectedHomeTeamIndex,
+                                                     awayTeamIndex: selectedAwayTeamIndex,
+                                                     startDate: selectedStartDate,
+                                                     endDate: selectedEndDate,
+                                                     onlyRegularSeason: isRegularSeason)
         
-        let request = LookupGame.LookupGame.Request(homeTeamIndex: selectedHomeTeamIndex,
-                                                    awayTeamIndex: selectedAwayTeamIndex,
-                                                    startDate: selectedStartDate,
-                                                    endDate: selectedEndDate,
-                                                    onlyRegularSeason: isRegularSeason)
-        
+        let request = LookupGame.Request(parameters: parameters)
         interactor?.createSearchGame(request: request)
     }
 }

@@ -9,43 +9,26 @@ import Foundation
 import Combine
 
 protocol DetailGameBusinessLogic {
-    func getViewModel()
-    func startGame()
+    func loadGame()
 }
 
 protocol DetailGameDataStore  {
-    var game: Game { get set }
+    var gameID: Int { get set }
 }
 
 struct DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore {
     
     var presenter: DetailGamePresentationLogic
-    var game: Game
+    var gameWorker = GameWorker(store: MLBAPIService())
+    var gameID: Int
     
-    func getViewModel() {
-        
+    func loadGame() {
         Task {
             do {
-                let gameDTO = try await SwiftMLB.game(gameIdentifier: game.id)
-                
-                let response = DetailGame.DetailGame.Response(game: game,
-                                                              linescore: gameDTO.linescore,
-                                                              boxscore: gameDTO.boxscore)
+                let game = try await gameWorker.fetchGame(withID: gameID)
+                let response = DetailGame.DetailGame.Response(game: game)
                 presenter.presentGame(response: response)
             } catch {
-                print(error)
-            }
-
-        }
-    }
-    
-    func startGame() {
-        Task {
-            do {
-                let parameters = SwiftMLBRequest.PersonParameters(personIdentifier: 571448, hydrate: .init(group: [.pitching, .hitting, .fielding], type: [.career]))
-                let data = try await SwiftMLB.boxscore(gameIdentifier: 565997)
-                print("SHIT")
-            } catch let error {
                 print(error)
             }
         }

@@ -110,7 +110,6 @@ struct ListGameRow: View {
 
 struct ListGameRow_Previews: PreviewProvider {
     static var previews: some View {
-        let game = Game.test_0
         let viewModel = ListGameRowViewModel(gameID: 1, gameDate: "June 22, 2004",
                                              gameVenueName: "The Sandlot",
                                              homeTeamName: "Rockstars",
