@@ -1,0 +1,32 @@
+//
+//  ListGameRowViewModel.swift
+//  mlbapp
+//
+//  Created by Daniel Weatrowski on 3/4/23.
+//
+
+import Foundation
+
+struct ListGameRowViewModel {
+    let gameID: Int
+    let gameDate: String
+    let gameVenueName: String
+    let homeTeamName: String
+    let homeTeamAbbreviation: String
+    let homeTeamScore: String
+    let homeTeamRecord: String
+    let homeTeamLogoName: String
+    let awayTeamName: String
+    let awayTeamAbbreviation: String
+    let awayTeamScore: String
+    let awayTeamRecord: String
+    let awayTeamLogoName: String
+    
+    var awayTeamDidWin: Bool {
+        return awayTeamScore > homeTeamScore
+    }
+    
+    var homeTeamDidWin: Bool {
+        return awayTeamScore < homeTeamScore
+    }
+}

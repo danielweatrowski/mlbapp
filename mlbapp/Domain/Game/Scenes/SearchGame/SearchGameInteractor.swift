@@ -9,33 +9,39 @@ import Foundation
 import Combine
 
 protocol SearchGameBusinessLogic {
-    func createSearchGame(request: LookupGame.Request)
+    func createSearchGame(request: SearchGame.Request)
 }
 
 protocol SearchGameDataStore {
-    var lookupResults: [LookupGame.Result] { get set }
+    var lookupResults: [GameSearch.Result] { get set }
 }
 
 class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
     
-    var presenter: LookupGamePresentationLogic?
-    private var worker: LookupGameWorker = LookupGameWorker()
+    var presenter: SearchGamePresentationLogic?
+    var gameWorker = GameWorker(store: MLBAPIService())
+
     private var cancellable: AnyCancellable?
     
     // Data store
-    var lookupResults: [LookupGame.Result] = []
+    var lookupResults: [GameSearch.Result] = []
     
     @MainActor
-    func createSearchGame(request: LookupGame.Request) {
+    func createSearchGame(request: SearchGame.Request) {
         
-        if request.parameters.homeTeamIndex == .max {
+        guard let homeTeamID = request.homeTeamID else {
             presenter?.presentLookupError(error: .missingTeamID)
             return
         }
         
         Task {
             do {
-                let lookupResults = try await worker.lookupGames(for: request)
+                let parameters = GameSearch.SearchParameters(homeTeamID: homeTeamID,
+                                                             awayTeamID: request.awayTeamID,
+                                                             startDate: request.startDate,
+                                                             endDate: request.endDate)
+                
+                let lookupResults = try await gameWorker.searchGame(with: parameters)
                 
                 guard lookupResults.isEmpty == false else {
                     presenter?.presentLookupError(error: .noGamesFound)
@@ -43,7 +49,7 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
                 }
                 
                 // present games
-                let response = LookupGame.Response(results: lookupResults)
+                let response = SearchGame.Response(results: lookupResults)
                 presenter?.presentLookupGames(response: response)
                 self.lookupResults = lookupResults
             } catch {

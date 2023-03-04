@@ -14,14 +14,16 @@ struct TeamIconView: View {
     let size: CGSize = CGSize(width: 46, height: 46)
     
     var body: some View {
-        Text("LAD")
+        Text(abbreviation)
             .fontWeight(.heavy)
             .foregroundColor(.white)
             .background(
                 Circle()
-                    .fill(.blue)
+                    .fill(color)
                     .frame(width: size.width, height: size.height)
             )
+            .frame(width: size.width, height: size.height)
+
     }
 }
 

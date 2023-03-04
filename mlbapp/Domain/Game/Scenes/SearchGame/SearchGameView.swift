@@ -7,22 +7,22 @@
 
 import SwiftUI
 protocol SearchGameDisplayLogic {
-    func displayLookupError(error: LookupGame.LookupGameError)
+    func displayLookupError(error: SearchGame.LookupGameError)
     func displayLookupResults(viewModel: ListGame.ViewModel)
 }
 
-struct LookupGameView: View {
+struct SearchGameView: View {
     var interactor: SearchGameBusinessLogic?
-    @ObservedObject var router: LookupGameRouter
+    @ObservedObject var router: SearchGameRouter
     
     @State private var selectedStartDate = Date()
     @State private var selectedEndDate = Date()
     
     //@State private var selectedHomeTeam: MLBTeam = MLBTeam.any
-    @State private var selectedHomeTeamIndex: Int = .max
+    @State private var selectedHomeTeamID: Int = .max
 
     //@State private var selectedAwayTeam: MLBTeam = MLBTeam.any
-    @State private var selectedAwayTeamIndex: Int = ActiveTeam.any.rawValue
+    @State private var selectedAwayTeamID: Int = ActiveTeam.any.id
 
     @State private var showingStartDatePicker = false
     @State private var showingEndDatePicker = false
@@ -38,18 +38,18 @@ struct LookupGameView: View {
 
             Form {
                 Section {
-                    Picker(selection: $selectedHomeTeamIndex,
+                    Picker(selection: $selectedHomeTeamID,
                            label: Text("Team")) {
                         ForEach(ActiveTeam.allTeams, id: \.id) {
                             Text($0.name)
-                                .tag($0.rawValue)
+                                .tag($0.id)
                         }
                     }
-                    Picker(selection: $selectedAwayTeamIndex,
+                    Picker(selection: $selectedAwayTeamID,
                            label: Text("Opponent")) {
                         ForEach(ActiveTeam.allCases, id: \.id) {
                             Text($0.name)
-                                .tag($0.rawValue)
+                                .tag($0.id)
                         }
                     }
                 } header: {
@@ -101,19 +101,17 @@ struct LookupGameView: View {
     }
     
     private func createGameSearch() {
-        let parameters = LookupGame.SearchParameters(homeTeamIndex: selectedHomeTeamIndex,
-                                                     awayTeamIndex: selectedAwayTeamIndex,
-                                                     startDate: selectedStartDate,
-                                                     endDate: selectedEndDate,
-                                                     onlyRegularSeason: isRegularSeason)
+        let request = SearchGame.Request(homeTeamID: selectedHomeTeamID,
+                                         awayTeamID: selectedAwayTeamID,
+                                         startDate: selectedStartDate,
+                                         endDate: selectedEndDate)
         
-        let request = LookupGame.Request(parameters: parameters)
         interactor?.createSearchGame(request: request)
     }
 }
 
-extension LookupGameView: SearchGameDisplayLogic {
-    func displayLookupError(error: LookupGame.LookupGameError) {
+extension SearchGameView: SearchGameDisplayLogic {
+    func displayLookupError(error: SearchGame.LookupGameError) {
         router.showErrorAlert(error: error)
     }
     
@@ -125,7 +123,7 @@ extension LookupGameView: SearchGameDisplayLogic {
 
 struct GameSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        let router = LookupGameRouter()
-        LookupGameView(router: router)
+        let router = SearchGameRouter()
+        SearchGameView(router: router)
     }
 }

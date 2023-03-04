@@ -7,28 +7,6 @@
 
 import SwiftUI
 
-struct ListGameRowViewModel {
-    let gameID: Int
-    let gameDate: String
-    let gameVenueName: String
-    let homeTeamName: String
-    let homeTeamScore: String
-    let homeTeamRecord: String
-    let homeTeamLogoName: String
-    let awayTeamName: String
-    let awayTeamScore: String
-    let awayTeamRecord: String
-    let awayTeamLogoName: String
-    
-    var awayTeamDidWin: Bool {
-        return awayTeamScore > homeTeamScore
-    }
-    
-    var homeTeamDidWin: Bool {
-        return awayTeamScore < homeTeamScore
-    }
-}
-
 struct ListGameRow: View {
     
     var viewModel: ListGameRowViewModel
@@ -45,10 +23,7 @@ struct ListGameRow: View {
             .font(.footnote)
                         
             HStack() {
-                Image(viewModel.awayTeamLogoName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 40)
+                TeamIconView(abbreviation: viewModel.homeTeamAbbreviation, color: .black)
                 VStack(alignment: .leading) {
                     Text(viewModel.homeTeamName)
                     Text(viewModel.homeTeamRecord)
@@ -74,10 +49,7 @@ struct ListGameRow: View {
             .font(.system(size: 17, weight: .medium, design: .default))
 
             HStack() {
-                Image("\(viewModel.awayTeamLogoName)")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 40)
+                TeamIconView(abbreviation: viewModel.awayTeamAbbreviation, color: .black)
                 VStack(alignment: .leading) {
                     Text(viewModel.awayTeamName)
                     Text(viewModel.awayTeamRecord)
@@ -113,10 +85,12 @@ struct ListGameRow_Previews: PreviewProvider {
         let viewModel = ListGameRowViewModel(gameID: 1, gameDate: "June 22, 2004",
                                              gameVenueName: "The Sandlot",
                                              homeTeamName: "Rockstars",
+                                             homeTeamAbbreviation: "SDR",
                                              homeTeamScore: "9",
                                              homeTeamRecord: "10-1",
                                              homeTeamLogoName: "",
                                              awayTeamName: "Dancers",
+                                             awayTeamAbbreviation: "SDD",
                                              awayTeamScore: "3",
                                              awayTeamRecord: "3-7",
                                              awayTeamLogoName: "")

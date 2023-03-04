@@ -18,19 +18,13 @@ struct DetailGameView: View {
             VStack() {
 
                 DetailGameHeaderView(viewModel: $viewModel.headerViewModel)
-                    .padding()
-                    .padding(.vertical)
-                    .background()
-                    .cornerRadius(16)
-                
+                    .frame(maxWidth: .infinity)
             }
             .padding([.leading, .trailing])
             
             VStack() {
-                LineScoreView(viewModel: $viewModel.lineScoreViewModel)
-                    .padding()
-                    .background()
-                    .cornerRadius(16)
+                LinescoreGridView(viewModel: $viewModel.lineScoreViewModel)
+                    .frame(maxWidth: .infinity)
                 
                 BoxscoreView(viewModel: $viewModel.boxscoreViewModel, teamBoxSelection: $teamBoxSelection)
                     .padding()

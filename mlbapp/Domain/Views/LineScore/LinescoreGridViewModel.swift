@@ -8,10 +8,11 @@
 import Foundation
 import SwiftUI
 
-struct LineScoreViewModel {
+struct LinescoreGridViewModel {
     
     static let empty: [LineScoreViewItem] = [
         LineScoreViewItem(type: .team, value: ""),
+        LineScoreViewItem(type: .none, value: ""),
         LineScoreViewItem(type: .run, value: ""),
         LineScoreViewItem(type: .run, value: ""),
         LineScoreViewItem(type: .run, value: ""),
@@ -30,12 +31,4 @@ struct LineScoreViewModel {
     var headers: [LineScoreViewItem]
     var homeLineItems: [LineScoreViewItem]
     var awayLineItems: [LineScoreViewItem]
-    var winningPitcherName: String?
-    var winningPitcherWins: Int?
-    var winningPitcherLosses: Int?
-    var winningPitcherERA: String?
-    var losingPitcherName: String?
-    var losingPitcherWins: Int?
-    var losingPitcherLosses: Int?
-    var losingPitcherERA: String?
 }

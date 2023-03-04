@@ -13,11 +13,9 @@ struct DetailGameHeaderView: View {
     var body: some View {
         if let viewModel = viewModel {
             HStack() {
-                VStack(alignment: .center, spacing: 2) {
-                    Image("\(viewModel.homeTeamName)")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 80, maxHeight: 80)
+                Spacer()
+                VStack(alignment: .center, spacing: 4) {
+                    TeamIconView(abbreviation: viewModel.homeTeamAbbreviation, color: .blue)
                     Text(viewModel.homeTeamName)
                         .font(.subheadline)
                         .bold()
@@ -28,7 +26,7 @@ struct DetailGameHeaderView: View {
                 
                 VStack() {
                     Text(viewModel.homeTeamScore)
-                        .font(.system(size: 40))
+                        .font(.system(size: 48))
                         .scaledToFill()
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
@@ -43,18 +41,15 @@ struct DetailGameHeaderView: View {
 
                 VStack() {
                     Text(viewModel.awayTeamScore)
-                        .font(.system(size: 40))
+                        .font(.system(size: 48))
                         .scaledToFill()
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
                         .bold()
                         .padding([.leading, .trailing])
                 }
-                VStack(alignment: .center, spacing: 2) {
-                    Image("\(viewModel.awayTeamName)")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 80, maxHeight: 80)
+                VStack(alignment: .center, spacing: 4) {
+                    TeamIconView(abbreviation: viewModel.awayTeamAbbreviation, color: .orange)
                     Text(viewModel.awayTeamName)
                         .font(.subheadline)
                         .bold()
@@ -62,7 +57,10 @@ struct DetailGameHeaderView: View {
                     Text(viewModel.awayTeamRecord)
                         .font(.caption2)
                 }
+                Spacer()
             }
+            .padding(.vertical)
+            .background()
             .cornerRadius(16)
         }
         else {
@@ -74,7 +72,7 @@ struct DetailGameHeaderView: View {
 struct DetailGameHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let viewModel = DetailGameHeaderViewModel(homeTeamName: "Dodgers", homeTeamScore: "10", homeTeamRecord: "10-0", awayTeamName: "Giants", awayTeamScore: "2", awayTeamRecord: "0-10")
+        let viewModel = DetailGameHeaderViewModel(homeTeamName: "Dodgers", homeTeamAbbreviation: "LAD", homeTeamScore: "10", homeTeamRecord: "10-0", awayTeamName: "Giants", awayTeamAbbreviation: "SFG", awayTeamScore: "2", awayTeamRecord: "0-10")
 
         DetailGameHeaderView(viewModel: .constant(viewModel))
     }

@@ -23,9 +23,19 @@ struct ListGameView: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(viewModel.rows, id: \.gameID) { row in
-                    ListGameRow(viewModel: row)
-                        .background()
-                        .cornerRadius(20)
+                    
+                    NavigationLink(destination: {
+                        DetailGameConfigurator.configure(for: row.gameID)
+                        
+                    }, label: {
+                        ListGameRow(viewModel: row)
+                            .background()
+                            .cornerRadius(20)
+                        
+                    })
+                    .buttonStyle(PlainButtonStyle())
+
+                
 //                    NavigationSplitView {
 //                        ListGameRow(viewModel: row)
 //                            .background()

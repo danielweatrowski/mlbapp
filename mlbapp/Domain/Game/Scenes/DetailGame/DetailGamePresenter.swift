@@ -23,10 +23,12 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
             return
         }
         
-        let headerViewModel = DetailGameHeaderViewModel(homeTeamName: game.homeTeam.name,
+        let headerViewModel = DetailGameHeaderViewModel(homeTeamName: game.homeTeam.teamName,
+                                                        homeTeamAbbreviation: game.homeTeam.abbreviation,
                                                         homeTeamScore: String(game.homeTeamScore),
                                                         homeTeamRecord: homeTeamRecord.formatted(),
-                                                        awayTeamName: game.awayTeam.name,
+                                                        awayTeamName: game.awayTeam.teamName,
+                                                        awayTeamAbbreviation: game.awayTeam.abbreviation,
                                                         awayTeamScore: String(game.awayTeamScore),
                                                         awayTeamRecord: awayTeamRecord.formatted())
 
@@ -37,6 +39,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
 //                                               awayTeamAbbreviation: game.awayTeam.abbreviation)
 
         DispatchQueue.main.async {
+            viewModel.navigationTitle = "\(game.awayTeam.abbreviation) @ \(game.homeTeam.abbreviation)"
             viewModel.headerViewModel = headerViewModel
             viewModel.lineScoreViewModel = lineScoreViewModel
             //viewModel.boxscoreViewModel = boxscoreViewModel
@@ -131,7 +134,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
     }
     
     
-    private func formatLineScore(for game: Game) -> LineScoreViewModel? {
+    private func formatLineScore(for game: Game) -> LinescoreGridViewModel? {
         
         guard let linescore = game.linescore else {
             return nil
@@ -154,6 +157,10 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         // Teams
         awayLineItems.append(a_nameAbbreviation)
         homeLineItems.append(h_nameAbbreviation)
+        headerLineItems.append(spacer)
+        
+        homeLineItems.append(spacer)
+        awayLineItems.append(spacer)
         headerLineItems.append(spacer)
                 
         // Innings
@@ -211,17 +218,9 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         let a_errorsTotalItem = LineScoreViewItem(id: UUID(), type: .stat, value: String(a_errorsTotal))
         awayLineItems.append(a_errorsTotalItem)
                 
-        return LineScoreViewModel(headers: headerLineItems,
+        return LinescoreGridViewModel(headers: headerLineItems,
                                   homeLineItems: homeLineItems,
-                                  awayLineItems: awayLineItems,
-                                  winningPitcherName: "dan",
-                                  winningPitcherWins: 10,
-                                  winningPitcherLosses: 0,
-                                  winningPitcherERA: "0.1",
-                                  losingPitcherName: "ian",
-                                  losingPitcherWins: 0,
-                                  losingPitcherLosses: 10,
-                                  losingPitcherERA: "15")
+                                  awayLineItems: awayLineItems)
     }
     
 }

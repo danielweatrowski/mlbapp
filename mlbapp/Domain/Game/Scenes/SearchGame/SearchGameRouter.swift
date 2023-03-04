@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-protocol LookupGameRoutingLogic {
+protocol SearchGameRoutingLogic {
     func routeToListGame(viewModel: ListGame.ViewModel) 
-    func showErrorAlert(error: LookupGame.LookupGameError)
+    func showErrorAlert(error: SearchGame.LookupGameError)
 }
 
-protocol LookupGameDataPassing {
+protocol SearchGameDataPassing {
     var dataStore: SearchGameDataStore? { get }
 }
 
-class LookupGameRouter: ObservableObject, LookupGameRoutingLogic, LookupGameDataPassing {
+class SearchGameRouter: ObservableObject, SearchGameRoutingLogic, SearchGameDataPassing {
     
     var dataStore: SearchGameDataStore?
     
@@ -35,7 +35,7 @@ class LookupGameRouter: ObservableObject, LookupGameRoutingLogic, LookupGameData
         routingToListGame = true
     }
     
-    func showErrorAlert(error: LookupGame.LookupGameError) {
+    func showErrorAlert(error: SearchGame.LookupGameError) {
         errorAlertTitle = error.description
         
         DispatchQueue.main.async {
