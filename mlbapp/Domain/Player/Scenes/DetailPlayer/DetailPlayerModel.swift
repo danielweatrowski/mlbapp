@@ -9,7 +9,6 @@ import Foundation
 
 enum DetailPlayer {
     struct Response {
-        var player: MLBPlayer
     }
     
     struct Request {

@@ -16,6 +16,9 @@ struct Game {
     let awayTeamScore: Int
     let venue: Venue
     
+//    var winningPitcher: Player
+//    var losingPitcher: Player
+    
     let linescore: Linescore?
 }
 

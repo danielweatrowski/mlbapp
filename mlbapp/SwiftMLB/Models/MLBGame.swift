@@ -17,6 +17,7 @@ struct MLBGame: Codable {
     let linescore: MLBLinescore
     let boxscore: MLBBoxscore
     let teams: GameTeams
+    let players: [MLBPlayer]
     
     struct GameTeams: Codable {
         let away: MLBTeam

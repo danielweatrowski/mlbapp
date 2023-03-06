@@ -24,6 +24,7 @@ struct Linescore {
     var innings: [Inning]
     var homeTotal: LineItem
     var awayTotal: LineItem
+    
 //    var winner: MLBPitcher?
 //    var loser: MLBPitcher?
     

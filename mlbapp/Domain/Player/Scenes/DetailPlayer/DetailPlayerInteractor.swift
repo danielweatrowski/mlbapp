@@ -12,13 +12,11 @@ protocol DetailPlayerBusinessLogic {
 }
 
 protocol DetailPlayerDataStore {
-    var player: MLBPlayer? { get set }
     var personID: Int { get set }
 }
 
 struct DetailPlayerInteractor: DetailPlayerBusinessLogic, DetailPlayerDataStore {
     
-    var player: MLBPlayer?
     var personID: Int
     
     var presenter: DetailPlayerPresentationLogic
