@@ -22,9 +22,40 @@ import Foundation
 //}
 
 struct Player {
-    let id: Int
-    let fullName: String
-    let firstName: String
-    let lastName: String
-    let primaryNumber: String
+    
+    var id: Int
+    
+    var firstName: String
+    
+    var lastName: String
+    
+    var fullName: String
+    
+    var primaryNumber: String?
+    
+    var nickname: String?
+    
+    var birthCity: String
+    
+    var birthStateProvince: String?
+    
+    var birthCountry: String
+    
+    var lastInitName: String
+    
+    var boxscoreName: String
+    
+    var height: String
+    
+    var weight: Int
+    
+    var currentAge: Int
+    
+    var birthDate: String
+    
+    var isActive: Bool
+    
+    var mlbDebutDate: String
+    
+    var primaryPositionCode: String
 }

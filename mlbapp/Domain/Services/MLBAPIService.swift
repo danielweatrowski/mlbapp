@@ -70,12 +70,30 @@ struct MLBAPIService: GameStoreProtocol {
                                                           ties: 0,
                                                           winningPercentage: gameDTO.teams.away.record?.winningPercentage ?? "NA"))
         
-        let homeLineItems = gameDTO.linescore.innings.map({
-            Linescore.LineItem(runs: $0.home.runs ?? -1, hits: $0.home.hits ?? -1, errors: $0.home.hits ?? -1)
+        let players = gameDTO.players.map({
+            Player(id: $0.id,
+                   firstName: $0.firstName,
+                   lastName: $0.lastName,
+                   fullName: $0.fullName,
+                   birthCity: $0.birthCity,
+                   birthCountry: $0.birthCountry,
+                   lastInitName: $0.lastInitName,
+                   boxscoreName: $0.boxscoreName,
+                   height: $0.height,
+                   weight: $0.weight,
+                   currentAge: $0.currentAge,
+                   birthDate: $0.birthDate,
+                   isActive: $0.active,
+                   mlbDebutDate: $0.mlbDebutDate,
+                   primaryPositionCode: $0.primaryPosition.code)
         })
-        let awayLineItems = gameDTO.linescore.innings.map({
-            Linescore.LineItem(runs: $0.away.runs ?? -1, hits: $0.away.hits ?? -1, errors: $0.away.errors ?? -1)
-        })
+        
+//        let homeLineItems = gameDTO.linescore.innings.map({
+//            Linescore.LineItem(runs: $0.home.runs ?? -1, hits: $0.home.hits ?? -1, errors: $0.home.hits ?? -1)
+//        })
+//        let awayLineItems = gameDTO.linescore.innings.map({
+//            Linescore.LineItem(runs: $0.away.runs ?? -1, hits: $0.away.hits ?? -1, errors: $0.away.errors ?? -1)
+//        })
         
         let innings: [Linescore.Inning] = gameDTO.linescore.innings.map { inningDTO in
             
@@ -102,6 +120,8 @@ struct MLBAPIService: GameStoreProtocol {
         
         let linescore = Linescore(innings: innings, homeTotal: homeTotal, awayTotal: awayTotal)
         
+        // TODO: Boxscore model
+        
         let game = Game(id: id,
                         date: gameDTO.gameDate,
                         homeTeam: homeTeam,
@@ -109,6 +129,7 @@ struct MLBAPIService: GameStoreProtocol {
                         awayTeam: awayTeam,
                         awayTeamScore: gameDTO.linescore.awayTotal.runs ?? 0,
                         venue: gameVenue,
+                        players: players,
                         linescore: linescore)
         
         return game

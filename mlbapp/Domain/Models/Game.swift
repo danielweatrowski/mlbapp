@@ -15,6 +15,7 @@ struct Game {
     let awayTeam: Team
     let awayTeamScore: Int
     let venue: Venue
+    let players: [Player]
     
 //    var winningPitcher: Player
 //    var losingPitcher: Player

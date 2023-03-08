@@ -36,6 +36,7 @@
 		664BDE8829846C8C006E0E61 /* BoxscoreTotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664BDE8729846C8C006E0E61 /* BoxscoreTotalsView.swift */; };
 		664BDE8B2984A93E006E0E61 /* DetailGameConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664BDE8A2984A93E006E0E61 /* DetailGameConfigurator.swift */; };
 		66598E40292EF36E0099E18D /* LinescoreGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66598E3F292EF36E0099E18D /* LinescoreGridViewModel.swift */; };
+		6669D0DA29B84F5200ED660A /* MLBBattingStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6669D0D929B84F5200ED660A /* MLBBattingStatistics.swift */; };
 		6672990C29AD48D900E4E453 /* GameWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6672990B29AD48D900E4E453 /* GameWorker.swift */; };
 		667ECBF8294FDB2B00213B58 /* SwiftMLBRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667ECBF7294FDB2B00213B58 /* SwiftMLBRequest+Parameters.swift */; };
 		6687811B2915CE630086A07E /* ListGameRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6687811A2915CE630086A07E /* ListGameRow.swift */; };
@@ -50,6 +51,7 @@
 		66A88B7A29B595250040817F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A88B7929B595250040817F /* Player.swift */; };
 		66A88B7C29B59B9C0040817F /* MLBPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A88B7B29B59B9C0040817F /* MLBPlayer.swift */; };
 		66A88B7E29B59BC70040817F /* MLBPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A88B7D29B59BC70040817F /* MLBPosition.swift */; };
+		66AAEEF629B6A7D3004835B1 /* Boxscore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AAEEF529B6A7D3004835B1 /* Boxscore.swift */; };
 		66ADAC6F298DF5CD004DD82F /* InterfaceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ADAC6E298DF5CC004DD82F /* InterfaceSize.swift */; };
 		66BF7C5A290A1BD000FFD647 /* SearchGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BF7C59290A1BD000FFD647 /* SearchGame.swift */; };
 		66BF7C5C290A1D1900FFD647 /* SearchGameConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BF7C5B290A1D1900FFD647 /* SearchGameConfigurator.swift */; };
@@ -139,6 +141,7 @@
 		664BDE8729846C8C006E0E61 /* BoxscoreTotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxscoreTotalsView.swift; sourceTree = "<group>"; };
 		664BDE8A2984A93E006E0E61 /* DetailGameConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGameConfigurator.swift; sourceTree = "<group>"; };
 		66598E3F292EF36E0099E18D /* LinescoreGridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinescoreGridViewModel.swift; sourceTree = "<group>"; };
+		6669D0D929B84F5200ED660A /* MLBBattingStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBBattingStatistics.swift; sourceTree = "<group>"; };
 		6672990B29AD48D900E4E453 /* GameWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWorker.swift; sourceTree = "<group>"; };
 		667ECBF7294FDB2B00213B58 /* SwiftMLBRequest+Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMLBRequest+Parameters.swift"; sourceTree = "<group>"; };
 		6687811A2915CE630086A07E /* ListGameRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameRow.swift; sourceTree = "<group>"; };
@@ -154,6 +157,7 @@
 		66A88B7929B595250040817F /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		66A88B7B29B59B9C0040817F /* MLBPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBPlayer.swift; sourceTree = "<group>"; };
 		66A88B7D29B59BC70040817F /* MLBPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBPosition.swift; sourceTree = "<group>"; };
+		66AAEEF529B6A7D3004835B1 /* Boxscore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boxscore.swift; sourceTree = "<group>"; };
 		66ADAC6E298DF5CC004DD82F /* InterfaceSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceSize.swift; sourceTree = "<group>"; };
 		66BF7C59290A1BD000FFD647 /* SearchGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGame.swift; sourceTree = "<group>"; };
 		66BF7C5B290A1D1900FFD647 /* SearchGameConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGameConfigurator.swift; sourceTree = "<group>"; };
@@ -431,6 +435,7 @@
 				66C3CF1B2975FBB2001E6CC7 /* MLBSchedule.swift */,
 				66A88B7B29B59B9C0040817F /* MLBPlayer.swift */,
 				66A88B7D29B59BC70040817F /* MLBPosition.swift */,
+				6669D0D929B84F5200ED660A /* MLBBattingStatistics.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -475,6 +480,7 @@
 				66C0C4BE29B2C1FF00C42F11 /* Linescore.swift */,
 				66A88B7529B3DB720040817F /* GameSearch.swift */,
 				66A88B7929B595250040817F /* Player.swift */,
+				66AAEEF529B6A7D3004835B1 /* Boxscore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -726,6 +732,7 @@
 				66C3CEF3295E9C8F001E6CC7 /* SwiftMLB+BoxscoreData.swift in Sources */,
 				660472E02916FE1B00AD9A42 /* ListGameModel.swift in Sources */,
 				66C3CF0529721C29001E6CC7 /* JSONBuilder.swift in Sources */,
+				66AAEEF629B6A7D3004835B1 /* Boxscore.swift in Sources */,
 				66291E332908DFE10055DC93 /* SearchGameRouter.swift in Sources */,
 				66C0C4C729B2DF0600C42F11 /* TeamIconView.swift in Sources */,
 				661F20C32941A18B00D925C7 /* LineScoreViewItem.swift in Sources */,
@@ -743,6 +750,7 @@
 				6617F7F5294680A100BC1BBF /* DetailPlayerView.swift in Sources */,
 				6617F8042946B97800BC1BBF /* HTTPLogger.swift in Sources */,
 				66EBDF2F291891C300BEF1A5 /* DetailGameHeaderView.swift in Sources */,
+				6669D0DA29B84F5200ED660A /* MLBBattingStatistics.swift in Sources */,
 				66C3CF1A2975EEBC001E6CC7 /* TeamBuilder.swift in Sources */,
 				66C3CF0329721A5C001E6CC7 /* SwiftMLBSerialization.swift in Sources */,
 				66D1DCCC29765B130029165C /* Seeds+Game.swift in Sources */,
