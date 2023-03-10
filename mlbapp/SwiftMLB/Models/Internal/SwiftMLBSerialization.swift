@@ -19,7 +19,6 @@ struct SwiftMLBSerialization {
     
     func data(options opt: JSONSerialization.WritingOptions = []) throws -> Data {
         let obj = try builder.build(with: data)
-        obj.printPretty()
         return try JSONSerialization.data(withJSONObject: obj, options: opt)
     }
     

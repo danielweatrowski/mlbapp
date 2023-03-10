@@ -11,6 +11,8 @@ extension MLBBoxscore {
     struct Team: Codable {
         let batters: [Player]
         let pitchers: [Player]
+        let bench: [Player]
+        let bullpen: [Player]
         
         let stats: MLBStatistics.TotalStats
         let notes: [String]

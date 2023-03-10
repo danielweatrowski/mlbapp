@@ -56,6 +56,18 @@ struct BoxscoreBuilder: JSONBuilder {
         guard let awayBatterIDs = awayBoxData["batters"] as? [Int] else {
             throw SwiftMLBError.keyNotFound(key: "livedata.boxscore.teams.away.batters")
         }
+        guard let homeBenchIDs = homeBoxData["bench"] as? [Int] else {
+            throw SwiftMLBError.keyNotFound(key: "livedata.boxscore.teams.home.bench")
+        }
+        guard let awayBenchIDs = awayBoxData["bench"] as? [Int] else {
+            throw SwiftMLBError.keyNotFound(key: "livedata.boxscore.teams.away.bench")
+        }
+        guard let homePenIDs = homeBoxData["bullpen"] as? [Int] else {
+            throw SwiftMLBError.keyNotFound(key: "livedata.boxscore.teams.home.bullpen")
+        }
+        guard let awayPenIDs = awayBoxData["bullpen"] as? [Int] else {
+            throw SwiftMLBError.keyNotFound(key: "livedata.boxscore.teams.away.bullpen")
+        }
         guard let homeNotesData = homeBoxData["note"] as? [[String: Any]] else {
             throw SwiftMLBError.keyNotFound(key: "livedata.boxscore.teams.home.note")
         }
@@ -147,6 +159,50 @@ struct BoxscoreBuilder: JSONBuilder {
             }
         }
         
+        // home bench
+        var homeBench = [[String: Any]]()
+        for playerID in homeBenchIDs {
+            let playerKey = "ID\(playerID)"
+            
+            if let playerDict = homePlayerInfo[playerKey] as? [String: Any] {
+                let pitcherDict = buildPlayerInfo(from: playerDict)
+                homeBench.append(pitcherDict)
+            }
+        }
+        
+        // away bench
+        var awayBench = [[String: Any]]()
+        for playerID in awayBenchIDs {
+            let playerKey = "ID\(playerID)"
+            
+            if let playerDict = awayPlayerInfo[playerKey] as? [String: Any] {
+                let pitcherDict = buildPlayerInfo(from: playerDict)
+                awayBench.append(pitcherDict)
+            }
+        }
+        
+        // home bullpen
+        var homeBullpen = [[String: Any]]()
+        for playerID in homePenIDs {
+            let playerKey = "ID\(playerID)"
+            
+            if let playerDict = homePlayerInfo[playerKey] as? [String: Any] {
+                let pitcherDict = buildPlayerInfo(from: playerDict)
+                homeBullpen.append(pitcherDict)
+            }
+        }
+        
+        // away bullpen
+        var awayBullpen = [[String: Any]]()
+        for playerID in awayPenIDs {
+            let playerKey = "ID\(playerID)"
+            
+            if let playerDict = homePlayerInfo[playerKey] as? [String: Any] {
+                let pitcherDict = buildPlayerInfo(from: playerDict)
+                awayBullpen.append(pitcherDict)
+            }
+        }
+        
         // home notes
         var homeNotes = [String]()
         for noteDict in homeNotesData {
@@ -168,6 +224,8 @@ struct BoxscoreBuilder: JSONBuilder {
         let homeJSON: [String: Any] = [
             "batters": homeBatters,
             "pitchers": homePitchers,
+            "bench": homeBench,
+            "bullpen": homeBullpen,
             "stats": homeTeamStatsData,
             "notes": homeNotes,
             "battingInfo": homeBattingInfoList,
@@ -177,6 +235,8 @@ struct BoxscoreBuilder: JSONBuilder {
         let awayJSON: [String: Any] = [
             "batters": awayBatters,
             "pitchers": awayPitchers,
+            "bench" : awayBench,
+            "bullpen": awayBullpen,
             "stats": awayTeamStatsData,
             "notes": awayNotes,
             "battingInfo": awayBattingInfoList,
@@ -193,7 +253,6 @@ struct BoxscoreBuilder: JSONBuilder {
     }
     
     private func buildPlayerInfo(from dict: [String: Any]) -> [String: Any] {
-        // var batterStatsDict = [String: Any]()
         var returnDict = [String: Any]()
         
         returnDict["battingOrder"] = dict["battingOrder"] as? String
