@@ -88,39 +88,9 @@ struct MLBAPIService: GameStoreProtocol {
                    primaryPositionCode: $0.primaryPosition.code)
         })
         
-//        let homeLineItems = gameDTO.linescore.innings.map({
-//            Linescore.LineItem(runs: $0.home.runs ?? -1, hits: $0.home.hits ?? -1, errors: $0.home.hits ?? -1)
-//        })
-//        let awayLineItems = gameDTO.linescore.innings.map({
-//            Linescore.LineItem(runs: $0.away.runs ?? -1, hits: $0.away.hits ?? -1, errors: $0.away.errors ?? -1)
-//        })
-        
-        let innings: [Linescore.Inning] = gameDTO.linescore.innings.map { inningDTO in
-            
-            let homeItem = Linescore.LineItem(runs: inningDTO.home.runs ?? -1,
-                                              hits: inningDTO.home.hits ?? -1,
-                                              errors: inningDTO.home.hits ?? -1)
-            
-            let awayItem = Linescore.LineItem(runs: inningDTO.away.runs ?? -1,
-                                              hits: inningDTO.away.hits ?? -1,
-                                              errors: inningDTO.away.hits ?? -1)
-            
-            return Linescore.Inning(home: homeItem,
-                                    away: awayItem,
-                                    num: inningDTO.num)
-        }
-        
-        let homeTotal = Linescore.LineItem(runs: gameDTO.linescore.homeTotal.runs ?? -1,
-                                           hits: gameDTO.linescore.homeTotal.hits ?? -1,
-                                           errors: gameDTO.linescore.homeTotal.errors ?? -1)
-        
-        let awayTotal = Linescore.LineItem(runs: gameDTO.linescore.awayTotal.runs ?? -1,
-                                           hits: gameDTO.linescore.awayTotal.hits ?? -1,
-                                           errors: gameDTO.linescore.awayTotal.errors ?? -1)
-        
-        let linescore = Linescore(innings: innings, homeTotal: homeTotal, awayTotal: awayTotal)
-        
-        // TODO: Boxscore model
+
+        let linescore = LinescoreAdapter(dataObject: gameDTO.linescore).toDomain()
+        let boxscore = BoxscoreAdapter(dataObject: gameDTO.boxscore).toDomain()
         
         let game = Game(id: id,
                         date: gameDTO.gameDate,
@@ -130,7 +100,8 @@ struct MLBAPIService: GameStoreProtocol {
                         awayTeamScore: gameDTO.linescore.awayTotal.runs ?? 0,
                         venue: gameVenue,
                         players: players,
-                        linescore: linescore)
+                        linescore: linescore,
+                        boxscore: boxscore)
         
         return game
     }

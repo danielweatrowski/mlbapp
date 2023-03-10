@@ -34,10 +34,6 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
 
         let lineScoreViewModel = formatLineScore(for: game)
 
-//        let boxscoreViewModel = formatBoxscore(boxscore: response.boxscore,
-//                                               homeTeamAbbreviation: game.homeTeam.abbreviation,
-//                                               awayTeamAbbreviation: game.awayTeam.abbreviation)
-
         DispatchQueue.main.async {
             viewModel.navigationTitle = "\(game.awayTeam.abbreviation) @ \(game.homeTeam.abbreviation)"
             viewModel.headerViewModel = headerViewModel

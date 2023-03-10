@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct MLBBoxscore: Codable {
+protocol MLBBoxscoreProtocol {
+    
+}
+
+struct MLBBoxscore: Codable, MLBBoxscoreProtocol {
     let gameId: String
     let home: Team
     let away: Team

@@ -10,8 +10,8 @@ import OSLog
 
 extension Logger {
     private static var subsystem = Bundle.main.bundleIdentifier!
-    private static var displayName: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
-    private static var category = "http"
+    private static var displayName: String = "SwiftMLB"
+    private static var category = "HTTP"
     
     static let http = Logger(subsystem: subsystem, category: "\(displayName) \(category)")
     

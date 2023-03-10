@@ -21,5 +21,6 @@ struct Game {
 //    var losingPitcher: Player
     
     let linescore: Linescore?
+    let boxscore: Boxscore?
 }
 

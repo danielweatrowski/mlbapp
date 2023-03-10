@@ -269,5 +269,5 @@ struct BoxscoreBuilder: JSONBuilder {
         
         return returnDict
     }
-    
+
 }
