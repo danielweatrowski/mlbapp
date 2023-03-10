@@ -46,6 +46,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         }
     }
     
+    /*
     private func formatBoxscore(boxscore: MLBBoxscore, homeTeamAbbreviation: String, awayTeamAbbreviation: String) -> BoxscoreViewModel {
         var homeBoxItems = [BoxscoreViewModel.Batter]()
         var awayBoxBatters = [BoxscoreViewModel.Batter]()
@@ -133,7 +134,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         return boxscoreViewModel
     }
     
-    
+    */
     private func formatLineScore(for game: Game) -> LinescoreGridViewModel? {
         
         guard let linescore = game.linescore else {
@@ -222,5 +223,4 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                   homeLineItems: homeLineItems,
                                   awayLineItems: awayLineItems)
     }
-    
 }

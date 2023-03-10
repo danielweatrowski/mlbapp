@@ -9,7 +9,7 @@ import Foundation
 
 enum MLBStatistics {
     enum Batting {
-        struct GameStatistics {
+        struct GameStatistics: Codable {
             let runs, doubles, triples, homeRuns, hits: Int?
             let strikeOuts, baseOnBalls, stolenBases: Int?
             let intentionalWalks, catchersInterference, caughtStealing: Int?
@@ -20,7 +20,7 @@ enum MLBStatistics {
             let atBatsPerHomeRun, stolenBasePercentage, summary, note: String?
         }
         
-        struct SeasonStatistics {
+        struct SeasonStatistics: Codable {
             let atBats, baseOnBalls, catcherInterference, caughtStealing: Int?
             let doubles, flyOuts, gamesPlayed: Int?
             let groundedIntoDoublePlay, groundedIntoTriplePlay, groundOuts: Int?
@@ -35,7 +35,7 @@ enum MLBStatistics {
     }
     
     enum Pitching {
-        struct GameStatistics {
+        struct GameStatistics: Codable {
             let note, summary: String?
             let gamesPlayed, gamesStarted, flyOuts, groundOuts: Int?
             let airOuts, runs, doubles, triples: Int?
@@ -57,7 +57,7 @@ enum MLBStatistics {
             let sacFlies, passedBall: Int?
         }
         
-        struct SeasonStatistics {
+        struct SeasonStatistics: Codable {
             let gamesPlayed, gamesStarted, flyOuts, groundOuts: Int?
             let airOuts, runs, doubles, triples: Int?
             let homeRuns, strikeOuts, baseOnBalls, intentionalWalks: Int?
@@ -86,7 +86,7 @@ enum MLBStatistics {
     }
     
     enum Fielding {
-        struct GameStatistics {
+        struct GameStatistics: Codable {
             let gamesStarted, caughtStealing, stolenBases: Int?
             let stolenBasePercentage: String?
             let assists, putOuts, errors, chances: Int?
@@ -94,12 +94,27 @@ enum MLBStatistics {
             let passedBall, pickoffs: Int?
         }
         
-        struct SeasonStatistics {
+        struct SeasonStatistics: Codable {
             let gamesStarted, caughtStealing, stolenBases: Int?
             let stolenBasePercentage: String?
             let assists, putOuts, errors, chances: Int?
             let fielding: String?
             let passedBall, pickoffs: Int?
         }
+    }
+}
+
+
+extension MLBStatistics {
+    struct GameStats: Codable {
+        let batting: Batting.GameStatistics
+        let fielding: Fielding.GameStatistics
+        let pitching: Pitching.GameStatistics
+    }
+    
+    struct TotalStats: Codable {
+        let batting: Batting.SeasonStatistics
+        let fielding: Fielding.SeasonStatistics
+        let pitching: Pitching.SeasonStatistics
     }
 }
