@@ -28,7 +28,7 @@ struct DetailGameView: View {
                 
                 DecisionsInfoView(viewModel: $viewModel.decisionsViewModel)
                 
-                BoxscoreView(viewModel: $viewModel.boxscoreViewModel, teamBoxSelection: $teamBoxSelection)
+                BoxscoreGridView(viewModel: $viewModel.boxscoreViewModel, teamBoxSelection: $teamBoxSelection)
                     .padding()
                     .background()
                     .cornerRadius(16)

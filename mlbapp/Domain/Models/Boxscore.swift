@@ -14,7 +14,8 @@ protocol BoxscoreProtocol {
 struct Boxscore: BoxscoreProtocol {
     struct Batter {
         var playerID: Int
-        var name: String
+        var fullName: String
+        var boxscoreName: String
         var stats: BattingStats
         var substitution: Bool
         var battingOrderIndex: String?
@@ -23,7 +24,8 @@ struct Boxscore: BoxscoreProtocol {
     
     struct Pitcher {
         let playerID: Int
-        let name: String
+        let fullName: String
+        var boxscoreName: String
         let stats: PitchingStats
     }
     
