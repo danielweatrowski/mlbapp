@@ -18,6 +18,7 @@ enum DetailGame {
         @Published var awayTeamAbbreviation: String = ""
         @Published var headerViewModel: DetailGameHeaderViewModel?
         @Published var lineScoreViewModel: LinescoreGridViewModel?
+        @Published var decisionsViewModel: DecisionsInfoViewModel?
         @Published var boxscoreViewModel: BoxscoreViewModel?
         
         init(gameID: Int) {

@@ -53,7 +53,12 @@ struct BoxscoreAdapter {
                                                        baseOnBalls: gameStats?.baseOnBalls,
                                                        strikeOuts: gameStats?.strikeOuts,
                                                        homeRuns: gameStats?.homeRuns,
-                                                       era: seasonStats.era)
+                                                       era: seasonStats.era,
+                                                       seasonWins: seasonStats.wins,
+                                                       seasonLosses: seasonStats.losses,
+                                                       didWin: gameStats?.wins == 1,
+                                                       didLose: gameStats?.losses == 1)
+            
             
             return Boxscore.Pitcher(playerID: playerDTO.id,
                                     name: playerDTO.fullName,
@@ -106,7 +111,11 @@ struct BoxscoreAdapter {
                                                        baseOnBalls: gameStats?.baseOnBalls,
                                                        strikeOuts: gameStats?.strikeOuts,
                                                        homeRuns: gameStats?.homeRuns,
-                                                       era: seasonStats.era)
+                                                       era: seasonStats.era,
+                                                       seasonWins: seasonStats.wins,
+                                                       seasonLosses: seasonStats.losses,
+                                                       didWin: gameStats?.wins == 1,
+                                                       didLose: gameStats?.losses == 1)
             
             return Boxscore.Pitcher(playerID: playerDTO.id,
                                     name: playerDTO.fullName,

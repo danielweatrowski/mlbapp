@@ -18,12 +18,21 @@ struct MLBGame: Codable {
     let boxscore: MLBBoxscore
     let teams: GameTeams
     let players: [MLBPlayer]
-    let winningPitcherID: Int?
-    let losingPitcherID: Int?
+    let decisions: DecisionInfo
     
     struct GameTeams: Codable {
         let away: MLBTeam
         let home: MLBTeam
     }
+    
+    struct DecisionInfo: Codable {
+        let winner: MLBPerson
+        let loser: MLBPerson
+    }
 }
 
+struct MLBPerson: Codable {
+    let id: Int
+    let fullName: String
+    let link: String
+}

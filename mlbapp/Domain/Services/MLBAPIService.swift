@@ -100,6 +100,8 @@ struct MLBAPIService: GameStoreProtocol {
                         awayTeamScore: gameDTO.linescore.awayTotal.runs ?? 0,
                         venue: gameVenue,
                         players: players,
+                        winningPitcherID: gameDTO.decisions.winner.id,
+                        losingPitcherID: gameDTO.decisions.loser.id,
                         linescore: linescore,
                         boxscore: boxscore)
         

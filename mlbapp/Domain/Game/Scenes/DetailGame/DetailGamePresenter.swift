@@ -16,7 +16,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
 
     @MainActor
     func presentGame(response: DetailGame.DetailGame.Response) {
-        let game = response.game
+        var game = response.game
         
         guard let homeTeamRecord = game.homeTeam.record, let awayTeamRecord = game.awayTeam.record else {
             // TODO: Present error
@@ -33,13 +33,32 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                                         awayTeamRecord: awayTeamRecord.formatted())
 
         let lineScoreViewModel = formatLineScore(for: game)
+        
+        let decisionsViewModel = formatDecisions(boxscore: game.boxscore, winningPitcher: game.winningPitcher, losingPitcher: game.losingPitcher)
+        
 
         DispatchQueue.main.async {
             viewModel.navigationTitle = "\(game.awayTeam.abbreviation) @ \(game.homeTeam.abbreviation)"
             viewModel.headerViewModel = headerViewModel
             viewModel.lineScoreViewModel = lineScoreViewModel
+            viewModel.decisionsViewModel = decisionsViewModel
             //viewModel.boxscoreViewModel = boxscoreViewModel
         }
+    }
+    
+    func formatDecisions(boxscore: Boxscore?, winningPitcher: Player?, losingPitcher: Player?) -> DecisionsInfoViewModel? {
+        guard let winningPlayer = winningPitcher, let losingPlayer = losingPitcher, let winningPitcher = boxscore?.winningPitcher, let losingPitcher = boxscore?.losingPitcher else {
+            return nil
+        }
+        
+        return DecisionsInfoViewModel(winningPitcherName: winningPlayer.lastName,
+                                             winningPitcherWins: winningPitcher.stats.seasonWins ?? 0,
+                                             winningPitcherLosses: winningPitcher.stats.seasonLosses ?? 0,
+                                             winningPitcherERA: winningPitcher.stats.era ?? "--",
+                                             losingPitcherName: losingPlayer.lastName,
+                                             losingPitcherWins: losingPitcher.stats.seasonWins ?? 0,
+                                             losingPitcherLosses: losingPitcher.stats.seasonLosses ?? 0,
+                                             losingPitcherERA: losingPitcher.stats.era ?? "--")
     }
     
     /*

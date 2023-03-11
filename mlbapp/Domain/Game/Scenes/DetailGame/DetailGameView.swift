@@ -26,6 +26,8 @@ struct DetailGameView: View {
                 LinescoreGridView(viewModel: $viewModel.lineScoreViewModel)
                     .frame(maxWidth: .infinity)
                 
+                DecisionsInfoView(viewModel: $viewModel.decisionsViewModel)
+                
                 BoxscoreView(viewModel: $viewModel.boxscoreViewModel, teamBoxSelection: $teamBoxSelection)
                     .padding()
                     .background()
@@ -76,9 +78,9 @@ struct DetailGameView: View {
 
 struct DetailGameView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            DetailGameConfigurator.configure(for: Seeds.Games.PHI_NYM_20190424.id)
-        }
+        
+        DetailGameConfigurator.configure(for: Seeds.Games.PHI_NYM_20190424.id)
+        
     }
 }
 

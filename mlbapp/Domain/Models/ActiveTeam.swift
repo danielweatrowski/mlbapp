@@ -154,7 +154,25 @@ enum ActiveTeam: Int, CaseIterable, Identifiable {
     }
     
     var primaryColor: String {
-        return "C41E3A"
+        switch self {
+        case .giants: return "FD5A1E"
+        case .dodgers: return "005A9C"
+        case .mariners: return "005C5C"
+        case .guardians: return "e31937"
+        default: return "FFFFFF"
+        }
+    }
+    
+    // TODO: Switch on light/dark mode
+    var logoURL: String {
+        switch(self) {
+        case .dodgers: return "https://www.mlbstatic.com/team-logos/team-cap-on-light/119.svg"
+        case .mets: return "https://www.mlbstatic.com/team-logos/team-cap-on-dark/121.svg"
+        case .pirates: return "https://www.mlbstatic.com/team-logos/team-cap-on-dark/134.svg"
+        case .mariners: return "https://www.mlbstatic.com/team-logos/team-cap-on-dark/136.svg"
+        case .guardians: return "https://www.mlbstatic.com/team-logos/team-cap-on-light/114.svg"
+        default: return "https://www.mlbstatic.com/team-logos/team-cap-on-dark/\(self.id).svg"
+        }
     }
 }
 

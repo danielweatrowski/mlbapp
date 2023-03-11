@@ -17,10 +17,29 @@ struct Game {
     let venue: Venue
     let players: [Player]
     
-//    var winningPitcher: Player
-//    var losingPitcher: Player
+    let winningPitcherID: Int?
+    let losingPitcherID: Int?
     
     let linescore: Linescore?
     let boxscore: Boxscore?
+    
+    lazy var winningPitcher: Player? = {
+        guard let winningPitcherID = winningPitcherID, let player = playerHash[winningPitcherID] else {
+            return nil
+        }
+        return player
+    }()
+    
+    lazy var losingPitcher: Player? = {
+        guard let losingPitcherID = losingPitcherID, let player = playerHash[losingPitcherID] else {
+            return nil
+        }
+        return player
+    }()
+    
+    lazy var playerHash: [Int: Player] = {
+        return players.reduce(into: [Int: Player]()) {
+            $0[$1.id] = $1
+        }
+    }()
 }
-

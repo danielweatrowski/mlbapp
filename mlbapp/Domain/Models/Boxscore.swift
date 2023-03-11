@@ -54,8 +54,41 @@ struct Boxscore: BoxscoreProtocol {
         let strikeOuts: Int?
         let homeRuns: Int?
         let era: String?
+        let seasonWins: Int?
+        let seasonLosses: Int?
+        let didWin: Bool
+        let didLose: Bool
     }
     
     let home: Team
     let away: Team
+}
+
+extension Boxscore {
+    var winningPitcher: Pitcher? {
+        let homePitcher = home.pitchers.first(where: {$0.stats.didWin})
+        if let pitcher = homePitcher {
+            return pitcher
+        }
+        
+        let awayPitcher = away.pitchers.first(where: {$0.stats.didWin})
+        if let pitcher = awayPitcher {
+            return pitcher
+        }
+        return nil
+    }
+    
+    var losingPitcher: Pitcher? {
+        let homePitcher = home.pitchers.first(where: {$0.stats.didLose})
+        if let pitcher = homePitcher {
+            return pitcher
+        }
+        
+        let awayPitcher = away.pitchers.first(where: {$0.stats.didLose})
+        if let pitcher = awayPitcher {
+            return pitcher
+        }
+        
+        return nil
+    }
 }

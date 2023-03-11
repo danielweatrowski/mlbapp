@@ -7,20 +7,9 @@
 
 import SwiftUI
 
-struct LinescorePitcherInfoViewModel {
-    var winningPitcherName: String
-    var winningPitcherWins: Int
-    var winningPitcherLosses: Int
-    var winningPitcherERA: String
-    var losingPitcherName: String
-    var losingPitcherWins: Int
-    var losingPitcherLosses: Int
-    var losingPitcherERA: String
-}
-
-struct LinescorePitcherInfoView: View {
+struct DecisionsInfoView: View {
     
-    var viewModel: LinescorePitcherInfoViewModel?
+    @Binding var viewModel: DecisionsInfoViewModel?
 
     var body: some View {
         if let viewModel = viewModel {
@@ -68,6 +57,7 @@ struct LinescorePitcherInfoView: View {
                 }
                 Spacer()
             }
+            .padding(.horizontal)
         } else {
             EmptyView()
         }
@@ -76,6 +66,6 @@ struct LinescorePitcherInfoView: View {
 
 struct LinescorePitcherInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        LinescorePitcherInfoView()
+        DecisionsInfoView(viewModel: .constant(nil))
     }
 }
