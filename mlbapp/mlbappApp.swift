@@ -13,6 +13,7 @@ struct mlbappApp: App {
         WindowGroup {
             NavigationView {
                 DetailGameConfigurator.configure(for: Seeds.Games.PHI_NYM_20190424.id)
+                    .environmentObject(MLBLogoService())
             }
         }
 

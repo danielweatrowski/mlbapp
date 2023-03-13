@@ -23,7 +23,7 @@ struct ListGameRow: View {
             .font(.footnote)
                         
             HStack() {
-                TeamIconView(abbreviation: viewModel.homeTeamAbbreviation, color: .black)
+                LogoView(teamID: viewModel.homeTeamID, teamAbbreviation: viewModel.homeTeamAbbreviation)
                 VStack(alignment: .leading) {
                     Text(viewModel.homeTeamName)
                     Text(viewModel.homeTeamRecord)
@@ -49,7 +49,7 @@ struct ListGameRow: View {
             .font(.system(size: 17, weight: .medium, design: .default))
 
             HStack() {
-                TeamIconView(abbreviation: viewModel.awayTeamAbbreviation, color: .black)
+                LogoView(teamID: viewModel.awayTeamID, teamAbbreviation: viewModel.awayTeamAbbreviation)
                 VStack(alignment: .leading) {
                     Text(viewModel.awayTeamName)
                     Text(viewModel.awayTeamRecord)
@@ -84,11 +84,13 @@ struct ListGameRow_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ListGameRowViewModel(gameID: 1, gameDate: "June 22, 2004",
                                              gameVenueName: "The Sandlot",
+                                             homeTeamID: 119,
                                              homeTeamName: "Rockstars",
                                              homeTeamAbbreviation: "SDR",
                                              homeTeamScore: "9",
                                              homeTeamRecord: "10-1",
                                              homeTeamLogoName: "",
+                                             awayTeamID: 114,
                                              awayTeamName: "Dancers",
                                              awayTeamAbbreviation: "SDD",
                                              awayTeamScore: "3",

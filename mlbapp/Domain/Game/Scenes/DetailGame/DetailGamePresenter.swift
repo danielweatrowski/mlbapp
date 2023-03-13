@@ -23,10 +23,12 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
             return
         }
         
-        let headerViewModel = DetailGameHeaderViewModel(homeTeamName: game.homeTeam.teamName,
+        let headerViewModel = DetailGameHeaderViewModel(homeTeamID: game.homeTeam.id,
+                                                        homeTeamName: game.homeTeam.teamName,
                                                         homeTeamAbbreviation: game.homeTeam.abbreviation,
                                                         homeTeamScore: String(game.homeTeamScore),
                                                         homeTeamRecord: homeTeamRecord.formatted(),
+                                                        awayTeamID: game.awayTeam.id,
                                                         awayTeamName: game.awayTeam.teamName,
                                                         awayTeamAbbreviation: game.awayTeam.abbreviation,
                                                         awayTeamScore: String(game.awayTeamScore),

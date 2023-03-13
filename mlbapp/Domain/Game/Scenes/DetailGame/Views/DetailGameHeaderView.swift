@@ -15,7 +15,8 @@ struct DetailGameHeaderView: View {
             HStack() {
                 Spacer()
                 VStack(alignment: .center, spacing: 4) {
-                    TeamIconView(abbreviation: viewModel.homeTeamAbbreviation, color: .blue)
+                    LogoView(teamID: viewModel.homeTeamID,
+                             teamAbbreviation: viewModel.homeTeamAbbreviation);
                     Text(viewModel.homeTeamName)
                         .font(.subheadline)
                         .bold()
@@ -49,7 +50,8 @@ struct DetailGameHeaderView: View {
                         .padding([.leading, .trailing])
                 }
                 VStack(alignment: .center, spacing: 4) {
-                    TeamIconView(abbreviation: viewModel.awayTeamAbbreviation, color: .orange)
+                    LogoView(teamID: viewModel.awayTeamID,
+                             teamAbbreviation: viewModel.awayTeamAbbreviation)
                     Text(viewModel.awayTeamName)
                         .font(.subheadline)
                         .bold()
