@@ -70,27 +70,29 @@ struct MLBAPIService: GameStoreProtocol {
                                                           ties: 0,
                                                           winningPercentage: gameDTO.teams.away.record?.winningPercentage ?? "NA"))
         
-        let players = gameDTO.players.map({
-            Player(id: $0.id,
-                   firstName: $0.firstName,
-                   lastName: $0.lastName,
-                   fullName: $0.fullName,
-                   birthCity: $0.birthCity,
-                   birthCountry: $0.birthCountry,
-                   lastInitName: $0.lastInitName,
-                   boxscoreName: $0.boxscoreName,
-                   height: $0.height,
-                   weight: $0.weight,
-                   currentAge: $0.currentAge,
-                   birthDate: $0.birthDate,
-                   isActive: $0.active,
-                   mlbDebutDate: $0.mlbDebutDate,
-                   primaryPositionCode: $0.primaryPosition.code)
-        })
-        
+        let players = gameDTO.players.reduce(into: [Int: Player]()) {
+            $0[$1.id] = Player(id: $1.id,
+                               firstName: $1.firstName,
+                               lastName: $1.lastName,
+                               fullName: $1.fullName,
+                               birthCity: $1.birthCity,
+                               birthCountry: $1.birthCountry,
+                               lastInitName: $1.lastInitName,
+                               boxscoreName: $1.boxscoreName,
+                               height: $1.height,
+                               weight: $1.weight,
+                               currentAge: $1.currentAge,
+                               birthDate: $1.birthDate,
+                               isActive: $1.active,
+                               mlbDebutDate: $1.mlbDebutDate,
+                               primaryPositionCode: $1.primaryPosition.code)
+        }
 
-        let linescore = LinescoreAdapter(dataObject: gameDTO.linescore).toDomain()
-        let boxscore = BoxscoreAdapter(dataObject: gameDTO.boxscore).toDomain()
+        let linescoreAdapter = LinescoreAdapter(dataObject: gameDTO.linescore)
+        let linescore = linescoreAdapter.toDomain()
+        
+        let boxscoreAdapter = BoxscoreAdapter(dataObject: gameDTO.boxscore, playersHash: players)
+        let boxscore = boxscoreAdapter.toDomain()
         
         let game = Game(id: id,
                         date: gameDTO.gameDate,

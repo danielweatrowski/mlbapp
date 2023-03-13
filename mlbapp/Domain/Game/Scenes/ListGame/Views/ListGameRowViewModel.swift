@@ -11,11 +11,13 @@ struct ListGameRowViewModel {
     let gameID: Int
     let gameDate: String
     let gameVenueName: String
+    let homeTeamID: Int
     let homeTeamName: String
     let homeTeamAbbreviation: String
     let homeTeamScore: String
     let homeTeamRecord: String
     let homeTeamLogoName: String
+    let awayTeamID: Int
     let awayTeamName: String
     let awayTeamAbbreviation: String
     let awayTeamScore: String

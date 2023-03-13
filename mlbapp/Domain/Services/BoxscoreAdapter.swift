@@ -10,6 +10,7 @@ import Foundation
 struct BoxscoreAdapter {
     
     let dataObject: MLBBoxscore
+    let playersHash: [Int: Player]
     
     func toDomain() -> Boxscore {
         let boxscore = dataObject
@@ -25,6 +26,7 @@ struct BoxscoreAdapter {
             let seasonStats = playerDTO.seasonStats.batting
             let battingOrder = Int(playerDTO.battingOrder ?? "100") ?? 100
 
+            let boxscoreName = playersHash[playerDTO.id]?.boxscoreName ?? playerDTO.fullName
             let battingStats = Boxscore.BattingStats(atBats: gameStats?.atBats,
                                                      runs: gameStats?.runs,
                                                      hits: gameStats?.hits,
@@ -35,7 +37,8 @@ struct BoxscoreAdapter {
                                                      avg: seasonStats.avg)
                         
             return Boxscore.Batter(playerID: playerDTO.id,
-                                         name: playerDTO.fullName,
+                                         fullName: playerDTO.fullName,
+                                         boxscoreName: boxscoreName,
                                          stats: battingStats,
                                          substitution: battingOrder % 100 != 0,
                                          battingOrderIndex: playerDTO.battingOrder)
@@ -45,7 +48,8 @@ struct BoxscoreAdapter {
         let homePitchers = h_team.pitchers.map { playerDTO in
             let gameStats = playerDTO.stats?.pitching
             let seasonStats = playerDTO.seasonStats.pitching
-            
+            let boxscoreName = playersHash[playerDTO.id]?.boxscoreName ?? playerDTO.fullName
+
             let pitchingStats = Boxscore.PitchingStats(inningsPitched: gameStats?.inningsPitched,
                                                        hits: gameStats?.hits,
                                                        runs: gameStats?.runs,
@@ -61,7 +65,8 @@ struct BoxscoreAdapter {
             
             
             return Boxscore.Pitcher(playerID: playerDTO.id,
-                                    name: playerDTO.fullName,
+                                    fullName: playerDTO.fullName,
+                                    boxscoreName: boxscoreName,
                                     stats: pitchingStats)
         }
         let boxHomeStats = Boxscore.BattingStats(atBats: h_teamBattingStats.atBats,
@@ -83,6 +88,7 @@ struct BoxscoreAdapter {
             let gameStats = playerDTO.stats?.batting
             let seasonStats = playerDTO.seasonStats.batting
             let battingOrder = Int(playerDTO.battingOrder ?? "100") ?? 100
+            let boxscoreName = playersHash[playerDTO.id]?.boxscoreName ?? playerDTO.fullName
 
             let battingStats = Boxscore.BattingStats(atBats: gameStats?.atBats,
                                                      runs: gameStats?.runs,
@@ -94,7 +100,8 @@ struct BoxscoreAdapter {
                                                      avg: seasonStats.avg)
                         
             return Boxscore.Batter(playerID: playerDTO.id,
-                                         name: playerDTO.fullName,
+                                         fullName: playerDTO.fullName,
+                                         boxscoreName: boxscoreName,
                                          stats: battingStats,
                                          substitution: battingOrder % 100 != 0,
                                          battingOrderIndex: playerDTO.battingOrder)
@@ -103,7 +110,8 @@ struct BoxscoreAdapter {
         let awayPitchers = a_team.pitchers.map { playerDTO in
             let gameStats = playerDTO.stats?.pitching
             let seasonStats = playerDTO.seasonStats.pitching
-            
+            let boxscoreName = playersHash[playerDTO.id]?.boxscoreName ?? playerDTO.fullName
+
             let pitchingStats = Boxscore.PitchingStats(inningsPitched: gameStats?.inningsPitched,
                                                        hits: gameStats?.hits,
                                                        runs: gameStats?.runs,
@@ -118,7 +126,8 @@ struct BoxscoreAdapter {
                                                        didLose: gameStats?.losses == 1)
             
             return Boxscore.Pitcher(playerID: playerDTO.id,
-                                    name: playerDTO.fullName,
+                                    fullName: playerDTO.fullName,
+                                    boxscoreName: boxscoreName,
                                     stats: pitchingStats)
         }
         let boxAwayStats = Boxscore.BattingStats(atBats: a_teamBattingStats.atBats,

@@ -16,7 +16,7 @@ struct EmptyGridItem: View {
     }
 }
 
-struct BoxscoreView: View {
+struct BoxscoreGridView: View {
     
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
@@ -150,6 +150,6 @@ struct BoxscoreView: View {
 
 struct BoxscoreView_Previews: PreviewProvider {
     static var previews: some View {
-        BoxscoreView(viewModel: .constant(BoxscoreViewModel.Seed.viewModel), teamBoxSelection: .constant(0))
+        BoxscoreGridView(viewModel: .constant(BoxscoreViewModel.Seed.viewModel), teamBoxSelection: .constant(0))
     }
 }

@@ -159,6 +159,9 @@ enum ActiveTeam: Int, CaseIterable, Identifiable {
         case .dodgers: return "005A9C"
         case .mariners: return "005C5C"
         case .guardians: return "e31937"
+        case .phillies: return "E81828"
+        case .mets: return "FF5910"
+        case .padres: return "ffc427"
         default: return "FFFFFF"
         }
     }
@@ -172,6 +175,16 @@ enum ActiveTeam: Int, CaseIterable, Identifiable {
         case .mariners: return "https://www.mlbstatic.com/team-logos/team-cap-on-dark/136.svg"
         case .guardians: return "https://www.mlbstatic.com/team-logos/team-cap-on-light/114.svg"
         default: return "https://www.mlbstatic.com/team-logos/team-cap-on-dark/\(self.id).svg"
+        }
+    }
+    
+    var logoAspectRatio: CGFloat {
+        switch self {
+        case .phillies: return 0.73
+        case .mets: return 0.79
+        case .padres: return 0.8
+        case .dodgers: return 0.76
+        default: return 0.76
         }
     }
 }
