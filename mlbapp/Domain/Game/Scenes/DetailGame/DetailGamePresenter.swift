@@ -38,13 +38,13 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         
         let decisionsViewModel = formatDecisions(boxscore: game.boxscore)
         
-
+        let boxscoreViewModel = formatBoxscore(boxscore: game.boxscore, homeTeamAbbreviation: game.homeTeam.abbreviation, awayTeamAbbreviation: game.awayTeam.abbreviation)
         DispatchQueue.main.async {
             viewModel.navigationTitle = "\(game.awayTeam.abbreviation) @ \(game.homeTeam.abbreviation)"
             viewModel.headerViewModel = headerViewModel
             viewModel.lineScoreViewModel = lineScoreViewModel
             viewModel.decisionsViewModel = decisionsViewModel
-            //viewModel.boxscoreViewModel = boxscoreViewModel
+            viewModel.boxscoreViewModel = boxscoreViewModel
         }
     }
     
@@ -61,6 +61,59 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                              losingPitcherWins: losingPitcher.stats.seasonWins ?? 0,
                                              losingPitcherLosses: losingPitcher.stats.seasonLosses ?? 0,
                                              losingPitcherERA: losingPitcher.stats.era ?? "--")
+    }
+    
+    private func formatBoxscore(boxscore: Boxscore?, homeTeamAbbreviation: String, awayTeamAbbreviation: String) -> BoxscoreViewModel? {
+        guard let boxscore = boxscore else { return nil }
+        
+        let batters = [boxscore.home.batters, boxscore.away.batters]
+        let teamRows = batters.map { teamBatters in
+            return teamBatters.map { batter in
+                
+                var name = batter.boxscoreName
+                
+                if let note = batter.note {
+                    name = note + name
+                }
+                
+                return BoxscoreRowViewModel(title: name,
+                                            subtitle: batter.position.abbreviation,
+                                            indentTitle: batter.substitution,
+                                            item0: batter.stats.atBats.formattedStat(),
+                                            item1: batter.stats.runs.formattedStat(),
+                                            item2: batter.stats.hits.formattedStat(),
+                                            item3: batter.stats.rbi.formattedStat(),
+                                            item4: batter.stats.baseOnBalls.formattedStat(),
+                                            item5: batter.stats.strikeOuts.formattedStat(),
+                                            item6: batter.stats.leftOnBase.formattedStat(),
+                                            item7: batter.stats.avg ?? "--")
+            }
+        }
+        
+        let teamStats = [boxscore.home.stats, boxscore.away.stats]
+        let totals = teamStats.map({
+            BoxscoreRowViewModel(title: "Totals",
+                                 subtitle: "",
+                                 boldItems: true,
+                                 item0: $0.atBats.formattedStat(),
+                                 item1: $0.runs.formattedStat(),
+                                 item2: $0.hits.formattedStat(),
+                                 item3: $0.rbi.formattedStat(),
+                                 item4: $0.baseOnBalls.formattedStat(),
+                                 item5: $0.strikeOuts.formattedStat(),
+                                 item6: $0.leftOnBase.formattedStat(),
+                                 item7: $0.avg ?? "")
+        })
+        
+        
+        return BoxscoreViewModel(homeTeamAbbreviation: homeTeamAbbreviation,
+                                 homeNotes: boxscore.home.notes,
+                                 homeRows: teamRows[0],
+                                 homeTotalsRow: totals[0],
+                                 awayTeamAbbreviation: awayTeamAbbreviation,
+                                 awayNotes: boxscore.away.notes,
+                                 awayRows: teamRows[1],
+                                 awayTotalsRow: totals[1])
     }
     
     /*
@@ -239,5 +292,15 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         return LinescoreGridViewModel(headers: headerLineItems,
                                   homeLineItems: homeLineItems,
                                   awayLineItems: awayLineItems)
+    }
+}
+
+extension Optional where Wrapped == Int {
+    func formattedStat() -> String {
+        if let stat = self {
+            return String(stat)
+        } else {
+            return "-"
+        }
     }
 }

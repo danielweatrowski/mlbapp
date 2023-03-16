@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-
+/*
 struct BoxscoreHeaderView: View {
     
-    var teamAbbreviation: String
+    let viewModel: BoxscoreRowViewModel
     
     var body: some View {
         GridRow {
@@ -69,3 +69,4 @@ struct BoxscoreHeaderView_Previews: PreviewProvider {
         }
     }
 }
+*/

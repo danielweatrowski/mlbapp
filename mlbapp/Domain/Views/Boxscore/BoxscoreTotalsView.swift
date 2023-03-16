@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BoxscoreTotalsView: View {
-    var viewModel: BoxscoreViewModel.Batter
+    var viewModel: BoxscoreRowViewModel
     
     var body: some View {
         Text("Hello, Baseball")
@@ -23,11 +23,5 @@ struct BoxscoreTotalsView: View {
 //                    .bold()
 //            }
 //        }
-    }
-}
-
-struct BoxscoreTotalsView_Previews: PreviewProvider {
-    static var previews: some View {
-        BoxscoreTotalsView(viewModel: BoxscoreViewModel.Seed.viewModel.homeBattingTotals)
     }
 }

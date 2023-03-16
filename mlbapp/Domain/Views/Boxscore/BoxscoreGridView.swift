@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EmptyGridItem: View {
-    let color: Color = .clear
+    let color: Color = .white
     
     var body: some View {
         color
@@ -31,17 +31,9 @@ struct BoxscoreGridView: View {
     var body: some View {
         if let viewModel = viewModel {
             VStack {
-                
-//                Picker("Teams", selection: $teamBoxSelection) {
-//                    Text(viewModel.homeTeamAbbreviation).tag(0)
-//                    Text(viewModel.awayTeamAbbreviation).tag(1)
-//                }
-//                .pickerStyle(.segmented)
-//                .padding(.bottom)
-                
                 // boxscore content
                 if interfaceSize.portrait {
-                    ScrollView(.horizontal) {
+                    ScrollView(.horizontal, showsIndicators: false) {
                         boxscore(for: viewModel)
                     }
                     .padding(.bottom, 16)
@@ -49,63 +41,22 @@ struct BoxscoreGridView: View {
                     boxscore(for: viewModel)
                 }
                 
+                
                 VStack(alignment: .leading, spacing: 8) {
+                    Text("Notes")
+                        .font(.subheadline)
+                        .bold()
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    ForEach(viewModel.homeNotes, id: \.self) {
+                    ForEach(selectedNotes, id: \.self) {
                         Text($0)
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
-                .padding(.vertical)
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    
-                    Text("Batting")
-                        .font(.subheadline)
-                        .bold()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-
-                    ForEach(viewModel.homeBattingInfo, id: \.title) { item in
-                        Group {
-                            Text(item.title)
-                                .font(.subheadline)
-                                .bold()
-                            + Text(" ")
-                            + Text(item.description)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                }
-                .padding(.vertical)
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    
-                    Text("Fielding")
-                        .font(.subheadline)
-                        .bold()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-
-                    ForEach(viewModel.homeFieldingInfo, id: \.title) { item in
-                        Group {
-                            Text(item.title)
-                                .font(.subheadline)
-                                .bold()
-                            + Text(" ")
-                            + Text(item.description)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                }
-                .padding(.vertical)
+                .padding(.top)
             }
-//            .onAppear {
-//                print("Horizontal: \(horizontalSizeClass)")
-//                print("Vertical: \(verticalSizeClass)")
-//            }
         }
         else {
             EmptyView()
@@ -114,17 +65,17 @@ struct BoxscoreGridView: View {
     
     @ViewBuilder
     private func boxscore(for viewModel: BoxscoreViewModel) -> some View {
-        Grid(verticalSpacing: 16) {
+        Grid(verticalSpacing: 12) {
             
-            BoxscoreHeaderView(teamAbbreviation: selectedTeamAbbreviation)
+            BoxscoreRowView(viewModel: viewModel.battingHeader(withTitle: selectedTeamAbbreviation + " Batting"))
             
             Divider()
             
             ForEach(selectedBatters, id: \.id) { batter in
-                BoxscoreRowView(viewModel: batter, type: .batter)
+                BoxscoreRowView(viewModel: batter)
             }
             
-            BoxscoreRowView(viewModel: viewModel.homeBattingTotals, type: .total)
+            BoxscoreRowView(viewModel: selectedTotals)
                 .padding(.top)
         }
     }
@@ -135,21 +86,30 @@ struct BoxscoreGridView: View {
         : viewModel?.awayTeamAbbreviation ?? ""
     }
     
-    private var selectedBatters: [BoxscoreViewModel.Batter] {
+    private var selectedBatters: [BoxscoreRowViewModel] {
         return teamBoxSelection == 0
-        ? viewModel?.homeBatters ?? []
-        : viewModel?.awayBatters ?? []
+        ? viewModel?.homeRows ?? []
+        : viewModel?.awayRows ?? []
     }
     
-    private var selectedTotals: BoxscoreViewModel.Batter {
+    private var selectedTotals: BoxscoreRowViewModel {
         return teamBoxSelection == 0
-        ? viewModel?.homeBattingTotals ?? BoxscoreViewModel.emptyTotals
-        : viewModel?.awayBattingTotals ?? BoxscoreViewModel.emptyTotals
+        ? viewModel?.homeTotalsRow ?? BoxscoreRowViewModel(title: "-", subtitle: "-", item0: "-", item1: "-", item2: "-", item3: "-", item4: "-", item5: "-", item6: "-", item7: "-")
+        : viewModel?.awayTotalsRow ?? BoxscoreRowViewModel(title: "-", subtitle: "-", item0: "-", item1: "-", item2: "-", item3: "-", item4: "-", item5: "-", item6: "-", item7: "-")
+    }
+    
+    private var selectedNotes: [String] {
+        return teamBoxSelection == 0
+        ? viewModel?.homeNotes ?? []
+        : viewModel?.awayNotes ?? []
     }
 }
 
+// TODO: Add Preview
+/*
 struct BoxscoreView_Previews: PreviewProvider {
     static var previews: some View {
         BoxscoreGridView(viewModel: .constant(BoxscoreViewModel.Seed.viewModel), teamBoxSelection: .constant(0))
     }
 }
+*/

@@ -9,69 +9,62 @@ import SwiftUI
 
 struct BoxscoreRowView: View {
     
-    enum RowType {
-        case batter, total
-    }
-    
-    var viewModel: BoxscoreViewModel.Batter
-    var type: RowType
+    var viewModel: BoxscoreRowViewModel
     
     var body: some View {
         GridRow {
-            nameField
+            titleField
                 .gridColumnAlignment(.leading)
-                
-            EmptyGridItem()
+                            
+            Text(viewModel.item0)
+                .font(.subheadline)
+                .bold(viewModel.boldItems)
             
-            Text(viewModel.atBats)
+            Text(viewModel.item1)
                 .font(.subheadline)
-                .bold(type == .total)
-            
-            Text(viewModel.runs)
-                .font(.subheadline)
-                .bold(type == .total)
+                .bold(viewModel.boldItems)
 
-            Text(viewModel.hits)
+            Text(viewModel.item2)
                 .font(.subheadline)
-                .bold(type == .total)
+                .bold(viewModel.boldItems)
 
-            Text(viewModel.runsBattedIn)
+            Text(viewModel.item3)
                 .font(.subheadline)
-                .bold(type == .total)
+                .bold(viewModel.boldItems)
 
-            Text(viewModel.baseOnBalls)
+            Text(viewModel.item4)
                 .font(.subheadline)
-                .bold(type == .total)
+                .bold(viewModel.boldItems)
 
-            Text(viewModel.strikeOuts)
+            Text(viewModel.item5)
                 .font(.subheadline)
-                .bold(type == .total)
+                .bold(viewModel.boldItems)
 
-            Text(viewModel.leftOnBase)
+            Text(viewModel.item6)
                 .font(.subheadline)
-                .bold(type == .total)
+                .bold(viewModel.boldItems)
 
-            Text(viewModel.average)
+            Text(viewModel.item7)
                 .font(.subheadline)
-                .bold(type == .total)
+                .bold(viewModel.boldItems)
         }
     }
     
     @ViewBuilder
-    var nameField: some View {
-        if viewModel.substitution {
-            Text("    ")
-            + Text(viewModel.name)
+    var titleField: some View {
+        if viewModel.indentTitle {
+            Text("  ")
+            + Text(viewModel.title)
                 .bold()
                 .font(.subheadline)
-            + Text("  \(viewModel.positionAbbreviation)")
+            + Text("  \(viewModel.subtitle)")
                 .font(.footnote)
                 .foregroundColor(.secondary)
         } else {
-            Text(viewModel.name)
+            Text(viewModel.title)
                 .bold()
                 .font(.subheadline)
-            + Text("  \(viewModel.positionAbbreviation)")
+            + Text("  \(viewModel.subtitle)")
                 .font(.footnote)
                 .foregroundColor(.secondary)
         }
@@ -80,8 +73,9 @@ struct BoxscoreRowView: View {
 
 struct BoxscoreRowView_Previews: PreviewProvider {
     static var previews: some View {
+        let vm = BoxscoreRowViewModel(title: "Title", subtitle: "Subtitle", item0: "0", item1: "0", item2: "0", item3: "0", item4: "0", item5: "0", item6: "0", item7: "0")
         Grid {
-            BoxscoreRowView(viewModel: BoxscoreViewModel.Seed.harper_20190424, type: .batter)
+            BoxscoreRowView(viewModel: vm)
         }
     }
 }

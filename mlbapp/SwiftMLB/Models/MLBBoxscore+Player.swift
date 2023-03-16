@@ -15,6 +15,6 @@ extension MLBBoxscore {
         let battingOrder: String?
         let seasonStats: MLBStatistics.TotalStats
         let stats: MLBStatistics.GameStats?
-        let position: MLBPosition?
+        let position: MLBPosition
     }
 }
