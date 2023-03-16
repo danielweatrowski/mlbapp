@@ -18,8 +18,10 @@ struct Boxscore: BoxscoreProtocol {
         var boxscoreName: String
         var stats: BattingStats
         var substitution: Bool
+        var position: Position
         var battingOrderIndex: String?
         var label: String?
+        var note: String?
     }
     
     struct Pitcher {
@@ -40,6 +42,7 @@ struct Boxscore: BoxscoreProtocol {
         var atBats: Int?
         var runs: Int?
         var hits: Int?
+        var rbi: Int?
         var runsBattedIn: Int?
         var baseOnBalls: Int?
         var strikeOuts: Int?

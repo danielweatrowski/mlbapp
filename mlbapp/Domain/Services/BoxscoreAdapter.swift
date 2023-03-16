@@ -30,6 +30,7 @@ struct BoxscoreAdapter {
             let battingStats = Boxscore.BattingStats(atBats: gameStats?.atBats,
                                                      runs: gameStats?.runs,
                                                      hits: gameStats?.hits,
+                                                     rbi: gameStats?.rbi,
                                                      runsBattedIn: gameStats?.rbi,
                                                      baseOnBalls: gameStats?.leftOnBase,
                                                      strikeOuts: gameStats?.strikeOuts,
@@ -41,7 +42,12 @@ struct BoxscoreAdapter {
                                          boxscoreName: boxscoreName,
                                          stats: battingStats,
                                          substitution: battingOrder % 100 != 0,
-                                         battingOrderIndex: playerDTO.battingOrder)
+                                         position: Position(code: playerDTO.position.code,
+                                                            type: playerDTO.position.type,
+                                                            name: playerDTO.position.name,
+                                                            abbreviation: playerDTO.position.abbreviation),
+                                         battingOrderIndex: playerDTO.battingOrder,
+                                         note: playerDTO.stats?.batting.note)
             
         }
         
@@ -72,6 +78,7 @@ struct BoxscoreAdapter {
         let boxHomeStats = Boxscore.BattingStats(atBats: h_teamBattingStats.atBats,
                                                  runs: h_teamBattingStats.runs,
                                                  hits: h_teamBattingStats.hits,
+                                                 rbi: h_teamBattingStats.rbi,
                                                  runsBattedIn: h_teamBattingStats.rbi,
                                                  baseOnBalls: h_teamBattingStats.baseOnBalls,
                                                  strikeOuts: h_teamBattingStats.strikeOuts,
@@ -93,6 +100,7 @@ struct BoxscoreAdapter {
             let battingStats = Boxscore.BattingStats(atBats: gameStats?.atBats,
                                                      runs: gameStats?.runs,
                                                      hits: gameStats?.hits,
+                                                     rbi: gameStats?.rbi,
                                                      runsBattedIn: gameStats?.rbi,
                                                      baseOnBalls: gameStats?.leftOnBase,
                                                      strikeOuts: gameStats?.strikeOuts,
@@ -104,7 +112,12 @@ struct BoxscoreAdapter {
                                          boxscoreName: boxscoreName,
                                          stats: battingStats,
                                          substitution: battingOrder % 100 != 0,
-                                         battingOrderIndex: playerDTO.battingOrder)
+                                         position: Position(code: playerDTO.position.code,
+                                                            type: playerDTO.position.type,
+                                                            name: playerDTO.position.name,
+                                                            abbreviation: playerDTO.position.abbreviation),
+                                         battingOrderIndex: playerDTO.battingOrder,
+                                         note: playerDTO.stats?.batting.note)
             
         }
         let awayPitchers = a_team.pitchers.map { playerDTO in
@@ -133,6 +146,7 @@ struct BoxscoreAdapter {
         let boxAwayStats = Boxscore.BattingStats(atBats: a_teamBattingStats.atBats,
                                                  runs: a_teamBattingStats.runs,
                                                  hits: a_teamBattingStats.hits,
+                                                 rbi: a_teamBattingStats.rbi,
                                                  runsBattedIn: a_teamBattingStats.rbi,
                                                  baseOnBalls: a_teamBattingStats.baseOnBalls,
                                                  strikeOuts: a_teamBattingStats.strikeOuts,
