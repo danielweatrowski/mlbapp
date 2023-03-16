@@ -20,5 +20,8 @@ struct DetailGameHeaderViewModel {
     var awayTeamScore: String = ""
     var awayTeamRecord: String = ""
     
+    var gameDate: String = ""
+    var venueName: String = ""
+    
 }
 

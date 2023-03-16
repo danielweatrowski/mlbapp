@@ -32,7 +32,9 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                                         awayTeamName: game.awayTeam.teamName,
                                                         awayTeamAbbreviation: game.awayTeam.abbreviation,
                                                         awayTeamScore: String(game.awayTeamScore),
-                                                        awayTeamRecord: awayTeamRecord.formatted())
+                                                        awayTeamRecord: awayTeamRecord.formatted(),
+                                                        gameDate: game.date.formatted(),
+                                                        venueName: game.venue.name)
 
         let lineScoreViewModel = formatLineScore(for: game)
         

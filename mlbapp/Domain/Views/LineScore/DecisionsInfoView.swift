@@ -57,7 +57,7 @@ struct DecisionsInfoView: View {
                 }
                 Spacer()
             }
-            .padding(.horizontal)
+            //.padding(.horizontal)
         } else {
             EmptyView()
         }

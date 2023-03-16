@@ -12,55 +12,68 @@ struct DetailGameHeaderView: View {
     
     var body: some View {
         if let viewModel = viewModel {
-            HStack() {
-                Spacer()
-                VStack(alignment: .center, spacing: 4) {
-                    LogoView(teamID: viewModel.homeTeamID,
-                             teamAbbreviation: viewModel.homeTeamAbbreviation);
-                    Text(viewModel.homeTeamName)
-                        .font(.subheadline)
-                        .bold()
-                        .multilineTextAlignment(.center)
-                    Text(viewModel.homeTeamRecord)
-                        .font(.caption2)
-                }
+            VStack {
                 
-                VStack() {
-                    Text(viewModel.homeTeamScore)
-                        .font(.system(size: 48))
-                        .scaledToFill()
-                        .minimumScaleFactor(0.5)
-                        .lineLimit(1)
-                        .bold()
-                        .padding([.leading, .trailing])
-
+                HStack {
+                    Text(viewModel.gameDate)
+                    Spacer()
+                    Text(viewModel.venueName)
                 }
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .padding([.horizontal, .bottom])
 
-                Text("FINAL")
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
-
-                VStack() {
-                    Text(viewModel.awayTeamScore)
-                        .font(.system(size: 48))
-                        .scaledToFill()
-                        .minimumScaleFactor(0.5)
-                        .lineLimit(1)
-                        .bold()
-                        .padding([.leading, .trailing])
-                }
-                VStack(alignment: .center, spacing: 4) {
-                    LogoView(teamID: viewModel.awayTeamID,
-                             teamAbbreviation: viewModel.awayTeamAbbreviation)
-                    Text(viewModel.awayTeamName)
-                        .font(.subheadline)
-                        .bold()
-                        .multilineTextAlignment(.center)
-                    Text(viewModel.awayTeamRecord)
+                
+                HStack(alignment: .center) {
+                    VStack(alignment: .center, spacing: 4) {
+                        LogoView(teamID: viewModel.homeTeamID,
+                                 teamAbbreviation: viewModel.homeTeamAbbreviation);
+                        Text(viewModel.homeTeamName)
+                            .font(.subheadline)
+                            .bold()
+                            .multilineTextAlignment(.center)
+                        Text(viewModel.homeTeamRecord)
+                            .font(.caption2)
+                    }
+                    
+                    VStack() {
+                        Text(viewModel.homeTeamScore)
+                            .font(.system(size: 48))
+                            .scaledToFill()
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(1)
+                            .bold()
+                            .padding([.leading, .trailing])
+                        
+                    }
+                    
+                    Text("FINAL")
                         .font(.caption2)
+                        .foregroundColor(.secondary)
+                    
+                    VStack() {
+                        Text(viewModel.awayTeamScore)
+                            .font(.system(size: 48))
+                            .scaledToFill()
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(1)
+                            .bold()
+                            .padding([.leading, .trailing])
+                    }
+                    VStack(alignment: .center, spacing: 4) {
+                        LogoView(teamID: viewModel.awayTeamID,
+                                 teamAbbreviation: viewModel.awayTeamAbbreviation)
+                        Text(viewModel.awayTeamName)
+                            .font(.subheadline)
+                            .bold()
+                            .multilineTextAlignment(.center)
+                        Text(viewModel.awayTeamRecord)
+                            .font(.caption2)
+                    }
                 }
-                Spacer()
             }
+            .frame(maxWidth: .infinity)
+            .frame(height: 150)
             .padding(.vertical)
             .background()
             .cornerRadius(16)
