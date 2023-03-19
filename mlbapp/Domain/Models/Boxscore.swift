@@ -36,6 +36,8 @@ struct Boxscore: BoxscoreProtocol {
         let pitchers: [Pitcher]
         let stats: BattingStats
         let notes: [String]
+        let battingDetais: [GameDetail]
+        let fieldingDetails: [GameDetail]
     }
     
     struct BattingStats {
@@ -63,6 +65,11 @@ struct Boxscore: BoxscoreProtocol {
         let seasonLosses: Int?
         let didWin: Bool
         let didLose: Bool
+    }
+    
+    struct GameDetail: Hashable {
+        let title: String
+        let detail: String
     }
     
     let home: Team

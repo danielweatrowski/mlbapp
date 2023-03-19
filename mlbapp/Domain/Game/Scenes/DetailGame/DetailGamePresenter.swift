@@ -16,7 +16,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
 
     @MainActor
     func presentGame(response: DetailGame.DetailGame.Response) {
-        var game = response.game
+        let game = response.game
         
         guard let homeTeamRecord = game.homeTeam.record, let awayTeamRecord = game.awayTeam.record else {
             // TODO: Present error
@@ -41,12 +41,19 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         let decisionsViewModel = formatDecisions(boxscore: game.boxscore)
         
         let boxscoreViewModel = formatBoxscore(boxscore: game.boxscore, homeTeamAbbreviation: game.homeTeam.abbreviation, awayTeamAbbreviation: game.awayTeam.abbreviation)
+        
         DispatchQueue.main.async {
             viewModel.navigationTitle = "\(game.awayTeam.abbreviation) @ \(game.homeTeam.abbreviation)"
             viewModel.headerViewModel = headerViewModel
             viewModel.lineScoreViewModel = lineScoreViewModel
             viewModel.decisionsViewModel = decisionsViewModel
             viewModel.boxscoreViewModel = boxscoreViewModel
+            viewModel.homeTeamBattingDetails = game.boxscore?.home.battingDetais
+            viewModel.awayTeamBattingDetails = game.boxscore?.away.battingDetais
+            viewModel.homeTeamFieldingDetails = game.boxscore?.home.fieldingDetails
+            viewModel.awayTeamFieldingDetails = game.boxscore?.away.fieldingDetails
+            viewModel.homeTeamAbbreviation = game.homeTeam.abbreviation
+            viewModel.awayTeamAbbreviation = game.awayTeam.abbreviation
         }
     }
     

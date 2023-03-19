@@ -85,10 +85,20 @@ struct BoxscoreAdapter {
                                                  leftOnBase: h_teamBattingStats.leftOnBase,
                                                  avg: h_teamBattingStats.avg)
         
+        let h_battingDetails = boxscore.home.battingInfo.map({
+            Boxscore.GameDetail(title: $0.label, detail: $0.value)
+        })
+        
+        let h_fieldingDetails = boxscore.home.fieldingInfo.map({
+            Boxscore.GameDetail(title: $0.label, detail: $0.value)
+        })
+        
         let boxHomeTeam = Boxscore.Team(batters: boxHomeBatters,
                                         pitchers: homePitchers,
                                         stats: boxHomeStats,
-                                        notes: boxscore.home.notes)
+                                        notes: boxscore.home.notes,
+                                        battingDetais: h_battingDetails,
+                                        fieldingDetails: h_fieldingDetails)
         
         let boxAwayBatters = a_team.batters.map { playerDTO in
             
@@ -153,12 +163,22 @@ struct BoxscoreAdapter {
                                                  leftOnBase: a_teamBattingStats.leftOnBase,
                                                  avg: a_teamBattingStats.avg)
         
+        let a_battingDetails = boxscore.away.battingInfo.map({
+            Boxscore.GameDetail(title: $0.label, detail: $0.value)
+        })
+        let a_fieldingDetails = boxscore.away.fieldingInfo.map({
+            Boxscore.GameDetail(title: $0.label, detail: $0.value)
+        })
+        
         let boxAwayTeam = Boxscore.Team(batters: boxAwayBatters,
                                         pitchers: awayPitchers,
                                         stats: boxAwayStats,
-                                        notes: boxscore.away.notes)
+                                        notes: boxscore.away.notes,
+                                        battingDetais: a_battingDetails,
+                                        fieldingDetails: a_fieldingDetails)
         
-        return Boxscore(home: boxHomeTeam, away: boxAwayTeam)
+        return Boxscore(home: boxHomeTeam,
+                        away: boxAwayTeam)
     }
     
 }

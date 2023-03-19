@@ -23,22 +23,26 @@ struct DetailGameView: View {
             
             VStack {
                 
-                VStack {
-                    LinescoreGridView(viewModel: $viewModel.lineScoreViewModel)
-                    //Divider()
-                    DecisionsInfoView(viewModel: $viewModel.decisionsViewModel)
-                        .padding(.top)
+                ListSection(title: nil) {
+                    VStack {
+                        LinescoreGridView(viewModel: $viewModel.lineScoreViewModel)
+                        //Divider()
+                        DecisionsInfoView(viewModel: $viewModel.decisionsViewModel)
+                            .padding(.top)
+                    }
                 }
-                .padding()
-                .background()
-                .cornerRadius(16)
             
-                
-                BoxscoreGridView(viewModel: $viewModel.boxscoreViewModel, teamBoxSelection: $teamBoxSelection)
-                    .padding()
-                    .background()
-                    .cornerRadius(16)
-                
+                ListSection(title: nil) {
+                    BoxscoreGridView(viewModel: $viewModel.boxscoreViewModel, teamBoxSelection: $teamBoxSelection)
+                }
+                ListSection(title: "Batting") {
+                    battingDetailsView
+                }
+                ListSection(title: "Fielding") {
+                    fieldingDetailsView
+                }
+
+                /*
                 VStack {
                     
                     HStack {
@@ -59,7 +63,7 @@ struct DetailGameView: View {
                 }
                 .padding()
                 .background()
-                .cornerRadius(16)
+                .cornerRadius(16) */
                 
             }
             .padding([.leading, .trailing])
@@ -78,6 +82,54 @@ struct DetailGameView: View {
         .background(Color(uiColor: .systemGroupedBackground))
         .onAppear {
             interactor.loadGame()
+        }
+    }
+    
+    @ViewBuilder
+    var battingDetailsView: some View {
+        let teamDetails = teamBoxSelection == 0
+        ? viewModel.homeTeamBattingDetails
+        : viewModel.awayTeamBattingDetails
+        
+        if let details = teamDetails {
+            VStack(alignment: .leading, spacing: 12) {
+                ForEach(details, id: \.self) { detail in
+                    Group {
+                        Text(detail.title)
+                            .bold()
+                            .font(.subheadline)
+                        + Text(" \(detail.detail)")
+                            .font(.subheadline)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+        } else {
+            EmptyView()
+        }
+    }
+    
+    @ViewBuilder
+    var fieldingDetailsView: some View {
+        let teamDetails = teamBoxSelection == 0
+        ? viewModel.homeTeamFieldingDetails
+        : viewModel.awayTeamFieldingDetails
+        
+        if let details = teamDetails {
+            VStack(alignment: .leading, spacing: 12) {
+                ForEach(details, id: \.self) { detail in
+                    Group {
+                        Text(detail.title)
+                            .bold()
+                            .font(.subheadline)
+                        + Text(" \(detail.detail)")
+                            .font(.subheadline)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+        } else {
+            EmptyView()
         }
     }
 }
