@@ -77,7 +77,7 @@ struct BoxscoreBuilder: JSONBuilder {
         guard let homeTeamStatsData = homeBoxData["teamStats"] as? [String : Any] else {
             throw SwiftMLBError.keyNotFound(key: "livedata.boxscore.teams.home.teamStats")
         }
-        guard let awayTeamStatsData = homeBoxData["teamStats"] as? [String : Any] else {
+        guard let awayTeamStatsData = awayBoxData["teamStats"] as? [String : Any] else {
             throw SwiftMLBError.keyNotFound(key: "livedata.boxscore.teams.away.teamStats")
         }
         guard let homeInfo = homeBoxData["info"] as? [[String : Any]] else {
@@ -90,6 +90,7 @@ struct BoxscoreBuilder: JSONBuilder {
         // home info
         var homeBattingInfoList = [[String: Any]]()
         var homeFieldingInfoList = [[String: Any]]()
+        var homeBaseRunningInfoList = [[String: Any]]()
 
         for infoDict in homeInfo {
             if let title = infoDict["title"] as? String, let fieldList = infoDict["fieldList"] as? [[String: Any]] {
@@ -97,6 +98,8 @@ struct BoxscoreBuilder: JSONBuilder {
                     homeBattingInfoList = fieldList
                 } else if title == "FIELDING" {
                     homeFieldingInfoList = fieldList
+                } else if title == "BASERUNNING" {
+                    homeBaseRunningInfoList = fieldList
                 }
             }
         }
@@ -104,13 +107,15 @@ struct BoxscoreBuilder: JSONBuilder {
         // away info
         var awayBattingInfoList = [[String: Any]]()
         var awayFieldingInfoList = [[String: Any]]()
-
+        var awayBaseRunningInfoList = [[String: Any]]()
         for infoDict in awayInfo {
             if let title = infoDict["title"] as? String, let fieldList = infoDict["fieldList"] as? [[String: Any]] {
                 if title == "BATTING" {
                     awayBattingInfoList = fieldList
                 } else if title == "FIELDING" {
                     awayFieldingInfoList = fieldList
+                } else if title == "BASERUNNING" {
+                    awayBaseRunningInfoList = fieldList
                 }
             }
         }
@@ -229,7 +234,8 @@ struct BoxscoreBuilder: JSONBuilder {
             "stats": homeTeamStatsData,
             "notes": homeNotes,
             "battingInfo": homeBattingInfoList,
-            "fieldingInfo": homeFieldingInfoList
+            "fieldingInfo": homeFieldingInfoList,
+            "baserunningInfo": homeBaseRunningInfoList
         ]
         
         let awayJSON: [String: Any] = [
@@ -240,7 +246,8 @@ struct BoxscoreBuilder: JSONBuilder {
             "stats": awayTeamStatsData,
             "notes": awayNotes,
             "battingInfo": awayBattingInfoList,
-            "fieldingInfo": awayFieldingInfoList
+            "fieldingInfo": awayFieldingInfoList,
+            "baserunningInfo": awayBaseRunningInfoList
         ]
         
         let boxData: [String: Any] = [

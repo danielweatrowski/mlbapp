@@ -35,9 +35,11 @@ struct Boxscore: BoxscoreProtocol {
         let batters: [Batter]
         let pitchers: [Pitcher]
         let stats: BattingStats
+        let pitchingStats: PitchingStats
         let notes: [String]
         let battingDetais: [GameDetail]
         let fieldingDetails: [GameDetail]
+        let baseRunningDetails: [GameDetail]
     }
     
     struct BattingStats {

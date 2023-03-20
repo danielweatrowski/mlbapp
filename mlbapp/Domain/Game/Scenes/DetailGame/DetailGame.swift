@@ -20,10 +20,13 @@ enum DetailGame {
         @Published var lineScoreViewModel: LinescoreGridViewModel?
         @Published var decisionsViewModel: DecisionsInfoViewModel?
         @Published var boxscoreViewModel: BoxscoreViewModel?
+        @Published var pitchingBoxscoreViewModel: BoxscoreViewModel?
         @Published var homeTeamBattingDetails: [Boxscore.GameDetail]?
         @Published var awayTeamBattingDetails: [Boxscore.GameDetail]?
         @Published var homeTeamFieldingDetails: [Boxscore.GameDetail]?
         @Published var awayTeamFieldingDetails: [Boxscore.GameDetail]?
+        @Published var homeTeamRunningDetails: [Boxscore.GameDetail]?
+        @Published var awayTeamRunningDetails: [Boxscore.GameDetail]?
         
         init(gameID: Int) {
             self.gameID = gameID

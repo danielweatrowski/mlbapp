@@ -47,7 +47,6 @@ struct GameBuilder: JSONBuilder {
             throw SwiftMLBError.keyNotFound(key: "gameData.players")
         }
         
-        // TODO: Parse players dictionary into array of `MLBPlayer`
         var playersJSON = [[String: Any]]()
         for (_, playerDict) in playerData {
             playersJSON.append(playerDict)

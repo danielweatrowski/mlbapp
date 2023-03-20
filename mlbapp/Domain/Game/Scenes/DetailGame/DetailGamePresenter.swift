@@ -40,7 +40,8 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         
         let decisionsViewModel = formatDecisions(boxscore: game.boxscore)
         
-        let boxscoreViewModel = formatBoxscore(boxscore: game.boxscore, homeTeamAbbreviation: game.homeTeam.abbreviation, awayTeamAbbreviation: game.awayTeam.abbreviation)
+        let boxscoreViewModel = formatBatterBoxscore(boxscore: game.boxscore, homeTeamAbbreviation: game.homeTeam.abbreviation, awayTeamAbbreviation: game.awayTeam.abbreviation)
+        let pitchingBoxscoreViewModel = formatPitcherBoxscore(boxscore: game.boxscore, homeTeamAbbreviation: game.homeTeam.abbreviation, awayTeamAbbreviation: game.awayTeam.abbreviation)
         
         DispatchQueue.main.async {
             viewModel.navigationTitle = "\(game.awayTeam.abbreviation) @ \(game.homeTeam.abbreviation)"
@@ -48,10 +49,13 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
             viewModel.lineScoreViewModel = lineScoreViewModel
             viewModel.decisionsViewModel = decisionsViewModel
             viewModel.boxscoreViewModel = boxscoreViewModel
+            viewModel.pitchingBoxscoreViewModel = pitchingBoxscoreViewModel
             viewModel.homeTeamBattingDetails = game.boxscore?.home.battingDetais
             viewModel.awayTeamBattingDetails = game.boxscore?.away.battingDetais
             viewModel.homeTeamFieldingDetails = game.boxscore?.home.fieldingDetails
             viewModel.awayTeamFieldingDetails = game.boxscore?.away.fieldingDetails
+            viewModel.homeTeamRunningDetails = game.boxscore?.home.baseRunningDetails
+            viewModel.awayTeamRunningDetails = game.boxscore?.away.baseRunningDetails
             viewModel.homeTeamAbbreviation = game.homeTeam.abbreviation
             viewModel.awayTeamAbbreviation = game.awayTeam.abbreviation
         }
@@ -72,7 +76,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                              losingPitcherERA: losingPitcher.stats.era ?? "--")
     }
     
-    private func formatBoxscore(boxscore: Boxscore?, homeTeamAbbreviation: String, awayTeamAbbreviation: String) -> BoxscoreViewModel? {
+    private func formatBatterBoxscore(boxscore: Boxscore?, homeTeamAbbreviation: String, awayTeamAbbreviation: String) -> BoxscoreViewModel? {
         guard let boxscore = boxscore else { return nil }
         
         let batters = [boxscore.home.batters, boxscore.away.batters]
@@ -125,95 +129,53 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                  awayTotalsRow: totals[1])
     }
     
-    /*
-    private func formatBoxscore(boxscore: MLBBoxscore, homeTeamAbbreviation: String, awayTeamAbbreviation: String) -> BoxscoreViewModel {
-        var homeBoxItems = [BoxscoreViewModel.Batter]()
-        var awayBoxBatters = [BoxscoreViewModel.Batter]()
+    private func formatPitcherBoxscore(boxscore: Boxscore?, homeTeamAbbreviation: String, awayTeamAbbreviation: String) -> BoxscoreViewModel? {
+        guard let boxscore = boxscore else { return nil }
         
-        for batter in boxscore.homeBatters {
-            let battingOrder = Int(batter.battingOrder ?? "100") ?? 100
-            var name = batter.fullName
-            
-            if let note = batter.stats?.note {
-                name = note + name
+        let pitchers = [boxscore.home.pitchers, boxscore.away.pitchers]
+        let teamRows = pitchers.map { teamPitchers in
+            return teamPitchers.map { pitcher in
+                                
+                return BoxscoreRowViewModel(title: pitcher.boxscoreName,
+                                            subtitle: "P",
+                                            indentTitle: false,
+                                            item0: pitcher.stats.inningsPitched ?? "-",
+                                            item1: pitcher.stats.hits.formattedStat(),
+                                            item2: pitcher.stats.runs.formattedStat(),
+                                            item3: pitcher.stats.earnedRuns.formattedStat(),
+                                            item4: pitcher.stats.baseOnBalls.formattedStat(),
+                                            item5: pitcher.stats.strikeOuts.formattedStat(),
+                                            item6: pitcher.stats.homeRuns.formattedStat(),
+                                            item7: pitcher.stats.era ?? "-")
             }
-            
-            let boxscoreItem: BoxscoreViewModel.Batter = BoxscoreViewModel.Batter(name: name,
-                                                      positionAbbreviation: batter.positionAbbreviation,
-                                                      atBats: String(batter.stats?.atBats ?? 0),
-                                                      runs: String(batter.stats?.runs ?? 0),
-                                                      hits: String(batter.stats?.hits ?? 0),
-                                                      runsBattedIn: String(batter.stats?.rbi ?? 0),
-                                                      baseOnBalls: String(batter.stats?.baseOnBalls ?? 0),
-                                                      strikeOuts: String(batter.stats?.strikeOuts ?? 0),
-                                                      leftOnBase: String(batter.stats?.leftOnBase ?? 0),
-                                                      average: batter.stats?.avg ?? "xxx",
-                                                      substitution: battingOrder % 100 != 0)
-            homeBoxItems.append(boxscoreItem)
         }
         
-        let hBattingTotals = boxscore.homeBattingTotals
-        let hBattingTotalsViewModel = BoxscoreViewModel.buildBattingTotals(atBats: String(hBattingTotals.atBats),
-                                                                           runs: String(hBattingTotals.runs),
-                                                                           hits: String(hBattingTotals.hits),
-                                                                           runsBattedIn: String(hBattingTotals.rbi),
-                                                                           baseOnBalls: String(hBattingTotals.baseOnBalls),
-                                                                           strikeOuts: String(hBattingTotals.strikeOuts),
-                                                                           leftOnBase: String(hBattingTotals.leftOnBase))
-        
-        for batter in boxscore.awayBatters {
-            let battingOrder = Int(batter.battingOrder ?? "100") ?? 100
-            var name = batter.fullName
-            
-            if let note = batter.stats?.note {
-                name = note + name
-            }
-            
-            let boxscoreItem: BoxscoreViewModel.Batter = BoxscoreViewModel.Batter(name: name,
-                                                      positionAbbreviation: batter.positionAbbreviation,
-                                                      atBats: String(batter.stats?.atBats ?? 0),
-                                                      runs: String(batter.stats?.runs ?? 0),
-                                                      hits: String(batter.stats?.hits ?? 0),
-                                                      runsBattedIn: String(batter.stats?.rbi ?? 0),
-                                                      baseOnBalls: String(batter.stats?.baseOnBalls ?? 0),
-                                                      strikeOuts: String(batter.stats?.strikeOuts ?? 0),
-                                                      leftOnBase: String(batter.stats?.leftOnBase ?? 0),
-                                                      average: batter.stats?.avg ?? "xxx",
-                                                      substitution: battingOrder % 100 != 0)
-            awayBoxBatters.append(boxscoreItem)
-        }
-        
-        let aBattingTotals = boxscore.awayBattingTotals
-        let aBattingTotalsViewModel = BoxscoreViewModel.buildBattingTotals(atBats: String(aBattingTotals.atBats),
-                                                                           runs: String(aBattingTotals.runs),
-                                                                           hits: String(aBattingTotals.hits),
-                                                                           runsBattedIn: String(aBattingTotals.rbi),
-                                                                           baseOnBalls: String(aBattingTotals.baseOnBalls),
-                                                                           strikeOuts: String(aBattingTotals.strikeOuts),
-                                                                           leftOnBase: String(aBattingTotals.leftOnBase))
-        
-        let homeBattingInfo = boxscore.homeBattingInfo.map({
-            BoxscoreViewModel.Info(title: $0.label, description: $0.value)
+        let teamStats = [boxscore.home.pitchingStats, boxscore.away.pitchingStats]
+        let totals = teamStats.map({
+            BoxscoreRowViewModel(title: "Totals",
+                                 subtitle: "",
+                                 boldItems: true,
+                                 item0: $0.inningsPitched ?? "-",
+                                 item1: $0.hits.formattedStat(),
+                                 item2: $0.runs.formattedStat(),
+                                 item3: $0.earnedRuns.formattedStat(),
+                                 item4: $0.baseOnBalls.formattedStat(),
+                                 item5: $0.strikeOuts.formattedStat(),
+                                 item6: $0.homeRuns.formattedStat(),
+                                 item7: $0.era ?? "")
         })
         
-        let homeFieldingInfo = boxscore.homeFieldingInfo.map({
-            BoxscoreViewModel.Info(title: $0.label, description: $0.value)
-        })
         
-        let boxscoreViewModel = BoxscoreViewModel(homeTeamAbbreviation: homeTeamAbbreviation,
-                                                  homeNotes: boxscore.homeNotes,
-                                                  homeBatters: homeBoxItems,
-                                                  homeBattingTotals: hBattingTotalsViewModel,
-                                                  awayTeamAbbreviation: awayTeamAbbreviation,
-                                                  awayNotes: boxscore.awayNotes,
-                                                  awayBatters: awayBoxBatters,
-                                                  awayBattingTotals: aBattingTotalsViewModel,
-                                                  homeBattingInfo: homeBattingInfo,
-                                                  homeFieldingInfo: homeFieldingInfo)
-        return boxscoreViewModel
+        return BoxscoreViewModel(homeTeamAbbreviation: homeTeamAbbreviation,
+                                 homeNotes: [],
+                                 homeRows: teamRows[0],
+                                 homeTotalsRow: totals[0],
+                                 awayTeamAbbreviation: awayTeamAbbreviation,
+                                 awayNotes: [],
+                                 awayRows: teamRows[1],
+                                 awayTotalsRow: totals[1])
     }
-    
-    */
+   
     private func formatLineScore(for game: Game) -> LinescoreGridViewModel? {
         
         guard let linescore = game.linescore else {

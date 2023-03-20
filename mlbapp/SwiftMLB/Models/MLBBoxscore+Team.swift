@@ -13,10 +13,10 @@ extension MLBBoxscore {
         let pitchers: [Player]
         let bench: [Player]
         let bullpen: [Player]
-        
         let stats: MLBStatistics.TotalStats
         let notes: [String]
         let battingInfo: [BoxscoreInfo]
         let fieldingInfo: [BoxscoreInfo]
+        let baserunningInfo: [BoxscoreInfo]
     }
 }

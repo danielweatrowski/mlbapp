@@ -18,7 +18,9 @@ struct BoxscoreAdapter {
         let h_team = boxscore.home
         let a_team = boxscore.away
         let h_teamBattingStats = h_team.stats.batting
+        let h_teamPitchingStats = h_team.stats.pitching
         let a_teamBattingStats = a_team.stats.batting
+        let a_teamPitchingStats = a_team.stats.pitching
         
         let boxHomeBatters = h_team.batters.map { playerDTO in
             
@@ -85,6 +87,19 @@ struct BoxscoreAdapter {
                                                  leftOnBase: h_teamBattingStats.leftOnBase,
                                                  avg: h_teamBattingStats.avg)
         
+        let boxHomePitchingStats = Boxscore.PitchingStats(inningsPitched: h_teamPitchingStats.inningsPitched,
+                                                          hits: h_teamPitchingStats.hits,
+                                                          runs: h_teamPitchingStats.runs,
+                                                          earnedRuns: h_teamPitchingStats.earnedRuns,
+                                                          baseOnBalls: h_teamPitchingStats.baseOnBalls,
+                                                          strikeOuts: h_teamPitchingStats.strikeOuts,
+                                                          homeRuns: h_teamPitchingStats.homeRuns,
+                                                          era: h_teamPitchingStats.era,
+                                                          seasonWins: nil,
+                                                          seasonLosses: nil,
+                                                          didWin: false,
+                                                          didLose: false)
+        
         let h_battingDetails = boxscore.home.battingInfo.map({
             Boxscore.GameDetail(title: $0.label, detail: $0.value)
         })
@@ -93,12 +108,17 @@ struct BoxscoreAdapter {
             Boxscore.GameDetail(title: $0.label, detail: $0.value)
         })
         
+        let h_runningDetails = boxscore.home.baserunningInfo.map({
+            Boxscore.GameDetail(title: $0.label, detail: $0.value)
+        })
         let boxHomeTeam = Boxscore.Team(batters: boxHomeBatters,
                                         pitchers: homePitchers,
                                         stats: boxHomeStats,
+                                        pitchingStats: boxHomePitchingStats,
                                         notes: boxscore.home.notes,
                                         battingDetais: h_battingDetails,
-                                        fieldingDetails: h_fieldingDetails)
+                                        fieldingDetails: h_fieldingDetails,
+                                        baseRunningDetails: h_runningDetails)
         
         let boxAwayBatters = a_team.batters.map { playerDTO in
             
@@ -163,19 +183,37 @@ struct BoxscoreAdapter {
                                                  leftOnBase: a_teamBattingStats.leftOnBase,
                                                  avg: a_teamBattingStats.avg)
         
+        let boxAwayPitchingStats = Boxscore.PitchingStats(inningsPitched: a_teamPitchingStats.inningsPitched,
+                                                          hits: a_teamPitchingStats.hits,
+                                                          runs: a_teamPitchingStats.runs,
+                                                          earnedRuns: a_teamPitchingStats.earnedRuns,
+                                                          baseOnBalls: a_teamPitchingStats.baseOnBalls,
+                                                          strikeOuts: a_teamPitchingStats.strikeOuts,
+                                                          homeRuns: a_teamPitchingStats.homeRuns,
+                                                          era: a_teamPitchingStats.era,
+                                                          seasonWins: nil,
+                                                          seasonLosses: nil,
+                                                          didWin: false,
+                                                          didLose: false)
+        
         let a_battingDetails = boxscore.away.battingInfo.map({
             Boxscore.GameDetail(title: $0.label, detail: $0.value)
         })
         let a_fieldingDetails = boxscore.away.fieldingInfo.map({
             Boxscore.GameDetail(title: $0.label, detail: $0.value)
         })
+        let a_runningDetails = boxscore.away.baserunningInfo.map({
+            Boxscore.GameDetail(title: $0.label, detail: $0.value)
+        })
         
         let boxAwayTeam = Boxscore.Team(batters: boxAwayBatters,
                                         pitchers: awayPitchers,
                                         stats: boxAwayStats,
+                                        pitchingStats: boxAwayPitchingStats,
                                         notes: boxscore.away.notes,
                                         battingDetais: a_battingDetails,
-                                        fieldingDetails: a_fieldingDetails)
+                                        fieldingDetails: a_fieldingDetails,
+                                        baseRunningDetails: a_runningDetails)
         
         return Boxscore(home: boxHomeTeam,
                         away: boxAwayTeam)

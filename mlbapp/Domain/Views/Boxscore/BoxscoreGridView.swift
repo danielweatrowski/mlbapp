@@ -41,21 +41,7 @@ struct BoxscoreGridView: View {
                     boxscore(for: viewModel)
                 }
                 
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Notes")
-                        .font(.subheadline)
-                        .bold()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    ForEach(selectedNotes, id: \.self) {
-                        Text($0)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                }
-                .padding(.top)
+                notes
             }
         }
         else {
@@ -64,10 +50,31 @@ struct BoxscoreGridView: View {
     }
     
     @ViewBuilder
+    private var notes: some View {
+        if !selectedNotes.isEmpty {
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Notes")
+                    .font(.subheadline)
+                    .bold()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                ForEach(selectedNotes, id: \.self) {
+                    Text($0)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+            .padding(.top)
+        }
+    }
+    
+    @ViewBuilder
     private func boxscore(for viewModel: BoxscoreViewModel) -> some View {
         Grid(verticalSpacing: 12) {
             
-            BoxscoreRowView(viewModel: viewModel.battingHeader(withTitle: selectedTeamAbbreviation + " Batting"))
+            BoxscoreRowView(viewModel: viewModel.battingHeader(withTitle: ""))
             
             Divider()
             
