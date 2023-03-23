@@ -34,7 +34,6 @@ struct SearchGameView: View {
     @State private var showingLookupGameResults: Bool = false
     
     var body: some View {
-        NavigationView {
 
             Form {
                 Section {
@@ -93,7 +92,6 @@ struct SearchGameView: View {
 
                 }
 
-            }
             .navigationTitle("Game Lookup")
             .alert(router.errorAlertTitle ?? "Something went wrong. Try again.", isPresented: $router.showingErrorAlert, actions: {})
 

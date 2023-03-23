@@ -22,7 +22,7 @@ struct LinescoreGridView: View {
         if let viewModel = viewModel {
             
             if interfaceSize.portrait {
-                ScrollView(.horizontal) {
+                ScrollView(.horizontal, showsIndicators: false) {
                     linescoreGrid(with: viewModel)
                 }
             } else {

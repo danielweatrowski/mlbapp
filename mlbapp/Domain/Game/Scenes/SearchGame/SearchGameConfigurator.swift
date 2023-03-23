@@ -9,7 +9,7 @@ import SwiftUI
 
 extension SearchGameView {
     // TODO: Remove
-    func configureView() -> some View {
+    func configureView() -> SearchGameView {
         var view = self
         let interactor = SearchGameInteractor()
         let presenter = SearchGamePresenter()

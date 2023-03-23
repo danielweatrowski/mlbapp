@@ -34,7 +34,7 @@ protocol MLBPlayerProtocol {
     
     var active: Bool { get set }
     
-    var mlbDebutDate: String { get set }
+    var mlbDebutDate: String? { get set }
     
     var birthCity: String { get set }
     
@@ -76,7 +76,7 @@ struct MLBPlayer: MLBPlayerProtocol, Codable {
     
     var active: Bool
     
-    var mlbDebutDate: String
+    var mlbDebutDate: String?
     
     var primaryPosition: MLBPosition
 }

@@ -22,7 +22,7 @@ struct ListGameView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 0) {
-                ForEach(viewModel.rows, id: \.gameID) { row in
+                ForEach(viewModel.rows, id: \.id) { row in
                     
                     NavigationLink(destination: {
                         DetailGameConfigurator.configure(for: row.gameID)

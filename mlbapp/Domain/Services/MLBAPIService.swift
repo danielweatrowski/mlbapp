@@ -84,7 +84,7 @@ struct MLBAPIService: GameStoreProtocol {
                                currentAge: $1.currentAge,
                                birthDate: $1.birthDate,
                                isActive: $1.active,
-                               mlbDebutDate: $1.mlbDebutDate,
+                               mlbDebutDate: $1.mlbDebutDate ?? "",
                                primaryPositionCode: $1.primaryPosition.code)
         }
 

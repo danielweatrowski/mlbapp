@@ -11,10 +11,18 @@ import SwiftUI
 struct mlbappApp: App {
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                DetailGameConfigurator.configure(for: 661849)
-                    .environmentObject(MLBLogoService())
+            NavigationStack {
+                let router = SearchGameRouter()
+                SearchGameView(router: router)
+                    .configureView()
+
             }
+            .environmentObject(MLBLogoService())
+
+//            NavigationView {
+//                DetailGameConfigurator.configure(for: 661849)
+//                    .environmentObject(MLBLogoService())
+//            }
         }
 
     }

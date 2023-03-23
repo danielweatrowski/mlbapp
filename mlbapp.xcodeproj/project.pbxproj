@@ -31,6 +31,7 @@
 		66199FC5294451EA00FF0777 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66199FC4294451EA00FF0777 /* Dictionary+Extensions.swift */; };
 		661F20C32941A18B00D925C7 /* LineScoreViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661F20C22941A18B00D925C7 /* LineScoreViewItem.swift */; };
 		662001D029C7C8E70027727A /* ListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662001CF29C7C8E70027727A /* ListSection.swift */; };
+		662001D229C7F2C50027727A /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662001D129C7F2C50027727A /* Router.swift */; };
 		66291E26290783000055DC93 /* SearchGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66291E25290783000055DC93 /* SearchGameView.swift */; };
 		66291E2F2908DDF10055DC93 /* SearchGameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66291E2E2908DDF10055DC93 /* SearchGameInteractor.swift */; };
 		66291E312908DE6F0055DC93 /* SearchGamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66291E302908DE6F0055DC93 /* SearchGamePresenter.swift */; };
@@ -150,6 +151,7 @@
 		66199FC4294451EA00FF0777 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		661F20C22941A18B00D925C7 /* LineScoreViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineScoreViewItem.swift; sourceTree = "<group>"; };
 		662001CF29C7C8E70027727A /* ListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSection.swift; sourceTree = "<group>"; };
+		662001D129C7F2C50027727A /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		66291E25290783000055DC93 /* SearchGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGameView.swift; sourceTree = "<group>"; };
 		66291E2E2908DDF10055DC93 /* SearchGameInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGameInteractor.swift; sourceTree = "<group>"; };
 		66291E302908DE6F0055DC93 /* SearchGamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGamePresenter.swift; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 			children = (
 				66ADAC6E298DF5CC004DD82F /* InterfaceSize.swift */,
 				66D4D07C29BEB46100F4AB26 /* CoreSVG.swift */,
+				662001D129C7F2C50027727A /* Router.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 				66C0C4B929B2B82F00C42F11 /* Division.swift in Sources */,
 				66D4D07429BE854300F4AB26 /* SVGView.swift in Sources */,
 				66EBDF2B29188C7D00BEF1A5 /* DetailGameInteractor.swift in Sources */,
+				662001D229C7F2C50027727A /* Router.swift in Sources */,
 				66291E2F2908DDF10055DC93 /* SearchGameInteractor.swift in Sources */,
 				66C3CEDC29590A6F001E6CC7 /* SwiftMLB+PlayerData.swift in Sources */,
 				6617F7F72946883F00BC1BBF /* DetailPlayerViewModel.swift in Sources */,

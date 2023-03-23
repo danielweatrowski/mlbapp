@@ -45,7 +45,7 @@ struct LogoView: View {
     var logo: some View {
         if let logoData = viewModel.logoData {
             SVGView(data: logoData)
-                .aspectRatio(viewModel.team.logoAspectRatio, contentMode: .fit)
+                .scaledToFit()//.aspectRatio(viewModel.team.logoAspectRatio, contentMode: .fit)
                 .frame(width: size.width, height: size.height)
         } else {
             RoundedRectangle(cornerRadius: 12)

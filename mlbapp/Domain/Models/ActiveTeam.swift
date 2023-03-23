@@ -184,7 +184,7 @@ enum ActiveTeam: Int, CaseIterable, Identifiable {
         case .mets: return 0.79
         case .padres: return 0.8
         case .dodgers: return 0.76
-        default: return 0.76
+        default: return 1
         }
     }
 }

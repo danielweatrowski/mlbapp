@@ -11,7 +11,7 @@ extension MLBBoxscore {
     struct Player: Codable {
         let id: Int
         let fullName: String
-        let jerseyNumber: String
+        let jerseyNumber: String?
         let battingOrder: String?
         let seasonStats: MLBStatistics.TotalStats
         let stats: MLBStatistics.GameStats?

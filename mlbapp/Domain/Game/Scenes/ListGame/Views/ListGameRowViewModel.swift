@@ -8,6 +8,7 @@
 import Foundation
 
 struct ListGameRowViewModel {
+    let id = UUID()
     let gameID: Int
     let gameDate: String
     let gameVenueName: String
