@@ -13,23 +13,8 @@ protocol SearchGameDisplayLogic {
 
 struct SearchGameView: View {
     var interactor: SearchGameBusinessLogic?
-    @ObservedObject var router: SearchGameRouter
-    
-    @State private var selectedStartDate = Date()
-    @State private var selectedEndDate = Date()
-    
-    //@State private var selectedHomeTeam: MLBTeam = MLBTeam.any
-    @State private var selectedHomeTeamID: Int = .max
-
-    //@State private var selectedAwayTeam: MLBTeam = MLBTeam.any
-    @State private var selectedAwayTeamID: Int = ActiveTeam.any.id
-
-    @State private var showingStartDatePicker = false
-    @State private var showingEndDatePicker = false
-    
-    @State private var hideScores = false
-    @State private var isRegularSeason = true
-    
+    @StateObject var viewModel: SearchGame.ViewModel
+    @EnvironmentObject var router: Router
     // Navigation
     @State private var showingLookupGameResults: Bool = false
     
@@ -37,14 +22,14 @@ struct SearchGameView: View {
 
             Form {
                 Section {
-                    Picker(selection: $selectedHomeTeamID,
+                    Picker(selection: $viewModel.selectedHomeTeamID,
                            label: Text("Team")) {
                         ForEach(ActiveTeam.allTeams, id: \.id) {
                             Text($0.name)
                                 .tag($0.id)
                         }
                     }
-                    Picker(selection: $selectedAwayTeamID,
+                    Picker(selection: $viewModel.selectedAwayTeamID,
                            label: Text("Opponent")) {
                         ForEach(ActiveTeam.allCases, id: \.id) {
                             Text($0.name)
@@ -56,72 +41,58 @@ struct SearchGameView: View {
                 }
                 
                 Section {
-                    DatePicker(selection: $selectedStartDate,
+                    DatePicker(selection: $viewModel.selectedStartDate,
                                displayedComponents: .date) {
                         Text("Start Date")
                     }
 
-                    DatePicker(selection: $selectedEndDate,
+                    DatePicker(selection: $viewModel.selectedEndDate,
                                displayedComponents: .date) {
                         Text("End Date")
-                    }
-                    
-                    Toggle(isOn: $hideScores) {
-                        Text("Hide Scores")
-                    }
-                    
-                    Toggle(isOn: $isRegularSeason) {
-                        Text("Regular Season Only")
                     }
                     
                 } header: {
                     Text("Options")
                 }
                 Section {
-                    HStack() {
-                        Spacer()
-                        Button("Search") {
-                            createGameSearch()
-                        }
-                        .background(
-                            // place navigation link in background of button so it's hidden from user
-                            NavigationLink(destination: router.listGameDestination, isActive: $router.routingToListGame) { EmptyView() }
-                        )
-                        Spacer()
+                    Button("Search") {
+                        createGameSearch()
                     }
-
                 }
+                .navigationTitle("Game Lookup")
 
-            .navigationTitle("Game Lookup")
-            .alert(router.errorAlertTitle ?? "Something went wrong. Try again.", isPresented: $router.showingErrorAlert, actions: {})
-
+//                .alert(router.errorAlertTitle ?? "Something went wrong. Try again.", isPresented: $router.showingErrorAlert, actions: {})
+        }
+        .onReceive(viewModel.$searchResults) { results in
+            guard let results = results, !results.isEmpty else {
+                return
+            }
+            router.path.append(.gameList(results: results))
         }
     }
     
     private func createGameSearch() {
-        let request = SearchGame.Request(homeTeamID: selectedHomeTeamID,
-                                         awayTeamID: selectedAwayTeamID,
-                                         startDate: selectedStartDate,
-                                         endDate: selectedEndDate)
+        let request = SearchGame.Request(homeTeamID: viewModel.selectedHomeTeamID,
+                                         awayTeamID: viewModel.selectedAwayTeamID,
+                                         startDate: viewModel.selectedStartDate,
+                                         endDate: viewModel.selectedEndDate)
         
         interactor?.createSearchGame(request: request)
     }
 }
 
-extension SearchGameView: SearchGameDisplayLogic {
-    func displayLookupError(error: SearchGame.LookupGameError) {
-        router.showErrorAlert(error: error)
+extension SearchGameView {
+    static func configure() -> Self {
+        let viewModel = SearchGame.ViewModel()
+        let presenter = SearchGamePresenter(viewModel: viewModel)
+        let interactor = SearchGameInteractor(presenter: presenter)
+        
+        return SearchGameView(interactor: interactor, viewModel: viewModel)
     }
-    
-    func displayLookupResults(viewModel: ListGame.ViewModel) {
-        router.routeToListGame(viewModel: viewModel)
-    }
-    
 }
 
 struct GameSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        let router = SearchGameRouter()
-        SearchGameView(router: router)
+        SearchGameView.configure()
     }
 }

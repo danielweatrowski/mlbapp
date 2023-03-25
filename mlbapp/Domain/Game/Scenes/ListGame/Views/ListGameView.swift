@@ -10,10 +10,9 @@ import SwiftUI
 
 struct ListGameView: View {
     
-    var viewModel: ListGame.ViewModel
-    
+    @StateObject var viewModel: ListGame.ViewModel
+    @EnvironmentObject var router: Router
     var interactor: ListGameBusinessLogic?
-    @ObservedObject var router: ListGameRouter
     
     var columns = [
         GridItem(.flexible(), spacing: 0)
@@ -21,29 +20,29 @@ struct ListGameView: View {
     
     var body: some View {
         ScrollView {
+            gameList
+        }
+        .background(
+            Color(uiColor: .systemGroupedBackground)
+        )
+        .navigationTitle("Lookup Results")
+        .onAppear {
+            interactor?.loadGames()
+        }
+    }
+    
+    @ViewBuilder
+    var gameList: some View {
+        if let rows = viewModel.rows {
             LazyVGrid(columns: columns, spacing: 0) {
-                ForEach(viewModel.rows, id: \.id) { row in
+                ForEach(rows, id: \.id) { row in
                     
-                    NavigationLink(destination: {
-                        DetailGameConfigurator.configure(for: row.gameID)
-                        
-                    }, label: {
+                    NavigationLink(value: RouterDestination.gameDetail(gameID: row.gameID)) {
                         ListGameRow(viewModel: row)
                             .background()
                             .cornerRadius(20)
-                        
-                    })
+                    }
                     .buttonStyle(PlainButtonStyle())
-
-                
-//                    NavigationSplitView {
-//                        ListGameRow(viewModel: row)
-//                            .background()
-//                            .cornerRadius(20)
-//                    } detail: {
-//                        DetailGameConfigurator.configure(for: row.gameID)
-//                    }
-                    
                 }
                 .padding([
                     .bottom,
@@ -51,19 +50,26 @@ struct ListGameView: View {
                     .trailing
                 ])
             }
+        } else {
+            EmptyView()
         }
-        .background(
-            Color(uiColor: .systemGroupedBackground)
-        )
+    }
+}
 
-        .navigationTitle("Lookup Results")
+extension ListGameView {
+    static func configure(results: [GameSearch.Result]) -> Self {
+        let viewModel = ListGame.ViewModel()
+        let presenter = ListGamePresenter(viewModel: viewModel)
+        let interactor = ListGameInteractor(presenter: presenter, games: results)
+        
+        return ListGameView(viewModel: viewModel, interactor: interactor)
     }
 }
 
 struct ListGameView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let viewModel = ListGame.ViewModel(rows: [])
-        ListGameView(viewModel: viewModel, router: ListGameRouter())
+        let viewModel = ListGame.ViewModel()
+        ListGameView(viewModel: viewModel)
     }
 }

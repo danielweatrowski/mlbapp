@@ -18,7 +18,7 @@ protocol SearchGameDataStore {
 
 class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
     
-    var presenter: SearchGamePresentationLogic?
+    var presenter: SearchGamePresentationLogic
     var gameWorker = GameWorker(store: MLBAPIService())
 
     private var cancellable: AnyCancellable?
@@ -26,11 +26,15 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
     // Data store
     var lookupResults: [GameSearch.Result] = []
     
+    init(presenter: SearchGamePresentationLogic) {
+        self.presenter = presenter
+    }
+    
     @MainActor
     func createSearchGame(request: SearchGame.Request) {
         
         guard let homeTeamID = request.homeTeamID else {
-            presenter?.presentLookupError(error: .missingTeamID)
+            //presenter?.presentLookupError(error: .missingTeamID)
             return
         }
         
@@ -44,16 +48,17 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
                 let lookupResults = try await gameWorker.searchGame(with: parameters)
                 
                 guard lookupResults.isEmpty == false else {
-                    presenter?.presentLookupError(error: .noGamesFound)
+                    //presenter?.presentLookupError(error: .noGamesFound)
                     return
                 }
                 
                 // present games
                 let response = SearchGame.Response(results: lookupResults)
-                presenter?.presentLookupGames(response: response)
+                presenter.presentLookupGames(response: response)
                 self.lookupResults = lookupResults
             } catch {
-                presenter?.presentLookupError(error: .unknown(error.localizedDescription))
+                print(error.localizedDescription)
+                //presenter?.presentLookupError(error: .unknown(error.localizedDescription))
             }
         }
     }

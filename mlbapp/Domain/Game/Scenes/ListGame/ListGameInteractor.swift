@@ -8,10 +8,21 @@
 import Foundation
 import Combine
 
-protocol ListGameBusinessLogic {}
+protocol ListGameBusinessLogic {
+    func loadGames()
+}
 
-protocol ListGameDataStore {}
+protocol ListGameDataStore {
+    var games: [GameSearch.Result] { get set }
+}
 
-class ListGameInteractor: ListGameBusinessLogic, ListGameDataStore {
-
+struct ListGameInteractor: ListGameBusinessLogic, ListGameDataStore {
+    
+    var presenter: ListGamePresenter
+    var games: [GameSearch.Result]
+    
+    func loadGames() {
+        let response = ListGame.Response(results: games)
+        presenter.presentLookupGames(response: response)
+    }
 }

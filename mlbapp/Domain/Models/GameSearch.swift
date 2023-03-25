@@ -15,7 +15,16 @@ enum GameSearch {
         let endDate: Date
     }
     
-    struct Result {
+    struct Result: Hashable {
+        
+        static func == (lhs: GameSearch.Result, rhs: GameSearch.Result) -> Bool {
+            return lhs.id == rhs.id
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            return hasher.combine(id)
+        }
+        
         let id: Int
         let gameDate: Date
         let venueName: String

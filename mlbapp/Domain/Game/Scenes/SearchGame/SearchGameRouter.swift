@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+/*
 protocol SearchGameRoutingLogic {
     func routeToListGame(viewModel: ListGame.ViewModel) 
     func showErrorAlert(error: SearchGame.LookupGameError)
@@ -30,7 +30,7 @@ class SearchGameRouter: ObservableObject, SearchGameRoutingLogic, SearchGameData
     func routeToListGame(viewModel: ListGame.ViewModel) {
         
         let interactor = ListGameInteractor()
-        listGameDestination = ListGameView(viewModel: viewModel, interactor: interactor, router: ListGameRouter())
+        listGameDestination = ListGameView(viewModel: viewModel, interactor: interactor)
         
         routingToListGame = true
     }
@@ -43,3 +43,4 @@ class SearchGameRouter: ObservableObject, SearchGameRoutingLogic, SearchGameData
         }
     }
 }
+*/

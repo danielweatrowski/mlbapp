@@ -6,8 +6,22 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum SearchGame {
+    
+    class ViewModel: ObservableObject {
+        @Published var selectedStartDate = Date()
+        @Published var selectedEndDate = Date()
+        
+        @Published var selectedHomeTeamID: Int = .max
+        @Published var selectedAwayTeamID: Int = ActiveTeam.any.id
+
+        @Published var showingStartDatePicker = false
+        @Published var showingEndDatePicker = false
+        
+        @Published var searchResults: [GameSearch.Result]?
+    }
         
     struct Request {
         let homeTeamID: Int?

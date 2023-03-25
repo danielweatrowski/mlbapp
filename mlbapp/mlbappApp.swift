@@ -9,15 +9,17 @@ import SwiftUI
 
 @main
 struct mlbappApp: App {
+    
+    @StateObject var router = Router()
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                let router = SearchGameRouter()
-                SearchGameView(router: router)
-                    .configureView()
-
+            NavigationStack(path: $router.path) {
+                SearchGameView
+                    .configure()
+                    .withRouter()
             }
             .environmentObject(MLBLogoService())
+            .environmentObject(router)
 
 //            NavigationView {
 //                DetailGameConfigurator.configure(for: 661849)
