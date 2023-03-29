@@ -21,6 +21,9 @@ enum SearchGame {
         @Published var showingEndDatePicker = false
         
         @Published var searchResults: [GameSearch.Result]?
+        
+        @Published var didError: Bool = false
+        @Published var errorMessage: String?
     }
         
     struct Request {

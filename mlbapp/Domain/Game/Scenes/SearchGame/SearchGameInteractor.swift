@@ -34,7 +34,7 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
     func createSearchGame(request: SearchGame.Request) {
         
         guard let homeTeamID = request.homeTeamID else {
-            //presenter?.presentLookupError(error: .missingTeamID)
+            presenter.presentLookupError(error: .missingTeamID)
             return
         }
         
@@ -48,7 +48,7 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
                 let lookupResults = try await gameWorker.searchGame(with: parameters)
                 
                 guard lookupResults.isEmpty == false else {
-                    //presenter?.presentLookupError(error: .noGamesFound)
+                    presenter.presentLookupError(error: .noGamesFound)
                     return
                 }
                 
@@ -58,7 +58,7 @@ class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
                 self.lookupResults = lookupResults
             } catch {
                 print(error.localizedDescription)
-                //presenter?.presentLookupError(error: .unknown(error.localizedDescription))
+                presenter.presentLookupError(error: .unknown(error.localizedDescription))
             }
         }
     }

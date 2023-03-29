@@ -9,6 +9,7 @@ import Foundation
 
 protocol SearchGamePresentationLogic {
     func presentLookupGames(response: SearchGame.Response)
+    func presentLookupError(error: SearchGame.LookupGameError)
 }
 
 struct SearchGamePresenter: SearchGamePresentationLogic {
@@ -23,5 +24,9 @@ struct SearchGamePresenter: SearchGamePresentationLogic {
         }
     }
     
-    // TODO: Present Error
+    @MainActor
+    func presentLookupError(error: SearchGame.LookupGameError) {
+        viewModel.errorMessage = error.description
+        viewModel.didError = true
+    }
 }

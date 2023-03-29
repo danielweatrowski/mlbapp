@@ -60,14 +60,16 @@ struct SearchGameView: View {
                     }
                 }
                 .navigationTitle("Game Lookup")
-
-//                .alert(router.errorAlertTitle ?? "Something went wrong. Try again.", isPresented: $router.showingErrorAlert, actions: {})
+                .alert(viewModel.errorMessage ?? "Something went wrong. Try again.", isPresented: $viewModel.didError, actions: {})
         }
         .onReceive(viewModel.$searchResults) { results in
             guard let results = results, !results.isEmpty else {
                 return
             }
-            router.path.append(.gameList(results: results))
+            router.navigate(to: .gameList(results: results))
+        }
+        .onAppear {
+            viewModel.searchResults = nil
         }
     }
     
