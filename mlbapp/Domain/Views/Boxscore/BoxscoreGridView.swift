@@ -25,7 +25,7 @@ struct BoxscoreGridView: View {
         return InterfaceSize(horizontalSizeClass: horizontalSizeClass, verticalSizeClass: verticalSizeClass)
     }
     
-    @Binding var viewModel: BoxscoreViewModel?
+    @Binding var viewModel: BoxscoreGridViewModel?
     @Binding var teamBoxSelection: Int
 
     var body: some View {
@@ -71,10 +71,10 @@ struct BoxscoreGridView: View {
     }
     
     @ViewBuilder
-    private func boxscore(for viewModel: BoxscoreViewModel) -> some View {
+    private func boxscore(for viewModel: BoxscoreGridViewModel) -> some View {
         Grid(verticalSpacing: 12) {
             
-            BoxscoreRowView(viewModel: viewModel.battingHeader(withTitle: ""))
+            BoxscoreRowView(viewModel: viewModel.type.header)
             
             Divider()
             

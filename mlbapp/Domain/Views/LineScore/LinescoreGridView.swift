@@ -53,7 +53,7 @@ struct LinescoreGridView: View {
                     }
                 }
             }
-            Divider()
+            //Divider()
             GridRow {
                 ForEach(viewModel.homeLineItems, id: \.id) { item in
                     switch(item.type) {

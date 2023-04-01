@@ -36,10 +36,4 @@ struct Game {
         }
         return player
     }()
-    
-//    lazy var playerHash: [Int: Player] = {
-//        return players.reduce(into: [Int: Player]()) {
-//            $0[$1.id] = $1
-//        }
-//    }()
 }

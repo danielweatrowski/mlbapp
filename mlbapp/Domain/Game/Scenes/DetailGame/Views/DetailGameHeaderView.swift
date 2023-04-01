@@ -19,6 +19,7 @@ struct DetailGameHeaderView: View {
                     Spacer()
                     Text(viewModel.venueName)
                 }
+                .frame(maxWidth: .infinity)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .padding([.horizontal, .bottom])
@@ -75,8 +76,6 @@ struct DetailGameHeaderView: View {
             .frame(maxWidth: .infinity)
             .frame(height: 150)
             .padding(.vertical)
-            .background()
-            .cornerRadius(16)
         }
         else {
             EmptyView()

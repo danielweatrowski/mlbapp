@@ -14,9 +14,11 @@ struct mlbappApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $router.path) {
-                SearchGameView
-                    .configure()
-                    .withRouter()
+                DetailGameConfigurator.configure(for: 661849)
+
+//                SearchGameView
+//                    .configure()
+//                    .withRouter()
             }
             .environmentObject(MLBLogoService())
             .environmentObject(router)

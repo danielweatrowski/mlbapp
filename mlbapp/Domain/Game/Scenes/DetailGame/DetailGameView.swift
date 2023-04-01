@@ -20,12 +20,14 @@ struct DetailGameView: View {
     }
     
     var body: some View {
-        ScrollView {
+        /*ScrollView {
             VStack() {
 
                 DetailGameHeaderView(viewModel: $viewModel.headerViewModel)
             }
             .padding([.leading, .trailing])
+            
+
             
             VStack {
                 
@@ -49,33 +51,35 @@ struct DetailGameView: View {
                 ListSection(title: "Pitchers") {
                     BoxscoreGridView(viewModel: $viewModel.pitchingBoxscoreViewModel, teamBoxSelection: $teamBoxSelection)
                 }
-
-                /*
-                VStack {
-                    
-                    HStack {
-                        Image(systemName: "mappin.circle.fill")
-                        Text("Stadium")
-                            .font(.subheadline)
-                        Spacer()
-                        
-                    }
-                    Divider()
-                    HStack {
-                        Image(systemName: "calendar.circle.fill")
-                        Text("Date")
-                            .font(.subheadline)
-                        Spacer()
-                        
-                    }
-                }
-                .padding()
-                .background()
-                .cornerRadius(16) */
-                
             }
             .padding([.leading, .trailing])
+            
+        } */
+        List {
+            Section {
+                DetailGameHeaderView(viewModel: $viewModel.headerViewModel)
+                    .listRowInsets(EdgeInsets())
+                LinescoreGridView(viewModel: $viewModel.lineScoreViewModel)
+                    .listRowInsets(EdgeInsets())
+                    .padding()
+            }
+            Section("Decisions") {
+                DecisionsInfoView(viewModel: $viewModel.decisionsViewModel)
+                    .listRowInsets(EdgeInsets())
+            }
+            
+            Section("Game Details") {
+                NavigationLink("Summary", value: RouterDestination.searchGame)
+                NavigationLink("Boxscore", value: RouterDestination.searchGame)
+                NavigationLink("Lineups", value: RouterDestination.searchGame)
+                NavigationLink("Roster", value: RouterDestination.searchGame)
+            }
+            
+            Section("Game Info") {
+                // TODO
+            }
         }
+        .listStyle(.insetGrouped)
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
                 Picker("Teams", selection: $teamBoxSelection) {
@@ -93,83 +97,7 @@ struct DetailGameView: View {
         }
     }
     
-    @ViewBuilder
-    var battingDetailsSection: some View {
-        let teamDetails = teamBoxSelection == 0
-        ? viewModel.homeTeamBattingDetails
-        : viewModel.awayTeamBattingDetails
-        
-        if let details = teamDetails, !details.isEmpty {
-            ListSection(title: "Batting") {
-                VStack(alignment: .leading, spacing: 12) {
-                    ForEach(details, id: \.self) { detail in
-                        Group {
-                            Text(detail.title)
-                                .bold()
-                                .font(.subheadline)
-                            + Text(" \(detail.detail)")
-                                .font(.subheadline)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                }
-            }
-        } else {
-            EmptyView()
-        }
-    }
     
-    @ViewBuilder
-    var fieldingDetailsSection: some View {
-        let teamDetails = teamBoxSelection == 0
-        ? viewModel.homeTeamFieldingDetails
-        : viewModel.awayTeamFieldingDetails
-        
-        if let details = teamDetails, !details.isEmpty {
-            ListSection(title: "Fielding") {
-                VStack(alignment: .leading, spacing: 12) {
-                    ForEach(details, id: \.self) { detail in
-                        Group {
-                            Text(detail.title)
-                                .bold()
-                                .font(.subheadline)
-                            + Text(" \(detail.detail)")
-                                .font(.subheadline)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                }
-            }
-        } else {
-            EmptyView()
-        }
-    }
-    
-    @ViewBuilder
-    var runningDetailsSection: some View {
-        let teamDetails = teamBoxSelection == 0
-        ? viewModel.homeTeamRunningDetails
-        : viewModel.awayTeamRunningDetails
-        
-        if let details = teamDetails, !details.isEmpty {
-            ListSection(title: "Base Running") {
-                VStack(alignment: .leading, spacing: 12) {
-                    ForEach(details, id: \.self) { detail in
-                        Group {
-                            Text(detail.title)
-                                .bold()
-                                .font(.subheadline)
-                            + Text(" \(detail.detail)")
-                                .font(.subheadline)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                }
-            }
-        } else {
-            EmptyView()
-        }
-    }
 }
 
 struct DetailGameView_Previews: PreviewProvider {

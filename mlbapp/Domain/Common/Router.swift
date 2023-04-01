@@ -12,6 +12,7 @@ enum RouterDestination: Hashable {
     case gameList(results: [GameSearch.Result])
     case searchGame
     case gameDetail(gameID: Int)
+    case boxscore(gameID: Int, formattedGameDate: String, homeTeamAbbreviation: String, awayTeamAbbreviation: String)
 }
 
 @MainActor
@@ -35,6 +36,8 @@ extension View {
                 SearchGameView.configure()
             case let .gameDetail(id):
                 DetailGameConfigurator.configure(for: id)
+            case let .boxscore(id, date, homeAbbr, awayAbbr):
+                BoxscoreDetailView.configure(gameID: id, formattedGameDate: date, homeTeamAbbreviation: homeAbbr, awayTeamAbbreviation: awayAbbr)
             }
         }
     }
