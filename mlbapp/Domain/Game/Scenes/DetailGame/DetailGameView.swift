@@ -20,41 +20,6 @@ struct DetailGameView: View {
     }
     
     var body: some View {
-        /*ScrollView {
-            VStack() {
-
-                DetailGameHeaderView(viewModel: $viewModel.headerViewModel)
-            }
-            .padding([.leading, .trailing])
-            
-
-            
-            VStack {
-                
-                ListSection(title: nil) {
-                    DecisionsInfoView(viewModel: $viewModel.decisionsViewModel)
-                }
-                .padding(.top, -8)
-                
-                ListSection(title: "Line") {
-                    LinescoreGridView(viewModel: $viewModel.lineScoreViewModel)
-                }
-            
-                ListSection(title: "Batters") {
-                    BoxscoreGridView(viewModel: $viewModel.boxscoreViewModel, teamBoxSelection: $teamBoxSelection)
-                }
-                
-                battingDetailsSection
-                runningDetailsSection
-                fieldingDetailsSection
-                
-                ListSection(title: "Pitchers") {
-                    BoxscoreGridView(viewModel: $viewModel.pitchingBoxscoreViewModel, teamBoxSelection: $teamBoxSelection)
-                }
-            }
-            .padding([.leading, .trailing])
-            
-        } */
         List {
             Section {
                 DetailGameHeaderView(viewModel: $viewModel.headerViewModel)
@@ -69,10 +34,13 @@ struct DetailGameView: View {
             }
             
             Section("Game Details") {
-                NavigationLink("Summary", value: RouterDestination.searchGame)
-                NavigationLink("Boxscore", value: RouterDestination.searchGame)
-                NavigationLink("Lineups", value: RouterDestination.searchGame)
-                NavigationLink("Roster", value: RouterDestination.searchGame)
+                NavigationLink("Summary", value: RouterDestination.empty)
+                NavigationLink("Boxscore", value: RouterDestination.boxscore(gameID: viewModel.gameID,
+                                                                             formattedGameDate: viewModel.gameDate,
+                                                                             homeTeamAbbreviation: viewModel.homeTeamAbbreviation,
+                                                                             awayTeamAbbreviation: viewModel.awayTeamAbbreviation))
+                NavigationLink("Lineups", value: RouterDestination.empty)
+                NavigationLink("Roster", value: RouterDestination.empty)
             }
             
             Section("Game Info") {

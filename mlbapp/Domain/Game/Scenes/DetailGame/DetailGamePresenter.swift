@@ -38,7 +38,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
 
         let lineScoreViewModel = formatLineScore(for: game)
         
-        let decisionsViewModel = formatDecisions(boxscore: game.boxscore)
+        let decisionsViewModel = formatDecisions(boxscore: game.boxscore, players: game.players)
         
         DispatchQueue.main.async {
             viewModel.navigationTitle = "\(game.awayTeam.abbreviation) @ \(game.homeTeam.abbreviation)"
@@ -50,16 +50,16 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         }
     }
     
-    func formatDecisions(boxscore: Boxscore?) -> DecisionsInfoViewModel? {
+    func formatDecisions(boxscore: Boxscore?, players: [Int: Player]) -> DecisionsInfoViewModel? {
         guard let winningPitcher = boxscore?.winningPitcher, let losingPitcher = boxscore?.losingPitcher else {
             return nil
         }
         
-        return DecisionsInfoViewModel(winningPitcherName: winningPitcher.boxscoreName,
+        return DecisionsInfoViewModel(winningPitcherName: players[winningPitcher.playerID]?.boxscoreName ?? winningPitcher.fullName,
                                              winningPitcherWins: winningPitcher.stats.seasonWins ?? 0,
                                              winningPitcherLosses: winningPitcher.stats.seasonLosses ?? 0,
                                              winningPitcherERA: winningPitcher.stats.era ?? "--",
-                                             losingPitcherName: losingPitcher.boxscoreName,
+                                      losingPitcherName: players[losingPitcher.playerID]?.boxscoreName ?? losingPitcher.fullName,
                                              losingPitcherWins: losingPitcher.stats.seasonWins ?? 0,
                                              losingPitcherLosses: losingPitcher.stats.seasonLosses ?? 0,
                                              losingPitcherERA: losingPitcher.stats.era ?? "--")

@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 enum RouterDestination: Hashable {
+    case empty
     case gameList(results: [GameSearch.Result])
     case searchGame
     case gameDetail(gameID: Int)
@@ -38,6 +39,8 @@ extension View {
                 DetailGameConfigurator.configure(for: id)
             case let .boxscore(id, date, homeAbbr, awayAbbr):
                 BoxscoreDetailView.configure(gameID: id, formattedGameDate: date, homeTeamAbbreviation: homeAbbr, awayTeamAbbreviation: awayAbbr)
+            case .empty:
+                EmptyView()
             }
         }
     }

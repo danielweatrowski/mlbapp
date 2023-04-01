@@ -15,7 +15,6 @@ struct Boxscore: BoxscoreProtocol {
     struct Batter {
         var playerID: Int
         var fullName: String
-        var boxscoreName: String
         var stats: BattingStats
         var substitution: Bool
         var position: Position
@@ -27,7 +26,6 @@ struct Boxscore: BoxscoreProtocol {
     struct Pitcher {
         let playerID: Int
         let fullName: String
-        var boxscoreName: String
         let stats: PitchingStats
     }
     

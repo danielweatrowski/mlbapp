@@ -10,7 +10,6 @@ import Foundation
 struct BoxscoreAdapter {
     
     let dataObject: MLBBoxscore
-    let playersHash: [Int: Player]
     
     func toDomain() -> Boxscore {
         let boxscore = dataObject
@@ -29,7 +28,6 @@ struct BoxscoreAdapter {
                 let seasonStats = playerDTO.seasonStats.batting
                 let battingOrder = Int(playerDTO.battingOrder ?? "100") ?? 100
 
-                let boxscoreName = playersHash[playerDTO.id]?.boxscoreName ?? playerDTO.fullName
                 let battingStats = Boxscore.BattingStats(atBats: gameStats?.atBats,
                                                          runs: gameStats?.runs,
                                                          hits: gameStats?.hits,
@@ -42,7 +40,6 @@ struct BoxscoreAdapter {
                 
                 return Boxscore.Batter(playerID: playerDTO.id,
                                              fullName: playerDTO.fullName,
-                                             boxscoreName: boxscoreName,
                                              stats: battingStats,
                                              substitution: battingOrder % 100 != 0,
                                              position: Position(code: playerDTO.position.code,
@@ -59,7 +56,6 @@ struct BoxscoreAdapter {
             return teamPitcherDTO.map { playerDTO in
                 let gameStats = playerDTO.stats?.pitching
                 let seasonStats = playerDTO.seasonStats.pitching
-                let boxscoreName = playersHash[playerDTO.id]?.boxscoreName ?? playerDTO.fullName
 
                 let pitchingStats = Boxscore.PitchingStats(inningsPitched: gameStats?.inningsPitched,
                                                            hits: gameStats?.hits,
@@ -77,7 +73,6 @@ struct BoxscoreAdapter {
                 
                 return Boxscore.Pitcher(playerID: playerDTO.id,
                                         fullName: playerDTO.fullName,
-                                        boxscoreName: boxscoreName,
                                         stats: pitchingStats)
             }
         }

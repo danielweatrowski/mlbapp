@@ -91,7 +91,7 @@ struct MLBAPIService: GameStoreProtocol {
         let linescoreAdapter = LinescoreAdapter(dataObject: gameDTO.linescore)
         let linescore = linescoreAdapter.toDomain()
         
-        let boxscoreAdapter = BoxscoreAdapter(dataObject: gameDTO.boxscore, playersHash: players)
+        let boxscoreAdapter = BoxscoreAdapter(dataObject: gameDTO.boxscore)
         let boxscore = boxscoreAdapter.toDomain()
         
         let game = Game(id: id,
@@ -108,5 +108,14 @@ struct MLBAPIService: GameStoreProtocol {
                         boxscore: boxscore)
         
         return game
+    }
+    
+    func fetchBoxscore(withID id: Int) async throws -> Boxscore {
+        let boxscoreDTO = try await SwiftMLB.boxscore(gameIdentifier: id)
+        
+        let boxscoreAdapter = BoxscoreAdapter(dataObject: boxscoreDTO)
+        let boxscore = boxscoreAdapter.toDomain()
+        
+        return boxscore
     }
 }

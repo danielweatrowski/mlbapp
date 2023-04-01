@@ -14,6 +14,7 @@ protocol BoxscoreDetailPresentationLogic {
 struct BoxscoreDetailPresenter: BoxscoreDetailPresentationLogic {
     
     let viewModel: BoxscoreDetail.ViewModel
+    let players: [Int: Player]
 
     func presentBoxscore(output: BoxscoreDetail.Output) {
         let boxscore = output.boxscore
@@ -37,6 +38,10 @@ struct BoxscoreDetailPresenter: BoxscoreDetailPresentationLogic {
         }
     }
     
+    private func getBoxscoreName(forPlayerID id: Int) -> String? {
+        return players[id]?.boxscoreName
+    }
+    
     private func formatBatterBoxscore(boxscore: Boxscore?, homeTeamAbbreviation: String, awayTeamAbbreviation: String) -> BoxscoreGridViewModel? {
         guard let boxscore = boxscore else { return nil }
         
@@ -44,7 +49,7 @@ struct BoxscoreDetailPresenter: BoxscoreDetailPresentationLogic {
         let teamRows = batters.map { teamBatters in
             return teamBatters.map { batter in
                 
-                var name = batter.boxscoreName
+                var name = getBoxscoreName(forPlayerID: batter.playerID) ?? batter.fullName
                 
                 if let note = batter.note {
                     name = note + name

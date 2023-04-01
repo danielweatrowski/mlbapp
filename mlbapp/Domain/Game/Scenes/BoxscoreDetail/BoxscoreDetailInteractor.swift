@@ -17,6 +17,7 @@ protocol BoxscoreDetailDataStore  {
 
 struct BoxscoreDetailInteractor: BoxscoreDetailBusinessLogic & BoxscoreDetailDataStore {
     
+    let presenter: BoxscoreDetailPresentationLogic?
     var gameID: Int
     
     func loadBoxscore() {

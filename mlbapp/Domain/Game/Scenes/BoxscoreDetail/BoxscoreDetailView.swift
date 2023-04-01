@@ -132,8 +132,8 @@ extension BoxscoreDetailView {
                                                  formattedGameDate: formattedGameDate,
                                                  homeTeamAbbreviation: homeTeamAbbreviation,
                                                  awayTeamAbbreviation: awayTeamAbbreviation)
-        let interactor = BoxscoreDetailInteractor(gameID: gameID)
-        let presenter = BoxscoreDetailPresenter(viewModel: viewModel)
+        let presenter = BoxscoreDetailPresenter(viewModel: viewModel,  playersHash: [:])
+        let interactor = BoxscoreDetailInteractor(presenter: presenter, gameID: gameID)
         
         return .init(interactor: interactor,
                      viewModel: viewModel)
