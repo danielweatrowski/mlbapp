@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct MLBAPIService: GameStoreProtocol {
+// TODO: MLBAPIRepository
+struct MLBAPIService: GameStoreProtocol {    
     func searchGame(with parameters: GameSearch.SearchParameters) async throws -> [GameSearch.Result] {
         
         let searchParameters = SwiftMLBRequest.ScheduleParameters(startDate: parameters.startDate,
@@ -43,32 +44,32 @@ struct MLBAPIService: GameStoreProtocol {
         let gameVenue = Venue(id: gameDTO.venue.id, name: gameDTO.venue.name)
         
         let homeTeam = Team(id: gameDTO.teams.home.id,
-                              name: gameDTO.teams.home.name,
-                              abbreviation: gameDTO.teams.home.abbreviation,
-                              teamName: gameDTO.teams.home.teamName,
-                              locationName: gameDTO.teams.home.locationName,
-                              venue: Venue(id: gameDTO.teams.home.venue.id, name: gameDTO.teams.home.venue.name),
-                              division: Division(id: gameDTO.teams.home.division.id, name: gameDTO.teams.home.division.name),
-                              league: League(id: gameDTO.teams.home.league.id, name: gameDTO.teams.home.league.name),
-                              record: Team.SeasonRecord(gamesPlayed: gameDTO.teams.home.record?.gamesPlayed ?? 0,
-                                                          wins: gameDTO.teams.home.record?.wins ?? 0,
-                                                          losses: gameDTO.teams.home.record?.losses ?? 0,
-                                                          ties: 0,
-                                                          winningPercentage: gameDTO.teams.home.record?.winningPercentage ?? "NA"))
+                            name: gameDTO.teams.home.name,
+                            abbreviation: gameDTO.teams.home.abbreviation,
+                            teamName: gameDTO.teams.home.teamName,
+                            locationName: gameDTO.teams.home.locationName,
+                            venue: Venue(id: gameDTO.teams.home.venue.id, name: gameDTO.teams.home.venue.name),
+                            division: Division(id: gameDTO.teams.home.division.id, name: gameDTO.teams.home.division.name),
+                            league: League(id: gameDTO.teams.home.league.id, name: gameDTO.teams.home.league.name),
+                            record: Team.SeasonRecord(gamesPlayed: gameDTO.teams.home.record?.gamesPlayed ?? 0,
+                                                      wins: gameDTO.teams.home.record?.wins ?? 0,
+                                                      losses: gameDTO.teams.home.record?.losses ?? 0,
+                                                      ties: 0,
+                                                      winningPercentage: gameDTO.teams.home.record?.winningPercentage ?? "NA"))
         
         let awayTeam = Team(id: gameDTO.teams.away.id,
-                              name: gameDTO.teams.away.name,
-                              abbreviation: gameDTO.teams.away.abbreviation,
-                              teamName: gameDTO.teams.away.teamName,
-                              locationName: gameDTO.teams.away.locationName,
-                              venue: Venue(id: gameDTO.teams.away.venue.id, name: gameDTO.teams.away.venue.name),
-                              division: Division(id: gameDTO.teams.away.division.id, name: gameDTO.teams.away.division.name),
-                              league: League(id: gameDTO.teams.away.league.id, name: gameDTO.teams.away.league.name),
-                              record: Team.SeasonRecord(gamesPlayed: gameDTO.teams.away.record?.gamesPlayed ?? 0,
-                                                          wins: gameDTO.teams.away.record?.wins ?? 0,
-                                                          losses: gameDTO.teams.away.record?.losses ?? 0,
-                                                          ties: 0,
-                                                          winningPercentage: gameDTO.teams.away.record?.winningPercentage ?? "NA"))
+                            name: gameDTO.teams.away.name,
+                            abbreviation: gameDTO.teams.away.abbreviation,
+                            teamName: gameDTO.teams.away.teamName,
+                            locationName: gameDTO.teams.away.locationName,
+                            venue: Venue(id: gameDTO.teams.away.venue.id, name: gameDTO.teams.away.venue.name),
+                            division: Division(id: gameDTO.teams.away.division.id, name: gameDTO.teams.away.division.name),
+                            league: League(id: gameDTO.teams.away.league.id, name: gameDTO.teams.away.league.name),
+                            record: Team.SeasonRecord(gamesPlayed: gameDTO.teams.away.record?.gamesPlayed ?? 0,
+                                                      wins: gameDTO.teams.away.record?.wins ?? 0,
+                                                      losses: gameDTO.teams.away.record?.losses ?? 0,
+                                                      ties: 0,
+                                                      winningPercentage: gameDTO.teams.away.record?.winningPercentage ?? "NA"))
         
         let players = gameDTO.players.reduce(into: [Int: Player]()) {
             $0[$1.id] = Player(id: $1.id,
@@ -85,9 +86,9 @@ struct MLBAPIService: GameStoreProtocol {
                                birthDate: $1.birthDate,
                                isActive: $1.active,
                                mlbDebutDate: $1.mlbDebutDate ?? "",
-                               primaryPositionCode: $1.primaryPosition.code)
+                               primaryPositionCode: $1.primaryPosition.code ?? "")
         }
-
+        
         let linescoreAdapter = LinescoreAdapter(dataObject: gameDTO.linescore)
         let linescore = linescoreAdapter.toDomain()
         
@@ -110,12 +111,37 @@ struct MLBAPIService: GameStoreProtocol {
         return game
     }
     
-    func fetchBoxscore(withID id: Int) async throws -> Boxscore {
+    func fetchBoxscore(forGameID id: Int) async throws -> Boxscore {
         let boxscoreDTO = try await SwiftMLB.boxscore(gameIdentifier: id)
         
         let boxscoreAdapter = BoxscoreAdapter(dataObject: boxscoreDTO)
         let boxscore = boxscoreAdapter.toDomain()
         
         return boxscore
+    }
+    
+    func fetchAllPlays(forGameID id: Int) async throws -> [Play] {
+        let dto = try await SwiftMLB.plays(for: id)
+        
+        let plays = dto.allPlays.map { playDTO in
+            
+            let result = Play.Result(type: playDTO.result.type,
+                                     event: playDTO.result.event,
+                                     eventType: playDTO.result.eventType,
+                                     description: playDTO.result.description,
+                                     rbi: playDTO.result.rbi,
+                                     awayScore: playDTO.result.awayScore,
+                                     homeScore: playDTO.result.homeScore,
+                                     isOut: playDTO.result.isOut)
+            
+            let about = Play.Detail(atBatIndex: playDTO.about.atBatIndex,
+                                    halfInning: playDTO.about.halfInning,
+                                    inning: playDTO.about.inning,
+                                    hasOut: playDTO.about.hasOut)
+            
+            return Play(result: result, about: about)
+        }
+        
+        return plays
     }
 }

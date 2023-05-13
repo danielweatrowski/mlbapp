@@ -11,8 +11,7 @@ struct BoxscoreDetailView: View {
     
     let interactor: BoxscoreDetailBusinessLogic?
     
-    @ObservedObject
-    var viewModel: BoxscoreDetail.ViewModel
+    @StateObject var viewModel: BoxscoreDetail.ViewModel
     
     @State
     private var teamBoxSelection = 0
@@ -20,7 +19,7 @@ struct BoxscoreDetailView: View {
     var body: some View {
         List {
             Section {
-                BoxscoreGridView(viewModel: $viewModel.pitchingBoxscoreViewModel, teamBoxSelection: $teamBoxSelection)
+                BoxscoreGridView(viewModel: $viewModel.boxscoreViewModel, teamBoxSelection: $teamBoxSelection)
             }
             
             battingDetailsSection
@@ -32,6 +31,7 @@ struct BoxscoreDetailView: View {
             }
         }
         .listStyle(.insetGrouped)
+        .navigationTitle(viewModel.navigationTitle)
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
                 Picker("Teams", selection: $teamBoxSelection) {
@@ -132,7 +132,7 @@ extension BoxscoreDetailView {
                                                  formattedGameDate: formattedGameDate,
                                                  homeTeamAbbreviation: homeTeamAbbreviation,
                                                  awayTeamAbbreviation: awayTeamAbbreviation)
-        let presenter = BoxscoreDetailPresenter(viewModel: viewModel,  playersHash: [:])
+        let presenter = BoxscoreDetailPresenter(viewModel: viewModel,  players: [:])
         let interactor = BoxscoreDetailInteractor(presenter: presenter, gameID: gameID)
         
         return .init(interactor: interactor,

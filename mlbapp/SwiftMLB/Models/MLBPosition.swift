@@ -8,8 +8,8 @@
 import Foundation
 
 struct MLBPosition: Codable {
-    let code: String
-    let type: String
-    let name: String
-    let abbreviation: String
+    let code: String?
+    let type: String?
+    let name: String?
+    let abbreviation: String?
 }

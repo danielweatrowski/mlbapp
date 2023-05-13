@@ -36,7 +36,7 @@ struct BoxscoreAdapter {
                                                          baseOnBalls: gameStats?.leftOnBase,
                                                          strikeOuts: gameStats?.strikeOuts,
                                                          leftOnBase: gameStats?.leftOnBase,
-                                                         avg: seasonStats.avg)
+                                                         avg: seasonStats?.avg)
                 
                 return Boxscore.Batter(playerID: playerDTO.id,
                                              fullName: playerDTO.fullName,
@@ -47,7 +47,7 @@ struct BoxscoreAdapter {
                                                                 name: playerDTO.position.name,
                                                                 abbreviation: playerDTO.position.abbreviation),
                                              battingOrderIndex: playerDTO.battingOrder,
-                                             note: playerDTO.stats?.batting.note)
+                                             note: playerDTO.stats?.batting?.note)
             }
         }
         
@@ -64,9 +64,9 @@ struct BoxscoreAdapter {
                                                            baseOnBalls: gameStats?.baseOnBalls,
                                                            strikeOuts: gameStats?.strikeOuts,
                                                            homeRuns: gameStats?.homeRuns,
-                                                           era: seasonStats.era,
-                                                           seasonWins: seasonStats.wins,
-                                                           seasonLosses: seasonStats.losses,
+                                                           era: seasonStats?.era,
+                                                           seasonWins: seasonStats?.wins,
+                                                           seasonLosses: seasonStats?.losses,
                                                            didWin: gameStats?.wins == 1,
                                                            didLose: gameStats?.losses == 1)
                 
@@ -79,27 +79,27 @@ struct BoxscoreAdapter {
         
         let teamBattingStatDTOs = [h_teamBattingStats, a_teamBattingStats]
         let teamBattingStats = teamBattingStatDTOs.map { teamBattingStatDTO in
-            return Boxscore.BattingStats(atBats: teamBattingStatDTO.atBats,
-                                         runs: teamBattingStatDTO.runs,
-                                         hits: teamBattingStatDTO.hits,
-                                         rbi: teamBattingStatDTO.rbi,
-                                         runsBattedIn: teamBattingStatDTO.rbi,
-                                         baseOnBalls: teamBattingStatDTO.baseOnBalls,
-                                         strikeOuts: teamBattingStatDTO.strikeOuts,
-                                         leftOnBase: teamBattingStatDTO.leftOnBase,
-                                         avg: teamBattingStatDTO.avg)
+            return Boxscore.BattingStats(atBats: teamBattingStatDTO?.atBats,
+                                         runs: teamBattingStatDTO?.runs,
+                                         hits: teamBattingStatDTO?.hits,
+                                         rbi: teamBattingStatDTO?.rbi,
+                                         runsBattedIn: teamBattingStatDTO?.rbi,
+                                         baseOnBalls: teamBattingStatDTO?.baseOnBalls,
+                                         strikeOuts: teamBattingStatDTO?.strikeOuts,
+                                         leftOnBase: teamBattingStatDTO?.leftOnBase,
+                                         avg: teamBattingStatDTO?.avg)
         }
     
         let teamPitchingStatDTOs = [h_teamPitchingStats, a_teamPitchingStats]
         let teamPitchingStats = teamPitchingStatDTOs.map { teamPitchingStatDTOs in
-            return Boxscore.PitchingStats(inningsPitched: h_teamPitchingStats.inningsPitched,
-                                          hits: h_teamPitchingStats.hits,
-                                          runs: h_teamPitchingStats.runs,
-                                          earnedRuns: h_teamPitchingStats.earnedRuns,
-                                          baseOnBalls: h_teamPitchingStats.baseOnBalls,
-                                          strikeOuts: h_teamPitchingStats.strikeOuts,
-                                          homeRuns: h_teamPitchingStats.homeRuns,
-                                          era: h_teamPitchingStats.era,
+            return Boxscore.PitchingStats(inningsPitched: h_teamPitchingStats?.inningsPitched,
+                                          hits: h_teamPitchingStats?.hits,
+                                          runs: h_teamPitchingStats?.runs,
+                                          earnedRuns: h_teamPitchingStats?.earnedRuns,
+                                          baseOnBalls: h_teamPitchingStats?.baseOnBalls,
+                                          strikeOuts: h_teamPitchingStats?.strikeOuts,
+                                          homeRuns: h_teamPitchingStats?.homeRuns,
+                                          era: h_teamPitchingStats?.era,
                                           seasonWins: nil,
                                           seasonLosses: nil,
                                           didWin: false,

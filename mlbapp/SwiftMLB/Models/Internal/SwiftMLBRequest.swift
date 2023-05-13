@@ -17,6 +17,7 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
     case boxscore(_ gameID: Int)
     case linescore(_ gameID: Int)
     case game(_ gameID: Int)
+    case plays(_ gameID: Int)
 
     var scheme: String {
         return "https"
@@ -35,7 +36,7 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
         switch self {
         case .schedule(_):
             return "/api/v1/schedule"
-        case let .scoringPlays(gameID):
+        case let .scoringPlays(gameID), let .plays(gameID):
             return "/api/v1.1/game/\(gameID)/feed/live"
         case .players(_):
             return "/api/v1.1/sports/1/players"
@@ -54,10 +55,10 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
     
     var queryItems: [URLQueryItem]? {
         switch self {
-        case .scoringPlays:
+        case .scoringPlays, .plays:
             return [
                 URLQueryItem(name: "fields",
-                             value: "gamePk,link,gameData,game,pk,teams,away,id,name,teamCode,fileCode,abbreviation,teamName,locationName,shortName,home,liveData,plays,allPlays,scoringPlays,scoringPlays,atBatIndex,result,description,awayScore,homeScore,about,halfInning,inning,endTime")
+                             value: "gamePk,link,gameData,game,pk,teams,away,id,name,teamCode,fileCode,abbreviation,teamName,locationName,shortName,home,liveData,plays,allPlays,scoringPlays,scoringPlays,atBatIndex,result,type,event,eventType,description,awayScore,homeScore,rbi,isOut,about,halfInning,inning,endTime,startTime,hasOut")
             ]
         case let .players(season):
             return [

@@ -10,7 +10,8 @@ import SwiftUI
 struct DetailGameView: View {
         
     var interactor: DetailGameInteractor
-    @ObservedObject var viewModel: DetailGame.ViewModel
+    @EnvironmentObject var router: Router
+    @StateObject var viewModel: DetailGame.ViewModel
     @State private var teamBoxSelection = 0
     
     private var selectedTeamAbbreviation: String {
@@ -34,7 +35,7 @@ struct DetailGameView: View {
             }
             
             Section("Game Details") {
-                NavigationLink("Summary", value: RouterDestination.empty)
+                NavigationLink("Summary", value: RouterDestination.summaryGame(gameID: viewModel.gameID))
                 NavigationLink("Boxscore", value: RouterDestination.boxscore(gameID: viewModel.gameID,
                                                                              formattedGameDate: viewModel.gameDate,
                                                                              homeTeamAbbreviation: viewModel.homeTeamAbbreviation,
@@ -48,16 +49,6 @@ struct DetailGameView: View {
             }
         }
         .listStyle(.insetGrouped)
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                Picker("Teams", selection: $teamBoxSelection) {
-                    Text(viewModel.homeTeamAbbreviation).tag(0)
-                    Text(viewModel.awayTeamAbbreviation).tag(1)
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal)
-            }
-        }
         .navigationTitle(viewModel.navigationTitle)
         .background(Color(uiColor: .systemGroupedBackground))
         .onAppear {

@@ -8,12 +8,15 @@
 import Foundation
 
 protocol GameStoreProtocol {
+    associatedtype P: PlayProtocol
     func fetchGame(withID id: Int) async throws -> Game
     func searchGame(with parameters: GameSearch.SearchParameters) async throws -> [GameSearch.Result]
+    func fetchAllPlays(forGameID id: Int) async throws -> [P]
+    func fetchBoxscore(forGameID id: Int) async throws -> Boxscore
 }
 
-struct GameWorker<Store: GameStoreProtocol>: GameStoreProtocol {
-    
+struct GameWorker<Store: GameStoreProtocol> {
+
     var store: Store
     
     func fetchGame(withID id: Int) async throws -> Game {
@@ -23,4 +26,14 @@ struct GameWorker<Store: GameStoreProtocol>: GameStoreProtocol {
     func searchGame(with parameters: GameSearch.SearchParameters) async throws -> [GameSearch.Result] {
         return try await store.searchGame(with: parameters)
     }
+    
+    func fetchAllPlays(forGameID id: Int) async throws -> [Store.P] {
+        return try await store.fetchAllPlays(forGameID: id)
+    }
+    
+    func fetchBoxscore(forGameID id: Int) async throws -> Boxscore {
+        return try await store.fetchBoxscore(forGameID: id)
+    }
+
+
 }

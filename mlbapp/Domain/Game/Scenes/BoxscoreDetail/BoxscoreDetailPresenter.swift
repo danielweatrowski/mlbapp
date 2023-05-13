@@ -56,7 +56,7 @@ struct BoxscoreDetailPresenter: BoxscoreDetailPresentationLogic {
                 }
                 
                 return BoxscoreRowViewModel(title: name,
-                                            subtitle: batter.position.abbreviation,
+                                            subtitle: batter.position.abbreviation ?? "",
                                             indentTitle: batter.substitution,
                                             item0: batter.stats.atBats.formattedStat(),
                                             item1: batter.stats.runs.formattedStat(),
@@ -102,8 +102,10 @@ struct BoxscoreDetailPresenter: BoxscoreDetailPresentationLogic {
         let pitchers = [boxscore.home.pitchers, boxscore.away.pitchers]
         let teamRows = pitchers.map { teamPitchers in
             return teamPitchers.map { pitcher in
+                
+                var name = getBoxscoreName(forPlayerID: pitcher.playerID) ?? pitcher.fullName
                                 
-                return BoxscoreRowViewModel(title: pitcher.boxscoreName,
+                return BoxscoreRowViewModel(title: name,
                                             subtitle: "P",
                                             indentTitle: false,
                                             item0: pitcher.stats.inningsPitched ?? "-",

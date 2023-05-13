@@ -14,7 +14,7 @@ struct BoxscoreGridViewModel {
         
         var header: BoxscoreRowViewModel {
             switch self {
-            case .batters: return BoxscoreRowViewModel(title: "",
+            case .batters: return BoxscoreRowViewModel(title: "Batters",
                                                        subtitle: "",
                                                        boldItems: true,
                                                        item0: "AB",
@@ -26,7 +26,7 @@ struct BoxscoreGridViewModel {
                                                        item6: "LOB",
                                                        item7: "AVG")
                 
-            case .pitchers: return BoxscoreRowViewModel(title: "",
+            case .pitchers: return BoxscoreRowViewModel(title: "Pitchers",
                                                         subtitle: "",
                                                         boldItems: true,
                                                         item0: "IP",

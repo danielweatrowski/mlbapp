@@ -107,14 +107,14 @@ enum MLBStatistics {
 
 extension MLBStatistics {
     struct GameStats: Codable {
-        let batting: Batting.GameStatistics
-        let fielding: Fielding.GameStatistics
-        let pitching: Pitching.GameStatistics
+        let batting: Batting.GameStatistics?
+        let fielding: Fielding.GameStatistics?
+        let pitching: Pitching.GameStatistics?
     }
     
     struct TotalStats: Codable {
-        let batting: Batting.SeasonStatistics
-        let fielding: Fielding.SeasonStatistics
-        let pitching: Pitching.SeasonStatistics
+        let batting: Batting.SeasonStatistics?
+        let fielding: Fielding.SeasonStatistics?
+        let pitching: Pitching.SeasonStatistics?
     }
 }

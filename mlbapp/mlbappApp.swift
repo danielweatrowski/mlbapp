@@ -15,7 +15,7 @@ struct mlbappApp: App {
         WindowGroup {
             NavigationStack(path: $router.path) {
                 DetailGameConfigurator.configure(for: 661849)
-
+                    .withRouter()
 //                SearchGameView
 //                    .configure()
 //                    .withRouter()

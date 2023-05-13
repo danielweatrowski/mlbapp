@@ -24,12 +24,12 @@ struct MLBBoxscore: Codable, MLBBoxscoreProtocol {
     // Decisions
     // boxscore node does not contain decision data
     var winningPitcher: Player? {
-        let homePitcher = home.pitchers.first(where: {$0.stats?.pitching.wins == 1})
+        let homePitcher = home.pitchers.first(where: {$0.stats?.pitching?.wins == 1})
         if let pitcher = homePitcher {
             return pitcher
         }
         
-        let awayPitcher = away.pitchers.first(where: {$0.stats?.pitching.wins == 1})
+        let awayPitcher = away.pitchers.first(where: {$0.stats?.pitching?.wins == 1})
         if let pitcher = awayPitcher {
             return pitcher
         }
@@ -37,12 +37,12 @@ struct MLBBoxscore: Codable, MLBBoxscoreProtocol {
     }
     
     var losingPitcher: Player? {
-        let homePitcher = home.pitchers.first(where: {$0.stats?.pitching.losses == 1})
+        let homePitcher = home.pitchers.first(where: {$0.stats?.pitching?.losses == 1})
         if let pitcher = homePitcher {
             return pitcher
         }
         
-        let awayPitcher = away.pitchers.first(where: {$0.stats?.pitching.losses == 1})
+        let awayPitcher = away.pitchers.first(where: {$0.stats?.pitching?.losses == 1})
         if let pitcher = awayPitcher {
             return pitcher
         }
