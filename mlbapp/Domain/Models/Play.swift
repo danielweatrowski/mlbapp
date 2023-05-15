@@ -30,6 +30,7 @@ protocol PlayDetailProtocol {
     var halfInning: String { get }
     var inning: Int { get }
     var hasOut: Bool { get }
+    var endTime: Date { get }
 }
 
 struct Play: PlayProtocol {
@@ -66,6 +67,8 @@ struct Play: PlayProtocol {
         var inning: Int
         
         var hasOut: Bool
+        
+        var endTime: Date
     }
     
 }

@@ -31,8 +31,8 @@ struct MLBPlay: Decodable {
         let atBatIndex: Int
         let halfInning: String
         let inning: Int
-        //let startTime: Date
-        //let endTime: Date
+        let startTime: Date
+        let endTime: Date
         let hasOut: Bool
     }
 }

@@ -13,15 +13,26 @@ struct SummaryGameView: View {
     let interactor: SummaryGameBusinessLogic?
     
     var body: some View {
-        List {
-            ForEach(viewModel.sections, id: \.id) { section in
-                Section(header: Text(section.inningName)) {
-                    ForEach(section.plays, id: \.id) { play in
-                        Text(play.description)
+        Group {
+            switch viewModel.state {
+            case .loaded:
+                List {
+                    ForEach(viewModel.sections, id: \.id) { section in
+                        Section(header: Text(section.inningName)) {
+                            ForEach(section.plays, id: \.id) { playVM in
+                                SummaryGamePlayView(viewModel: playVM)
+                            }
+                        }
                     }
                 }
+            case .loading:
+                ProgressView()
+            case .error:
+                // TODO
+                EmptyView()
             }
         }
+        .navigationTitle(viewModel.navigationTitle)
         .onAppear {
             interactor?.loadGameSummary()
         }
@@ -36,9 +47,3 @@ extension SummaryGameView {
         return SummaryGameView(viewModel: viewModel, interactor: interactor)
     }
 }
-
-//struct SummaryGameView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SummaryGameView()
-//    }
-//}

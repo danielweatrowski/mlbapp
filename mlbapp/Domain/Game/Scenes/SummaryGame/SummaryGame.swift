@@ -18,18 +18,26 @@ struct SummaryGame {
     
     struct InningPlayViewModel: Identifiable {
         let id = UUID()
+        let playID: Int
         let eventName: String
         let description: String
+        let time: String
         let numberOfOuts: String?
     }
     
     class ViewModel: ObservableObject {
+        
+        enum State {
+            case loading, loaded, error
+        }
         
         init(gameID: Int) {
             self.gameID = gameID
         }
         
         var gameID: Int
+        let navigationTitle = "Summary"
+        @Published var state: State = .loading
         @Published var sections: [InningSectionViewModel] = []
     }
     

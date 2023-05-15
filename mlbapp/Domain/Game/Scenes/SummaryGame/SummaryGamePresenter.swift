@@ -17,32 +17,56 @@ struct SummaryGamePresenter: SummaryGamePresentationLogic {
     
     func presentGameSummary(output: SummaryGame.Output<Play>) {
         
-        var inningHash: [String: [SummaryGame.InningPlayViewModel]] = [:]
+        var homeInningPlays: [Int: [SummaryGame.InningPlayViewModel]] = [:]
+        var awayInningPlays:  [Int: [SummaryGame.InningPlayViewModel]] = [:]
         
         for play in output.plays {
-            let inningHashID = "\(play.about.halfInning.capitalized) \(play.about.inning)"
-            let playViewModel = SummaryGame.InningPlayViewModel(eventName: play.result.event,
+            let inningHashID = play.about.inning
+            let timeFormatted = play.about.endTime.formatted(date: .omitted, time: .shortened)
+            let playViewModel = SummaryGame.InningPlayViewModel(playID: play.about.atBatIndex,
+                                                                eventName: play.result.event,
                                                                 description: play.result.description,
+                                                                time: timeFormatted,
                                                                 numberOfOuts: nil)
             
-            if inningHash[inningHashID] != nil {
-                inningHash[inningHashID]?.append(playViewModel)
+            if play.about.halfInning == "top" {
+                if awayInningPlays[inningHashID] != nil {
+                    awayInningPlays[inningHashID]?.append(playViewModel)
+                } else {
+                    awayInningPlays[inningHashID] = []
+                    awayInningPlays[inningHashID]?.append(playViewModel)
+                }
             } else {
-                inningHash[inningHashID] = []
-                inningHash[inningHashID]?.append(playViewModel)
+                if homeInningPlays[inningHashID] != nil {
+                    homeInningPlays[inningHashID]?.append(playViewModel)
+                } else {
+                    homeInningPlays[inningHashID] = []
+                    homeInningPlays[inningHashID]?.append(playViewModel)
+                }
             }
         }
         
         var sectionsViewModel: [SummaryGame.InningSectionViewModel] = []
-        inningHash.forEach {
-            let sectionViewModel = SummaryGame.InningSectionViewModel(inningNumber: 1,
-                                                                      inningName: $0,
-                                                                      plays: $1)
-            sectionsViewModel.append(sectionViewModel)
+        for i in 1..<homeInningPlays.keys.count + 1 {
+            
+            let topInningPlays = awayInningPlays[i] ?? []
+            let topSectionViewModel = SummaryGame.InningSectionViewModel(inningNumber: i,
+                                                                      inningName: "Top \(i)",
+                                                                      plays: topInningPlays)
+            
+            sectionsViewModel.append(topSectionViewModel)
+            let botInningPlays = homeInningPlays[i] ?? []
+            let botSectionViewModel = SummaryGame.InningSectionViewModel(inningNumber: i,
+                                                                      inningName: "Bottom \(i)",
+                                                                      plays: botInningPlays)
+            
+            sectionsViewModel.append(botSectionViewModel)
+            
         }
         
         DispatchQueue.main.async {
             viewModel.sections = sectionsViewModel
+            viewModel.state = .loaded
         }
     }
 

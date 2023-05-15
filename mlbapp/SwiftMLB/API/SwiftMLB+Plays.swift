@@ -17,10 +17,18 @@ extension SwiftMLB {
         let playsData = try serializer.data()
         
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+        decoder.dateDecodingStrategy = .formatted(.iso8601TimeZoneOmitted)
         let plays = try decoder.decode(MLBPlays.self, from: playsData)
         
         return plays
     }
-    
 }
+
+extension DateFormatter {
+    static let iso8601TimeZoneOmitted: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        return dateFormatter
+    }()
+  }

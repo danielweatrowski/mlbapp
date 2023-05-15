@@ -137,7 +137,8 @@ struct MLBAPIService: GameStoreProtocol {
             let about = Play.Detail(atBatIndex: playDTO.about.atBatIndex,
                                     halfInning: playDTO.about.halfInning,
                                     inning: playDTO.about.inning,
-                                    hasOut: playDTO.about.hasOut)
+                                    hasOut: playDTO.about.hasOut,
+                                    endTime: playDTO.about.endTime)
             
             return Play(result: result, about: about)
         }
