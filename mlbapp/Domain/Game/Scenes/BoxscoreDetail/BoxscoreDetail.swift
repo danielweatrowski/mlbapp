@@ -11,6 +11,10 @@ enum BoxscoreDetail {
     
     class ViewModel: ObservableObject {
         
+        enum State {
+            case loading, loaded, error
+        }
+        
         var gameID: Int
         var formattedGameDate: String
         
@@ -18,6 +22,7 @@ enum BoxscoreDetail {
         var awayTeamAbbreviation: String
 
         var navigationTitle: String = "Boxscore"
+        @Published var state: State = .loading
         
         @Published var boxscoreViewModel: BoxscoreGridViewModel?
         @Published var pitchingBoxscoreViewModel: BoxscoreGridViewModel?

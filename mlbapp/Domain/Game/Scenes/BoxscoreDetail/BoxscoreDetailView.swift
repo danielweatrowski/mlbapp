@@ -17,21 +17,29 @@ struct BoxscoreDetailView: View {
     private var teamBoxSelection = 0
     
     var body: some View {
-        List {
-            Section {
-                BoxscoreGridView(viewModel: $viewModel.boxscoreViewModel, teamBoxSelection: $teamBoxSelection)
-            }
-            
-            battingDetailsSection
-            runningDetailsSection
-            fieldingDetailsSection
-            
-            Section {
-                BoxscoreGridView(viewModel: $viewModel.pitchingBoxscoreViewModel, teamBoxSelection: $teamBoxSelection)
+        Group {
+            switch viewModel.state {
+            case .loading:
+                ProgressView()
+            case .loaded:
+                List {
+                    Section {
+                        BoxscoreGridView(viewModel: $viewModel.boxscoreViewModel, teamBoxSelection: $teamBoxSelection)
+                    }
+                    
+                    battingDetailsSection
+                    runningDetailsSection
+                    fieldingDetailsSection
+                    
+                    Section {
+                        BoxscoreGridView(viewModel: $viewModel.pitchingBoxscoreViewModel, teamBoxSelection: $teamBoxSelection)
+                    }
+                }
+                .listStyle(.insetGrouped)
+            case .error:
+                EmptyView()
             }
         }
-        .listStyle(.insetGrouped)
-        .navigationTitle(viewModel.navigationTitle)
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
                 Picker("Teams", selection: $teamBoxSelection) {
@@ -42,6 +50,7 @@ struct BoxscoreDetailView: View {
                 .padding(.horizontal)
             }
         }
+        .navigationTitle(viewModel.navigationTitle)
         .onAppear {
             interactor?.loadBoxscore()
         }
@@ -127,12 +136,12 @@ struct BoxscoreDetailView: View {
 }
 
 extension BoxscoreDetailView {
-    static func configure(gameID: Int, formattedGameDate: String, homeTeamAbbreviation: String, awayTeamAbbreviation: String) -> Self {
+    static func configure(gameID: Int, formattedGameDate: String, homeTeamAbbreviation: String, awayTeamAbbreviation: String, players: [Int: Player]) -> Self {
         let viewModel = BoxscoreDetail.ViewModel(gameID: gameID,
                                                  formattedGameDate: formattedGameDate,
                                                  homeTeamAbbreviation: homeTeamAbbreviation,
                                                  awayTeamAbbreviation: awayTeamAbbreviation)
-        let presenter = BoxscoreDetailPresenter(viewModel: viewModel,  players: [:])
+        let presenter = BoxscoreDetailPresenter(viewModel: viewModel,  players: players)
         let interactor = BoxscoreDetailInteractor(presenter: presenter, gameID: gameID)
         
         return .init(interactor: interactor,

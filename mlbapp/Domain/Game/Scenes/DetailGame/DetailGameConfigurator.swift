@@ -12,7 +12,7 @@ struct DetailGameConfigurator {
     static func configure(for gameID: Int) -> DetailGameView {
         let viewModel = DetailGame.ViewModel(gameID: gameID)
         let presenter = DetailGamePresenter(viewModel: viewModel)
-        let interactor = DetailGameInteractor(presenter: presenter, gameID: gameID)
+        let interactor = DetailGameInteractor(gameID: gameID, presenter: presenter)
         let view = DetailGameView(interactor: interactor, viewModel: viewModel)
         
         return view

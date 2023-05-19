@@ -21,7 +21,7 @@ import Foundation
 //
 //}
 
-struct Player {
+struct Player: Hashable {
     
     var id: Int
     

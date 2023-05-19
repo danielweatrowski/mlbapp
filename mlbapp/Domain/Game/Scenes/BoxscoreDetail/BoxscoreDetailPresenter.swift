@@ -35,6 +35,8 @@ struct BoxscoreDetailPresenter: BoxscoreDetailPresentationLogic {
             viewModel.awayTeamFieldingDetails = boxscore.away.fieldingDetails
             viewModel.homeTeamRunningDetails = boxscore.home.baseRunningDetails
             viewModel.awayTeamRunningDetails = boxscore.away.baseRunningDetails
+            
+            viewModel.state = .loaded
         }
     }
     
@@ -103,7 +105,7 @@ struct BoxscoreDetailPresenter: BoxscoreDetailPresentationLogic {
         let teamRows = pitchers.map { teamPitchers in
             return teamPitchers.map { pitcher in
                 
-                var name = getBoxscoreName(forPlayerID: pitcher.playerID) ?? pitcher.fullName
+                let name = getBoxscoreName(forPlayerID: pitcher.playerID) ?? pitcher.fullName
                                 
                 return BoxscoreRowViewModel(title: name,
                                             subtitle: "P",
