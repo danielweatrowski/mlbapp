@@ -11,7 +11,8 @@ protocol BoxscoreProtocol {
     
 }
 
-struct Boxscore: BoxscoreProtocol {
+struct Boxscore: Hashable, Equatable {
+    
     struct Batter {
         var playerID: Int
         var fullName: String
@@ -38,6 +39,14 @@ struct Boxscore: BoxscoreProtocol {
         let battingDetais: [GameDetail]
         let fieldingDetails: [GameDetail]
         let baseRunningDetails: [GameDetail]
+        
+        var startingLineup: [Batter]? {
+            guard !batters.isEmpty else {
+                return nil
+            }
+            
+            return batters.filter({ !$0.substitution })
+        }
     }
     
     struct BattingStats {
@@ -72,8 +81,17 @@ struct Boxscore: BoxscoreProtocol {
         let detail: String
     }
     
+    let id: UUID = UUID()
     let home: Team
     let away: Team
+    
+    static func == (lhs: Boxscore, rhs: Boxscore) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        return hasher.combine(id)
+    }
 }
 
 extension Boxscore {

@@ -15,15 +15,17 @@ protocol DetailGameBusinessLogic {
 protocol DetailGameDataStore  {
     var gameID: Int { get set }
     var playerHash: [Int: Player]? { get }
+    var boxscore: Boxscore? { get }
 }
 
-class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore {
+class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore, ObservableObject {
     
     var presenter: DetailGamePresentationLogic
     var gameWorker = GameWorker(store: MLBAPIService())
     var gameID: Int
     
     var playerHash: [Int: Player]? = nil
+    var boxscore: Boxscore? = nil
     
     init(gameID: Int, presenter: DetailGamePresentationLogic) {
         self.gameID = gameID
@@ -37,6 +39,8 @@ class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore {
                 let response = DetailGame.DetailGame.Response(game: game)
                 
                 self.playerHash = game.players
+                self.boxscore = game.boxscore
+                
                 presenter.presentGame(response: response)
             } catch {
                 print(error)

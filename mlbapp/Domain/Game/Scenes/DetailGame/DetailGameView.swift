@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DetailGameView: View {
         
-    var interactor: DetailGameInteractor
+    @StateObject var interactor: DetailGameInteractor
     @EnvironmentObject var router: Router
     @StateObject var viewModel: DetailGame.ViewModel
     @State private var teamBoxSelection = 0
@@ -41,7 +41,8 @@ struct DetailGameView: View {
                                                                              homeTeamAbbreviation: viewModel.homeTeamAbbreviation,
                                                                              awayTeamAbbreviation: viewModel.awayTeamAbbreviation,
                                                                              players: interactor.playerHash ?? [:]))
-                NavigationLink("Lineups", value: RouterDestination.empty)
+                NavigationLink("Starting Lineups", value: RouterDestination.lineupDetail(gameID: viewModel.gameID,
+                                                                                         boxscore: interactor.boxscore))
                 NavigationLink("Roster", value: RouterDestination.empty)
             }
             
