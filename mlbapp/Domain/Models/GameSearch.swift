@@ -9,7 +9,7 @@ import Foundation
 
 enum GameSearch {
     struct SearchParameters {
-        let homeTeamID: Int
+        let homeTeamID: Int?
         let awayTeamID: Int?
         let startDate: Date
         let endDate: Date

@@ -13,8 +13,8 @@ struct MLBAPIService: GameStoreProtocol {
         
         let searchParameters = SwiftMLBRequest.ScheduleParameters(startDate: parameters.startDate,
                                                                   endDate: parameters.endDate,
-                                                                  teamIdentifier: String(parameters.homeTeamID),
-                                                                  opponentIdentifier: parameters.awayTeamID == 0 ? nil : String(parameters.awayTeamID!)
+                                                                  teamIdentifier: parameters.homeTeamID == nil ? nil : String(parameters.homeTeamID!),
+                                                                  opponentIdentifier: (parameters.awayTeamID == 0 || parameters.awayTeamID == nil) ? nil : String(parameters.awayTeamID!)
         )
         
         let schedule = try await SwiftMLB.schedule(parameters: searchParameters)
