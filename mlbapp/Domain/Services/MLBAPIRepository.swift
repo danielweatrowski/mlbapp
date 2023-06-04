@@ -24,12 +24,8 @@ struct MLBAPIRepository: GameStoreProtocol {
                 linescore = LinescoreAdapter(dataObject: linescoreDTO).toDomain()
             }
             
-            var decisions: GameSearch.Result.Decisions?
-            if let decisionsDTO = gameDTO.decisions {
-                decisions = .init(winnerName: decisionsDTO.winner?.fullName,
-                                  loserName: decisionsDTO.loser?.fullName,
-                                  saveName: decisionsDTO.save?.fullName)
-            }
+            let decisionsAdapter = DecisionsAdapter(dataObject: gameDTO.decisions)
+            let decisions = decisionsAdapter.toDomain()
             
             return GameSearch.Result(id: gameDTO.gamePk,
                               gameDate: gameDTO.gameDate,
@@ -109,6 +105,10 @@ struct MLBAPIRepository: GameStoreProtocol {
         let boxscoreAdapter = BoxscoreAdapter(dataObject: gameDTO.boxscore)
         let boxscore = boxscoreAdapter.toDomain()
         
+        let decisionsAdapter = DecisionsAdapter(dataObject: gameDTO.decisions)
+        let decisions = decisionsAdapter.toDomain()
+
+        
         let game = Game(id: id,
                         date: gameDTO.gameDate,
                         homeTeam: homeTeam,
@@ -117,8 +117,7 @@ struct MLBAPIRepository: GameStoreProtocol {
                         awayTeamScore: gameDTO.linescore.teams.away?.runs ?? 0,
                         venue: gameVenue,
                         players: players,
-                        winningPitcherID: gameDTO.decisions.winner.id,
-                        losingPitcherID: gameDTO.decisions.loser.id,
+                        decisions: decisions,
                         linescore: linescore,
                         boxscore: boxscore)
         

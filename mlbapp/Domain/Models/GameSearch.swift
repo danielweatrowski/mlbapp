@@ -45,11 +45,5 @@ enum GameSearch {
                 return "\(wins)-\(losses)"
             }
         }
-        
-        struct Decisions {
-            let winnerName: String?
-            let loserName: String?
-            let saveName: String?
-        }
     }
 }

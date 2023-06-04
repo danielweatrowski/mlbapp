@@ -18,6 +18,7 @@ struct mlbappApp: App {
                 NavigationStack(path: $router.path) {
                     ScoresListView
                         .configure()
+                        .withRouter()
                 }
                 .tabItem {
                     Label("Scores", systemImage: "squareshape.split.2x2")

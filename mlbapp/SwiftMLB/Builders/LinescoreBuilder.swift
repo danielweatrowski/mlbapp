@@ -18,9 +18,6 @@ struct LinescoreBuilder: JSONBuilder {
         guard let linescore = liveData["linescore"] as? [String: Any] else {
             throw SwiftMLBError.keyNotFound(key: "liveData")
         }
-        guard let decisions = liveData["decisions"] as? [String: Any] else {
-            throw SwiftMLBError.keyNotFound(key: "decisions")
-        }
         guard let teams = linescore["teams"] as? [String: Any] else {
             throw SwiftMLBError.keyNotFound(key: "teams")
         }
@@ -30,8 +27,8 @@ struct LinescoreBuilder: JSONBuilder {
             "teams": teams,
             "home": teams["home"] ?? [:],
             "away": teams["away"] ?? [:],
-            "winner": decisions["winner"] ?? [:],
-            "loser": decisions["loser"] ?? [:]
+//            "winner": decisions["winner"] ?? [:],
+//            "loser": decisions["loser"] ?? [:]
         ]
     }
 }

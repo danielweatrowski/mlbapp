@@ -17,21 +17,20 @@ struct Game {
     let venue: Venue
     let players: [Int: Player]
     
-    let winningPitcherID: Int?
-    let losingPitcherID: Int?
+    let decisions: Decisions?
     
     let linescore: Linescore?
     let boxscore: Boxscore?
     
     lazy var winningPitcher: Player? = {
-        guard let winningPitcherID = winningPitcherID, let player = players[winningPitcherID] else {
+        guard let winningPitcherID = decisions?.winner.id, let player = players[winningPitcherID] else {
             return nil
         }
         return player
     }()
     
     lazy var losingPitcher: Player? = {
-        guard let losingPitcherID = losingPitcherID, let player = players[losingPitcherID] else {
+        guard let losingPitcherID = decisions?.loser.id, let player = players[losingPitcherID] else {
             return nil
         }
         return player

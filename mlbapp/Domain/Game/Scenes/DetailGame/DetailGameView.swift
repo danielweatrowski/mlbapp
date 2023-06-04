@@ -30,9 +30,11 @@ struct DetailGameView: View {
                     .listRowInsets(EdgeInsets())
                     .padding()
             }
-            Section("Decisions") {
-                DecisionsInfoView(viewModel: $viewModel.decisionsViewModel)
-                    .listRowInsets(EdgeInsets())
+            if let _ = viewModel.decisionsViewModel {
+                Section("Decisions") {
+                    DecisionsInfoView(viewModel: $viewModel.decisionsViewModel)
+                        .listRowInsets(EdgeInsets())
+                }
             }
             
             Section("Game Details") {

@@ -38,7 +38,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
 
         let lineScoreViewModel = formatLineScore(for: game)
         
-        let decisionsViewModel = formatDecisions(boxscore: game.boxscore, players: game.players)
+        let decisionsViewModel = formatDecisions(decisions: game.decisions, boxscore: game.boxscore, players: game.players)
         
         DispatchQueue.main.async {
             viewModel.navigationTitle = "\(game.awayTeam.abbreviation) @ \(game.homeTeam.abbreviation)"
@@ -48,6 +48,21 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
             viewModel.homeTeamAbbreviation = game.homeTeam.abbreviation
             viewModel.awayTeamAbbreviation = game.awayTeam.abbreviation
         }
+    }
+    
+    func formatDecisions(decisions: Decisions?, boxscore: Boxscore?, players: [Int: Player]) -> DecisionsInfoViewModel? {
+        guard let decisions = decisions, let losingPitcher = boxscore?.pitcher(withID: decisions.loser.id), let winningPitcher = boxscore?.pitcher(withID: decisions.winner.id) else {
+            return nil
+        }
+        
+        return DecisionsInfoViewModel(winningPitcherName: players[winningPitcher.playerID]?.boxscoreName ?? winningPitcher.fullName,
+                                             winningPitcherWins: winningPitcher.stats.seasonWins ?? 0,
+                                             winningPitcherLosses: winningPitcher.stats.seasonLosses ?? 0,
+                                             winningPitcherERA: winningPitcher.stats.era ?? "--",
+                                      losingPitcherName: players[losingPitcher.playerID]?.boxscoreName ?? losingPitcher.fullName,
+                                             losingPitcherWins: losingPitcher.stats.seasonWins ?? 0,
+                                             losingPitcherLosses: losingPitcher.stats.seasonLosses ?? 0,
+                                             losingPitcherERA: losingPitcher.stats.era ?? "--")
     }
     
     func formatDecisions(boxscore: Boxscore?, players: [Int: Player]) -> DecisionsInfoViewModel? {

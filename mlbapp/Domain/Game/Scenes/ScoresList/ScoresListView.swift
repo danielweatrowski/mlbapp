@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ScoresListView: View {
     
+    @EnvironmentObject var router: Router
     var interactor: ScoresListBusinessLogic?
     @StateObject private var viewModel: ScoresList.ViewModel
     

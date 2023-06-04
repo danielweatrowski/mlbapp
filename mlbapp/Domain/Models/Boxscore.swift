@@ -95,6 +95,19 @@ struct Boxscore: Hashable, Equatable {
 }
 
 extension Boxscore {
+    func pitcher(withID id: Int)  -> Pitcher? {
+        let homePitcher = home.pitchers.first(where: {$0.playerID == id})
+        if let pitcher = homePitcher {
+            return pitcher
+        }
+        
+        let awayPitcher = away.pitchers.first(where: {$0.playerID == id})
+        if let pitcher = awayPitcher {
+            return pitcher
+        }
+        return nil
+    }
+    
     var winningPitcher: Pitcher? {
         let homePitcher = home.pitchers.first(where: {$0.stats.didWin})
         if let pitcher = homePitcher {
