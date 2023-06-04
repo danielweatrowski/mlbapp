@@ -23,28 +23,48 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
             
             let homeAbbreviation = homeTeam?.abbreviation ?? "NA"
             let awayAbbreviation = awayTeam?.abbreviation ?? "NA"
+            let linescoreViewModel = formatLineScore(gameResult: result,
+                                            homeAbbreviation: homeAbbreviation,
+                                            awayAbbrevation: awayAbbreviation)
+            
+            // show date for future games
+            let statusLabel = Calendar.current.isDateInToday(result.gameDate)
+            ? result.state
+            : result.gameDate.formatted()
             
             return ListGameRowViewModel(gameID: result.id,
-                                 gameDate: result.gameDate.formatted(),
-                                 gameVenueName: result.venueName,
-                                 homeTeamID: result.homeTeam.id,
-                                 homeTeamName: result.homeTeam.name,
-                                 homeTeamAbbreviation: homeAbbreviation,
-                                 homeTeamScore: String(result.homeTeam.score),
-                                 homeTeamRecord: result.homeTeam.record,
-                                 homeTeamLogoName: "",
-                                 awayTeamID: result.awayTeam.id,
-                                 awayTeamName: result.awayTeam.name,
-                                 awayTeamAbbreviation: awayAbbreviation,
-                                 awayTeamScore: String(result.awayTeam.score),
-                                 awayTeamRecord: result.awayTeam.record,
-                                 awayTeamLogoName: "")
+                                        gameDate: statusLabel,
+                                     gameVenueName: result.venueName,
+                                     homeTeamID: result.homeTeam.id,
+                                     homeTeamName: result.homeTeam.name,
+                                     homeTeamAbbreviation: homeAbbreviation,
+                                     homeTeamScore: String(result.homeTeam.score),
+                                     homeTeamRecord: result.homeTeam.record,
+                                     homeTeamLogoName: "",
+                                     awayTeamID: result.awayTeam.id,
+                                     awayTeamName: result.awayTeam.name,
+                                     awayTeamAbbreviation: awayAbbreviation,
+                                     awayTeamScore: String(result.awayTeam.score),
+                                     awayTeamRecord: result.awayTeam.record,
+                                        awayTeamLogoName: "",
+                                        linescoreViewModel: linescoreViewModel)
         }
         
         DispatchQueue.main.async {
             viewModel.rows = listGameRows
             viewModel.state = .loaded
         }
+    }
+    
+    private func formatLineScore(gameResult: GameSearch.Result, homeAbbreviation: String, awayAbbrevation: String) -> LinescoreGridViewModel? {
+        
+        guard let linescore = gameResult.linescore else {
+            return nil
+        }
+        
+        return LinescoreGridViewModel(homeAbbreviation: homeAbbreviation,
+                                      awayAbbreviation: awayAbbrevation,
+                                      linescore)
     }
 
 }

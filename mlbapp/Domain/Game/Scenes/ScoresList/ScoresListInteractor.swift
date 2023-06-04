@@ -25,12 +25,16 @@ class ScoresListInteractor: ScoresListBusinessLogic {
     func loadScores() {
         
         Task {
-            let lookupResults = try await gameWorker.searchGame(with: .init(homeTeamID: nil,
-                                                                            awayTeamID: nil,
-                                                                            startDate: Date(),
-                                                                            endDate: Date()))
-            let output = ScoresList.Output(results: lookupResults)
-            presenter?.presentScoresList(output: output)
+            do {
+                let lookupResults = try await gameWorker.searchGame(with: .init(homeTeamID: nil,
+                                                                                awayTeamID: nil,
+                                                                                startDate: Date(),
+                                                                                endDate: Date()))
+                let output = ScoresList.Output(results: lookupResults)
+                presenter?.presentScoresList(output: output)
+            } catch {
+                print(error)
+            }
         }
     }
     

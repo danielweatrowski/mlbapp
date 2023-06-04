@@ -23,9 +23,15 @@ struct MLBLinescore: Codable {
         var leftOnBase: Int?
     }
     
+    struct Teams: Codable {
+        var home: LineItem?
+        var away: LineItem?
+    }
+    
     var innings: [Inning]
-    var homeTotal: LineItem
-    var awayTotal: LineItem
+    var teams: Teams
+//    var home: LineItem?
+//    var away: LineItem?
     var winner: MLBPitcher?
     var loser: MLBPitcher?
 }

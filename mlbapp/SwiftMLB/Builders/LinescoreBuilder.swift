@@ -27,8 +27,9 @@ struct LinescoreBuilder: JSONBuilder {
         
         return [
             "innings": linescore["innings"] ?? [:],
-            "homeTotal": teams["home"] ?? [:],
-            "awayTotal": teams["away"] ?? [:],
+            "teams": teams,
+            "home": teams["home"] ?? [:],
+            "away": teams["away"] ?? [:],
             "winner": decisions["winner"] ?? [:],
             "loser": decisions["loser"] ?? [:]
         ]

@@ -25,7 +25,8 @@ struct DetailGameView: View {
             Section {
                 DetailGameHeaderView(viewModel: $viewModel.headerViewModel)
                     .listRowInsets(EdgeInsets())
-                LinescoreGridView(viewModel: $viewModel.lineScoreViewModel)
+                LinescoreGridView(viewModel: $viewModel.lineScoreViewModel,
+                                  embedInScrollView: true)
                     .listRowInsets(EdgeInsets())
                     .padding()
             }

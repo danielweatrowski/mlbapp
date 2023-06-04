@@ -35,7 +35,8 @@ struct ListGamePresenter {
                                  awayTeamAbbreviation: awayAbbreviation,
                                  awayTeamScore: String(result.awayTeam.score),
                                  awayTeamRecord: result.awayTeam.record,
-                                 awayTeamLogoName: "")
+                                        awayTeamLogoName: "",
+                                        linescoreViewModel: nil)
         }
         
         DispatchQueue.main.async {

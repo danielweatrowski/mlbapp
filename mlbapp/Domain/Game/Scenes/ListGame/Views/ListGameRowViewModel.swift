@@ -25,11 +25,17 @@ struct ListGameRowViewModel {
     let awayTeamRecord: String
     let awayTeamLogoName: String
     
+    let linescoreViewModel: LinescoreGridViewModel?
+    
     var awayTeamDidWin: Bool {
         return awayTeamScore > homeTeamScore
     }
     
     var homeTeamDidWin: Bool {
         return awayTeamScore < homeTeamScore
+    }
+    
+    var showLinescore: Bool {
+        return linescoreViewModel != nil
     }
 }

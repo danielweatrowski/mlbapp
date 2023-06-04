@@ -20,6 +20,8 @@ struct MLBSchedule: Codable {
         let gameType: String
         let gameInSeries: Int?
         let seriesGameNumber: Int?
+        let linescore: MLBLinescore?
+        let status: MLBGameState
         
         struct Teams: Codable {
             
@@ -31,6 +33,7 @@ struct MLBSchedule: Codable {
                 let score: Int?
                 let team: Team
                 let leagueRecord: LeagueRecord
+                let probablePitcher: ProbablePitcher?
                 
                 struct LeagueRecord: Codable {
                     
@@ -44,7 +47,15 @@ struct MLBSchedule: Codable {
                     let id: Int
                     let name: String
                 }
+                
+                struct ProbablePitcher: Codable {
+                    let id: Int
+                    let fullName: String
+                    let link: String
+                }
             }
         }
+        
+        
     }
 }

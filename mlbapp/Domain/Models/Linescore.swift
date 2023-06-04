@@ -16,14 +16,14 @@ struct Linescore {
     }
     
     struct LineItem: Codable {
-        var runs: Int
-        var hits: Int
-        var errors: Int
+        var runs: Int?
+        var hits: Int?
+        var errors: Int?
     }
     
     var innings: [Inning]
-    var homeTotal: LineItem
-    var awayTotal: LineItem
+    var homeTotal: LineItem?
+    var awayTotal: LineItem?
     
 //    var winner: MLBPitcher?
 //    var loser: MLBPitcher?

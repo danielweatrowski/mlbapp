@@ -19,21 +19,28 @@ struct MLBAPIService: GameStoreProtocol {
         
         let schedule = try await SwiftMLB.schedule(parameters: searchParameters)
         
-        let games = schedule.games.map({
-            GameSearch.Result(id: $0.gamePk,
-                              gameDate: $0.gameDate,
-                              venueName: $0.venue.name,
-                              awayTeam: GameSearch.Result.Team(id: $0.teams.away.team.id,
-                                                               name: $0.teams.away.team.name,
-                                                               score: $0.teams.away.score ?? -1,
-                                                               wins: $0.teams.away.leagueRecord.wins,
-                                                               losses: $0.teams.away.leagueRecord.losses),
-                              homeTeam: GameSearch.Result.Team(id: $0.teams.home.team.id,
-                                                               name: $0.teams.home.team.name,
-                                                               score: $0.teams.home.score ?? -1 ,
-                                                               wins: $0.teams.home.leagueRecord.wins,
-                                                               losses: $0.teams.home.leagueRecord.losses))
-        })
+        let games = schedule.games.map { gameDTO in
+            var linescore: Linescore?
+            if let linescoreDTO = gameDTO.linescore {
+                linescore = LinescoreAdapter(dataObject: linescoreDTO).toDomain()
+            }
+            
+            return GameSearch.Result(id: gameDTO.gamePk,
+                              gameDate: gameDTO.gameDate,
+                                     venueName: gameDTO.venue.name,
+                                     state: gameDTO.status.detailedState,
+                              awayTeam: GameSearch.Result.Team(id: gameDTO.teams.away.team.id,
+                                                               name: gameDTO.teams.away.team.name,
+                                                               score: gameDTO.teams.away.score ?? -1,
+                                                               wins: gameDTO.teams.away.leagueRecord.wins,
+                                                               losses: gameDTO.teams.away.leagueRecord.losses),
+                              homeTeam: GameSearch.Result.Team(id: gameDTO.teams.home.team.id,
+                                                               name: gameDTO.teams.home.team.name,
+                                                               score: gameDTO.teams.home.score ?? -1 ,
+                                                               wins: gameDTO.teams.home.leagueRecord.wins,
+                                                               losses: gameDTO.teams.home.leagueRecord.losses),
+                              linescore: linescore)
+        }
         
         return games
     }
@@ -98,9 +105,9 @@ struct MLBAPIService: GameStoreProtocol {
         let game = Game(id: id,
                         date: gameDTO.gameDate,
                         homeTeam: homeTeam,
-                        homeTeamScore: gameDTO.linescore.homeTotal.runs ?? 0,
+                        homeTeamScore: gameDTO.linescore.teams.home?.runs ?? 0,
                         awayTeam: awayTeam,
-                        awayTeamScore: gameDTO.linescore.awayTotal.runs ?? 0,
+                        awayTeamScore: gameDTO.linescore.teams.away?.runs ?? 0,
                         venue: gameVenue,
                         players: players,
                         winningPitcherID: gameDTO.decisions.winner.id,

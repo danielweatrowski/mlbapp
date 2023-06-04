@@ -74,6 +74,13 @@ struct ListGameRow: View {
                 
             }
             .font(.system(size: 17, weight: .medium, design: .default))
+            
+            if viewModel.showLinescore {
+                Divider()
+                LinescoreGridView(viewModel: .constant(viewModel.linescoreViewModel),
+                                  embedInScrollView: false)
+                    .listRowInsets(EdgeInsets())
+            }
         }
         .padding()
     }
@@ -95,7 +102,8 @@ struct ListGameRow_Previews: PreviewProvider {
                                              awayTeamAbbreviation: "SDD",
                                              awayTeamScore: "3",
                                              awayTeamRecord: "3-7",
-                                             awayTeamLogoName: "")
+                                             awayTeamLogoName: "",
+                                             linescoreViewModel: nil)
         ListGameRow(viewModel: viewModel)
             .previewLayout(.fixed(width: 400, height: 200))
     }

@@ -28,9 +28,10 @@ enum GameSearch {
         let id: Int
         let gameDate: Date
         let venueName: String
+        let state: String
         let awayTeam: Team
         let homeTeam: Team
-        
+        let linescore: Linescore?
         
         struct Team {
             let id: Int

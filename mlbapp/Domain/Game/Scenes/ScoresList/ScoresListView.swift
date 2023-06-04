@@ -22,6 +22,7 @@ struct ScoresListView: View {
             case .loading:
                 ProgressView()
             case .loaded:
+                // TODO: Try using ListGameView.configure(_:) here
                 ScrollView {
                     gameList
                 }

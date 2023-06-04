@@ -17,11 +17,12 @@ struct LinescoreGridView: View {
     }
     
     @Binding var viewModel: LinescoreGridViewModel?
+    var embedInScrollView: Bool
     
     var body: some View {
         if let viewModel = viewModel {
             
-            if interfaceSize.portrait {
+            if interfaceSize.portrait, embedInScrollView {
                 ScrollView(.horizontal, showsIndicators: false) {
                     linescoreGrid(with: viewModel)
                 }

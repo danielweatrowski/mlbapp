@@ -9,14 +9,25 @@ import Foundation
 
 public extension SwiftMLBRequest {
     struct ScheduleParameters {
+        
+        struct Options {
+            let includeLinescore: Bool
+            let includeDecisions: Bool
+            let includeProbablePitchers: Bool
+        }
+        
         var startDate: Date?
         var endDate: Date?
         var teamIdentifier: String?
         var opponentIdentifier: String?
         var gameType: String?
+        var options: Options = .init(includeLinescore: true,
+                                     includeDecisions: true,
+                                     includeProbablePitchers: true)
+        
         
         func toQueryItems() -> [URLQueryItem] {
-            return [
+            var items = [
                 URLQueryItem(name: "startDate", value: startDate?.formatted(date: .numeric, time: .omitted)),
                 URLQueryItem(name: "endDate", value: endDate?.formatted(date: .numeric, time: .omitted)),
                 URLQueryItem(name: "teamId", value: teamIdentifier),
@@ -24,6 +35,25 @@ public extension SwiftMLBRequest {
                 URLQueryItem(name: "gameType", value: gameType),
                 URLQueryItem(name: "sportId", value: "1")
             ]
+            
+            var hydrations: [String] = []
+            if options.includeLinescore {
+                hydrations.append("linescore")
+            }
+            if options.includeProbablePitchers {
+                hydrations.append("probablePitchers")
+            }
+            if options.includeDecisions {
+                hydrations.append("decisions")
+
+            }
+            
+            if !hydrations.isEmpty {
+                let value = hydrations.joined(separator: ",")
+                items.append(URLQueryItem(name: "hydrate", value: value))
+            }
+            
+            return items
         }
     }
     
