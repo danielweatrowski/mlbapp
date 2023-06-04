@@ -18,7 +18,7 @@ protocol BoxscoreDetailDataStore  {
 struct BoxscoreDetailInteractor: BoxscoreDetailBusinessLogic & BoxscoreDetailDataStore {
     
     let presenter: BoxscoreDetailPresentationLogic?
-    var gameWorker = GameWorker(store: MLBAPIService())
+    var gameWorker = GameWorker(store: MLBAPIRepository())
     var gameID: Int
     
     func loadBoxscore() {

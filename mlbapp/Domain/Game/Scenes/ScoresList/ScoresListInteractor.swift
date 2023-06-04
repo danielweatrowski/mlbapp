@@ -16,7 +16,7 @@ class ScoresListInteractor: ScoresListBusinessLogic {
     
     let presenter: ScoresListPresentationLogic?
     
-    private let gameWorker = GameWorker(store: MLBAPIService())
+    private let gameWorker = GameWorker(store: MLBAPIRepository())
     
     init(presenter: ScoresListPresentationLogic?) {
         self.presenter = presenter

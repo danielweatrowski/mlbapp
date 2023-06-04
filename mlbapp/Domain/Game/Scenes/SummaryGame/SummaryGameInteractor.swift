@@ -18,7 +18,7 @@ protocol SummaryGameDataStore  {
 struct SummaryGameInteractor: SummaryGameBusinessLogic & SummaryGameDataStore {
     
     let presenter: SummaryGamePresentationLogic?
-    var gameWorker = GameWorker(store: MLBAPIService())
+    var gameWorker = GameWorker(store: MLBAPIRepository())
     var gameID: Int
     
     func loadGameSummary() {

@@ -47,6 +47,9 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
                                      awayTeamScore: String(result.awayTeam.score),
                                      awayTeamRecord: result.awayTeam.record,
                                         awayTeamLogoName: "",
+                                        winningPitcherName: result.decisions?.winnerName,
+                                        losingPitcherName: result.decisions?.loserName,
+                                        savePitcherName: result.decisions?.saveName,
                                         linescoreViewModel: linescoreViewModel)
         }
         

@@ -24,6 +24,9 @@ struct ListGameRowViewModel {
     let awayTeamScore: String
     let awayTeamRecord: String
     let awayTeamLogoName: String
+    let winningPitcherName: String?
+    let losingPitcherName: String?
+    let savePitcherName: String?
     
     let linescoreViewModel: LinescoreGridViewModel?
     
@@ -37,5 +40,9 @@ struct ListGameRowViewModel {
     
     var showLinescore: Bool {
         return linescoreViewModel != nil
+    }
+    
+    var showDecisions: Bool {
+        winningPitcherName != nil && losingPitcherName != nil
     }
 }

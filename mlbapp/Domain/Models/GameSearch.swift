@@ -32,6 +32,7 @@ enum GameSearch {
         let awayTeam: Team
         let homeTeam: Team
         let linescore: Linescore?
+        let decisions: Decisions?
         
         struct Team {
             let id: Int
@@ -43,6 +44,12 @@ enum GameSearch {
             var record: String {
                 return "\(wins)-\(losses)"
             }
+        }
+        
+        struct Decisions {
+            let winnerName: String?
+            let loserName: String?
+            let saveName: String?
         }
     }
 }

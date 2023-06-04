@@ -81,30 +81,64 @@ struct ListGameRow: View {
                                   embedInScrollView: false)
                     .listRowInsets(EdgeInsets())
             }
+            
+            if viewModel.showDecisions, let winner = viewModel.winningPitcherName, let loser = viewModel.losingPitcherName {
+                Divider()
+                HStack {
+                    HStack {
+                        Text("W:")
+                            .bold()
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        Text(winner)
+                            .font(.subheadline)
+                    }
+                    HStack {
+                        Text("L:")
+                            .bold()
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        Text(loser)
+                            .font(.subheadline)
+                    }
+                    
+                    if let saver = viewModel.savePitcherName {
+                        HStack {
+                            Text("S:")
+                                .bold()
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            Text(saver)
+                                .font(.subheadline)
+                        }
+                    }
+                }
+                .padding(.top, 4)
+            }
         }
         .padding()
     }
 
 }
 
-struct ListGameRow_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = ListGameRowViewModel(gameID: 1, gameDate: "June 22, 2004",
-                                             gameVenueName: "The Sandlot",
-                                             homeTeamID: 119,
-                                             homeTeamName: "Rockstars",
-                                             homeTeamAbbreviation: "SDR",
-                                             homeTeamScore: "9",
-                                             homeTeamRecord: "10-1",
-                                             homeTeamLogoName: "",
-                                             awayTeamID: 114,
-                                             awayTeamName: "Dancers",
-                                             awayTeamAbbreviation: "SDD",
-                                             awayTeamScore: "3",
-                                             awayTeamRecord: "3-7",
-                                             awayTeamLogoName: "",
-                                             linescoreViewModel: nil)
-        ListGameRow(viewModel: viewModel)
-            .previewLayout(.fixed(width: 400, height: 200))
-    }
-}
+//struct ListGameRow_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let viewModel = ListGameRowViewModel(gameID: 1, gameDate: "June 22, 2004",
+//                                             gameVenueName: "The Sandlot",
+//                                             homeTeamID: 119,
+//                                             homeTeamName: "Rockstars",
+//                                             homeTeamAbbreviation: "SDR",
+//                                             homeTeamScore: "9",
+//                                             homeTeamRecord: "10-1",
+//                                             homeTeamLogoName: "",
+//                                             awayTeamID: 114,
+//                                             awayTeamName: "Dancers",
+//                                             awayTeamAbbreviation: "SDD",
+//                                             awayTeamScore: "3",
+//                                             awayTeamRecord: "3-7",
+//                                             awayTeamLogoName: "",
+//                                             linescoreViewModel: nil)
+//        ListGameRow(viewModel: viewModel)
+//            .previewLayout(.fixed(width: 400, height: 200))
+//    }
+//}

@@ -21,7 +21,8 @@ struct MLBSchedule: Codable {
         let gameInSeries: Int?
         let seriesGameNumber: Int?
         let linescore: MLBLinescore?
-        let status: MLBGameState
+        let status: MLBGameStatus
+        let decisions: MLBGameDecision?
         
         struct Teams: Codable {
             

@@ -19,7 +19,7 @@ protocol SearchGameDataStore {
 class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
     
     var presenter: SearchGamePresentationLogic
-    var gameWorker = GameWorker(store: MLBAPIService())
+    var gameWorker = GameWorker(store: MLBAPIRepository())
 
     private var cancellable: AnyCancellable?
     

@@ -7,8 +7,7 @@
 
 import Foundation
 
-// TODO: MLBAPIRepository
-struct MLBAPIService: GameStoreProtocol {    
+struct MLBAPIRepository: GameStoreProtocol {    
     func searchGame(with parameters: GameSearch.SearchParameters) async throws -> [GameSearch.Result] {
         
         let searchParameters = SwiftMLBRequest.ScheduleParameters(startDate: parameters.startDate,
@@ -25,6 +24,13 @@ struct MLBAPIService: GameStoreProtocol {
                 linescore = LinescoreAdapter(dataObject: linescoreDTO).toDomain()
             }
             
+            var decisions: GameSearch.Result.Decisions?
+            if let decisionsDTO = gameDTO.decisions {
+                decisions = .init(winnerName: decisionsDTO.winner?.fullName,
+                                  loserName: decisionsDTO.loser?.fullName,
+                                  saveName: decisionsDTO.save?.fullName)
+            }
+            
             return GameSearch.Result(id: gameDTO.gamePk,
                               gameDate: gameDTO.gameDate,
                                      venueName: gameDTO.venue.name,
@@ -39,7 +45,8 @@ struct MLBAPIService: GameStoreProtocol {
                                                                score: gameDTO.teams.home.score ?? -1 ,
                                                                wins: gameDTO.teams.home.leagueRecord.wins,
                                                                losses: gameDTO.teams.home.leagueRecord.losses),
-                              linescore: linescore)
+                                     linescore: linescore,
+                                     decisions: decisions)
         }
         
         return games

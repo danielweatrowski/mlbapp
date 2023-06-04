@@ -21,7 +21,7 @@ protocol DetailGameDataStore  {
 class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore, ObservableObject {
     
     var presenter: DetailGamePresentationLogic
-    var gameWorker = GameWorker(store: MLBAPIService())
+    var gameWorker = GameWorker(store: MLBAPIRepository())
     var gameID: Int
     
     var playerHash: [Int: Player]? = nil
