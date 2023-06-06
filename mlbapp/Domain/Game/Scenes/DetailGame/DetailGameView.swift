@@ -12,55 +12,76 @@ struct DetailGameView: View {
     @StateObject var interactor: DetailGameInteractor
     @EnvironmentObject var router: Router
     @StateObject var viewModel: DetailGame.ViewModel
-    @State private var teamBoxSelection = 0
-    
-    private var selectedTeamAbbreviation: String {
-        return teamBoxSelection == 0
-        ? viewModel.homeTeamAbbreviation
-        : viewModel.awayTeamAbbreviation
-    }
     
     var body: some View {
+        Group {
+            switch viewModel.state {
+            case .loading:
+                ProgressView()
+            case .loaded:
+                list
+            case .error:
+                EmptyView()
+            }
+        }
+        .navigationTitle(viewModel.navigationTitle)
+        .onAppear {
+            interactor.loadGame()
+        }
+    }
+    
+    @ViewBuilder
+    var list: some View {
         List {
             Section {
                 DetailGameHeaderView(viewModel: $viewModel.headerViewModel)
                     .listRowInsets(EdgeInsets())
-                LinescoreGridView(viewModel: $viewModel.lineScoreViewModel,
-                                  embedInScrollView: true)
-                    .listRowInsets(EdgeInsets())
-                    .padding()
+                
+                if viewModel.isGameLiveOrFinal {
+                    LinescoreGridView(viewModel: $viewModel.lineScoreViewModel,
+                                      embedInScrollView: true)
+                        .listRowInsets(EdgeInsets())
+                        .padding()
+                    NavigationLink("Summary", value: RouterDestination.summaryGame(gameID: viewModel.gameID))
+                    NavigationLink("Boxscore", value: RouterDestination.boxscore(gameID: viewModel.gameID,
+                                                                                 formattedGameDate: viewModel.gameDate,
+                                                                                 homeTeamAbbreviation: viewModel.homeTeamAbbreviation,
+                                                                                 awayTeamAbbreviation: viewModel.awayTeamAbbreviation,
+                                                                                 players: interactor.playerHash ?? [:]))
+                }
             }
-            if let _ = viewModel.decisionsViewModel {
+            
+            if viewModel.showProbablePitchers {
+                Section("Probable Pitchers") {
+                    ProbablePitchersView(viewModel: viewModel.probablePitchersViewModel)
+                }
+            }
+            
+            if viewModel.showDecisions {
                 Section("Decisions") {
                     DecisionsInfoView(viewModel: $viewModel.decisionsViewModel)
                         .listRowInsets(EdgeInsets())
                 }
             }
             
-            Section("Game Details") {
-                NavigationLink("Summary", value: RouterDestination.summaryGame(gameID: viewModel.gameID))
-                NavigationLink("Boxscore", value: RouterDestination.boxscore(gameID: viewModel.gameID,
-                                                                             formattedGameDate: viewModel.gameDate,
-                                                                             homeTeamAbbreviation: viewModel.homeTeamAbbreviation,
-                                                                             awayTeamAbbreviation: viewModel.awayTeamAbbreviation,
-                                                                             players: interactor.playerHash ?? [:]))
+            Section("Team Details") {
                 NavigationLink("Starting Lineups", value: RouterDestination.lineupDetail(gameID: viewModel.gameID,
                                                                                          boxscore: interactor.boxscore))
-                NavigationLink("Roster", value: RouterDestination.empty)
+                NavigationLink("Rosters", value: RouterDestination.empty)
             }
             
             Section("Game Info") {
-                // TODO
+                ForEach(viewModel.infoItems, id: \.self) { item in
+                    HStack {
+                        Text(item.type.title)
+                        Spacer()
+                        Text(item.value)
+                    }
+                }
             }
         }
         .listStyle(.insetGrouped)
-        .navigationTitle(viewModel.navigationTitle)
-        .background(Color(uiColor: .systemGroupedBackground))
-        .onAppear {
-            interactor.loadGame()
-        }
     }
-    
     
 }
 

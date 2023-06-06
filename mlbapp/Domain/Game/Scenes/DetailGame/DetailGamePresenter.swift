@@ -5,7 +5,7 @@
 //  Created by Daniel Weatrowski on 11/6/22.
 //
 
-import Foundation
+import SwiftUI
 
 protocol DetailGamePresentationLogic {
     func presentGame(response: DetailGame.DetailGame.Response)
@@ -23,6 +23,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
             return
         }
         
+        let formattedStatus = formatStatusBanner(gameStatus: game.status)
         let headerViewModel = DetailGameHeaderViewModel(homeTeamID: game.homeTeam.id,
                                                         homeTeamName: game.homeTeam.teamName,
                                                         homeTeamAbbreviation: game.homeTeam.abbreviation,
@@ -34,11 +35,54 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                                         awayTeamScore: String(game.awayTeamScore),
                                                         awayTeamRecord: awayTeamRecord.formatted(),
                                                         gameDate: game.date.formatted(),
-                                                        venueName: game.venue.name)
+                                                        venueName: game.venue.name,
+                                                        statusText: formattedStatus?.0,
+                                                        statusBackgroundColor: formattedStatus?.1)
 
         let lineScoreViewModel = formatLineScore(for: game)
         
-        let decisionsViewModel = formatDecisions(decisions: game.decisions, boxscore: game.boxscore, players: game.players)
+        let decisionsViewModel = formatDecisions(decisions: game.decisions,
+                                                 boxscore: game.boxscore,
+                                                 players: game.players)
+        
+        let probablePitchersViewModel = formatProbablePitchers(probablePitchers: game.probablePitchers,
+                                                               homeTeamName: game.homeTeam.teamName,
+                                                               awayTeamName: game.awayTeam.teamName)
+        
+        // remove all previous info items to avoid duplication
+        DispatchQueue.main.async {
+            viewModel.infoItems.removeAll()
+        }
+        
+        for type in DetailGame.GameInfoItem.InfoType.allCases {
+            
+            var item: DetailGame.GameInfoItem?
+            
+            switch type {
+            case .venue:
+                item = DetailGame.GameInfoItem(type: type, value: game.venue.name)
+            case .firstPitchTime:
+                item = DetailGame.GameInfoItem(type: type, value: game.info.firstPitchDate?.formatted(date: .omitted, time: .shortened) ?? "TBD")
+            case .wind:
+                item = DetailGame.GameInfoItem(type: type, value: game.info.windDescription ?? "-")
+            case .weather:
+                item = DetailGame.GameInfoItem(type: type, value: game.info.weatherTempurature ?? "-")
+            case .attendance:
+                item = DetailGame.GameInfoItem(type: type, value: game.info.attendance.formattedStat())
+            case .duration:
+                if let duration = game.info.gameDurationInMinutes {
+                    item = DetailGame.GameInfoItem(type: type, value: "\(duration) min")
+                } else {
+                    item = DetailGame.GameInfoItem(type: type, value: "-")
+                }
+            }
+            
+            if let item = item {
+                DispatchQueue.main.async {
+                    viewModel.infoItems.append(item)
+                }
+            }
+        }
         
         DispatchQueue.main.async {
             viewModel.navigationTitle = "\(game.awayTeam.abbreviation) @ \(game.homeTeam.abbreviation)"
@@ -47,7 +91,32 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
             viewModel.decisionsViewModel = decisionsViewModel
             viewModel.homeTeamAbbreviation = game.homeTeam.abbreviation
             viewModel.awayTeamAbbreviation = game.awayTeam.abbreviation
+            viewModel.probablePitchersViewModel = probablePitchersViewModel
+            
+            viewModel.gameStatus = game.status
+            viewModel.state = .loaded
         }
+    }
+    
+    func formatStatusBanner(gameStatus: GameStatus) -> (String, Color)? {
+        switch gameStatus {
+        case .live:
+            return (gameStatus.friendlyName.uppercased(), .green)
+        case .final:
+            return (gameStatus.friendlyName.uppercased(), .red)
+        default: return nil
+        }
+    }
+    
+    func formatProbablePitchers(probablePitchers: ProbablePitchers?, homeTeamName: String, awayTeamName: String) -> ProbablePitchersViewModel? {
+        guard let probablePitchers = probablePitchers, probablePitchers.hasPitcherData else {
+            return nil
+        }
+        
+        return ProbablePitchersViewModel(homeTeamName: homeTeamName,
+                                         homeTeamProbablePitcher: probablePitchers.home?.fullName,
+                                         awayTeamName: awayTeamName,
+                                         awayTeamProbablePitcher: probablePitchers.away?.fullName)
     }
     
     func formatDecisions(decisions: Decisions?, boxscore: Boxscore?, players: [Int: Player]) -> DecisionsInfoViewModel? {
@@ -55,19 +124,9 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
             return nil
         }
         
-        return DecisionsInfoViewModel(winningPitcherName: players[winningPitcher.playerID]?.boxscoreName ?? winningPitcher.fullName,
-                                             winningPitcherWins: winningPitcher.stats.seasonWins ?? 0,
-                                             winningPitcherLosses: winningPitcher.stats.seasonLosses ?? 0,
-                                             winningPitcherERA: winningPitcher.stats.era ?? "--",
-                                      losingPitcherName: players[losingPitcher.playerID]?.boxscoreName ?? losingPitcher.fullName,
-                                             losingPitcherWins: losingPitcher.stats.seasonWins ?? 0,
-                                             losingPitcherLosses: losingPitcher.stats.seasonLosses ?? 0,
-                                             losingPitcherERA: losingPitcher.stats.era ?? "--")
-    }
-    
-    func formatDecisions(boxscore: Boxscore?, players: [Int: Player]) -> DecisionsInfoViewModel? {
-        guard let winningPitcher = boxscore?.winningPitcher, let losingPitcher = boxscore?.losingPitcher else {
-            return nil
+        var savingPitcher: Boxscore.Pitcher?
+        if let savingPitcherID = decisions.save?.id {
+            savingPitcher = boxscore?.pitcher(withID: savingPitcherID)
         }
         
         return DecisionsInfoViewModel(winningPitcherName: players[winningPitcher.playerID]?.boxscoreName ?? winningPitcher.fullName,
@@ -77,7 +136,10 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                       losingPitcherName: players[losingPitcher.playerID]?.boxscoreName ?? losingPitcher.fullName,
                                              losingPitcherWins: losingPitcher.stats.seasonWins ?? 0,
                                              losingPitcherLosses: losingPitcher.stats.seasonLosses ?? 0,
-                                             losingPitcherERA: losingPitcher.stats.era ?? "--")
+                                      losingPitcherERA: losingPitcher.stats.era ?? "--",
+                                      savingPitcherName: players[savingPitcher?.playerID ?? -1]?.boxscoreName,
+                                      savingPitcherWins: savingPitcher?.stats.seasonWins ?? 0,
+                                      savingPitcherLosses: savingPitcher?.stats.seasonLosses ?? 0, savingPitcherERA: savingPitcher?.stats.era ?? "--")
     }
    
     private func formatLineScore(for game: Game) -> LinescoreGridViewModel? {

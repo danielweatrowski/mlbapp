@@ -50,6 +50,13 @@
 		66510D472A2D1F8100DB41B8 /* MLBGameDecision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66510D462A2D1F8100DB41B8 /* MLBGameDecision.swift */; };
 		66510D4A2A2D2DFB00DB41B8 /* Decisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66510D492A2D2DFB00DB41B8 /* Decisions.swift */; };
 		66510D4C2A2D302200DB41B8 /* DecisionsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66510D4B2A2D302200DB41B8 /* DecisionsAdapter.swift */; };
+		66510D4E2A2D596200DB41B8 /* MLBProbablePitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66510D4D2A2D596100DB41B8 /* MLBProbablePitcher.swift */; };
+		66510D502A2D96CE00DB41B8 /* DetailGamePitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66510D4F2A2D96CE00DB41B8 /* DetailGamePitcherView.swift */; };
+		66510D522A2D9BEB00DB41B8 /* ProbablePitchersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66510D512A2D9BEB00DB41B8 /* ProbablePitchersView.swift */; };
+		66510D552A2E722800DB41B8 /* ProbablePitchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66510D542A2E722800DB41B8 /* ProbablePitchers.swift */; };
+		66510D582A2E738A00DB41B8 /* ProbablePitchersAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66510D572A2E738A00DB41B8 /* ProbablePitchersAdapter.swift */; };
+		66510D5A2A2E7F5700DB41B8 /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66510D592A2E7F5700DB41B8 /* GameStatus.swift */; };
+		66510D5C2A2E8C6300DB41B8 /* StatusBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66510D5B2A2E8C6300DB41B8 /* StatusBannerView.swift */; };
 		6652D70929F30DDE00DEE161 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6652D70829F30DDE00DEE161 /* Play.swift */; };
 		6652D70B29F3495900DEE161 /* SummaryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6652D70A29F3495900DEE161 /* SummaryGame.swift */; };
 		6652D70D29F34B6A00DEE161 /* SummaryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6652D70C29F34B6A00DEE161 /* SummaryGameView.swift */; };
@@ -194,6 +201,13 @@
 		66510D462A2D1F8100DB41B8 /* MLBGameDecision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBGameDecision.swift; sourceTree = "<group>"; };
 		66510D492A2D2DFB00DB41B8 /* Decisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decisions.swift; sourceTree = "<group>"; };
 		66510D4B2A2D302200DB41B8 /* DecisionsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionsAdapter.swift; sourceTree = "<group>"; };
+		66510D4D2A2D596100DB41B8 /* MLBProbablePitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBProbablePitcher.swift; sourceTree = "<group>"; };
+		66510D4F2A2D96CE00DB41B8 /* DetailGamePitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGamePitcherView.swift; sourceTree = "<group>"; };
+		66510D512A2D9BEB00DB41B8 /* ProbablePitchersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProbablePitchersView.swift; sourceTree = "<group>"; };
+		66510D542A2E722800DB41B8 /* ProbablePitchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProbablePitchers.swift; sourceTree = "<group>"; };
+		66510D572A2E738A00DB41B8 /* ProbablePitchersAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProbablePitchersAdapter.swift; sourceTree = "<group>"; };
+		66510D592A2E7F5700DB41B8 /* GameStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatus.swift; sourceTree = "<group>"; };
+		66510D5B2A2E8C6300DB41B8 /* StatusBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBannerView.swift; sourceTree = "<group>"; };
 		6652D70829F30DDE00DEE161 /* Play.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
 		6652D70A29F3495900DEE161 /* SummaryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryGame.swift; sourceTree = "<group>"; };
 		6652D70C29F34B6A00DEE161 /* SummaryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryGameView.swift; sourceTree = "<group>"; };
@@ -569,6 +583,7 @@
 				665AB7C029E9CD28009FC3F8 /* MLBPlay.swift */,
 				66510D442A2C29A200DB41B8 /* MLBGameStatus.swift */,
 				66510D462A2D1F8100DB41B8 /* MLBGameDecision.swift */,
+				66510D4D2A2D596100DB41B8 /* MLBProbablePitcher.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -621,6 +636,8 @@
 				662C928C29C0105600A56DA4 /* Position.swift */,
 				6652D70829F30DDE00DEE161 /* Play.swift */,
 				66510D492A2D2DFB00DB41B8 /* Decisions.swift */,
+				66510D542A2E722800DB41B8 /* ProbablePitchers.swift */,
+				66510D592A2E7F5700DB41B8 /* GameStatus.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -633,6 +650,7 @@
 				6612584829BBD2C200C704AE /* LinescoreAdapter.swift */,
 				66D4D08029BEBA6D00F4AB26 /* MLBLogoService.swift */,
 				66510D4B2A2D302200DB41B8 /* DecisionsAdapter.swift */,
+				66510D572A2E738A00DB41B8 /* ProbablePitchersAdapter.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -647,6 +665,8 @@
 				66D4D07329BE854300F4AB26 /* SVGView.swift */,
 				66D4D07A29BEA91B00F4AB26 /* LogoViewModel.swift */,
 				662001CF29C7C8E70027727A /* ListSection.swift */,
+				66510D512A2D9BEB00DB41B8 /* ProbablePitchersView.swift */,
+				66510D5B2A2E8C6300DB41B8 /* StatusBannerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -719,6 +739,7 @@
 			children = (
 				66EBDF2E291891C300BEF1A5 /* DetailGameHeaderView.swift */,
 				66C0C4C429B2DBAD00C42F11 /* DetailGameHeaderViewModel.swift */,
+				66510D4F2A2D96CE00DB41B8 /* DetailGamePitcherView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -827,7 +848,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66510D502A2D96CE00DB41B8 /* DetailGamePitcherView.swift in Sources */,
 				66C3CF0929722AB6001E6CC7 /* MLBBoxscore.swift in Sources */,
+				66510D582A2E738A00DB41B8 /* ProbablePitchersAdapter.swift in Sources */,
 				66C3CF01296E7A36001E6CC7 /* SwiftMLB+Linescore.swift in Sources */,
 				6612584929BBD2C200C704AE /* LinescoreAdapter.swift in Sources */,
 				662CE9C129BBDF7D006346C4 /* WebView.swift in Sources */,
@@ -863,6 +886,7 @@
 				66EBDF292918547500BEF1A5 /* LinescoreGridView.swift in Sources */,
 				66A4B5592900E64600D74067 /* Team.swift in Sources */,
 				6617F8022946B8B500BC1BBF /* HTTPClient.swift in Sources */,
+				66510D5A2A2E7F5700DB41B8 /* GameStatus.swift in Sources */,
 				66EBDF2729184EA800BEF1A5 /* DetailGameView.swift in Sources */,
 				66C3CF112973A9BB001E6CC7 /* MLBVenue.swift in Sources */,
 				667ECBF8294FDB2B00213B58 /* SwiftMLBRequest+Parameters.swift in Sources */,
@@ -876,11 +900,13 @@
 				6617F7F929468C6200BC1BBF /* DetailPlayerInteractor.swift in Sources */,
 				66A88B7C29B59B9C0040817F /* MLBPlayer.swift in Sources */,
 				66589E4D2A17FF52009380D6 /* SwiftMLB+StartingLineups.swift in Sources */,
+				66510D552A2E722800DB41B8 /* ProbablePitchers.swift in Sources */,
 				66C0C4BF29B2C1FF00C42F11 /* Linescore.swift in Sources */,
 				6617F7FD29468F3400BC1BBF /* DetailPlayerModel.swift in Sources */,
 				66199FC12944247300FF0777 /* HTTPClientService.swift in Sources */,
 				66D1DCCA29765AB20029165C /* Seeds.swift in Sources */,
 				66EBDF3D292EAA5900BEF1A5 /* Game.swift in Sources */,
+				66510D5C2A2E8C6300DB41B8 /* StatusBannerView.swift in Sources */,
 				665AB7BD29E9CB73009FC3F8 /* SwiftMLB+Plays.swift in Sources */,
 				66D46A3E292EC16200DCA9D0 /* MLBGame.swift in Sources */,
 				66589E532A180ABE009380D6 /* LineupDetailPresenter.swift in Sources */,
@@ -895,6 +921,7 @@
 				66589E4F2A1802B3009380D6 /* LineupDetailInteractor.swift in Sources */,
 				660472DA2916FC0C00AD9A42 /* ListGameView.swift in Sources */,
 				66A4B53F2900D80600D74067 /* mlbappApp.swift in Sources */,
+				66510D4E2A2D596200DB41B8 /* MLBProbablePitcher.swift in Sources */,
 				66C3CEF9296BB89F001E6CC7 /* BoxscoreBuilder.swift in Sources */,
 				66A88B7829B3EF4A0040817F /* DecisionsInfoView.swift in Sources */,
 				6617F8002946983200BC1BBF /* PlayerHeadshotPlaceholder.swift in Sources */,
@@ -930,6 +957,7 @@
 				66A4B5542900DBBB00D74067 /* SwiftMLB.swift in Sources */,
 				66C0C4B729B2B6E600C42F11 /* Venue.swift in Sources */,
 				6652D70F29F34EC900DEE161 /* SummaryGameInteractor.swift in Sources */,
+				66510D522A2D9BEB00DB41B8 /* ProbablePitchersView.swift in Sources */,
 				66D4D07B29BEA91B00F4AB26 /* LogoViewModel.swift in Sources */,
 				66199FC5294451EA00FF0777 /* Dictionary+Extensions.swift in Sources */,
 				6617F7F5294680A100BC1BBF /* DetailPlayerView.swift in Sources */,

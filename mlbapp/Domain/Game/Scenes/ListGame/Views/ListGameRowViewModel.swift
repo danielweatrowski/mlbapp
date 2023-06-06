@@ -10,7 +10,8 @@ import Foundation
 struct ListGameRowViewModel {
     let id = UUID()
     let gameID: Int
-    let gameDate: String
+    let gameStatusText: String
+    let gameStatus: GameStatus
     let gameVenueName: String
     let homeTeamID: Int
     let homeTeamName: String
@@ -39,7 +40,15 @@ struct ListGameRowViewModel {
     }
     
     var showLinescore: Bool {
-        return linescoreViewModel != nil
+        return (linescoreViewModel != nil && isGameLiveOrFinal)
+    }
+    
+    var isGameLiveOrFinal: Bool {
+        return gameStatus == .final || gameStatus == .live
+    }
+    
+    var isGameLive: Bool {
+        return gameStatus == .live
     }
     
     var showDecisions: Bool {

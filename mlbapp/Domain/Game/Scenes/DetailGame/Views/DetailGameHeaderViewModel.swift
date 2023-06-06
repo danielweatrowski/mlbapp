@@ -5,7 +5,7 @@
 //  Created by Daniel Weatrowski on 3/3/23.
 //
 
-import Foundation
+import SwiftUI
 
 struct DetailGameHeaderViewModel {
     
@@ -22,6 +22,13 @@ struct DetailGameHeaderViewModel {
     
     var gameDate: String = ""
     var venueName: String = ""
+    
+    var statusText: String?
+    var statusBackgroundColor: Color?
+    
+    var showStatusBanner: Bool {
+        return statusText != nil && statusText?.isEmpty == false && statusBackgroundColor != nil
+    }
     
 }
 

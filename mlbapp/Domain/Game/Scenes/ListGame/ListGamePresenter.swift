@@ -22,7 +22,8 @@ struct ListGamePresenter {
             let awayAbbreviation = awayTeam?.abbreviation ?? "NA"
             
             return ListGameRowViewModel(gameID: result.id,
-                                 gameDate: result.gameDate.formatted(),
+                                        gameStatusText: result.gameDate.formatted(),
+                                        gameStatus: result.status,
                                  gameVenueName: result.venueName,
                                  homeTeamID: result.homeTeam.id,
                                  homeTeamName: result.homeTeam.name,

@@ -16,4 +16,15 @@ struct DecisionsInfoViewModel {
     var losingPitcherWins: Int
     var losingPitcherLosses: Int
     var losingPitcherERA: String
+    var savingPitcherName: String? = nil
+    var savingPitcherWins: Int = 0
+    var savingPitcherLosses: Int = 0
+    var savingPitcherERA: String = ""
+}
+
+extension DecisionsInfoViewModel {
+
+    var includeSaveDecision: Bool {
+        savingPitcherName != nil
+    }
 }

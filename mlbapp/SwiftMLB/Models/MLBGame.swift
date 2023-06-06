@@ -14,15 +14,33 @@ struct MLBGame: Codable {
     let season: String
     let venue: MLBVenue
     let gameDate: Date
+    let status: MLBGameStatus
+    let gameInfo: GameInfo?
+    let weather: WeatherInfo?
+    
     let linescore: MLBLinescore
     let boxscore: MLBBoxscore
     let teams: GameTeams
     let players: [MLBPlayer]
     let decisions: MLBGameDecision?
+    let probablePitchers: MLBProbablePitcher?
     
     struct GameTeams: Codable {
         let away: MLBTeam
         let home: MLBTeam
+    }
+    
+    struct GameInfo: Codable {
+        let attendance: Int?
+        // Using string here bc this date format is different and fails to decode
+        let firstPitch: String?
+        let gameDurationMinutes: Int?
+    }
+    
+    struct WeatherInfo: Codable {
+        let condition: String?
+        let temp: String?
+        let wind: String?
     }
 }
 

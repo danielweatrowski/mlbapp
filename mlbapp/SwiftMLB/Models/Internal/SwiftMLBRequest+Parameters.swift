@@ -23,7 +23,7 @@ public extension SwiftMLBRequest {
         var gameType: String?
         var options: Options = .init(includeLinescore: true,
                                      includeDecisions: true,
-                                     includeProbablePitchers: false)
+                                     includeProbablePitchers: true)
         
         
         func toQueryItems() -> [URLQueryItem] {

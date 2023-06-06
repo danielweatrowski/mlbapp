@@ -12,70 +12,78 @@ struct DetailGameHeaderView: View {
     
     var body: some View {
         if let viewModel = viewModel {
-            VStack {
+            VStack(spacing: 0) {
                 
-                HStack {
-                    Text(viewModel.gameDate)
-                    Spacer()
-                    Text(viewModel.venueName)
+                if viewModel.showStatusBanner, let statusText = viewModel.statusText, let backgroundColor = viewModel.statusBackgroundColor {
+                    StatusBannerView(statusText: statusText,
+                                     backgroundColor: backgroundColor)
+                }
+                
+                
+                VStack {
+                    HStack {
+                        Text(viewModel.gameDate)
+                        Spacer()
+                        Text(viewModel.venueName)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .padding([.horizontal, .vertical])
+                    
+                    
+                    HStack(alignment: .center) {
+                        VStack(alignment: .center, spacing: 4) {
+                            LogoView(teamID: viewModel.homeTeamID,
+                                     teamAbbreviation: viewModel.homeTeamAbbreviation);
+                            Text(viewModel.homeTeamName)
+                                .font(.subheadline)
+                                .bold()
+                                .multilineTextAlignment(.center)
+                            Text(viewModel.homeTeamRecord)
+                                .font(.caption2)
+                        }
+                        
+                        VStack() {
+                            Text(viewModel.homeTeamScore)
+                                .font(.system(size: 48))
+                                .scaledToFill()
+                                .minimumScaleFactor(0.5)
+                                .lineLimit(1)
+                                .bold()
+                                .padding([.leading, .trailing])
+                            
+                        }
+                        
+                        Text("-")
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                        
+                        VStack() {
+                            Text(viewModel.awayTeamScore)
+                                .font(.system(size: 48))
+                                .scaledToFill()
+                                .minimumScaleFactor(0.5)
+                                .lineLimit(1)
+                                .bold()
+                                .padding([.leading, .trailing])
+                        }
+                        VStack(alignment: .center, spacing: 4) {
+                            LogoView(teamID: viewModel.awayTeamID,
+                                     teamAbbreviation: viewModel.awayTeamAbbreviation)
+                            Text(viewModel.awayTeamName)
+                                .font(.subheadline)
+                                .bold()
+                                .multilineTextAlignment(.center)
+                            Text(viewModel.awayTeamRecord)
+                                .font(.caption2)
+                        }
+                    }
                 }
                 .frame(maxWidth: .infinity)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .padding([.horizontal, .bottom])
-
-                
-                HStack(alignment: .center) {
-                    VStack(alignment: .center, spacing: 4) {
-                        LogoView(teamID: viewModel.homeTeamID,
-                                 teamAbbreviation: viewModel.homeTeamAbbreviation);
-                        Text(viewModel.homeTeamName)
-                            .font(.subheadline)
-                            .bold()
-                            .multilineTextAlignment(.center)
-                        Text(viewModel.homeTeamRecord)
-                            .font(.caption2)
-                    }
-                    
-                    VStack() {
-                        Text(viewModel.homeTeamScore)
-                            .font(.system(size: 48))
-                            .scaledToFill()
-                            .minimumScaleFactor(0.5)
-                            .lineLimit(1)
-                            .bold()
-                            .padding([.leading, .trailing])
-                        
-                    }
-                    
-                    Text("FINAL")
-                        .font(.caption2)
-                        .foregroundColor(.secondary)
-                    
-                    VStack() {
-                        Text(viewModel.awayTeamScore)
-                            .font(.system(size: 48))
-                            .scaledToFill()
-                            .minimumScaleFactor(0.5)
-                            .lineLimit(1)
-                            .bold()
-                            .padding([.leading, .trailing])
-                    }
-                    VStack(alignment: .center, spacing: 4) {
-                        LogoView(teamID: viewModel.awayTeamID,
-                                 teamAbbreviation: viewModel.awayTeamAbbreviation)
-                        Text(viewModel.awayTeamName)
-                            .font(.subheadline)
-                            .bold()
-                            .multilineTextAlignment(.center)
-                        Text(viewModel.awayTeamRecord)
-                            .font(.caption2)
-                    }
-                }
+                .frame(height: 150)
+                .padding(.bottom)
             }
-            .frame(maxWidth: .infinity)
-            .frame(height: 150)
-            .padding(.vertical)
         }
         else {
             EmptyView()

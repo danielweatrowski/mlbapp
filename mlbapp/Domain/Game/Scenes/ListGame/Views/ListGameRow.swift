@@ -14,13 +14,12 @@ struct ListGameRow: View {
     var body: some View {
         VStack() {
             HStack() {
-                
-                Text(viewModel.gameDate)
+                gameStatusText
                 Spacer()
                 Text(viewModel.gameVenueName)
+                    .foregroundColor(.secondary)
+                    .font(.subheadline)
             }
-            .foregroundColor(.secondary)
-            .font(.footnote)
                         
             HStack() {
                 LogoView(teamID: viewModel.homeTeamID, teamAbbreviation: viewModel.homeTeamAbbreviation)
@@ -32,17 +31,19 @@ struct ListGameRow: View {
                 
                 Spacer()
                 
-                Text(String(viewModel.homeTeamScore))
-                    .padding()
-                    .font(.title3)
-                    .minimumScaleFactor(0.8)
-                    .lineLimit(1)
-                    .frame(width: 56)
-                    .background(
-                        Color.secondary.opacity(0.1)
-                            .frame(maxWidth: .infinity)
-                    )
-                    .cornerRadius(12)
+                if viewModel.isGameLiveOrFinal {
+                    Text(String(viewModel.homeTeamScore))
+                        .padding()
+                        .font(.title3)
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
+                        .frame(width: 56)
+                        .background(
+                            Color.secondary.opacity(0.1)
+                                .frame(maxWidth: .infinity)
+                        )
+                        .cornerRadius(12)
+                }
                     
                 
             }
@@ -58,19 +59,21 @@ struct ListGameRow: View {
                 
                 Spacer()
                 
-                Text(String(viewModel.awayTeamScore))
-                    .padding()
-                    .font(.title3)
-                    .minimumScaleFactor(0.8)
-                    .lineLimit(1)
-                    .frame(width: 56)
-                    .background(
-                        Color
-                            .secondary
-                            .opacity(0.1)
-                            .frame(maxWidth: .infinity)
-                    )
-                    .cornerRadius(12)
+                if viewModel.isGameLiveOrFinal {
+                    Text(String(viewModel.awayTeamScore))
+                        .padding()
+                        .font(.title3)
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
+                        .frame(width: 56)
+                        .background(
+                            Color
+                                .secondary
+                                .opacity(0.1)
+                                .frame(maxWidth: .infinity)
+                        )
+                        .cornerRadius(12)
+                }
                 
             }
             .font(.system(size: 17, weight: .medium, design: .default))
@@ -117,6 +120,20 @@ struct ListGameRow: View {
             }
         }
         .padding()
+    }
+    
+    @ViewBuilder
+    var gameStatusText: some View {
+        if viewModel.isGameLive {
+            Text(viewModel.gameStatusText.uppercased())
+                .bold()
+                .font(.subheadline)
+                .foregroundColor(.green)
+        } else {
+            Text(viewModel.gameStatusText)
+                .foregroundColor(.secondary)
+                .font(.subheadline)
+        }
     }
 
 }

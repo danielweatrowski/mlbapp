@@ -17,8 +17,11 @@ struct Game {
     let venue: Venue
     let players: [Int: Player]
     
-    let decisions: Decisions?
+    var info: Info = Info()
     
+    let status: GameStatus
+    let decisions: Decisions?
+    let probablePitchers: ProbablePitchers?
     let linescore: Linescore?
     let boxscore: Boxscore?
     
@@ -35,4 +38,17 @@ struct Game {
         }
         return player
     }()
+    
+    struct Info {
+        var weatherTempurature: String?
+        var windDescription: String?
+        var firstPitchDateString: String?
+        var attendance: Int?
+        var gameDurationInMinutes: Int?
+        
+        var firstPitchDate: Date? {
+            let dateFormatter = DateFormatter.iso8601TimeZoneOmitted
+            return dateFormatter.date(from: firstPitchDateString ?? "")
+        }
+    }
 }

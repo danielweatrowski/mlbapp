@@ -24,7 +24,7 @@ struct SummaryGamePresenter: SummaryGamePresentationLogic {
             let inningHashID = play.about.inning
             let timeFormatted = play.about.endTime.formatted(date: .omitted, time: .shortened)
             let playViewModel = SummaryGame.InningPlayViewModel(playID: play.about.atBatIndex,
-                                                                eventName: play.result.event,
+                                                                eventName: play.result.event ?? "OH NO",
                                                                 description: play.result.description,
                                                                 time: timeFormatted,
                                                                 numberOfOuts: nil)

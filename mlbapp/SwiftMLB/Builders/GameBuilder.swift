@@ -53,6 +53,10 @@ struct GameBuilder: JSONBuilder {
         }
 
         let decisionJSON = liveData["decisions"] as? [String: Any]
+        let probablePitchersJSON = gameData["probablePitchers"] as? [String: Any]
+        let statusJSON = gameData["status"] as? [String: Any]
+        let weatherJSON = gameData["weather"] as? [String: Any]
+        let gameInfoJSON = gameData["gameInfo"] as? [String: Any]
         let linescoreJSON = try linescoreBuilder.build(with: data)
         let boxscoreJSON = try boxscoreBuilder.build(with: data)
         let venueJSON = buildVenue(venueDict: venueInfo)
@@ -70,6 +74,10 @@ struct GameBuilder: JSONBuilder {
             "linescore": linescoreJSON,
             "players": playersJSON,
             "decisions": decisionJSON,
+            "probablePitchers": probablePitchersJSON,
+            "status": statusJSON,
+            "weather": weatherJSON,
+            "gameInfo": gameInfoJSON,
             "teams": [
                 "away": awayJSON,
                 "home": homeJSON

@@ -18,9 +18,9 @@ struct MLBPlay: Decodable {
     
     struct Result: Decodable {
         let type: String
-        let event: String
-        let eventType: String
-        let description: String
+        let event: String?
+        let eventType: String?
+        let description: String?
         let rbi: Int
         let awayScore: Int
         let homeScore: Int

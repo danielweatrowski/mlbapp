@@ -28,12 +28,13 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
                                             awayAbbrevation: awayAbbreviation)
             
             // show date for future games
-            let statusLabel = Calendar.current.isDateInToday(result.gameDate)
-            ? result.state
-            : result.gameDate.formatted()
+            let statusLabel = (result.status == .preview || result.status == .other)
+            ? result.gameDate.formatted()
+            : result.status.friendlyName
             
             return ListGameRowViewModel(gameID: result.id,
-                                        gameDate: statusLabel,
+                                        gameStatusText: statusLabel,
+                                        gameStatus: result.status,
                                      gameVenueName: result.venueName,
                                      homeTeamID: result.homeTeam.id,
                                      homeTeamName: result.homeTeam.name,

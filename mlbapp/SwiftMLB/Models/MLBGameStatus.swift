@@ -10,4 +10,5 @@ import Foundation
 struct MLBGameStatus: Codable {
     let statusCode: String
     let detailedState: String
+    let abstractGameState: String
 }

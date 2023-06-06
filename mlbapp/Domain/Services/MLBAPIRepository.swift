@@ -27,10 +27,12 @@ struct MLBAPIRepository: GameStoreProtocol {
             let decisionsAdapter = DecisionsAdapter(dataObject: gameDTO.decisions)
             let decisions = decisionsAdapter.toDomain()
             
+            let gameStatus = GameStatus(rawValue: gameDTO.status.abstractGameState) ?? .other
+            
             return GameSearch.Result(id: gameDTO.gamePk,
                               gameDate: gameDTO.gameDate,
                                      venueName: gameDTO.venue.name,
-                                     state: gameDTO.status.detailedState,
+                                     status: gameStatus,
                               awayTeam: GameSearch.Result.Team(id: gameDTO.teams.away.team.id,
                                                                name: gameDTO.teams.away.team.name,
                                                                score: gameDTO.teams.away.score ?? -1,
@@ -107,7 +109,18 @@ struct MLBAPIRepository: GameStoreProtocol {
         
         let decisionsAdapter = DecisionsAdapter(dataObject: gameDTO.decisions)
         let decisions = decisionsAdapter.toDomain()
-
+        
+        let probablePitchersAdapter = ProbablePitchersAdapter(dataObject: gameDTO.probablePitchers)
+        let probablePitchers = probablePitchersAdapter.toDomain()
+        
+        let gameStatus = GameStatus(rawValue: gameDTO.status.abstractGameState) ?? .other
+        
+        let gameInfo = Game.Info(weatherTempurature: gameDTO.weather?.temp,
+                                 windDescription: gameDTO.weather?.wind,
+                                 firstPitchDateString: gameDTO.gameInfo?.firstPitch,
+                                 attendance: gameDTO.gameInfo?.attendance,
+                                 gameDurationInMinutes: gameDTO.gameInfo?.gameDurationMinutes)
+                                 
         
         let game = Game(id: id,
                         date: gameDTO.gameDate,
@@ -117,7 +130,10 @@ struct MLBAPIRepository: GameStoreProtocol {
                         awayTeamScore: gameDTO.linescore.teams.away?.runs ?? 0,
                         venue: gameVenue,
                         players: players,
+                        info: gameInfo,
+                        status: gameStatus,
                         decisions: decisions,
+                        probablePitchers: probablePitchers,
                         linescore: linescore,
                         boxscore: boxscore)
         
@@ -136,12 +152,16 @@ struct MLBAPIRepository: GameStoreProtocol {
     func fetchAllPlays(forGameID id: Int) async throws -> [Play] {
         let dto = try await SwiftMLB.plays(for: id)
         
-        let plays = dto.allPlays.map { playDTO in
+        let plays: [Play?] = dto.allPlays.map { playDTO in
+            
+            guard let event = playDTO.result.event, let eventType = playDTO.result.eventType, let desc = playDTO.result.description else {
+                return nil
+            }
             
             let result = Play.Result(type: playDTO.result.type,
-                                     event: playDTO.result.event,
-                                     eventType: playDTO.result.eventType,
-                                     description: playDTO.result.description,
+                                     event: event,
+                                     eventType: eventType,
+                                     description: desc,
                                      rbi: playDTO.result.rbi,
                                      awayScore: playDTO.result.awayScore,
                                      homeScore: playDTO.result.homeScore,
@@ -157,5 +177,6 @@ struct MLBAPIRepository: GameStoreProtocol {
         }
         
         return plays
+            .compactMap({$0})
     }
 }

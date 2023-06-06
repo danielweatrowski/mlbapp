@@ -13,49 +13,23 @@ struct DecisionsInfoView: View {
 
     var body: some View {
         if let viewModel = viewModel {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack {
-                        Text("W:")
-                            .bold()
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        Text(viewModel.winningPitcherName)
-                            .bold()
-                            .font(.subheadline)
-                        Spacer()
-                    }
-                    HStack {
-                        Text("\(viewModel.winningPitcherWins)-\(viewModel.winningPitcherLosses)")
-                            .font(.footnote)
-                        Divider()
-                        Text("\(viewModel.winningPitcherERA) ERA")
-                            .font(.footnote)
-                        Spacer()
-                    }
-                }
+            VStack {
+                DetailGamePitcherView(titleText: "Win",
+                                  pitcherNameText: viewModel.winningPitcherName,
+                                  pitcherInfoText:  "\(viewModel.winningPitcherWins) - \(viewModel.winningPitcherLosses) | \(viewModel.winningPitcherERA)")
+                Divider()
                 
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack {
-                        Text("L:")
-                            .bold()
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        Text(viewModel.losingPitcherName)
-                            .bold()
-                            .font(.subheadline)
-                        Spacer()
-                    }
-                    HStack {
-                        Text("\(viewModel.losingPitcherWins)-\(viewModel.losingPitcherLosses)")
-                            .font(.footnote)
-                        Divider()
-                        Text("\(viewModel.losingPitcherERA) ERA")
-                            .font(.footnote)
-                        Spacer()
-                    }
+                DetailGamePitcherView(titleText: "Loss",
+                                  pitcherNameText: viewModel.losingPitcherName,
+                                  pitcherInfoText:  "\(viewModel.losingPitcherWins) - \(viewModel.losingPitcherLosses) | \(viewModel.losingPitcherERA) ERA")
+                
+                if let savePitcher = viewModel.savingPitcherName {
+                    Divider()
+                    DetailGamePitcherView(titleText: "Save",
+                                      pitcherNameText: savePitcher,
+                                      pitcherInfoText:  "\(viewModel.savingPitcherWins) - \(viewModel.savingPitcherLosses) | \(viewModel.savingPitcherERA) ERA")
+
                 }
-                Spacer()
             }
             .padding()
         } else {
