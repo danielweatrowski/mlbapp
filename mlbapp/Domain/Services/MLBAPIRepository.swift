@@ -162,7 +162,7 @@ struct MLBAPIRepository: GameStoreProtocol {
                                      event: event,
                                      eventType: eventType,
                                      description: desc,
-                                     rbi: playDTO.result.rbi,
+                                     rbi: playDTO.result.rbi ?? 0,
                                      awayScore: playDTO.result.awayScore,
                                      homeScore: playDTO.result.homeScore,
                                      isOut: playDTO.result.isOut)
