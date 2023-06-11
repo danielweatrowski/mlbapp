@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Decisions {
-    struct Player {
+struct Decisions: Codable {
+    struct Player: Codable {
         let id: Int
         let fullName: String
     }

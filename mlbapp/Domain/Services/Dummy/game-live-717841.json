@@ -1,0 +1,1656 @@
+{
+  "id": 717841,
+  "players": {
+    "650402": {
+      "id": 650402,
+      "lastInitName": "Torres, G",
+      "boxscoreName": "Torres",
+      "firstName": "Gleyber",
+      "birthDate": "1996-12-13",
+      "birthCountry": "Venezuela",
+      "lastName": "Torres",
+      "primaryPositionCode": "4",
+      "weight": 205,
+      "currentAge": 26,
+      "fullName": "Gleyber Torres",
+      "height": "6' 1\"",
+      "birthCity": "Caracas",
+      "mlbDebutDate": "2018-04-22",
+      "isActive": true
+    },
+    "605280": {
+      "id": 605280,
+      "lastInitName": "Holmes, C",
+      "boxscoreName": "Holmes",
+      "firstName": "Clayton",
+      "birthDate": "1993-03-27",
+      "birthCountry": "USA",
+      "lastName": "Holmes",
+      "primaryPositionCode": "1",
+      "weight": 245,
+      "currentAge": 30,
+      "fullName": "Clay Holmes",
+      "height": "6' 5\"",
+      "birthCity": "Dothan",
+      "mlbDebutDate": "2018-04-06",
+      "isActive": true
+    },
+    "624414": {
+      "id": 624414,
+      "lastInitName": "Arroyo, C",
+      "boxscoreName": "Arroyo",
+      "firstName": "Christian",
+      "birthDate": "1995-05-30",
+      "birthCountry": "USA",
+      "lastName": "Arroyo",
+      "primaryPositionCode": "4",
+      "weight": 220,
+      "currentAge": 28,
+      "fullName": "Christian Arroyo",
+      "height": "6' 1\"",
+      "birthCity": "Tampa",
+      "mlbDebutDate": "2017-04-24",
+      "isActive": true
+    },
+    "457759": {
+      "id": 457759,
+      "lastInitName": "Turner, J",
+      "boxscoreName": "Turner, J",
+      "firstName": "Justin",
+      "birthDate": "1984-11-23",
+      "birthCountry": "USA",
+      "lastName": "Turner",
+      "primaryPositionCode": "10",
+      "weight": 208,
+      "currentAge": 38,
+      "fullName": "Justin Turner",
+      "height": "5' 11\"",
+      "birthCity": "Long Beach",
+      "mlbDebutDate": "2009-09-08",
+      "isActive": true
+    },
+    "593974": {
+      "id": 593974,
+      "lastInitName": "Peralta, W",
+      "boxscoreName": "Peralta, Wa",
+      "firstName": "Wandy",
+      "birthDate": "1991-07-27",
+      "birthCountry": "Dominican Republic",
+      "lastName": "Peralta",
+      "primaryPositionCode": "1",
+      "weight": 227,
+      "currentAge": 31,
+      "fullName": "Wandy Peralta",
+      "height": "6' 0\"",
+      "birthCity": "San Francisco de Macoris",
+      "mlbDebutDate": "2016-09-04",
+      "isActive": true
+    },
+    "646240": {
+      "id": 646240,
+      "lastInitName": "Devers, R",
+      "boxscoreName": "Devers",
+      "firstName": "Rafael",
+      "birthDate": "1996-10-24",
+      "birthCountry": "Dominican Republic",
+      "lastName": "Devers",
+      "primaryPositionCode": "5",
+      "weight": 235,
+      "currentAge": 26,
+      "fullName": "Rafael Devers",
+      "height": "6' 0\"",
+      "birthCity": "Sanchez",
+      "mlbDebutDate": "2017-07-25",
+      "isActive": true
+    },
+    "676760": {
+      "id": 676760,
+      "lastInitName": "Marinaccio, R",
+      "boxscoreName": "Marinaccio",
+      "firstName": "Ronald",
+      "birthDate": "1995-07-01",
+      "birthCountry": "USA",
+      "lastName": "Marinaccio",
+      "primaryPositionCode": "1",
+      "weight": 205,
+      "currentAge": 27,
+      "fullName": "Ron Marinaccio",
+      "height": "6' 2\"",
+      "birthCity": "Toms River",
+      "mlbDebutDate": "2022-04-09",
+      "isActive": true
+    },
+    "572020": {
+      "id": 572020,
+      "lastInitName": "Paxton, J",
+      "boxscoreName": "Paxton",
+      "firstName": "James",
+      "birthDate": "1988-11-06",
+      "birthCountry": "Canada",
+      "lastName": "Paxton",
+      "primaryPositionCode": "1",
+      "weight": 212,
+      "currentAge": 34,
+      "fullName": "James Paxton",
+      "height": "6' 4\"",
+      "birthCity": "Ladner",
+      "mlbDebutDate": "2013-09-07",
+      "isActive": true
+    },
+    "518626": {
+      "id": 518626,
+      "lastInitName": "Donaldson, J",
+      "boxscoreName": "Donaldson",
+      "firstName": "Joshua",
+      "birthDate": "1985-12-08",
+      "birthCountry": "USA",
+      "lastName": "Donaldson",
+      "primaryPositionCode": "5",
+      "weight": 210,
+      "currentAge": 37,
+      "fullName": "Josh Donaldson",
+      "height": "6' 1\"",
+      "birthCity": "Pensacola",
+      "mlbDebutDate": "2010-04-30",
+      "isActive": true
+    },
+    "592454": {
+      "id": 592454,
+      "lastInitName": "Kahnle, T",
+      "boxscoreName": "Kahnle",
+      "firstName": "Thomas",
+      "birthDate": "1989-08-07",
+      "birthCountry": "USA",
+      "lastName": "Kahnle",
+      "primaryPositionCode": "1",
+      "weight": 230,
+      "currentAge": 33,
+      "fullName": "Tommy Kahnle",
+      "height": "6' 1\"",
+      "birthCity": "Latham",
+      "mlbDebutDate": "2014-04-03",
+      "isActive": true
+    },
+    "598286": {
+      "id": 598286,
+      "lastInitName": "Ramirez, N",
+      "boxscoreName": "Ramirez, N",
+      "firstName": "Nicholas",
+      "birthDate": "1989-08-01",
+      "birthCountry": "USA",
+      "lastName": "Ramirez",
+      "primaryPositionCode": "1",
+      "weight": 232,
+      "currentAge": 33,
+      "fullName": "Nick Ramirez",
+      "height": "6' 4\"",
+      "birthCity": "Anaheim Hills",
+      "mlbDebutDate": "2019-05-11",
+      "isActive": true
+    },
+    "601713": {
+      "id": 601713,
+      "lastInitName": "Pivetta, N",
+      "boxscoreName": "Pivetta",
+      "firstName": "Nicholas",
+      "birthDate": "1993-02-14",
+      "birthCountry": "Canada",
+      "lastName": "Pivetta",
+      "primaryPositionCode": "1",
+      "weight": 210,
+      "currentAge": 30,
+      "fullName": "Nick Pivetta",
+      "height": "6' 5\"",
+      "birthCity": "Victoria",
+      "mlbDebutDate": "2017-04-30",
+      "isActive": true
+    },
+    "621057": {
+      "id": 621057,
+      "lastInitName": "Garza, J",
+      "boxscoreName": "Garza",
+      "firstName": "Justin",
+      "birthDate": "1994-03-20",
+      "birthCountry": "USA",
+      "lastName": "Garza",
+      "primaryPositionCode": "1",
+      "weight": 170,
+      "currentAge": 29,
+      "fullName": "Justin Garza",
+      "height": "5' 10\"",
+      "birthCity": "Glendora",
+      "mlbDebutDate": "2021-06-27",
+      "isActive": true
+    },
+    "680776": {
+      "id": 680776,
+      "lastInitName": "Duran, J",
+      "boxscoreName": "Duran, Ja",
+      "firstName": "Jarren",
+      "birthDate": "1996-09-05",
+      "birthCountry": "USA",
+      "lastName": "Duran",
+      "primaryPositionCode": "8",
+      "weight": 205,
+      "currentAge": 26,
+      "fullName": "Jarren Duran",
+      "height": "6' 2\"",
+      "birthCity": "Corona",
+      "mlbDebutDate": "2021-07-17",
+      "isActive": true
+    },
+    "656061": {
+      "id": 656061,
+      "lastInitName": "Abreu, A",
+      "boxscoreName": "Abreu, A",
+      "firstName": "Albert",
+      "birthDate": "1995-09-26",
+      "birthCountry": "Dominican Republic",
+      "lastName": "Abreu",
+      "primaryPositionCode": "1",
+      "weight": 190,
+      "currentAge": 27,
+      "fullName": "Albert Abreu",
+      "height": "6' 2\"",
+      "birthCity": "Guayubin",
+      "mlbDebutDate": "2020-08-08",
+      "isActive": true
+    },
+    "683011": {
+      "id": 683011,
+      "lastInitName": "Volpe, A",
+      "boxscoreName": "Volpe",
+      "firstName": "Anthony",
+      "birthDate": "2001-04-28",
+      "birthCountry": "USA",
+      "lastName": "Volpe",
+      "primaryPositionCode": "6",
+      "weight": 180,
+      "currentAge": 22,
+      "fullName": "Anthony Volpe",
+      "height": "5' 9\"",
+      "birthCity": "New York",
+      "mlbDebutDate": "2023-03-30",
+      "isActive": true
+    },
+    "643396": {
+      "id": 643396,
+      "lastInitName": "Kiner-Falefa, I",
+      "boxscoreName": "Kiner-Falefa",
+      "firstName": "Isiah",
+      "birthDate": "1995-03-23",
+      "birthCountry": "USA",
+      "lastName": "Kiner-Falefa",
+      "primaryPositionCode": "8",
+      "weight": 190,
+      "currentAge": 28,
+      "fullName": "Isiah Kiner-Falefa",
+      "height": "5' 11\"",
+      "birthCity": "Honolulu",
+      "mlbDebutDate": "2018-04-10",
+      "isActive": true
+    },
+    "622772": {
+      "id": 622772,
+      "lastInitName": "Cordero, J",
+      "boxscoreName": "Cordero, J",
+      "firstName": "Jimmy",
+      "birthDate": "1991-10-19",
+      "birthCountry": "Dominican Republic",
+      "lastName": "Cordero",
+      "primaryPositionCode": "1",
+      "weight": 245,
+      "currentAge": 31,
+      "fullName": "Jimmy Cordero",
+      "height": "6' 4\"",
+      "birthCity": "San Cristobal",
+      "mlbDebutDate": "2018-08-02",
+      "isActive": true
+    },
+    "657077": {
+      "id": 657077,
+      "lastInitName": "Verdugo, A",
+      "boxscoreName": "Verdugo",
+      "firstName": "Alexander",
+      "birthDate": "1996-05-15",
+      "birthCountry": "USA",
+      "lastName": "Verdugo",
+      "primaryPositionCode": "9",
+      "weight": 209,
+      "currentAge": 27,
+      "fullName": "Alex Verdugo",
+      "height": "6' 0\"",
+      "birthCity": "Tucson",
+      "mlbDebutDate": "2017-09-01",
+      "isActive": true
+    },
+    "656557": {
+      "id": 656557,
+      "lastInitName": "Houck, T",
+      "boxscoreName": "Houck",
+      "firstName": "Tanner",
+      "birthDate": "1996-06-29",
+      "birthCountry": "USA",
+      "lastName": "Houck",
+      "primaryPositionCode": "1",
+      "weight": 226,
+      "currentAge": 26,
+      "fullName": "Tanner Houck",
+      "height": "6' 5\"",
+      "birthCity": "St. Louis",
+      "mlbDebutDate": "2020-09-15",
+      "isActive": true
+    },
+    "641343": {
+      "id": 641343,
+      "lastInitName": "Bauers, J",
+      "boxscoreName": "Bauers",
+      "firstName": "Jakob",
+      "birthDate": "1995-10-06",
+      "birthCountry": "USA",
+      "lastName": "Bauers",
+      "primaryPositionCode": "7",
+      "weight": 195,
+      "currentAge": 27,
+      "fullName": "Jake Bauers",
+      "height": "5' 11\"",
+      "birthCity": "Newport Beach",
+      "mlbDebutDate": "2018-06-07",
+      "isActive": true
+    },
+    "641856": {
+      "id": 641856,
+      "lastInitName": "McKinney, B",
+      "boxscoreName": "McKinney",
+      "firstName": "William",
+      "birthDate": "1994-08-23",
+      "birthCountry": "USA",
+      "lastName": "McKinney",
+      "primaryPositionCode": "O",
+      "weight": 205,
+      "currentAge": 28,
+      "fullName": "Billy McKinney",
+      "height": "5' 11\"",
+      "birthCity": "Dallas",
+      "mlbDebutDate": "2018-03-30",
+      "isActive": true
+    },
+    "807799": {
+      "id": 807799,
+      "lastInitName": "Yoshida, M",
+      "boxscoreName": "Yoshida",
+      "firstName": "Masataka",
+      "birthDate": "1993-07-15",
+      "birthCountry": "Japan",
+      "lastName": "Yoshida",
+      "primaryPositionCode": "7",
+      "weight": 192,
+      "currentAge": 29,
+      "fullName": "Masataka Yoshida",
+      "height": "5' 8\"",
+      "birthCity": "Fukui",
+      "mlbDebutDate": "2023-03-30",
+      "isActive": true
+    },
+    "650633": {
+      "id": 650633,
+      "lastInitName": "King, M",
+      "boxscoreName": "King",
+      "firstName": "Michael",
+      "birthDate": "1995-05-25",
+      "birthCountry": "USA",
+      "lastName": "King",
+      "primaryPositionCode": "1",
+      "weight": 210,
+      "currentAge": 28,
+      "fullName": "Michael King",
+      "height": "6' 3\"",
+      "birthCity": "Rochester",
+      "mlbDebutDate": "2019-09-27",
+      "isActive": true
+    },
+    "624512": {
+      "id": 624512,
+      "lastInitName": "McGuire, R",
+      "boxscoreName": "McGuire",
+      "firstName": "Reese",
+      "birthDate": "1995-03-02",
+      "birthCountry": "USA",
+      "lastName": "McGuire",
+      "primaryPositionCode": "2",
+      "weight": 233,
+      "currentAge": 28,
+      "fullName": "Reese McGuire",
+      "height": "6' 0\"",
+      "birthCity": "Seattle",
+      "mlbDebutDate": "2018-09-06",
+      "isActive": true
+    },
+    "622663": {
+      "id": 622663,
+      "lastInitName": "Severino, L",
+      "boxscoreName": "Severino, L",
+      "firstName": "Luis",
+      "birthDate": "1994-02-20",
+      "birthCountry": "Dominican Republic",
+      "lastName": "Severino",
+      "primaryPositionCode": "1",
+      "weight": 218,
+      "currentAge": 29,
+      "fullName": "Luis Severino",
+      "height": "6' 2\"",
+      "birthCity": "Sabana de la Mar",
+      "mlbDebutDate": "2015-08-05",
+      "isActive": true
+    },
+    "608701": {
+      "id": 608701,
+      "lastInitName": "Refsnyder, R",
+      "boxscoreName": "Refsnyder",
+      "firstName": "Robert",
+      "birthDate": "1991-03-26",
+      "birthCountry": "Republic of Korea",
+      "lastName": "Refsnyder",
+      "primaryPositionCode": "7",
+      "weight": 203,
+      "currentAge": 32,
+      "fullName": "Rob Refsnyder",
+      "height": "6' 0\"",
+      "birthCity": "Seoul",
+      "mlbDebutDate": "2015-07-11",
+      "isActive": true
+    },
+    "676477": {
+      "id": 676477,
+      "lastInitName": "Whitlock, G",
+      "boxscoreName": "Whitlock",
+      "firstName": "Garrett",
+      "birthDate": "1996-06-11",
+      "birthCountry": "USA",
+      "lastName": "Whitlock",
+      "primaryPositionCode": "1",
+      "weight": 222,
+      "currentAge": 26,
+      "fullName": "Garrett Whitlock",
+      "height": "6' 5\"",
+      "birthCity": "Snellville",
+      "mlbDebutDate": "2021-04-04",
+      "isActive": true
+    },
+    "519203": {
+      "id": 519203,
+      "lastInitName": "Rizzo, A",
+      "boxscoreName": "Rizzo",
+      "firstName": "Anthony",
+      "birthDate": "1989-08-08",
+      "birthCountry": "USA",
+      "lastName": "Rizzo",
+      "primaryPositionCode": "3",
+      "weight": 240,
+      "currentAge": 33,
+      "fullName": "Anthony Rizzo",
+      "height": "6' 3\"",
+      "birthCity": "Parkland",
+      "mlbDebutDate": "2011-06-09",
+      "isActive": true
+    },
+    "670174": {
+      "id": 670174,
+      "lastInitName": "Winckowski, J",
+      "boxscoreName": "Winckowski",
+      "firstName": "Joshua",
+      "birthDate": "1998-06-28",
+      "birthCountry": "USA",
+      "lastName": "Winckowski",
+      "primaryPositionCode": "1",
+      "weight": 215,
+      "currentAge": 24,
+      "fullName": "Josh Winckowski",
+      "height": "6' 4\"",
+      "birthCity": "Toledo",
+      "mlbDebutDate": "2022-05-28",
+      "isActive": true
+    },
+    "593334": {
+      "id": 593334,
+      "lastInitName": "Germán, D",
+      "boxscoreName": "Germán",
+      "firstName": "Domingo",
+      "birthDate": "1992-08-04",
+      "birthCountry": "Dominican Republic",
+      "lastName": "German",
+      "primaryPositionCode": "1",
+      "weight": 181,
+      "currentAge": 30,
+      "fullName": "Domingo German",
+      "height": "6' 2\"",
+      "birthCity": "San Pedro de Macoris",
+      "mlbDebutDate": "2017-06-11",
+      "isActive": true
+    },
+    "657376": {
+      "id": 657376,
+      "lastInitName": "Schmidt, C",
+      "boxscoreName": "Schmidt",
+      "firstName": "Clarke",
+      "birthDate": "1996-02-20",
+      "birthCountry": "USA",
+      "lastName": "Schmidt",
+      "primaryPositionCode": "1",
+      "weight": 200,
+      "currentAge": 27,
+      "fullName": "Clarke Schmidt",
+      "height": "6' 1\"",
+      "birthCity": "Acworth",
+      "mlbDebutDate": "2020-09-04",
+      "isActive": true
+    },
+    "543037": {
+      "id": 543037,
+      "lastInitName": "Cole, G",
+      "boxscoreName": "Cole",
+      "firstName": "Gerrit",
+      "birthDate": "1990-09-08",
+      "birthCountry": "USA",
+      "lastName": "Cole",
+      "primaryPositionCode": "1",
+      "weight": 220,
+      "currentAge": 32,
+      "fullName": "Gerrit Cole",
+      "height": "6' 4\"",
+      "birthCity": "Newport Beach",
+      "mlbDebutDate": "2013-06-11",
+      "isActive": true
+    },
+    "676710": {
+      "id": 676710,
+      "lastInitName": "Crawford, K",
+      "boxscoreName": "Crawford, K",
+      "firstName": "Kutter",
+      "birthDate": "1996-04-01",
+      "birthCountry": "USA",
+      "lastName": "Crawford",
+      "primaryPositionCode": "1",
+      "weight": 195,
+      "currentAge": 27,
+      "fullName": "Kutter Crawford",
+      "height": "6' 1\"",
+      "birthCity": "Okeechobee",
+      "mlbDebutDate": "2021-09-05",
+      "isActive": true
+    },
+    "640454": {
+      "id": 640454,
+      "lastInitName": "Krook, M",
+      "boxscoreName": "Krook",
+      "firstName": "Matthew",
+      "birthDate": "1994-10-21",
+      "birthCountry": "USA",
+      "lastName": "Krook",
+      "primaryPositionCode": "1",
+      "weight": 225,
+      "currentAge": 28,
+      "fullName": "Matt Krook",
+      "height": "6' 4\"",
+      "birthCity": "Hillsborough",
+      "mlbDebutDate": "",
+      "isActive": true
+    },
+    "671213": {
+      "id": 671213,
+      "lastInitName": "Casas, T",
+      "boxscoreName": "Casas",
+      "firstName": "Triston",
+      "birthDate": "2000-01-15",
+      "birthCountry": "USA",
+      "lastName": "Casas",
+      "primaryPositionCode": "3",
+      "weight": 244,
+      "currentAge": 23,
+      "fullName": "Triston Casas",
+      "height": "6' 5\"",
+      "birthCity": "Miami",
+      "mlbDebutDate": "2022-09-04",
+      "isActive": true
+    },
+    "678394": {
+      "id": 678394,
+      "lastInitName": "Bello, B",
+      "boxscoreName": "Bello",
+      "firstName": "Brayan",
+      "birthDate": "1999-05-17",
+      "birthCountry": "Dominican Republic",
+      "lastName": "Bello",
+      "primaryPositionCode": "1",
+      "weight": 195,
+      "currentAge": 24,
+      "fullName": "Brayan Bello",
+      "height": "6' 1\"",
+      "birthCity": "Samana",
+      "mlbDebutDate": "2022-07-06",
+      "isActive": true
+    },
+    "657136": {
+      "id": 657136,
+      "lastInitName": "Wong, C",
+      "boxscoreName": "Wong",
+      "firstName": "Connor",
+      "birthDate": "1996-05-19",
+      "birthCountry": "USA",
+      "lastName": "Wong",
+      "primaryPositionCode": "2",
+      "weight": 190,
+      "currentAge": 27,
+      "fullName": "Connor Wong",
+      "height": "6' 1\"",
+      "birthCity": "Houston",
+      "mlbDebutDate": "2021-06-22",
+      "isActive": true
+    },
+    "518934": {
+      "id": 518934,
+      "lastInitName": "LeMahieu, D",
+      "boxscoreName": "LeMahieu",
+      "firstName": "David",
+      "birthDate": "1988-07-13",
+      "birthCountry": "USA",
+      "lastName": "LeMahieu",
+      "primaryPositionCode": "5",
+      "weight": 220,
+      "currentAge": 34,
+      "fullName": "DJ LeMahieu",
+      "height": "6' 4\"",
+      "birthCity": "Visalia",
+      "mlbDebutDate": "2011-05-30",
+      "isActive": true
+    },
+    "682175": {
+      "id": 682175,
+      "lastInitName": "Jacques, J",
+      "boxscoreName": "Jacques",
+      "firstName": "Joe",
+      "birthDate": "1995-03-11",
+      "birthCountry": "USA",
+      "lastName": "Jacques",
+      "primaryPositionCode": "1",
+      "weight": 210,
+      "currentAge": 28,
+      "fullName": "Joe Jacques",
+      "height": "6' 4\"",
+      "birthCity": "Shrewsbury",
+      "mlbDebutDate": "",
+      "isActive": true
+    },
+    "622569": {
+      "id": 622569,
+      "lastInitName": "Reyes, P",
+      "boxscoreName": "Reyes, P",
+      "firstName": "Pablo",
+      "birthDate": "1993-09-05",
+      "birthCountry": "Dominican Republic",
+      "lastName": "Reyes",
+      "primaryPositionCode": "4",
+      "weight": 175,
+      "currentAge": 29,
+      "fullName": "Pablo Reyes",
+      "height": "5' 8\"",
+      "birthCity": "Santo Domingo",
+      "mlbDebutDate": "2018-09-02",
+      "isActive": true
+    },
+    "594807": {
+      "id": 594807,
+      "lastInitName": "Duvall, A",
+      "boxscoreName": "Duvall",
+      "firstName": "Adam",
+      "birthDate": "1988-09-04",
+      "birthCountry": "USA",
+      "lastName": "Duvall",
+      "primaryPositionCode": "8",
+      "weight": 233,
+      "currentAge": 34,
+      "fullName": "Adam Duvall",
+      "height": "6' 1\"",
+      "birthCity": "Louisville",
+      "mlbDebutDate": "2014-06-26",
+      "isActive": true
+    },
+    "624431": {
+      "id": 624431,
+      "lastInitName": "Trevino, J",
+      "boxscoreName": "Trevino",
+      "firstName": "Jose",
+      "birthDate": "1992-11-28",
+      "birthCountry": "USA",
+      "lastName": "Trevino",
+      "primaryPositionCode": "2",
+      "weight": 215,
+      "currentAge": 30,
+      "fullName": "Jose Trevino",
+      "height": "5' 10\"",
+      "birthCity": "Corpus Christi",
+      "mlbDebutDate": "2018-06-15",
+      "isActive": true
+    },
+    "641432": {
+      "id": 641432,
+      "lastInitName": "Calhoun, W",
+      "boxscoreName": "Calhoun, W",
+      "firstName": "Willie",
+      "birthDate": "1994-11-04",
+      "birthCountry": "USA",
+      "lastName": "Calhoun",
+      "primaryPositionCode": "10",
+      "weight": 205,
+      "currentAge": 28,
+      "fullName": "Willie Calhoun",
+      "height": "5' 8\"",
+      "birthCity": "Vallejo",
+      "mlbDebutDate": "2017-09-12",
+      "isActive": true
+    },
+    "455119": {
+      "id": 455119,
+      "lastInitName": "Martin, C",
+      "boxscoreName": "Martin",
+      "firstName": "Christopher",
+      "birthDate": "1986-06-02",
+      "birthCountry": "USA",
+      "lastName": "Martin",
+      "primaryPositionCode": "1",
+      "weight": 224,
+      "currentAge": 37,
+      "fullName": "Chris Martin",
+      "height": "6' 8\"",
+      "birthCity": "Arlington",
+      "mlbDebutDate": "2014-04-26",
+      "isActive": true
+    },
+    "665828": {
+      "id": 665828,
+      "lastInitName": "Cabrera, O",
+      "boxscoreName": "Cabrera, O",
+      "firstName": "Oswaldo",
+      "birthDate": "1999-03-01",
+      "birthCountry": "Venezuela",
+      "lastName": "Cabrera",
+      "primaryPositionCode": "7",
+      "weight": 200,
+      "currentAge": 24,
+      "fullName": "Oswaldo Cabrera",
+      "height": "5' 11\"",
+      "birthCity": "Guarenas",
+      "mlbDebutDate": "2022-08-17",
+      "isActive": true
+    },
+    "543309": {
+      "id": 543309,
+      "lastInitName": "Higashioka, K",
+      "boxscoreName": "Higashioka",
+      "firstName": "Kyle",
+      "birthDate": "1990-04-20",
+      "birthCountry": "USA",
+      "lastName": "Higashioka",
+      "primaryPositionCode": "2",
+      "weight": 202,
+      "currentAge": 33,
+      "fullName": "Kyle Higashioka",
+      "height": "6' 1\"",
+      "birthCity": "Huntington Beach",
+      "mlbDebutDate": "2017-04-10",
+      "isActive": true
+    },
+    "571771": {
+      "id": 571771,
+      "lastInitName": "Hernández, K",
+      "boxscoreName": "Hernández, K",
+      "firstName": "Enrique",
+      "birthDate": "1991-08-24",
+      "birthCountry": "Puerto Rico",
+      "lastName": "Hernandez",
+      "primaryPositionCode": "6",
+      "weight": 195,
+      "currentAge": 31,
+      "fullName": "Enrique Hernandez",
+      "height": "5' 11\"",
+      "birthCity": "San Juan",
+      "mlbDebutDate": "2014-07-01",
+      "isActive": true
+    },
+    "445276": {
+      "id": 445276,
+      "lastInitName": "Jansen, K",
+      "boxscoreName": "Jansen",
+      "firstName": "Kenley",
+      "birthDate": "1987-09-30",
+      "birthCountry": "Curacao",
+      "lastName": "Jansen",
+      "primaryPositionCode": "1",
+      "weight": 265,
+      "currentAge": 35,
+      "fullName": "Kenley Jansen",
+      "height": "6' 5\"",
+      "birthCity": "Willemstad",
+      "mlbDebutDate": "2010-07-24",
+      "isActive": true
+    },
+    "446372": {
+      "id": 446372,
+      "lastInitName": "Kluber, C",
+      "boxscoreName": "Kluber",
+      "firstName": "Corey",
+      "birthDate": "1986-04-10",
+      "birthCountry": "USA",
+      "lastName": "Kluber",
+      "primaryPositionCode": "1",
+      "weight": 210,
+      "currentAge": 37,
+      "fullName": "Corey Kluber",
+      "height": "6' 4\"",
+      "birthCity": "Birmingham",
+      "mlbDebutDate": "2011-09-01",
+      "isActive": true
+    },
+    "657514": {
+      "id": 657514,
+      "lastInitName": "Bernardino, B",
+      "boxscoreName": "Bernardino",
+      "firstName": "Brennan",
+      "birthDate": "1992-01-15",
+      "birthCountry": "USA",
+      "lastName": "Bernardino",
+      "primaryPositionCode": "1",
+      "weight": 180,
+      "currentAge": 31,
+      "fullName": "Brennan Bernardino",
+      "height": "6' 4\"",
+      "birthCity": "Valencia",
+      "mlbDebutDate": "2022-07-31",
+      "isActive": true
+    },
+    "519317": {
+      "id": 519317,
+      "lastInitName": "Stanton, G",
+      "boxscoreName": "Stanton",
+      "firstName": "Giancarlo",
+      "birthDate": "1989-11-08",
+      "birthCountry": "USA",
+      "lastName": "Stanton",
+      "primaryPositionCode": "10",
+      "weight": 245,
+      "currentAge": 33,
+      "fullName": "Giancarlo Stanton",
+      "height": "6' 6\"",
+      "birthCity": "Panorama",
+      "mlbDebutDate": "2010-06-08",
+      "isActive": true
+    }
+  },
+  "linescore": {
+    "innings": [
+      {
+        "num": 1,
+        "home": {
+          "hits": 2,
+          "runs": 0,
+          "errors": 0
+        },
+        "away": {
+          "hits": 1,
+          "runs": 0,
+          "errors": 0
+        }
+      },
+      {
+        "num": 2,
+        "home": {
+          "hits": 1,
+          "runs": 0,
+          "errors": 0
+        },
+        "away": {
+          "hits": 1,
+          "runs": 0,
+          "errors": 0
+        }
+      },
+      {
+        "num": 3,
+        "home": {
+          "hits": 1,
+          "runs": 0,
+          "errors": 0
+        },
+        "away": {
+          "hits": 1,
+          "runs": 0,
+          "errors": 0
+        }
+      },
+      {
+        "num": 4,
+        "home": {
+          "hits": 0,
+          "runs": 0,
+          "errors": 0
+        },
+        "away": {
+          "hits": 2,
+          "runs": 1,
+          "errors": 0
+        }
+      },
+      {
+        "num": 5,
+        "home": {
+          "hits": 0,
+          "errors": 0
+        },
+        "away": {
+          "hits": 0,
+          "errors": 0
+        }
+      }
+    ],
+    "homeTotal": {
+      "hits": 4,
+      "runs": 0,
+      "errors": 0
+    },
+    "awayTotal": {
+      "hits": 5,
+      "runs": 1,
+      "errors": 0
+    }
+  },
+  "homeTeam": {
+    "abbreviation": "NYY",
+    "league": {
+      "id": 103,
+      "name": "American League"
+    },
+    "venue": {
+      "id": 3313,
+      "name": "Yankee Stadium"
+    },
+    "id": 147,
+    "locationName": "Bronx",
+    "division": {
+      "id": 201,
+      "name": "American League East"
+    },
+    "record": {
+      "losses": 27,
+      "gamesPlayed": 64,
+      "winningPercentage": ".578",
+      "wins": 37,
+      "ties": 0
+    },
+    "teamName": "Yankees",
+    "name": "New York Yankees"
+  },
+  "awayTeamScore": 1,
+  "probablePitchers": {
+    "home": {
+      "id": 543037,
+      "fullName": "Gerrit Cole"
+    },
+    "away": {
+      "id": 676477,
+      "fullName": "Garrett Whitlock"
+    }
+  },
+  "date": 708044700,
+  "boxscore": {
+    "id": "6F7FEDB8-6CAF-43D6-8E39-5484CEDA7E56",
+    "home": {
+      "batters": [
+        {
+          "battingOrderIndex": "100",
+          "stats": {
+            "atBats": 2,
+            "strikeOuts": 0,
+            "baseOnBalls": 0,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".241",
+            "runsBattedIn": 0,
+            "hits": 2,
+            "leftOnBase": 0
+          },
+          "playerID": 518934,
+          "fullName": "DJ LeMahieu",
+          "substitution": false,
+          "position": {
+            "code": "4",
+            "abbreviation": "2B",
+            "type": "Infielder",
+            "name": "Second Base"
+          }
+        },
+        {
+          "battingOrderIndex": "200",
+          "stats": {
+            "atBats": 2,
+            "strikeOuts": 1,
+            "baseOnBalls": 2,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".152",
+            "runsBattedIn": 0,
+            "hits": 0,
+            "leftOnBase": 2
+          },
+          "playerID": 518626,
+          "fullName": "Josh Donaldson",
+          "substitution": false,
+          "position": {
+            "code": "5",
+            "abbreviation": "3B",
+            "type": "Infielder",
+            "name": "Third Base"
+          }
+        },
+        {
+          "battingOrderIndex": "300",
+          "stats": {
+            "atBats": 2,
+            "strikeOuts": 1,
+            "baseOnBalls": 2,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".275",
+            "runsBattedIn": 0,
+            "hits": 0,
+            "leftOnBase": 2
+          },
+          "playerID": 519203,
+          "fullName": "Anthony Rizzo",
+          "substitution": false,
+          "position": {
+            "code": "3",
+            "abbreviation": "1B",
+            "type": "Infielder",
+            "name": "First Base"
+          }
+        },
+        {
+          "battingOrderIndex": "400",
+          "stats": {
+            "atBats": 2,
+            "strikeOuts": 1,
+            "baseOnBalls": 0,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".250",
+            "runsBattedIn": 0,
+            "hits": 1,
+            "leftOnBase": 0
+          },
+          "playerID": 519317,
+          "fullName": "Giancarlo Stanton",
+          "substitution": false,
+          "position": {
+            "code": "10",
+            "abbreviation": "DH",
+            "type": "Hitter",
+            "name": "Designated Hitter"
+          }
+        },
+        {
+          "battingOrderIndex": "500",
+          "stats": {
+            "atBats": 2,
+            "strikeOuts": 1,
+            "baseOnBalls": 2,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".243",
+            "runsBattedIn": 0,
+            "hits": 0,
+            "leftOnBase": 2
+          },
+          "playerID": 641343,
+          "fullName": "Jake Bauers",
+          "substitution": false,
+          "position": {
+            "code": "9",
+            "abbreviation": "RF",
+            "type": "Outfielder",
+            "name": "Outfielder"
+          }
+        },
+        {
+          "battingOrderIndex": "600",
+          "stats": {
+            "atBats": 2,
+            "strikeOuts": 0,
+            "baseOnBalls": 0,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".235",
+            "runsBattedIn": 0,
+            "hits": 1,
+            "leftOnBase": 0
+          },
+          "playerID": 643396,
+          "fullName": "Isiah Kiner-Falefa",
+          "substitution": false,
+          "position": {
+            "code": "8",
+            "abbreviation": "CF",
+            "type": "Outfielder",
+            "name": "Outfielder"
+          }
+        },
+        {
+          "battingOrderIndex": "700",
+          "stats": {
+            "atBats": 1,
+            "strikeOuts": 0,
+            "baseOnBalls": 0,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".286",
+            "runsBattedIn": 0,
+            "hits": 0,
+            "leftOnBase": 0
+          },
+          "playerID": 641856,
+          "fullName": "Billy McKinney",
+          "substitution": false,
+          "position": {
+            "code": "7",
+            "abbreviation": "LF",
+            "type": "Outfielder",
+            "name": "Outfielder"
+          }
+        },
+        {
+          "battingOrderIndex": "800",
+          "stats": {
+            "atBats": 1,
+            "strikeOuts": 0,
+            "baseOnBalls": 0,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".214",
+            "runsBattedIn": 0,
+            "hits": 0,
+            "leftOnBase": 0
+          },
+          "playerID": 624431,
+          "fullName": "Jose Trevino",
+          "substitution": false,
+          "position": {
+            "code": "2",
+            "abbreviation": "C",
+            "type": "Catcher",
+            "name": "Catcher"
+          }
+        },
+        {
+          "battingOrderIndex": "900",
+          "stats": {
+            "atBats": 1,
+            "strikeOuts": 0,
+            "baseOnBalls": 0,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".187",
+            "runsBattedIn": 0,
+            "hits": 0,
+            "leftOnBase": 0
+          },
+          "playerID": 683011,
+          "fullName": "Anthony Volpe",
+          "substitution": false,
+          "position": {
+            "code": "6",
+            "abbreviation": "SS",
+            "type": "Infielder",
+            "name": "Shortstop"
+          }
+        },
+        {
+          "stats": {
+            "avg": ".000"
+          },
+          "playerID": 543037,
+          "fullName": "Gerrit Cole",
+          "substitution": false,
+          "position": {
+            "code": "1",
+            "abbreviation": "P",
+            "type": "Pitcher",
+            "name": "Pitcher"
+          }
+        }
+      ],
+      "notes": [
+        
+      ],
+      "stats": {
+        "atBats": 15,
+        "strikeOuts": 4,
+        "baseOnBalls": 0,
+        "runs": 0,
+        "rbi": 0,
+        "avg": ".234",
+        "runsBattedIn": 0,
+        "hits": 4,
+        "leftOnBase": 6
+      },
+      "pitchingStats": {
+        "didWin": false,
+        "strikeOuts": 5,
+        "baseOnBalls": 0,
+        "runs": 1,
+        "earnedRuns": 1,
+        "didLose": false,
+        "era": "3.65",
+        "hits": 5,
+        "inningsPitched": "4.2",
+        "homeRuns": 0
+      },
+      "pitchers": [
+        {
+          "fullName": "Gerrit Cole",
+          "stats": {
+            "strikeOuts": 5,
+            "seasonLosses": 0,
+            "didLose": false,
+            "baseOnBalls": 0,
+            "didWin": false,
+            "inningsPitched": "4.2",
+            "homeRuns": 0,
+            "seasonWins": 7,
+            "earnedRuns": 1,
+            "hits": 5,
+            "era": "2.77",
+            "runs": 1
+          },
+          "playerID": 543037
+        }
+      ],
+      "baseRunningDetails": [
+        {
+          "title": "CS",
+          "detail": "Kiner-Falefa (3, 2nd base by Whitlock\/Wong)."
+        }
+      ],
+      "battingDetais": [
+        {
+          "title": "TB",
+          "detail": "Kiner-Falefa; LeMahieu 2; Stanton."
+        },
+        {
+          "title": "Runners left in scoring position, 2 out",
+          "detail": "Rizzo; Bauers."
+        },
+        {
+          "title": "Team RISP",
+          "detail": "0-for-2."
+        },
+        {
+          "title": "Team LOB",
+          "detail": "3."
+        }
+      ],
+      "fieldingDetails": [
+        {
+          "title": "DP",
+          "detail": "2 (Volpe-LeMahieu-Rizzo; Donaldson-LeMahieu-Rizzo)."
+        }
+      ]
+    },
+    "away": {
+      "batters": [
+        {
+          "battingOrderIndex": "100",
+          "stats": {
+            "atBats": 2,
+            "strikeOuts": 1,
+            "baseOnBalls": 1,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".283",
+            "runsBattedIn": 0,
+            "hits": 0,
+            "leftOnBase": 1
+          },
+          "playerID": 657077,
+          "fullName": "Alex Verdugo",
+          "substitution": false,
+          "position": {
+            "code": "9",
+            "abbreviation": "RF",
+            "type": "Outfielder",
+            "name": "Outfielder"
+          }
+        },
+        {
+          "battingOrderIndex": "200",
+          "stats": {
+            "atBats": 2,
+            "strikeOuts": 0,
+            "baseOnBalls": 1,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".312",
+            "runsBattedIn": 0,
+            "hits": 0,
+            "leftOnBase": 1
+          },
+          "playerID": 807799,
+          "fullName": "Masataka Yoshida",
+          "substitution": false,
+          "position": {
+            "code": "7",
+            "abbreviation": "LF",
+            "type": "Outfielder",
+            "name": "Outfielder"
+          }
+        },
+        {
+          "battingOrderIndex": "300",
+          "stats": {
+            "atBats": 2,
+            "strikeOuts": 1,
+            "baseOnBalls": 0,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".258",
+            "runsBattedIn": 0,
+            "hits": 1,
+            "leftOnBase": 0
+          },
+          "playerID": 457759,
+          "fullName": "Justin Turner",
+          "substitution": false,
+          "position": {
+            "code": "10",
+            "abbreviation": "DH",
+            "type": "Hitter",
+            "name": "Designated Hitter"
+          }
+        },
+        {
+          "battingOrderIndex": "400",
+          "stats": {
+            "atBats": 2,
+            "strikeOuts": 0,
+            "baseOnBalls": 1,
+            "runs": 1,
+            "rbi": 0,
+            "avg": ".245",
+            "runsBattedIn": 0,
+            "hits": 1,
+            "leftOnBase": 1
+          },
+          "playerID": 646240,
+          "fullName": "Rafael Devers",
+          "substitution": false,
+          "position": {
+            "code": "5",
+            "abbreviation": "3B",
+            "type": "Infielder",
+            "name": "Third Base"
+          }
+        },
+        {
+          "battingOrderIndex": "500",
+          "stats": {
+            "atBats": 2,
+            "strikeOuts": 2,
+            "baseOnBalls": 1,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".429",
+            "runsBattedIn": 0,
+            "hits": 0,
+            "leftOnBase": 1
+          },
+          "playerID": 594807,
+          "fullName": "Adam Duvall",
+          "substitution": false,
+          "position": {
+            "code": "8",
+            "abbreviation": "CF",
+            "type": "Outfielder",
+            "name": "Outfielder"
+          }
+        },
+        {
+          "battingOrderIndex": "600",
+          "stats": {
+            "atBats": 2,
+            "strikeOuts": 0,
+            "baseOnBalls": 0,
+            "runs": 0,
+            "rbi": 1,
+            "avg": ".211",
+            "runsBattedIn": 1,
+            "hits": 2,
+            "leftOnBase": 0
+          },
+          "playerID": 671213,
+          "fullName": "Triston Casas",
+          "substitution": false,
+          "position": {
+            "code": "3",
+            "abbreviation": "1B",
+            "type": "Infielder",
+            "name": "First Base"
+          }
+        },
+        {
+          "battingOrderIndex": "700",
+          "stats": {
+            "atBats": 2,
+            "strikeOuts": 1,
+            "baseOnBalls": 2,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".253",
+            "runsBattedIn": 0,
+            "hits": 0,
+            "leftOnBase": 2
+          },
+          "playerID": 624414,
+          "fullName": "Christian Arroyo",
+          "substitution": false,
+          "position": {
+            "code": "4",
+            "abbreviation": "2B",
+            "type": "Infielder",
+            "name": "Second Base"
+          }
+        },
+        {
+          "battingOrderIndex": "800",
+          "stats": {
+            "atBats": 1,
+            "strikeOuts": 0,
+            "baseOnBalls": 0,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".241",
+            "runsBattedIn": 0,
+            "hits": 1,
+            "leftOnBase": 0
+          },
+          "playerID": 657136,
+          "fullName": "Connor Wong",
+          "substitution": false,
+          "position": {
+            "code": "2",
+            "abbreviation": "C",
+            "type": "Catcher",
+            "name": "Catcher"
+          }
+        },
+        {
+          "battingOrderIndex": "900",
+          "stats": {
+            "atBats": 2,
+            "strikeOuts": 0,
+            "baseOnBalls": 2,
+            "runs": 0,
+            "rbi": 0,
+            "avg": ".227",
+            "runsBattedIn": 0,
+            "hits": 0,
+            "leftOnBase": 2
+          },
+          "playerID": 571771,
+          "fullName": "Enrique Hernandez",
+          "substitution": false,
+          "position": {
+            "code": "6",
+            "abbreviation": "SS",
+            "type": "Infielder",
+            "name": "Shortstop"
+          }
+        },
+        {
+          "stats": {
+            "avg": ".000"
+          },
+          "playerID": 676477,
+          "fullName": "Garrett Whitlock",
+          "substitution": false,
+          "position": {
+            "code": "1",
+            "abbreviation": "P",
+            "type": "Pitcher",
+            "name": "Pitcher"
+          }
+        }
+      ],
+      "notes": [
+        
+      ],
+      "stats": {
+        "atBats": 17,
+        "strikeOuts": 5,
+        "baseOnBalls": 0,
+        "runs": 1,
+        "rbi": 1,
+        "avg": ".260",
+        "runsBattedIn": 1,
+        "hits": 5,
+        "leftOnBase": 8
+      },
+      "pitchingStats": {
+        "didWin": false,
+        "strikeOuts": 5,
+        "baseOnBalls": 0,
+        "runs": 1,
+        "earnedRuns": 1,
+        "didLose": false,
+        "era": "3.65",
+        "hits": 5,
+        "inningsPitched": "4.2",
+        "homeRuns": 0
+      },
+      "pitchers": [
+        {
+          "fullName": "Garrett Whitlock",
+          "stats": {
+            "strikeOuts": 4,
+            "seasonLosses": 2,
+            "didLose": false,
+            "baseOnBalls": 0,
+            "didWin": false,
+            "inningsPitched": "4.0",
+            "homeRuns": 0,
+            "seasonWins": 2,
+            "earnedRuns": 0,
+            "hits": 4,
+            "era": "4.85",
+            "runs": 0
+          },
+          "playerID": 676477
+        }
+      ],
+      "baseRunningDetails": [
+        
+      ],
+      "battingDetais": [
+        {
+          "title": "2B",
+          "detail": "Devers (16, Cole)."
+        },
+        {
+          "title": "TB",
+          "detail": "Casas 2; Devers 2; Turner, J; Wong."
+        },
+        {
+          "title": "RBI",
+          "detail": "Casas (19)."
+        },
+        {
+          "title": "2-out RBI",
+          "detail": "Casas."
+        },
+        {
+          "title": "Runners left in scoring position, 2 out",
+          "detail": "Arroyo."
+        },
+        {
+          "title": "GIDP",
+          "detail": "Arroyo; Hernández, K."
+        },
+        {
+          "title": "Team RISP",
+          "detail": "1-for-3."
+        },
+        {
+          "title": "Team LOB",
+          "detail": "3."
+        }
+      ],
+      "fieldingDetails": [
+        
+      ]
+    }
+  },
+  "venue": {
+    "id": 3313,
+    "name": "Yankee Stadium"
+  },
+  "info": {
+    "firstPitchDateString": "2023-06-09T23:07:00.000Z",
+    "weatherTempurature": "68",
+    "windDescription": "6 mph, Calm"
+  },
+  "awayTeam": {
+    "abbreviation": "BOS",
+    "league": {
+      "id": 103,
+      "name": "American League"
+    },
+    "venue": {
+      "id": 3,
+      "name": "Fenway Park"
+    },
+    "id": 111,
+    "locationName": "Boston",
+    "division": {
+      "id": 201,
+      "name": "American League East"
+    },
+    "record": {
+      "losses": 32,
+      "gamesPlayed": 63,
+      "winningPercentage": ".492",
+      "wins": 31,
+      "ties": 0
+    },
+    "teamName": "Red Sox",
+    "name": "Boston Red Sox"
+  },
+  "status": "Live",
+  "homeTeamScore": 0
+}

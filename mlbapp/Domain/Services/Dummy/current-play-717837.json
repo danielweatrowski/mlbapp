@@ -1,0 +1,674 @@
+{
+  "currentPlay": {
+    "result": {
+      "type": "atBat",
+      "event": "Home Run",
+      "eventType": "home_run",
+      "description": "Kyle Schwarber homers (17) on a fly ball to right field.",
+      "rbi": 1,
+      "awayScore": 4,
+      "homeScore": 5,
+      "isOut": false
+    },
+    "about": {
+      "atBatIndex": 74,
+      "halfInning": "bottom",
+      "isTopInning": false,
+      "inning": 9,
+      "startTime": "2023-06-10T02:00:16.105Z",
+      "endTime": "2023-06-10T02:01:46.438Z",
+      "isComplete": true,
+      "isScoringPlay": true,
+      "hasReview": false,
+      "hasOut": false,
+      "captivatingIndex": 65
+    },
+    "count": {
+      "balls": 1,
+      "strikes": 1,
+      "outs": 2
+    },
+    "matchup": {
+      "batter": {
+        "id": 656941,
+        "fullName": "Kyle Schwarber",
+        "link": "/api/v1/people/656941"
+      },
+      "batSide": {
+        "code": "L",
+        "description": "Left"
+      },
+      "pitcher": {
+        "id": 657571,
+        "fullName": "Caleb Ferguson",
+        "link": "/api/v1/people/657571"
+      },
+      "pitchHand": {
+        "code": "L",
+        "description": "Left"
+      },
+      "batterHotColdZoneStats": {
+        "stats": [
+          {
+            "type": {
+              "displayName": "hotColdZones"
+            },
+            "group": {
+              "displayName": "hitting"
+            },
+            "exemptions": [
+              
+            ],
+            "splits": [
+              {
+                "stat": {
+                  "name": "battingAverage",
+                  "zones": [
+                    {
+                      "zone": "01",
+                      "color": "rgba(150, 188, 255, .55)",
+                      "temp": "cool",
+                      "value": ".214"
+                    },
+                    {
+                      "zone": "02",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".071"
+                    },
+                    {
+                      "zone": "03",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".200"
+                    },
+                    {
+                      "zone": "04",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".125"
+                    },
+                    {
+                      "zone": "05",
+                      "color": "rgba(214, 41, 52, .55)",
+                      "temp": "hot",
+                      "value": ".379"
+                    },
+                    {
+                      "zone": "06",
+                      "color": "rgba(214, 41, 52, .55)",
+                      "temp": "hot",
+                      "value": ".364"
+                    },
+                    {
+                      "zone": "07",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".158"
+                    },
+                    {
+                      "zone": "08",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".192"
+                    },
+                    {
+                      "zone": "09",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".167"
+                    },
+                    {
+                      "zone": "11",
+                      "color": "rgba(150, 188, 255, .55)",
+                      "temp": "cool",
+                      "value": ".211"
+                    },
+                    {
+                      "zone": "12",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".000"
+                    },
+                    {
+                      "zone": "13",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".056"
+                    },
+                    {
+                      "zone": "14",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".000"
+                    }
+                  ]
+                }
+              },
+              {
+                "stat": {
+                  "name": "onBasePlusSlugging",
+                  "zones": [
+                    {
+                      "zone": "01",
+                      "color": "rgba(255, 255, 255, 0.55)",
+                      "temp": "lukewarm",
+                      "value": ".929"
+                    },
+                    {
+                      "zone": "02",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".357"
+                    },
+                    {
+                      "zone": "03",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".500"
+                    },
+                    {
+                      "zone": "04",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".417"
+                    },
+                    {
+                      "zone": "05",
+                      "color": "rgba(214, 41, 52, .55)",
+                      "temp": "hot",
+                      "value": "1.414"
+                    },
+                    {
+                      "zone": "06",
+                      "color": "rgba(214, 41, 52, .55)",
+                      "temp": "hot",
+                      "value": "1.364"
+                    },
+                    {
+                      "zone": "07",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".474"
+                    },
+                    {
+                      "zone": "08",
+                      "color": "rgba(255, 255, 255, 0.55)",
+                      "temp": "lukewarm",
+                      "value": ".654"
+                    },
+                    {
+                      "zone": "09",
+                      "color": "rgba(255, 255, 255, 0.55)",
+                      "temp": "lukewarm",
+                      "value": ".688"
+                    },
+                    {
+                      "zone": "11",
+                      "color": "rgba(255, 255, 255, 0.55)",
+                      "temp": "lukewarm",
+                      "value": ".800"
+                    },
+                    {
+                      "zone": "12",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".400"
+                    },
+                    {
+                      "zone": "13",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".500"
+                    },
+                    {
+                      "zone": "14",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": ".464"
+                    }
+                  ]
+                }
+              },
+              {
+                "stat": {
+                  "name": "exitVelocity",
+                  "zones": [
+                    {
+                      "zone": "01",
+                      "color": "rgba(214, 41, 52, .55)",
+                      "temp": "hot",
+                      "value": "99.22"
+                    },
+                    {
+                      "zone": "02",
+                      "color": "rgba(214, 41, 52, .55)",
+                      "temp": "hot",
+                      "value": "93.18"
+                    },
+                    {
+                      "zone": "03",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": "81.79"
+                    },
+                    {
+                      "zone": "04",
+                      "color": "rgba(214, 41, 52, .55)",
+                      "temp": "hot",
+                      "value": "95.82"
+                    },
+                    {
+                      "zone": "05",
+                      "color": "rgba(214, 41, 52, .55)",
+                      "temp": "hot",
+                      "value": "97.56"
+                    },
+                    {
+                      "zone": "06",
+                      "color": "rgba(214, 41, 52, .55)",
+                      "temp": "hot",
+                      "value": "95.70"
+                    },
+                    {
+                      "zone": "07",
+                      "color": "rgba(255, 255, 255, 0.55)",
+                      "temp": "lukewarm",
+                      "value": "90.80"
+                    },
+                    {
+                      "zone": "08",
+                      "color": "rgba(234, 147, 153, .55)",
+                      "temp": "warm",
+                      "value": "91.46"
+                    },
+                    {
+                      "zone": "09",
+                      "color": "rgba(234, 147, 153, .55)",
+                      "temp": "warm",
+                      "value": "91.61"
+                    },
+                    {
+                      "zone": "11",
+                      "color": "rgba(214, 41, 52, .55)",
+                      "temp": "hot",
+                      "value": "93.16"
+                    },
+                    {
+                      "zone": "12",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": "50.02"
+                    },
+                    {
+                      "zone": "13",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": "81.05"
+                    },
+                    {
+                      "zone": "14",
+                      "color": "rgba(6, 90, 238, .55)",
+                      "temp": "cold",
+                      "value": "74.34"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "batterHotColdZones": [
+        {
+          "zone": "01",
+          "color": "rgba(255, 255, 255, 0.55)",
+          "temp": "lukewarm",
+          "value": ".929"
+        },
+        {
+          "zone": "02",
+          "color": "rgba(6, 90, 238, .55)",
+          "temp": "cold",
+          "value": ".357"
+        },
+        {
+          "zone": "03",
+          "color": "rgba(6, 90, 238, .55)",
+          "temp": "cold",
+          "value": ".500"
+        },
+        {
+          "zone": "04",
+          "color": "rgba(6, 90, 238, .55)",
+          "temp": "cold",
+          "value": ".417"
+        },
+        {
+          "zone": "05",
+          "color": "rgba(214, 41, 52, .55)",
+          "temp": "hot",
+          "value": "1.414"
+        },
+        {
+          "zone": "06",
+          "color": "rgba(214, 41, 52, .55)",
+          "temp": "hot",
+          "value": "1.364"
+        },
+        {
+          "zone": "07",
+          "color": "rgba(6, 90, 238, .55)",
+          "temp": "cold",
+          "value": ".474"
+        },
+        {
+          "zone": "08",
+          "color": "rgba(255, 255, 255, 0.55)",
+          "temp": "lukewarm",
+          "value": ".654"
+        },
+        {
+          "zone": "09",
+          "color": "rgba(255, 255, 255, 0.55)",
+          "temp": "lukewarm",
+          "value": ".688"
+        },
+        {
+          "zone": "11",
+          "color": "rgba(255, 255, 255, 0.55)",
+          "temp": "lukewarm",
+          "value": ".800"
+        },
+        {
+          "zone": "12",
+          "color": "rgba(6, 90, 238, .55)",
+          "temp": "cold",
+          "value": ".400"
+        },
+        {
+          "zone": "13",
+          "color": "rgba(6, 90, 238, .55)",
+          "temp": "cold",
+          "value": ".500"
+        },
+        {
+          "zone": "14",
+          "color": "rgba(6, 90, 238, .55)",
+          "temp": "cold",
+          "value": ".464"
+        }
+      ],
+      "pitcherHotColdZones": [
+        
+      ],
+      "splits": {
+        "batter": "vs_LHP",
+        "pitcher": "vs_LHB",
+        "menOnBase": "Empty"
+      }
+    },
+    "pitchIndex": [
+      0,
+      1,
+      2
+    ],
+    "actionIndex": [
+      
+    ],
+    "runnerIndex": [
+      0
+    ],
+    "runners": [
+      {
+        "movement": {
+          "originBase": null,
+          "start": null,
+          "end": "score",
+          "outBase": null,
+          "isOut": false,
+          "outNumber": null
+        },
+        "details": {
+          "event": "Home Run",
+          "eventType": "home_run",
+          "movementReason": null,
+          "runner": {
+            "id": 656941,
+            "fullName": "Kyle Schwarber",
+            "link": "/api/v1/people/656941"
+          },
+          "responsiblePitcher": {
+            "id": 657571,
+            "link": "/api/v1/people/657571"
+          },
+          "isScoringEvent": true,
+          "rbi": true,
+          "earned": true,
+          "teamUnearned": false,
+          "playIndex": 2
+        },
+        "credits": [
+          
+        ]
+      }
+    ],
+    "playEvents": [
+      {
+        "details": {
+          "call": {
+            "code": "F",
+            "description": "Foul"
+          },
+          "description": "Foul",
+          "code": "F",
+          "ballColor": "rgba(170, 21, 11, 1.0)",
+          "trailColor": "rgba(152, 0, 101, 1.0)",
+          "isInPlay": false,
+          "isStrike": true,
+          "isBall": false,
+          "type": {
+            "code": "FC",
+            "description": "Cutter"
+          },
+          "isOut": false,
+          "hasReview": false
+        },
+        "count": {
+          "balls": 0,
+          "strikes": 1,
+          "outs": 2
+        },
+        "pitchData": {
+          "startSpeed": 88.3,
+          "endSpeed": 83.0,
+          "strikeZoneTop": 3.23,
+          "strikeZoneBottom": 1.53,
+          "coordinates": {
+            "aY": 21.309195898329126,
+            "aZ": -33.401930172957044,
+            "pfxX": -1.615413451155653,
+            "pfxZ": -0.7206645641142488,
+            "pX": -0.24341719190254388,
+            "pZ": 1.5057511829383388,
+            "vX0": -5.852578956563333,
+            "vY0": -128.6174660532871,
+            "vZ0": -4.372627673771293,
+            "x": 126.28,
+            "y": 198.12,
+            "x0": 2.2518071825201833,
+            "y0": 50.00154363419637,
+            "z0": 5.757758479269191,
+            "aX": -2.7625868765488337
+          },
+          "breaks": {
+            "breakAngle": 6.0,
+            "breakLength": 8.4,
+            "breakY": 24.0,
+            "spinRate": 2850,
+            "spinDirection": 303
+          },
+          "zone": 8,
+          "typeConfidence": 0.9,
+          "plateTime": 0.42243046139607277,
+          "extension": 6.2362146161774366
+        },
+        "index": 0,
+        "playId": "2cdf3f46-6619-43f7-b39e-cd0db68b6e64",
+        "pitchNumber": 1,
+        "startTime": "2023-06-10T02:00:37.172Z",
+        "endTime": "2023-06-10T02:00:41.068Z",
+        "isPitch": true,
+        "type": "pitch"
+      },
+      {
+        "details": {
+          "call": {
+            "code": "B",
+            "description": "Ball"
+          },
+          "description": "Ball",
+          "code": "B",
+          "ballColor": "rgba(39, 161, 39, 1.0)",
+          "trailColor": "rgba(188, 0, 33, 1.0)",
+          "isInPlay": false,
+          "isStrike": false,
+          "isBall": true,
+          "type": {
+            "code": "FF",
+            "description": "Four-Seam Fastball"
+          },
+          "isOut": false,
+          "hasReview": false
+        },
+        "count": {
+          "balls": 1,
+          "strikes": 1,
+          "outs": 2
+        },
+        "pitchData": {
+          "startSpeed": 96.4,
+          "endSpeed": 88.7,
+          "strikeZoneTop": 3.22837974572022,
+          "strikeZoneBottom": 1.56740017479679,
+          "coordinates": {
+            "aY": 29.637315413045513,
+            "aZ": -15.580946952087332,
+            "pfxX": 5.67243913815726,
+            "pfxZ": 8.31357059141105,
+            "pX": -0.4148978942046618,
+            "pZ": 1.4168562875685118,
+            "vX0": -9.404106123063023,
+            "vY0": -139.93714681166546,
+            "vZ0": -8.832603098484253,
+            "x": 132.81,
+            "y": 200.52,
+            "x0": 2.2422632420166475,
+            "y0": 50.00639730960715,
+            "z0": 5.620875588975677,
+            "aX": 11.326977383658946
+          },
+          "breaks": {
+            "breakAngle": 28.8,
+            "breakLength": 3.6,
+            "breakY": 24.0,
+            "spinRate": 2291,
+            "spinDirection": 137
+          },
+          "zone": 13,
+          "typeConfidence": 0.91,
+          "plateTime": 0.3904307414938306,
+          "extension": 6.171274297159398
+        },
+        "index": 1,
+        "playId": "8d5ef757-2d4a-4cb9-a4a3-f365ebf30b80",
+        "pitchNumber": 2,
+        "startTime": "2023-06-10T02:00:58.205Z",
+        "endTime": "2023-06-10T02:01:02.680Z",
+        "isPitch": true,
+        "type": "pitch"
+      },
+      {
+        "details": {
+          "call": {
+            "code": "E",
+            "description": "In play, run(s)"
+          },
+          "description": "In play, run(s)",
+          "code": "E",
+          "ballColor": "rgba(26, 86, 190, 1.0)",
+          "trailColor": "rgba(152, 0, 101, 1.0)",
+          "isInPlay": true,
+          "isStrike": false,
+          "isBall": false,
+          "type": {
+            "code": "FC",
+            "description": "Cutter"
+          },
+          "isOut": false,
+          "hasReview": false
+        },
+        "count": {
+          "balls": 1,
+          "strikes": 1,
+          "outs": 2
+        },
+        "pitchData": {
+          "startSpeed": 87.3,
+          "endSpeed": 80.7,
+          "strikeZoneTop": 3.23,
+          "strikeZoneBottom": 1.53,
+          "coordinates": {
+            "aY": 25.024400619460152,
+            "aZ": -32.81153449330143,
+            "pfxX": -2.3642038577776905,
+            "pfxZ": -0.3882501568314627,
+            "pX": -0.19691584132359868,
+            "pZ": 2.1886451226583223,
+            "vX0": -5.3374354885671185,
+            "vY0": -127.10991412137594,
+            "vZ0": -2.6632539553945236,
+            "x": 124.51,
+            "y": 179.69,
+            "x0": 2.2337179333107757,
+            "y0": 50.002383913168764,
+            "z0": 5.844171611744561,
+            "aX": -3.884397811947155
+          },
+          "breaks": {
+            "breakAngle": 8.4,
+            "breakLength": 8.4,
+            "breakY": 24.0,
+            "spinRate": 2949,
+            "spinDirection": 287
+          },
+          "zone": 5,
+          "typeConfidence": 0.91,
+          "plateTime": 0.4302127803689131,
+          "extension": 6.221389952490832
+        },
+        "hitData": {
+          "launchSpeed": 101.2,
+          "launchAngle": 26.0,
+          "totalDistance": 389.0,
+          "trajectory": "fly_ball",
+          "hardness": "medium",
+          "location": "9",
+          "coordinates": {
+            "coordX": 223.98,
+            "coordY": 74.96
+          }
+        },
+        "index": 2,
+        "playId": "b758a13a-31ae-4263-b987-a3d9958edd33",
+        "pitchNumber": 3,
+        "startTime": "2023-06-10T02:01:15.959Z",
+        "endTime": "2023-06-10T02:01:46.438Z",
+        "isPitch": true,
+        "type": "pitch"
+      }
+    ],
+    "playEndTime": "2023-06-10T02:01:46.438Z",
+    "atBatIndex": 74
+  }
+}

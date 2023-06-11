@@ -11,9 +11,9 @@ protocol BoxscoreProtocol {
     
 }
 
-struct Boxscore: Hashable, Equatable {
+struct Boxscore: Hashable, Equatable, Codable {
     
-    struct Batter {
+    struct Batter: Codable {
         var playerID: Int
         var fullName: String
         var stats: BattingStats
@@ -24,13 +24,13 @@ struct Boxscore: Hashable, Equatable {
         var note: String?
     }
     
-    struct Pitcher {
+    struct Pitcher: Codable {
         let playerID: Int
         let fullName: String
         let stats: PitchingStats
     }
     
-    struct Team {
+    struct Team: Codable {
         let batters: [Batter]
         let pitchers: [Pitcher]
         let stats: BattingStats
@@ -49,7 +49,7 @@ struct Boxscore: Hashable, Equatable {
         }
     }
     
-    struct BattingStats {
+    struct BattingStats: Codable {
         var atBats: Int?
         var runs: Int?
         var hits: Int?
@@ -61,7 +61,7 @@ struct Boxscore: Hashable, Equatable {
         var avg: String?
     }
     
-    struct PitchingStats {
+    struct PitchingStats: Codable {
         let inningsPitched: String?
         let hits: Int?
         let runs: Int?
@@ -76,7 +76,7 @@ struct Boxscore: Hashable, Equatable {
         let didLose: Bool
     }
     
-    struct GameDetail: Hashable {
+    struct GameDetail: Hashable, Codable {
         let title: String
         let detail: String
     }

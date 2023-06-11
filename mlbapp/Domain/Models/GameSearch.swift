@@ -8,14 +8,14 @@
 import Foundation
 
 enum GameSearch {
-    struct SearchParameters {
+    struct SearchParameters: Codable {
         let homeTeamID: Int?
         let awayTeamID: Int?
         let startDate: Date
         let endDate: Date
     }
     
-    struct Result: Hashable {
+    struct Result: Hashable, Codable {
         
         static func == (lhs: GameSearch.Result, rhs: GameSearch.Result) -> Bool {
             return lhs.id == rhs.id
@@ -34,7 +34,7 @@ enum GameSearch {
         let linescore: Linescore?
         let decisions: Decisions?
         
-        struct Team {
+        struct Team: Codable {
             let id: Int
             let name: String
             let score: Int

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum GameStatus: String {
+enum GameStatus: String, Codable {
     case live = "Live"
     case final = "Final"
     case preview = "Preview"

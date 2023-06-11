@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Game {
+struct Game: Codable {
     let id: Int
     let date: Date
     let homeTeam: Team
@@ -39,7 +39,7 @@ struct Game {
         return player
     }()
     
-    struct Info {
+    struct Info: Codable {
         var weatherTempurature: String?
         var windDescription: String?
         var firstPitchDateString: String?

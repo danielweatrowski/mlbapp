@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Position {
+struct Position: Codable {
     let code: String?
     let type: String?
     let name: String?
