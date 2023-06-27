@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct ProbablePitchers {
+struct ProbablePitchers: Codable {
     
-    struct Pitcher {
+    struct Pitcher: Codable {
         let id: Int
         let fullName: String
     }

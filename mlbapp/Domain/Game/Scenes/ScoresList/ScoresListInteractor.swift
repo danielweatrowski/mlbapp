@@ -16,7 +16,7 @@ class ScoresListInteractor: ScoresListBusinessLogic {
     
     let presenter: ScoresListPresentationLogic?
     
-    private let gameWorker = GameWorker(store: MLBAPIRepository())
+    private let gameWorker = GameWorker(store: DummyMLBRepository())
     
     init(presenter: ScoresListPresentationLogic?) {
         self.presenter = presenter
@@ -30,6 +30,11 @@ class ScoresListInteractor: ScoresListBusinessLogic {
                                                                                 awayTeamID: nil,
                                                                                 startDate: Date(),
                                                                                 endDate: Date()))
+                
+                let jsonEncoder = JSONEncoder()
+                let jsonData = try jsonEncoder.encode(lookupResults)
+                let json = String(data: jsonData, encoding: String.Encoding.utf8)
+                
                 let output = ScoresList.Output(results: lookupResults)
                 presenter?.presentScoresList(output: output)
             } catch {

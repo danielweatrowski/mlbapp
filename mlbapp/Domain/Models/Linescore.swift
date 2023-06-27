@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Linescore {
+struct Linescore: Codable {
     
     struct Inning: Codable {
         var home: LineItem

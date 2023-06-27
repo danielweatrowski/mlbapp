@@ -9,6 +9,10 @@ import Foundation
 
 enum LineupDetail {
     
+    enum State {
+        case loading, loaded, error
+    }
+    
     struct GameLineups {
         var home: [Boxscore.Batter]?
         var away: [Boxscore.Batter]?
@@ -20,10 +24,10 @@ enum LineupDetail {
     
     class ViewModel: ObservableObject {
         let navigationTitle = "Lineups"
-        
-        @Published var homeLineup: [String] = []
-        @Published var awayLineup: [String] = []
+        @Published var state: State = .loading
+
+        @Published var homeLineup: [LineupRowViewModel] = []
+        @Published var awayLineup: [LineupRowViewModel] = []
 
     }
-    
 }

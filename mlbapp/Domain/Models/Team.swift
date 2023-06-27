@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Team {
+struct Team: Codable {
     let id: Int
     let name: String
     let abbreviation: String
@@ -19,13 +19,13 @@ struct Team {
     
     let record: SeasonRecord?
     
-    struct MetaData {
+    struct MetaData: Codable {
         let id: Int
         let name: String
         let link: String
     }
     
-    struct SeasonRecord {
+    struct SeasonRecord: Codable {
         let gamesPlayed: Int
         let wins: Int
         let losses: Int
