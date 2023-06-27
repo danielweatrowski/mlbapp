@@ -26,6 +26,7 @@ enum DetailGame {
         @Published var lineScoreViewModel: LinescoreGridViewModel?
         @Published var decisionsViewModel: DecisionsInfoViewModel?
         @Published var probablePitchersViewModel: ProbablePitchersViewModel?
+        @Published var currentPlayViewModel: CurrentPlayViewModel?
         @Published var infoItems: [GameInfoItem] = []
         
         

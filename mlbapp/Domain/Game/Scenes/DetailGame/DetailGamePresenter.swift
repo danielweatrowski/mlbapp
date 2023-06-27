@@ -49,6 +49,14 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                                                homeTeamName: game.homeTeam.teamName,
                                                                awayTeamName: game.awayTeam.teamName)
         
+        let currentPlayViewModel = CurrentPlayViewModel(numberOfOuts: 2,
+                                                        countText: "2-2",
+                                                        batterNameText: "Betts, M",
+                                                        batterStatsText: "0-2, .200 AVG",
+                                                        pitcherNameText: "Strahm",
+                                                        pitcherStatsText: "2 IP, 2K, 3.33 ERA",
+                                                        isRunnerOn1B: true)
+        
         // remove all previous info items to avoid duplication
         DispatchQueue.main.async {
             viewModel.infoItems.removeAll()
@@ -92,7 +100,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
             viewModel.homeTeamAbbreviation = game.homeTeam.abbreviation
             viewModel.awayTeamAbbreviation = game.awayTeam.abbreviation
             viewModel.probablePitchersViewModel = probablePitchersViewModel
-            
+            viewModel.currentPlayViewModel = currentPlayViewModel
             viewModel.gameStatus = game.status
             viewModel.state = .loaded
         }

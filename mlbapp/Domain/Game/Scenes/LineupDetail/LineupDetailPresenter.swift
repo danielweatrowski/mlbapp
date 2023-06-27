@@ -21,9 +21,16 @@ struct LineupDetailPresenter: LineupDetailPresentationLogic {
             return
         }
         
+        // TODO: DRY
         let players = homeLineup
             .filter({$0.battingOrderIndex != nil})
-            .map({$0.fullName})
+            .map { player in
+                let battingIndex = Int(player.battingOrderIndex ?? "0") ?? 0
+                return LineupRowViewModel(playerBattingIndex: battingIndex / 100,
+                                          playerNameText: player.fullName,
+                                          playerPositionText: player.position.abbreviation ?? "-",
+                                          playerInfoText: "")
+            }
         
         
         DispatchQueue.main.async {
@@ -36,14 +43,18 @@ struct LineupDetailPresenter: LineupDetailPresentationLogic {
         
         let awayPlayers = awayLineup
             .filter({$0.battingOrderIndex != nil})
-            .map({$0.fullName})
+            .map { player in
+                let battingIndex = Int(player.battingOrderIndex ?? "0") ?? 0
+                return LineupRowViewModel(playerBattingIndex: battingIndex / 100,
+                                          playerNameText: player.fullName,
+                                          playerPositionText: player.position.abbreviation ?? "-",
+                                          playerInfoText: "")
+            }
         
         
         DispatchQueue.main.async {
             viewModel.awayLineup = awayPlayers
+            viewModel.state = .loaded
         }
-        
     }
-    
-    
 }

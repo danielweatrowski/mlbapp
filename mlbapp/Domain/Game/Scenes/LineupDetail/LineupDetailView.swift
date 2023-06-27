@@ -13,23 +13,53 @@ struct LineupDetailView: View {
     let interactor: LineupDetailBusinessLogic?
     
     var body: some View {
-        List {
-            Section("Home") {
-                ForEach(viewModel.homeLineup, id: \.self) { batter in
-                    Text(batter)
+        Group {
+            switch viewModel.state {
+            case .loaded:
+                List {
+                    Section("Home") {
+                        homeLineup
+                    }
+                    
+                    Section("Away") {
+                        awayLineup
+                    }
                 }
-            }
-            
-            Section("Away") {
-                ForEach(viewModel.awayLineup, id: \.self) { batter in
-                    Text(batter)
-                }
+            case .loading:
+                ProgressView()
+            default: EmptyView()
             }
         }
         .onAppear {
             interactor?.getLineups()
         }
         .navigationTitle(viewModel.navigationTitle)
+    }
+    
+    @ViewBuilder
+    var homeLineup: some View {
+        if viewModel.homeLineup.isEmpty {
+            Text("No Data Found.")
+                .italic()
+                .foregroundColor(.secondary)
+        } else {
+            ForEach(viewModel.homeLineup, id: \.id) { rowVM in
+                LineupRowView(viewModel: rowVM)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var awayLineup: some View {
+        if viewModel.awayLineup.isEmpty {
+            Text("No Data Found.")
+                .italic()
+                .foregroundColor(.secondary)
+        } else {
+            ForEach(viewModel.awayLineup, id: \.id) { rowVM in
+                LineupRowView(viewModel: rowVM)
+            }
+        }
     }
 }
 

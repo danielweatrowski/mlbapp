@@ -36,40 +36,42 @@ protocol PlayDetailProtocol {
 struct Play: PlayProtocol {
     
     var result: Result
-    
     var about: Detail
-    
+//    var count: Count
+//    
+//    var runners: [RunnerAction]
+//    
+//    let batterID: Int
+//    let pitcherID: Int
     
     struct Result: PlayResultProtocol {
         var type: String
-        
         var event: String
-        
         var eventType: String
-        
         var description: String
-        
         var rbi: Int
-        
         var awayScore: Int
-        
         var homeScore: Int
-        
         var isOut: Bool
     }
     
     struct Detail: PlayDetailProtocol {
-        
         var atBatIndex: Int
-        
         var halfInning: String
-        
         var inning: Int
-        
         var hasOut: Bool
-        
         var endTime: Date
     }
     
+    struct RunnerAction {
+        let runnerID: Int
+        
+        let originBase: String?
+        let startBase: String?
+        let endBase: String?
+        
+        let isOut: Bool
+        let outNumber: Int?
+    }
 }
 
