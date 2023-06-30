@@ -33,6 +33,7 @@ enum GameSearch {
         let homeTeam: Team
         let linescore: Linescore?
         let decisions: Decisions?
+        let liveInfo: LiveInfo?
         
         struct Team: Codable {
             let id: Int
@@ -44,6 +45,12 @@ enum GameSearch {
             var record: String {
                 return "\(wins)-\(losses)"
             }
+        }
+        
+        struct LiveInfo: Codable {
+            let currentInning: Int
+            let currentInningDescription: String
+            let currentInningHalf: String
         }
     }
 }

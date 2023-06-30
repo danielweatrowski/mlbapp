@@ -17,6 +17,8 @@ enum ScoresList {
         
         let navigationTitle = "Scores"
         @Published var state: State = .loading
+        @Published var selectedDate = Date()
+        @Published var showCalendarSheet: Bool = false
         @Published var rows: [ListGameRowViewModel]?
     }
     

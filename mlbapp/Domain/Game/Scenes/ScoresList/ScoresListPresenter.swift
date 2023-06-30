@@ -29,8 +29,13 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
             
             // show date for future games
             let statusLabel = (result.status == .preview || result.status == .other)
-            ? result.gameDate.formatted()
+            ? result.gameDate.formatted(date: .omitted, time: .shortened)
             : result.status.friendlyName
+            
+            var currentInningText: String?
+            if let liveInfo = result.liveInfo {
+                currentInningText = "\(liveInfo.currentInningHalf) \(liveInfo.currentInningDescription)"
+            }
             
             return ListGameRowViewModel(gameID: result.id,
                                         gameStatusText: statusLabel,
@@ -51,6 +56,7 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
                                         winningPitcherName: result.decisions?.winner.fullName,
                                         losingPitcherName: result.decisions?.loser.fullName,
                                         savePitcherName: result.decisions?.save?.fullName,
+                                        currentInningText: currentInningText,
                                         linescoreViewModel: linescoreViewModel)
         }
         

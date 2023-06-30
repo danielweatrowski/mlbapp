@@ -30,6 +30,9 @@ struct MLBLinescore: Codable {
     
     var innings: [Inning]
     var teams: Teams
+    var currentInning: Int?
+    var currentInningOrdinal: String?
+    var inningHalf: String?
 //    var home: LineItem?
 //    var away: LineItem?
     var winner: MLBPitcher?

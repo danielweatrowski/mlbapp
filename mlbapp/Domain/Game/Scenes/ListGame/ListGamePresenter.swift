@@ -39,7 +39,8 @@ struct ListGamePresenter {
                                     awayTeamLogoName: "",
                                     winningPitcherName: nil,
                                     losingPitcherName: nil,
-                                    savePitcherName: nil,
+                                        savePitcherName: nil,
+                                        currentInningText: nil,
                                     linescoreViewModel: nil)
         }
         

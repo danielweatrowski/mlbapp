@@ -28,6 +28,7 @@ struct ListGameRowViewModel {
     let winningPitcherName: String?
     let losingPitcherName: String?
     let savePitcherName: String?
+    let currentInningText: String?
     
     let linescoreViewModel: LinescoreGridViewModel?
     
@@ -51,7 +52,15 @@ struct ListGameRowViewModel {
         return gameStatus == .live
     }
     
+    var isGameScheduled: Bool {
+        return gameStatus == .preview
+    }
+    
     var showDecisions: Bool {
         winningPitcherName != nil && losingPitcherName != nil
+    }
+    
+    var isGameFinal: Bool {
+        return gameStatus == .final
     }
 }

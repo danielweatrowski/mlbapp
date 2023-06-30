@@ -19,8 +19,9 @@ struct MLBAPIRepository: GameStoreProtocol {
         let schedule = try await SwiftMLB.schedule(parameters: searchParameters)
         
         let games = schedule.games.map { gameDTO in
+            let linescoreDTO = gameDTO.linescore
             var linescore: Linescore?
-            if let linescoreDTO = gameDTO.linescore {
+            if let linescoreDTO = linescoreDTO {
                 linescore = LinescoreAdapter(dataObject: linescoreDTO).toDomain()
             }
             
@@ -28,6 +29,13 @@ struct MLBAPIRepository: GameStoreProtocol {
             let decisions = decisionsAdapter.toDomain()
             
             let gameStatus = GameStatus(rawValue: gameDTO.status.abstractGameState) ?? .other
+            
+            var liveInfo: GameSearch.Result.LiveInfo?
+            if gameStatus == .live, let currentInning = linescoreDTO?.currentInning, let currentInningDesc = linescoreDTO?.currentInningOrdinal, let half = linescoreDTO?.inningHalf {
+                liveInfo = .init(currentInning: currentInning,
+                                 currentInningDescription: currentInningDesc,
+                                 currentInningHalf: half)
+            }
             
             return GameSearch.Result(id: gameDTO.gamePk,
                               gameDate: gameDTO.gameDate,
@@ -44,7 +52,8 @@ struct MLBAPIRepository: GameStoreProtocol {
                                                                wins: gameDTO.teams.home.leagueRecord.wins,
                                                                losses: gameDTO.teams.home.leagueRecord.losses),
                                      linescore: linescore,
-                                     decisions: decisions)
+                                     decisions: decisions,
+                                     liveInfo: liveInfo)
         }
         
         return games

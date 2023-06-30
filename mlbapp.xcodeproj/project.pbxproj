@@ -90,6 +90,7 @@
 		669BC5942A1C602000934A96 /* ScoresListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BC5932A1C602000934A96 /* ScoresListPresenter.swift */; };
 		669BC5962A1C602A00934A96 /* ScoresList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BC5952A1C602A00934A96 /* ScoresList.swift */; };
 		66A1204A2A43AAD400E6B335 /* LineupRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A120492A43AAD400E6B335 /* LineupRowView.swift */; };
+		66A1204C2A4A945F00E6B335 /* ScoresListDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A1204B2A4A945F00E6B335 /* ScoresListDatePickerView.swift */; };
 		66A4B53F2900D80600D74067 /* mlbappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A4B53E2900D80600D74067 /* mlbappApp.swift */; };
 		66A4B5432900D80900D74067 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66A4B5422900D80900D74067 /* Assets.xcassets */; };
 		66A4B5462900D80900D74067 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66A4B5452900D80900D74067 /* Preview Assets.xcassets */; };
@@ -253,6 +254,7 @@
 		669BC5932A1C602000934A96 /* ScoresListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresListPresenter.swift; sourceTree = "<group>"; };
 		669BC5952A1C602A00934A96 /* ScoresList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresList.swift; sourceTree = "<group>"; };
 		66A120492A43AAD400E6B335 /* LineupRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineupRowView.swift; sourceTree = "<group>"; };
+		66A1204B2A4A945F00E6B335 /* ScoresListDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresListDatePickerView.swift; sourceTree = "<group>"; };
 		66A4B53B2900D80600D74067 /* mlbapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mlbapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A4B53E2900D80600D74067 /* mlbappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mlbappApp.swift; sourceTree = "<group>"; };
 		66A4B5422900D80900D74067 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -557,6 +559,7 @@
 				669BC5912A1C601600934A96 /* ScoresListInteractor.swift */,
 				669BC5932A1C602000934A96 /* ScoresListPresenter.swift */,
 				669BC5952A1C602A00934A96 /* ScoresList.swift */,
+				66A1204B2A4A945F00E6B335 /* ScoresListDatePickerView.swift */,
 			);
 			path = ScoresList;
 			sourceTree = "<group>";
@@ -1019,6 +1022,7 @@
 				660472DE2916FD2800AD9A42 /* ListGameRouter.swift in Sources */,
 				66EBDF3329189EAA00BEF1A5 /* DetailGamePresenter.swift in Sources */,
 				66A4B5542900DBBB00D74067 /* SwiftMLB.swift in Sources */,
+				66A1204C2A4A945F00E6B335 /* ScoresListDatePickerView.swift in Sources */,
 				66C0C4B729B2B6E600C42F11 /* Venue.swift in Sources */,
 				6652D70F29F34EC900DEE161 /* SummaryGameInteractor.swift in Sources */,
 				66510D522A2D9BEB00DB41B8 /* ProbablePitchersView.swift in Sources */,
