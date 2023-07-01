@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LineupRowViewModel: Hashable {
     let id: UUID = UUID()
-    var playerBattingIndex: Int
+    var imageName: String
     var playerNameText: String
     var playerPositionText: String
     var playerInfoText: String
@@ -21,7 +21,7 @@ struct LineupRowView: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 16) {
-            Image(systemName: "\(viewModel.playerBattingIndex).circle.fill")
+            Image(systemName: viewModel.imageName)
                 .resizable()
                 .frame(width: 24, height: 24)
                 .foregroundColor(.blue)

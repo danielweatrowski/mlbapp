@@ -32,7 +32,7 @@ struct LineupDetailPresenter: LineupDetailPresentationLogic {
             .filter({$0.battingOrderIndex != nil})
             .map { player in
                 let battingIndex = Int(player.battingOrderIndex ?? "0") ?? 0
-                return LineupRowViewModel(playerBattingIndex: battingIndex / 100,
+                return LineupRowViewModel(imageName: "\(battingIndex / 100).circle.fill",
                                           playerNameText: player.fullName,
                                           playerPositionText: player.position.abbreviation ?? "-",
                                           playerInfoText: "")
@@ -51,7 +51,7 @@ struct LineupDetailPresenter: LineupDetailPresentationLogic {
             .filter({$0.battingOrderIndex != nil})
             .map { player in
                 let battingIndex = Int(player.battingOrderIndex ?? "0") ?? 0
-                return LineupRowViewModel(playerBattingIndex: battingIndex / 100,
+                return LineupRowViewModel(imageName: "\(battingIndex / 100).circle.fill",
                                           playerNameText: player.fullName,
                                           playerPositionText: player.position.abbreviation ?? "-",
                                           playerInfoText: "")
