@@ -28,6 +28,8 @@ enum LineupDetail {
 
         @Published var homeLineup: [LineupRowViewModel] = []
         @Published var awayLineup: [LineupRowViewModel] = []
+        
+        @Published var sceneError: SceneError = SceneError()
 
     }
 }

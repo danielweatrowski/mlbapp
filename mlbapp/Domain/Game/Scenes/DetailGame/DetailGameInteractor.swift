@@ -43,7 +43,8 @@ class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore, Obser
                 
                 presenter.presentGame(response: response)
             } catch {
-                print(error)
+                let sceneError = SceneError(errorDescription: error.localizedDescription)
+                self.presenter.presentSceneError(sceneError)
             }
         }
     }

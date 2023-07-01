@@ -9,10 +9,21 @@ import SwiftUI
 
 protocol DetailGamePresentationLogic {
     func presentGame(response: DetailGame.DetailGame.Response)
+    func presentSceneError(_ sceneError: SceneError)
 }
 
 struct DetailGamePresenter: DetailGamePresentationLogic {
     var viewModel: DetailGame.ViewModel
+    
+    func presentSceneError(_ sceneError: SceneError) {
+        DispatchQueue.main.async {
+            self.viewModel.sceneError.errorTitle = sceneError.errorTitle
+            self.viewModel.sceneError.errorDescription = sceneError.errorDescription
+            
+            self.viewModel.sceneError.didError = true
+        }
+    }
+
 
     @MainActor
     func presentGame(response: DetailGame.DetailGame.Response) {

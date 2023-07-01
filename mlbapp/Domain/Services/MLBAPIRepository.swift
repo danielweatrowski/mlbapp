@@ -174,7 +174,7 @@ struct MLBAPIRepository: GameStoreProtocol {
                                      rbi: playDTO.result.rbi ?? 0,
                                      awayScore: playDTO.result.awayScore,
                                      homeScore: playDTO.result.homeScore,
-                                     isOut: playDTO.result.isOut)
+                                     isOut: playDTO.result.isOut ?? false)
             
             let about = Play.Detail(atBatIndex: playDTO.about.atBatIndex,
                                     halfInning: playDTO.about.halfInning,

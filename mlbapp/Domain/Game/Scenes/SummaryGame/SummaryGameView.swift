@@ -32,6 +32,7 @@ struct SummaryGameView: View {
                 EmptyView()
             }
         }
+        .withSceneError($viewModel.sceneError)
         .navigationTitle(viewModel.navigationTitle)
         .onAppear {
             interactor?.loadGameSummary()

@@ -29,6 +29,9 @@ enum DetailGame {
         @Published var currentPlayViewModel: CurrentPlayViewModel?
         @Published var infoItems: [GameInfoItem] = []
         
+        // errors
+        @Published var sceneError: SceneError = SceneError()
+        
         
         init(gameID: Int) {
             self.gameID = gameID

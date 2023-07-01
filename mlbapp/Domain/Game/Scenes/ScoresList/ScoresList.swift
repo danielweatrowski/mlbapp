@@ -20,6 +20,8 @@ enum ScoresList {
         @Published var selectedDate = Date()
         @Published var showCalendarSheet: Bool = false
         @Published var rows: [ListGameRowViewModel]?
+        
+        @Published var sceneError: SceneError = SceneError()
     }
     
     struct Output {

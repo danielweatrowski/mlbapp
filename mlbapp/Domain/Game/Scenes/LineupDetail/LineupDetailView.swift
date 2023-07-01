@@ -30,6 +30,7 @@ struct LineupDetailView: View {
             default: EmptyView()
             }
         }
+        .withSceneError($viewModel.sceneError)
         .onAppear {
             interactor?.getLineups()
         }

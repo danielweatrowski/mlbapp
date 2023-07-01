@@ -29,7 +29,8 @@ struct BoxscoreDetailInteractor: BoxscoreDetailBusinessLogic & BoxscoreDetailDat
                 
                 presenter?.presentBoxscore(output: output)
             } catch {
-                print(error)
+                let sceneError = SceneError(errorDescription: error.localizedDescription)
+                self.presenter?.presentSceneError(sceneError)
             }
         }
     }

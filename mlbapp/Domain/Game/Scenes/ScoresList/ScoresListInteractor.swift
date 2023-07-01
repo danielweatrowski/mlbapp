@@ -37,7 +37,8 @@ class ScoresListInteractor: ScoresListBusinessLogic {
                 let output = ScoresList.Output(results: sortedResults)
                 presenter?.presentScoresList(output: output)
             } catch {
-                print(error)
+                let sceneError = SceneError(errorDescription: error.localizedDescription)
+                presenter?.presentSceneError(sceneError)
             }
         }
     }

@@ -7,13 +7,22 @@
 
 import Foundation
 
-protocol ScoresListPresentationLogic {
+protocol ScoresListPresentationLogic: SceneErrorPresentable {
     func presentScoresList(output: ScoresList.Output)
 }
 
 struct ScoresListPresenter: ScoresListPresentationLogic {
     
     let viewModel: ScoresList.ViewModel
+    
+    func presentSceneError(_ sceneError: SceneError) {
+            viewModel.sceneError.errorTitle = sceneError.errorTitle
+            viewModel.sceneError.errorDescription = sceneError.errorDescription
+            
+        DispatchQueue.main.async {
+            self.viewModel.sceneError.present()
+        }
+    }
     
     func presentScoresList(output: ScoresList.Output) {
         let listGameRows = output.results.map { result in

@@ -34,6 +34,9 @@ enum BoxscoreDetail {
         @Published var homeTeamRunningDetails: [Boxscore.GameDetail]?
         @Published var awayTeamRunningDetails: [Boxscore.GameDetail]?
         
+        // error
+        @Published var sceneError: SceneError = SceneError()
+        
         init(gameID: Int, formattedGameDate: String, homeTeamAbbreviation: String, awayTeamAbbreviation: String, navigationTitle: String = "Boxscore", boxscoreViewModel: BoxscoreGridViewModel? = nil, pitchingBoxscoreViewModel: BoxscoreGridViewModel? = nil, homeTeamBattingDetails: [Boxscore.GameDetail]? = nil, awayTeamBattingDetails: [Boxscore.GameDetail]? = nil, homeTeamFieldingDetails: [Boxscore.GameDetail]? = nil, awayTeamFieldingDetails: [Boxscore.GameDetail]? = nil, homeTeamRunningDetails: [Boxscore.GameDetail]? = nil, awayTeamRunningDetails: [Boxscore.GameDetail]? = nil) {
             self.gameID = gameID
             self.formattedGameDate = formattedGameDate

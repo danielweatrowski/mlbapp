@@ -24,7 +24,7 @@ struct MLBPlay: Decodable {
         let rbi: Int?
         let awayScore: Int
         let homeScore: Int
-        let isOut: Bool
+        let isOut: Bool?
     }
     
     struct About: Decodable {

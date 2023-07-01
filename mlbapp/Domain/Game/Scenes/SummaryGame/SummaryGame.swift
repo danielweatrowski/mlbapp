@@ -39,6 +39,9 @@ struct SummaryGame {
         let navigationTitle = "Summary"
         @Published var state: State = .loading
         @Published var sections: [InningSectionViewModel] = []
+        
+        // errors
+        @Published var sceneError: SceneError = SceneError()
     }
     
     struct Output<P: PlayProtocol> {

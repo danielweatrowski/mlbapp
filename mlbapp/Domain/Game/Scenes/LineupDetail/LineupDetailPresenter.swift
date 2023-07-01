@@ -7,13 +7,22 @@
 
 import Foundation
 
-protocol LineupDetailPresentationLogic {
+protocol LineupDetailPresentationLogic: SceneErrorPresentable {
     func presentLineups(output: LineupDetail.Output)
 }
 
 struct LineupDetailPresenter: LineupDetailPresentationLogic {
     
     let viewModel: LineupDetail.ViewModel
+    
+    func presentSceneError(_ sceneError: SceneError) {
+        viewModel.sceneError.errorTitle = sceneError.errorTitle
+        viewModel.sceneError.errorDescription = sceneError.errorDescription
+        
+        DispatchQueue.main.async {
+            self.viewModel.sceneError.present()
+        }
+    }
     
     func presentLineups(output: LineupDetail.Output) {
         

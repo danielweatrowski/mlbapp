@@ -7,13 +7,23 @@
 
 import Foundation
 
-protocol SummaryGamePresentationLogic {
+protocol SummaryGamePresentationLogic: SceneErrorPresentable {
     func presentGameSummary(output: SummaryGame.Output<Play>)
+    func presentSceneError(_ sceneError: SceneError)
 }
 
 struct SummaryGamePresenter: SummaryGamePresentationLogic {
-    
+        
     let viewModel: SummaryGame.ViewModel
+    
+    func presentSceneError(_ sceneError: SceneError) {
+        self.viewModel.sceneError.errorTitle = sceneError.errorTitle
+        self.viewModel.sceneError.errorDescription = sceneError.errorDescription
+        
+        DispatchQueue.main.async {
+            self.viewModel.sceneError.present()
+        }
+    }
     
     func presentGameSummary(output: SummaryGame.Output<Play>) {
         

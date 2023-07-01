@@ -57,6 +57,7 @@ struct ScoresListView: View {
             Color(uiColor: .systemGroupedBackground)
         )
         .navigationTitle(viewModel.navigationTitle)
+        .withSceneError($viewModel.sceneError)
         .onAppear {
             interactor?.loadScores(for: viewModel.selectedDate)
         }

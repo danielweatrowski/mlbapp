@@ -40,6 +40,7 @@ struct BoxscoreDetailView: View {
                 EmptyView()
             }
         }
+        .withSceneError($viewModel.sceneError)
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
                 Picker("Teams", selection: $teamBoxSelection) {

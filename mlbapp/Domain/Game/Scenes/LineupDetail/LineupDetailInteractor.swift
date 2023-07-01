@@ -32,7 +32,7 @@ struct LineupDetailInteractor: LineupDetailBusinessLogic, LineupDetailDataStore 
             let output = LineupDetail.Output(lineups: lineups)
             presenter?.presentLineups(output: output)
         } else {
-            // TODO: Fetch boxscore
+            let sceneError = SceneError(errorDescription: "Did fail to unwrap boxscore")
         }
     }
     

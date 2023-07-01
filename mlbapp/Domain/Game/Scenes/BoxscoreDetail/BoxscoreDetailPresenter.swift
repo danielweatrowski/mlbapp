@@ -7,14 +7,23 @@
 
 import Foundation
 
-protocol BoxscoreDetailPresentationLogic {
+protocol BoxscoreDetailPresentationLogic: SceneErrorPresentable {
     func presentBoxscore(output: BoxscoreDetail.Output)
 }
 
 struct BoxscoreDetailPresenter: BoxscoreDetailPresentationLogic {
-    
+        
     let viewModel: BoxscoreDetail.ViewModel
     let players: [Int: Player]
+    
+    func presentSceneError(_ sceneError: SceneError) {
+        DispatchQueue.main.async {
+            self.viewModel.sceneError.errorTitle = sceneError.errorTitle
+            self.viewModel.sceneError.errorDescription = sceneError.errorDescription
+            
+            self.viewModel.sceneError.didError = true
+        }
+    }
 
     func presentBoxscore(output: BoxscoreDetail.Output) {
         let boxscore = output.boxscore
