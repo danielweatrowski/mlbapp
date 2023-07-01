@@ -12,6 +12,12 @@ struct SceneError {
     var errorTitle: String = ""
     var errorDescription: String = ""
     
+    mutating func presentAlert(_ sceneError: SceneError) {
+        self.errorTitle = sceneError.errorTitle
+        self.errorDescription = sceneError.errorDescription
+        self.didError = true
+    }
+    
     mutating func present() {
         self.didError = true
     }

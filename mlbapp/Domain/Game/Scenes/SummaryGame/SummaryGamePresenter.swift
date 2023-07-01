@@ -17,11 +17,8 @@ struct SummaryGamePresenter: SummaryGamePresentationLogic {
     let viewModel: SummaryGame.ViewModel
     
     func presentSceneError(_ sceneError: SceneError) {
-        self.viewModel.sceneError.errorTitle = sceneError.errorTitle
-        self.viewModel.sceneError.errorDescription = sceneError.errorDescription
-        
         DispatchQueue.main.async {
-            self.viewModel.sceneError.present()
+            self.viewModel.sceneError.presentAlert(sceneError)
         }
     }
     

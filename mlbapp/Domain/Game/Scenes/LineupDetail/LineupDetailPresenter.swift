@@ -16,11 +16,8 @@ struct LineupDetailPresenter: LineupDetailPresentationLogic {
     let viewModel: LineupDetail.ViewModel
     
     func presentSceneError(_ sceneError: SceneError) {
-        viewModel.sceneError.errorTitle = sceneError.errorTitle
-        viewModel.sceneError.errorDescription = sceneError.errorDescription
-        
         DispatchQueue.main.async {
-            self.viewModel.sceneError.present()
+            self.viewModel.sceneError.presentAlert(sceneError)
         }
     }
     

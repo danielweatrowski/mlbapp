@@ -16,11 +16,8 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
     let viewModel: ScoresList.ViewModel
     
     func presentSceneError(_ sceneError: SceneError) {
-            viewModel.sceneError.errorTitle = sceneError.errorTitle
-            viewModel.sceneError.errorDescription = sceneError.errorDescription
-            
         DispatchQueue.main.async {
-            self.viewModel.sceneError.present()
+            self.viewModel.sceneError.presentAlert(sceneError)
         }
     }
     

@@ -29,10 +29,10 @@ struct SummaryGameInteractor: SummaryGameBusinessLogic & SummaryGameDataStore {
                 
                 presenter?.presentGameSummary(output: output)
             } catch {
-                let sceneError = SceneError(errorDescription: error.localizedDescription)
+                print(error)
+                var sceneError = SceneError(errorDescription: error.localizedDescription)
                 presenter?.presentSceneError(sceneError)
             }
         }
     }
-    
 }

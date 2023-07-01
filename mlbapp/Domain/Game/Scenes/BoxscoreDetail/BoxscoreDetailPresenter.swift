@@ -18,10 +18,7 @@ struct BoxscoreDetailPresenter: BoxscoreDetailPresentationLogic {
     
     func presentSceneError(_ sceneError: SceneError) {
         DispatchQueue.main.async {
-            self.viewModel.sceneError.errorTitle = sceneError.errorTitle
-            self.viewModel.sceneError.errorDescription = sceneError.errorDescription
-            
-            self.viewModel.sceneError.didError = true
+            self.viewModel.sceneError.presentAlert(sceneError)
         }
     }
 
