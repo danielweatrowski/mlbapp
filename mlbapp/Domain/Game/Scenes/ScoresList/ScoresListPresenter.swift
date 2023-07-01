@@ -22,6 +22,8 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
     }
     
     func presentScoresList(output: ScoresList.Output) {
+        print("PRESENTING GAME")
+
         let listGameRows = output.results.map { result in
             
             let homeTeam = ActiveTeam.team(withIdentifier: result.homeTeam.id)
@@ -79,7 +81,7 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
             
             var currentInningText: String?
             if let liveInfo = gameResult.liveInfo {
-                currentInningText = "\(liveInfo.currentInningHalf) \(liveInfo.currentInningDescription)"
+                currentInningText = "\(liveInfo.inningState) \(liveInfo.currentInningDescription)"
             }
             
             return StatusBannerViewModel(statusText: currentInningText ?? "LIVE", secondaryStatusText: gameResult.venueName, backgroundColor: .green)

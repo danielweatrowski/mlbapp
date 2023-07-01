@@ -16,7 +16,7 @@ extension Seeds {
     }
     
     struct Games {
-        static let PHI_NYM_20190424 = Game(id: 565997, date: Date(), homeTeam: Teams.mets, homeTeamScore: 0, awayTeam: Teams.phillies, awayTeamScore: 6, venue: Venues.citiField, players: [:], status: .final, decisions: nil, probablePitchers: nil, linescore: nil, boxscore: nil)
+        static let PHI_NYM_20190424 = Game(id: 565997, date: Date(), homeTeam: Teams.mets, homeTeamScore: 0, awayTeam: Teams.phillies, awayTeamScore: 6, venue: Venues.citiField, players: [:], status: .final, decisions: nil, probablePitchers: nil, linescore: nil, boxscore: nil, liveInfo: nil)
     }
     
     struct Venues {

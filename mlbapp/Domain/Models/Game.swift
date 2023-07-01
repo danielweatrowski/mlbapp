@@ -24,6 +24,7 @@ struct Game: Codable {
     let probablePitchers: ProbablePitchers?
     let linescore: Linescore?
     let boxscore: Boxscore?
+    let liveInfo: GameLiveInfo?
     
     lazy var winningPitcher: Player? = {
         guard let winningPitcherID = decisions?.winner.id, let player = players[winningPitcherID] else {

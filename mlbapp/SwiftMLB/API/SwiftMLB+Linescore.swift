@@ -13,7 +13,7 @@ extension SwiftMLB {
         
         let data = try await networkService.load(request)
         
-        let serializer = SwiftMLBSerialization(data: data, builder: LinescoreBuilder())
+        let serializer = SwiftMLBSerialization(data: data, builder: PassThruBuilder())
         let linescoreData = try serializer.data()
 
         let decoder = JSONDecoder()

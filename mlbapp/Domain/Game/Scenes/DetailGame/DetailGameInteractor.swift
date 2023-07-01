@@ -41,6 +41,7 @@ class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore, Obser
                 self.playerHash = game.players
                 self.boxscore = game.boxscore
                 
+                
                 presenter.presentGame(response: response)
             } catch {
                 let sceneError = SceneError(errorDescription: error.localizedDescription)

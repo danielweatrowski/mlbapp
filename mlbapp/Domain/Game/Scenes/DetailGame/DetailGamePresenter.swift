@@ -27,7 +27,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         let game = response.game
         
         guard let homeTeamRecord = game.homeTeam.record, let awayTeamRecord = game.awayTeam.record else {
-            // TODO: Present error
+            self.presentSceneError(SceneError(errorDescription: "Did find nil Team.record values"))
             return
         }
         
@@ -160,12 +160,12 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         switch game.status {
         case .live:
             
-//            var currentInningText: String?
-//            if let liveInfo = gameResult.liveInfo {
-//                currentInningText = "\(liveInfo.currentInningHalf) \(liveInfo.currentInningDescription)"
-//            }
+            var currentInningText: String?
+            if let liveInfo = game.liveInfo {
+                currentInningText = "\(liveInfo.inningState) \(liveInfo.currentInningDescription)"
+            }
             
-            return StatusBannerViewModel(statusText: "LIVE", secondaryStatusText: game.venue.name, backgroundColor: .green, chevronIndicator: false)
+            return StatusBannerViewModel(statusText: currentInningText ?? "LIVE", secondaryStatusText: game.venue.name, backgroundColor: .green, chevronIndicator: false)
         case .final:
             return StatusBannerViewModel(statusText: "FINAL", statusTextColor: .red, secondaryStatusText: game.venue.name, secondaryStatusTextColor: .secondary, backgroundColor: .clear, divider: true, chevronIndicator: false)
         default:

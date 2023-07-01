@@ -30,9 +30,10 @@ struct MLBAPIRepository: GameStoreProtocol {
             
             let gameStatus = GameStatus(rawValue: gameDTO.status.abstractGameState) ?? .other
             
-            var liveInfo: GameSearch.Result.LiveInfo?
-            if gameStatus == .live, let currentInning = linescoreDTO?.currentInning, let currentInningDesc = linescoreDTO?.currentInningOrdinal, let half = linescoreDTO?.inningHalf {
+            var liveInfo: GameLiveInfo?
+            if gameStatus == .live, let currentInning = linescoreDTO?.currentInning, let currentInningDesc = linescoreDTO?.currentInningOrdinal, let half = linescoreDTO?.inningHalf, let state = linescoreDTO?.inningState {
                 liveInfo = .init(currentInning: currentInning,
+                                 inningState: state,
                                  currentInningDescription: currentInningDesc,
                                  currentInningHalf: half)
             }
@@ -129,6 +130,14 @@ struct MLBAPIRepository: GameStoreProtocol {
                                  firstPitchDateString: gameDTO.gameInfo?.firstPitch,
                                  attendance: gameDTO.gameInfo?.attendance,
                                  gameDurationInMinutes: gameDTO.gameInfo?.gameDurationMinutes)
+        
+        var liveInfo: GameLiveInfo?
+        if let inning = gameDTO.linescore.currentInning, let state = gameDTO.linescore.inningState, let half = gameDTO.linescore.inningHalf, let ordinal = gameDTO.linescore.currentInningOrdinal {
+            liveInfo = .init(currentInning: inning,
+                             inningState: state,
+                             currentInningDescription: ordinal,
+                             currentInningHalf: half)
+        }
                                  
         
         let game = Game(id: id,
@@ -144,7 +153,8 @@ struct MLBAPIRepository: GameStoreProtocol {
                         decisions: decisions,
                         probablePitchers: probablePitchers,
                         linescore: linescore,
-                        boxscore: boxscore)
+                        boxscore: boxscore,
+                        liveInfo: liveInfo)
         
         return game
     }

@@ -28,7 +28,6 @@ struct SummaryGameView: View {
             case .loading:
                 ProgressView()
             case .error:
-                // TODO
                 EmptyView()
             }
         }

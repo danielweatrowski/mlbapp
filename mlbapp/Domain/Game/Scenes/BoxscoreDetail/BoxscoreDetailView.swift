@@ -41,6 +41,7 @@ struct BoxscoreDetailView: View {
             }
         }
         .withSceneError($viewModel.sceneError)
+        .toolbar(.hidden, for: .tabBar)
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
                 Picker("Teams", selection: $teamBoxSelection) {

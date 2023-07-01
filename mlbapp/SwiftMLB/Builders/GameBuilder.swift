@@ -8,9 +8,8 @@
 import Foundation
 
 struct GameBuilder: JSONBuilder {
-    private let linescoreBuilder = LinescoreBuilder()
     private let boxscoreBuilder = BoxscoreBuilder()
-    private let teamBuilder = TeamBuilder()
+    private let teamBuilder = PassThruBuilder()
     
     func build(with data: Data) throws -> [String : Any] {
         
@@ -57,7 +56,7 @@ struct GameBuilder: JSONBuilder {
         let statusJSON = gameData["status"] as? [String: Any]
         let weatherJSON = gameData["weather"] as? [String: Any]
         let gameInfoJSON = gameData["gameInfo"] as? [String: Any]
-        let linescoreJSON = try linescoreBuilder.build(with: data)
+        let linescoreJSON = liveData["linescore"] as? [String: Any]
         let boxscoreJSON = try boxscoreBuilder.build(with: data)
         let venueJSON = buildVenue(venueDict: venueInfo)
         let awayJSON = try buildTeam(teamDict: awayData)
