@@ -26,19 +26,9 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
             let linescoreViewModel = formatLineScore(gameResult: result,
                                             homeAbbreviation: homeAbbreviation,
                                             awayAbbrevation: awayAbbreviation)
-            
-            // show date for future games
-            let statusLabel = (result.status == .preview || result.status == .other)
-            ? result.gameDate.formatted(date: .omitted, time: .shortened)
-            : result.status.friendlyName
-            
-            var currentInningText: String?
-            if let liveInfo = result.liveInfo {
-                currentInningText = "\(liveInfo.currentInningHalf) \(liveInfo.currentInningDescription)"
-            }
+            let bannerViewModel = formatBanner(gameResult: result)
             
             return ListGameRowViewModel(gameID: result.id,
-                                        gameStatusText: statusLabel,
                                         gameStatus: result.status,
                                      gameVenueName: result.venueName,
                                      homeTeamID: result.homeTeam.id,
@@ -56,8 +46,8 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
                                         winningPitcherName: result.decisions?.winner.fullName,
                                         losingPitcherName: result.decisions?.loser.fullName,
                                         savePitcherName: result.decisions?.save?.fullName,
-                                        currentInningText: currentInningText,
-                                        linescoreViewModel: linescoreViewModel)
+                                        linescoreViewModel: linescoreViewModel,
+                                        statusBannerViewModel: bannerViewModel)
         }
         
         DispatchQueue.main.async {
@@ -75,6 +65,24 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
         return LinescoreGridViewModel(homeAbbreviation: homeAbbreviation,
                                       awayAbbreviation: awayAbbrevation,
                                       linescore)
+    }
+    
+    private func formatBanner(gameResult: GameSearch.Result) -> StatusBannerViewModel {
+        switch gameResult.status {
+        case .live:
+            
+            var currentInningText: String?
+            if let liveInfo = gameResult.liveInfo {
+                currentInningText = "\(liveInfo.currentInningHalf) \(liveInfo.currentInningDescription)"
+            }
+            
+            return StatusBannerViewModel(statusText: currentInningText ?? "LIVE", secondaryStatusText: gameResult.venueName, backgroundColor: .green)
+        case .final:
+            return StatusBannerViewModel(statusText: "FINAL", statusTextColor: .red, secondaryStatusText: gameResult.venueName, secondaryStatusTextColor: .secondary, backgroundColor: .clear, divider: true)
+        default:
+            let text = gameResult.gameDate.formatted(date: .omitted, time: .shortened)
+            return StatusBannerViewModel(statusText: text, statusTextColor: .secondary, secondaryStatusText: gameResult.venueName, secondaryStatusTextColor: .secondary, backgroundColor: .clear, divider: true)
+        }
     }
 
 }

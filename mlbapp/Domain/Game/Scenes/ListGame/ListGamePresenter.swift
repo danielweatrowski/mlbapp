@@ -22,7 +22,6 @@ struct ListGamePresenter {
             let awayAbbreviation = awayTeam?.abbreviation ?? "NA"
             
             return ListGameRowViewModel(gameID: result.id,
-                                        gameStatusText: result.gameDate.formatted(),
                                         gameStatus: result.status,
                                  gameVenueName: result.venueName,
                                  homeTeamID: result.homeTeam.id,
@@ -38,10 +37,10 @@ struct ListGamePresenter {
                                  awayTeamRecord: result.awayTeam.record,
                                     awayTeamLogoName: "",
                                     winningPitcherName: nil,
-                                    losingPitcherName: nil,
+                                        losingPitcherName: nil,
                                         savePitcherName: nil,
-                                        currentInningText: nil,
-                                    linescoreViewModel: nil)
+                                        linescoreViewModel: nil,
+                                        statusBannerViewModel: nil)
         }
         
         DispatchQueue.main.async {

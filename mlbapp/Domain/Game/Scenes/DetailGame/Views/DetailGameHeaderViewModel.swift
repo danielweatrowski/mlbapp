@@ -20,15 +20,7 @@ struct DetailGameHeaderViewModel {
     var awayTeamScore: String = ""
     var awayTeamRecord: String = ""
     
-    var gameDate: String = ""
-    var venueName: String = ""
-    
-    var statusText: String?
-    var statusBackgroundColor: Color?
-    
-    var showStatusBanner: Bool {
-        return statusText != nil && statusText?.isEmpty == false && statusBackgroundColor != nil
-    }
+    var statusBannerViewModel: StatusBannerViewModel?
     
 }
 

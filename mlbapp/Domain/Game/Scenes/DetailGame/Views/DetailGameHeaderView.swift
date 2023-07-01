@@ -14,6 +14,70 @@ struct DetailGameHeaderView: View {
         if let viewModel = viewModel {
             VStack(spacing: 0) {
                 
+                banner
+                
+                VStack(spacing: 10) {
+                    
+                    HStack() {
+                        //LogoView(teamID: viewModel.homeTeamID, teamAbbreviation: viewModel.homeTeamAbbreviation)
+                        VStack(alignment: .leading) {
+                            Text(viewModel.homeTeamName)
+                            Text(viewModel.homeTeamRecord)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Spacer()
+                        
+                        Text(String(viewModel.homeTeamScore))
+                            .padding()
+                            .font(.title3)
+                            .minimumScaleFactor(0.8)
+                            .lineLimit(1)
+                            .frame(width: 56)
+                            .background(
+                                Color.secondary.opacity(0.1)
+                                    .frame(maxWidth: .infinity)
+                            )
+                            .cornerRadius(12)
+                        
+                    }
+                    .font(.system(size: 17, weight: .medium, design: .default))
+                    
+                    HStack() {
+                        //LogoView(teamID: viewModel.awayTeamID, teamAbbreviation: viewModel.awayTeamAbbreviation)
+                        VStack(alignment: .leading) {
+                            Text(viewModel.awayTeamName)
+                            Text(viewModel.awayTeamRecord)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Spacer()
+                        
+                        Text(String(viewModel.awayTeamScore))
+                            .padding()
+                            .font(.title3)
+                            .minimumScaleFactor(0.8)
+                            .lineLimit(1)
+                            .frame(width: 56)
+                            .background(
+                                Color
+                                    .secondary
+                                    .opacity(0.1)
+                                    .frame(maxWidth: .infinity)
+                            )
+                            .cornerRadius(12)
+                    
+                        
+                    }
+                    .font(.system(size: 17, weight: .medium, design: .default))
+                }
+                .padding()
+            }
+            /*
+            VStack(spacing: 0) {
+                
                 if viewModel.showStatusBanner, let statusText = viewModel.statusText, let backgroundColor = viewModel.statusBackgroundColor {
                     StatusBannerView(statusText: statusText,
                                      backgroundColor: backgroundColor)
@@ -34,21 +98,21 @@ struct DetailGameHeaderView: View {
                     
                     HStack(alignment: .center) {
                         VStack(alignment: .center, spacing: 4) {
-                            LogoView(teamID: viewModel.homeTeamID,
-                                     teamAbbreviation: viewModel.homeTeamAbbreviation);
+//                            LogoView(teamID: viewModel.homeTeamID,
+//                                     teamAbbreviation: viewModel.homeTeamAbbreviation);
                             Text(viewModel.homeTeamName)
-                                .font(.subheadline)
                                 .bold()
                                 .multilineTextAlignment(.center)
                             Text(viewModel.homeTeamRecord)
-                                .font(.caption2)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
                         }
                         
                         VStack() {
                             Text(viewModel.homeTeamScore)
-                                .font(.system(size: 48))
-                                .scaledToFill()
-                                .minimumScaleFactor(0.5)
+                                .font(.system(size: 38))
+//                                .scaledToFill()
+//                                .minimumScaleFactor(0.5)
                                 .lineLimit(1)
                                 .bold()
                                 .padding([.leading, .trailing])
@@ -61,22 +125,22 @@ struct DetailGameHeaderView: View {
                         
                         VStack() {
                             Text(viewModel.awayTeamScore)
-                                .font(.system(size: 48))
-                                .scaledToFill()
-                                .minimumScaleFactor(0.5)
+                                .font(.system(size: 38))
+//                                .scaledToFill()
+//                                .minimumScaleFactor(0.5)
                                 .lineLimit(1)
                                 .bold()
                                 .padding([.leading, .trailing])
                         }
                         VStack(alignment: .center, spacing: 4) {
-                            LogoView(teamID: viewModel.awayTeamID,
-                                     teamAbbreviation: viewModel.awayTeamAbbreviation)
+//                            LogoView(teamID: viewModel.awayTeamID,
+//                                     teamAbbreviation: viewModel.awayTeamAbbreviation)
                             Text(viewModel.awayTeamName)
-                                .font(.subheadline)
                                 .bold()
                                 .multilineTextAlignment(.center)
                             Text(viewModel.awayTeamRecord)
-                                .font(.caption2)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
                         }
                     }
                 }
@@ -84,9 +148,17 @@ struct DetailGameHeaderView: View {
                 .frame(height: 150)
                 .padding(.bottom)
             }
+             */
         }
         else {
             EmptyView()
+        }
+    }
+    
+    @ViewBuilder
+    var banner: some View {
+        if let viewModel = viewModel?.statusBannerViewModel {
+            StatusBannerView(viewModel: viewModel)
         }
     }
 }

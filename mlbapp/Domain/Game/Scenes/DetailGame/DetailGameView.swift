@@ -51,13 +51,13 @@ struct DetailGameView: View {
                 }
             }
             
-            Section("AT BAT") {
-                if let currentPlayVM = viewModel.currentPlayViewModel {
-                    CurrentPlayView(viewModel: currentPlayVM)
-                        .listRowInsets(EdgeInsets())
-                    DetailGamePitcherView(titleText: "On Deck", pitcherNameText: "Ive, J", pitcherInfoText: "0-2, .000 AVG")
-                }
-            }
+//            Section("AT BAT") {
+//                if let currentPlayVM = viewModel.currentPlayViewModel {
+//                    CurrentPlayView(viewModel: currentPlayVM)
+//                        .listRowInsets(EdgeInsets())
+//                    DetailGamePitcherView(titleText: "On Deck", pitcherNameText: "Ive, J", pitcherInfoText: "0-2, .000 AVG")
+//                }
+//            }
             
             if viewModel.showProbablePitchers {
                 Section("Probable Pitchers") {

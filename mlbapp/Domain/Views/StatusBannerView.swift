@@ -7,41 +7,48 @@
 
 import SwiftUI
 
-struct StatusBannerView: View {
+struct StatusBannerViewModel {
     let statusText: String
     var statusTextColor: Color = .primary
     var secondaryStatusText: String?
     var secondaryStatusTextColor: Color = .primary
     let backgroundColor: Color
     var divider: Bool = false
+    var chevronIndicator: Bool = true
+}
+
+struct StatusBannerView: View {
+
+    let viewModel: StatusBannerViewModel
     
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text(statusText)
+                Text(viewModel.statusText)
                     .bold()
-                    .foregroundColor(statusTextColor)
+                    .foregroundColor(viewModel.statusTextColor)
                     .font(.subheadline)
                 
-                if let secondaryStatusText = secondaryStatusText {
+                if let secondaryStatusText = viewModel.secondaryStatusText {
                     Spacer()
                     Text(secondaryStatusText)
                         .font(.subheadline)
-                        .foregroundColor(secondaryStatusTextColor)
+                        .foregroundColor(viewModel.secondaryStatusTextColor)
                     
                 }
-                
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.secondary)
-                    .font(.caption)
+                if viewModel.chevronIndicator {
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.secondary)
+                        .font(.caption)
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal)
             .padding(.vertical, 8)
-            .background(backgroundColor)
+            .background(viewModel.backgroundColor)
         }
         
-        if divider {
+        if viewModel.divider {
             Divider()
         }
     }

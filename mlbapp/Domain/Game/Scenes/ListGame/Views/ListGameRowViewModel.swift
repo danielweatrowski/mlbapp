@@ -10,7 +10,6 @@ import Foundation
 struct ListGameRowViewModel {
     let id = UUID()
     let gameID: Int
-    let gameStatusText: String
     let gameStatus: GameStatus
     let gameVenueName: String
     let homeTeamID: Int
@@ -28,9 +27,9 @@ struct ListGameRowViewModel {
     let winningPitcherName: String?
     let losingPitcherName: String?
     let savePitcherName: String?
-    let currentInningText: String?
     
     let linescoreViewModel: LinescoreGridViewModel?
+    let statusBannerViewModel: StatusBannerViewModel?
     
     var awayTeamDidWin: Bool {
         return awayTeamScore > homeTeamScore

@@ -17,17 +17,6 @@ struct ListGameRow: View {
             banner
             
             VStack(spacing: 10) {
-//                if viewModel.isGameScheduled {
-//                    HStack() {
-//                        Text(viewModel.gameStatusText)
-//                            .foregroundColor(.secondary)
-//                            .font(.subheadline)
-//                        Spacer()
-//                        Text(viewModel.gameVenueName)
-//                            .foregroundColor(.secondary)
-//                            .font(.subheadline)
-//                    }
-//                }
                 
                 HStack() {
                     //LogoView(teamID: viewModel.homeTeamID, teamAbbreviation: viewModel.homeTeamAbbreviation)
@@ -135,14 +124,8 @@ struct ListGameRow: View {
     
     @ViewBuilder
     var banner: some View {
-        if viewModel.isGameLive {
-            let text = viewModel.currentInningText ?? "LIVE"
-            StatusBannerView(statusText: text, secondaryStatusText: "@ \(viewModel.gameVenueName)", backgroundColor: .green)
-        } else if viewModel.isGameFinal {
-            StatusBannerView(statusText: "FINAL", statusTextColor: .red, secondaryStatusText: "\(viewModel.gameVenueName)",secondaryStatusTextColor: .secondary, backgroundColor: .clear, divider: true)
-        }
-        else if viewModel.isGameScheduled {
-            StatusBannerView(statusText: viewModel.gameStatusText, statusTextColor: .secondary, secondaryStatusText: "\(viewModel.gameVenueName)", secondaryStatusTextColor: .secondary, backgroundColor: .clear, divider: true)
+        if let bannerViewModel = viewModel.statusBannerViewModel {
+            StatusBannerView(viewModel: bannerViewModel)
         }
     }
 }

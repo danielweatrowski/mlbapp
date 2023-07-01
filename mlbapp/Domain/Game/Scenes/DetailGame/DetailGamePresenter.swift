@@ -23,21 +23,18 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
             return
         }
         
-        let formattedStatus = formatStatusBanner(gameStatus: game.status)
+        let bannerViewModel = formatBanner(game: game)
         let headerViewModel = DetailGameHeaderViewModel(homeTeamID: game.homeTeam.id,
-                                                        homeTeamName: game.homeTeam.teamName,
+                                                        homeTeamName: game.homeTeam.name,
                                                         homeTeamAbbreviation: game.homeTeam.abbreviation,
                                                         homeTeamScore: String(game.homeTeamScore),
                                                         homeTeamRecord: homeTeamRecord.formatted(),
                                                         awayTeamID: game.awayTeam.id,
-                                                        awayTeamName: game.awayTeam.teamName,
+                                                        awayTeamName: game.awayTeam.name,
                                                         awayTeamAbbreviation: game.awayTeam.abbreviation,
                                                         awayTeamScore: String(game.awayTeamScore),
                                                         awayTeamRecord: awayTeamRecord.formatted(),
-                                                        gameDate: game.date.formatted(),
-                                                        venueName: game.venue.name,
-                                                        statusText: formattedStatus?.0,
-                                                        statusBackgroundColor: formattedStatus?.1)
+                                                        statusBannerViewModel: bannerViewModel)
 
         let lineScoreViewModel = formatLineScore(for: game)
         
@@ -106,16 +103,6 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         }
     }
     
-    func formatStatusBanner(gameStatus: GameStatus) -> (String, Color)? {
-        switch gameStatus {
-        case .live:
-            return (gameStatus.friendlyName.uppercased(), .green)
-        case .final:
-            return (gameStatus.friendlyName.uppercased(), .red)
-        default: return nil
-        }
-    }
-    
     func formatProbablePitchers(probablePitchers: ProbablePitchers?, homeTeamName: String, awayTeamName: String) -> ProbablePitchersViewModel? {
         guard let probablePitchers = probablePitchers, probablePitchers.hasPitcherData else {
             return nil
@@ -159,6 +146,24 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         return LinescoreGridViewModel(homeAbbreviation: game.homeTeam.abbreviation,
                                       awayAbbreviation: game.awayTeam.abbreviation,
                                       linescore)
+    }
+    
+    private func formatBanner(game: Game) -> StatusBannerViewModel {
+        switch game.status {
+        case .live:
+            
+//            var currentInningText: String?
+//            if let liveInfo = gameResult.liveInfo {
+//                currentInningText = "\(liveInfo.currentInningHalf) \(liveInfo.currentInningDescription)"
+//            }
+            
+            return StatusBannerViewModel(statusText: "LIVE", secondaryStatusText: game.venue.name, backgroundColor: .green, chevronIndicator: false)
+        case .final:
+            return StatusBannerViewModel(statusText: "FINAL", statusTextColor: .red, secondaryStatusText: game.venue.name, secondaryStatusTextColor: .secondary, backgroundColor: .clear, divider: true, chevronIndicator: false)
+        default:
+            let text = game.date.formatted(date: .omitted, time: .shortened)
+            return StatusBannerViewModel(statusText: text, statusTextColor: .secondary, secondaryStatusText: game.venue.name, secondaryStatusTextColor: .secondary, backgroundColor: .clear, divider: true, chevronIndicator: false)
+        }
     }
 }
 
