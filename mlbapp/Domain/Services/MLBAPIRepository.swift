@@ -21,6 +21,13 @@ struct MLBAPIRepository: GameStoreProtocol {
                 return nil
             }
             return Roster.Player(personID: personID,
+                                 weight: playerDTO.person?.weight,
+                                 height: playerDTO.person?.height,
+                                 age: playerDTO.person?.currentAge,
+                                 throwingHandCode: playerDTO.person?.pitchHand?.code ?? "-",
+                                 throwingHand: playerDTO.person?.pitchHand?.description ?? "",
+                                 battingSideCode: playerDTO.person?.batSide?.code ?? "",
+                                 battingSide: playerDTO.person?.batSide?.description ?? "",
                                  fullName: fullName,
                                  position: .init(code: playerDTO.position?.code,
                                                  type: playerDTO.position?.type,

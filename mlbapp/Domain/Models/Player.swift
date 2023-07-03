@@ -35,27 +35,27 @@ struct Player: Hashable, Codable {
     
     var nickname: String?
     
-    var birthCity: String
+    var birthCity: String?
     
     var birthStateProvince: String?
     
-    var birthCountry: String
+    var birthCountry: String?
     
-    var lastInitName: String
+    var lastInitName: String?
     
-    var boxscoreName: String
+    var boxscoreName: String?
     
-    var height: String
+    var height: String?
     
-    var weight: Int
+    var weight: Int?
     
-    var currentAge: Int
+    var currentAge: Int?
     
-    var birthDate: String
+    var birthDate: String?
     
     var isActive: Bool
     
-    var mlbDebutDate: String
+    var mlbDebutDate: String?
     
-    var primaryPositionCode: String
+    var primaryPositionCode: String?
 }

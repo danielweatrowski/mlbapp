@@ -17,7 +17,7 @@ struct MLBRoster: Decodable {
         
         let status: Status?
         let position: MLBPosition?
-        let person: MLBPerson?
+        let person: MLBPlayer?
         let jerseyNumber: String?
         
     }

@@ -7,48 +7,17 @@
 
 import Foundation
 
-protocol MLBPlayerProtocol {
-    var id: Int { get set }
-
-    var firstName: String { get set }
-
-    var lastName: String { get set }
+struct MLBPlayer: Codable {
+    struct Orientation: Codable {
+        let code: String
+        let description: String
+    }
     
-    var fullName: String { get set }
-
-    var primaryNumber: String? { get set }
-
-    var nickname: String? { get set }
-    
-    var lastInitName: String { get set }
-    
-    var boxscoreName: String { get set }
-    
-    var height: String { get set }
-    
-    var weight: Int { get set }
-    
-    var currentAge: Int { get set }
-    
-    var birthDate: String { get set }
-    
-    var active: Bool { get set }
-    
-    var mlbDebutDate: String? { get set }
-    
-    var birthCity: String { get set }
-    
-    var birthStateProvince: String? { get set }
-    
-    var birthCountry: String { get set }
-}
-
-struct MLBPlayer: MLBPlayerProtocol, Codable {
-    var birthCity: String
+    var birthCity: String?
     
     var birthStateProvince: String?
     
-    var birthCountry: String
+    var birthCountry: String?
     
     var id: Int
     
@@ -58,25 +27,29 @@ struct MLBPlayer: MLBPlayerProtocol, Codable {
     
     var fullName: String
     
-    var primaryNumber: String?
+    var primaryNumber: String
     
     var nickname: String?
     
-    var lastInitName: String
+    var lastInitName: String?
     
-    var boxscoreName: String
+    var boxscoreName: String?
     
-    var height: String
+    var height: String?
     
-    var weight: Int
+    var weight: Int?
     
-    var currentAge: Int
+    var currentAge: Int?
     
-    var birthDate: String
+    var birthDate: String?
     
     var active: Bool
     
     var mlbDebutDate: String?
     
     var primaryPosition: MLBPosition
+    
+    var batSide: Orientation?
+    
+    var pitchHand: Orientation?
 }

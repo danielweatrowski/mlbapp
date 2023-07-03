@@ -72,7 +72,7 @@ struct DetailGameView: View {
                 }
             }
             
-            Section("Team Details") {
+            Section("Team Info") {
                 NavigationLink("Starting Lineups", value: RouterDestination.lineupDetail(gameID: viewModel.gameID,
                                                                                          boxscore: interactor.boxscore))
                 NavigationLink("Rosters", value: RouterDestination.rosterDetail(homeTeam: interactor.homeTeam,

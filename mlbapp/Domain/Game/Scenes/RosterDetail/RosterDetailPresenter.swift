@@ -20,13 +20,15 @@ struct RosterDetailPresenter: RosterDetailPresentationLogic {
             return RosterRowViewModel(playerNumberText: player.jerseyNumber,
                                       playerNameText: player.fullName,
                                       playerPositionText: player.position?.abbreviation ?? "-",
-                                      playerInfoText: "")
+                                      playerInfoText: "",
+                                      details: formatDetails(player))
         }
         let awayRosterViewModel = output.awayRoster.players.map { player in
             return RosterRowViewModel(playerNumberText: player.jerseyNumber,
                                       playerNameText: player.fullName,
                                       playerPositionText: player.position?.abbreviation ?? "-",
-                                      playerInfoText: "")
+                                      playerInfoText: "",
+                                      details: formatDetails(player))
         }
         
         DispatchQueue.main.async {
@@ -39,5 +41,13 @@ struct RosterDetailPresenter: RosterDetailPresentationLogic {
         DispatchQueue.main.async {
             self.viewModel.sceneError.presentAlert(sceneError)
         }
+    }
+    
+    private func formatDetails(_ player: Roster.Player) -> [RosterRowViewModel.DetailItem] {
+        let throwsDetail = RosterRowViewModel.DetailItem(text: player.throwingHandCode, secondaryText: "throw")
+        let batDetail = RosterRowViewModel.DetailItem(text: player.battingSideCode, secondaryText: "bat")
+        let ageDetail = RosterRowViewModel.DetailItem(text: player.age.formattedStat(), secondaryText: "age")
+
+        return [throwsDetail, batDetail, ageDetail]
     }
 }

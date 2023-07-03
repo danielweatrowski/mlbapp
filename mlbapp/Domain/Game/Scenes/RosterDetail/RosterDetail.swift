@@ -18,6 +18,7 @@ enum RosterDetail {
         
         @Published var state: State = .loaded
         @Published var teamSelection: Int = 0
+        @Published var searchText: String = ""
         
         @Published var homeRoster: [RosterRowViewModel] = []
         @Published var awayRoster: [RosterRowViewModel] = []

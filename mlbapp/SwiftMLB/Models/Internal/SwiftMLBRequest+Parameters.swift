@@ -130,6 +130,9 @@ public extension SwiftMLBRequest {
         func toQueryItems() -> [URLQueryItem] {
             var items = [URLQueryItem]()
             
+            let hydrateItem = URLQueryItem(name: "hydrate", value: "person")
+            items.append(hydrateItem)
+
             let rosterTypeItem = URLQueryItem(name: "rosterType", value: type.rawValue)
             items.append(rosterTypeItem)
             

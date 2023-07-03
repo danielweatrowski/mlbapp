@@ -23,7 +23,6 @@ struct RosterDetailView: View {
                         }
                     }
                 }
-        
             case .loading:
                 ProgressView()
             default: EmptyView()

@@ -47,13 +47,11 @@ struct mlbappApp: App {
                 .environmentObject(MLBLogoService())
                 .environmentObject(router)
             }
-
-
-//            NavigationView {
-//                DetailGameConfigurator.configure(for: 661849)
-//                    .environmentObject(MLBLogoService())
-//            }
+            .onAppear {
+                let tabBarAppearance = UITabBarAppearance()
+                tabBarAppearance.configureWithDefaultBackground()
+                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            }
         }
-
     }
 }

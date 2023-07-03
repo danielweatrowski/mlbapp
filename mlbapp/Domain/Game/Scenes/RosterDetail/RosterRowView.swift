@@ -7,12 +7,20 @@
 
 import SwiftUI
 
-struct RosterRowViewModel: Hashable {
+struct RosterRowViewModel: Identifiable {
+    
+    struct DetailItem {
+        let id = UUID()
+        let text: String
+        let secondaryText: String
+    }
+    
     let id: UUID = UUID()
     var playerNumberText: String
     var playerNameText: String
     var playerPositionText: String
     var playerInfoText: String
+    let details: [DetailItem]
 }
 
 struct RosterRowView: View {
@@ -20,14 +28,32 @@ struct RosterRowView: View {
     let viewModel: RosterRowViewModel
     
     var body: some View {
-        HStack(alignment: .center, spacing: 16) {
+        HStack(alignment: .firstTextBaseline, spacing: 16) {
             numberView
-            VStack(alignment: .leading, spacing: 2) {
-                Text(viewModel.playerNameText)
-                    .bold()
-                Text(viewModel.playerPositionText)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+            VStack(alignment: .leading, spacing: 6) {
+                HStack {
+                    Text(viewModel.playerNameText)
+                        .bold()
+                    Spacer()
+                    Text(viewModel.playerPositionText)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                HStack {
+                    
+                    ForEach(viewModel.details, id: \.id) { detail in
+                        Text(detail.text)
+                            .font(.subheadline)
+                        + Text(" \(detail.secondaryText)")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        
+                        if detail.id != viewModel.details.last?.id {
+                            Divider()
+                                .frame(height: 20)
+                        }
+                    }
+                }
             }
         }
         .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
@@ -38,7 +64,7 @@ struct RosterRowView: View {
     @ViewBuilder
     var numberView: some View {
         Text(viewModel.playerNumberText)
-            .font(.subheadline)
+            .font(.system(size: 13))
             .bold()
             .foregroundColor(.white)
             .background(
@@ -46,6 +72,6 @@ struct RosterRowView: View {
                     .fill(.blue)
                     .frame(width: 25, height: 25)
             )
-            .frame(width: 25, height: 25)
+            .frame(width: 25, height: 25, alignment: .center)
     }
 }
