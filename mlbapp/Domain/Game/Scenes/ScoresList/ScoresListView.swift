@@ -10,7 +10,7 @@ import SwiftUI
 struct ScoresListView: View {
     
     @EnvironmentObject var router: Router
-    var interactor: ScoresListBusinessLogic?
+    @StateObject var interactor: ScoresListInteractor
     @StateObject private var viewModel: ScoresList.ViewModel
     
     var columns = [
@@ -24,7 +24,6 @@ struct ScoresListView: View {
                 case .loading:
                     ProgressView()
                 case .loaded:
-                    // TODO: Try using ListGameView.configure(_:) here
                     ScrollView {
                         gameList
                     }
@@ -38,9 +37,9 @@ struct ScoresListView: View {
                 ScoresListDatePickerView(selectedDate: $viewModel.selectedDate, didTapDate: {
                     viewModel.showCalendarSheet = true
                 }, didTapNextDate: {
-                    viewModel.selectedDate = interactor!.getNextDay(from: viewModel.selectedDate)
+                    viewModel.selectedDate = interactor.getNextDay(from: viewModel.selectedDate)
                 }, didTapPreviousDate: {
-                    viewModel.selectedDate = interactor!.getPreviousDay(from: viewModel.selectedDate)
+                    viewModel.selectedDate = interactor.getPreviousDay(from: viewModel.selectedDate)
                 })
                 .padding(.bottom, 4)
             }
@@ -59,11 +58,11 @@ struct ScoresListView: View {
         .navigationTitle(viewModel.navigationTitle)
         .withSceneError($viewModel.sceneError)
         .onAppear {
-            interactor?.loadScores(for: viewModel.selectedDate)
+            interactor.loadScores(for: viewModel.selectedDate)
         }
         .onReceive(viewModel.$selectedDate) { newDate in
             viewModel.state = .loading
-            interactor?.loadScores(for: newDate)
+            interactor.loadScores(for: newDate)
         }
     }
     

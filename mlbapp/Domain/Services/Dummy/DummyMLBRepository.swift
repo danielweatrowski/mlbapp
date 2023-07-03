@@ -8,6 +8,10 @@
 import Foundation
 
 struct DummyMLBRepository: GameStoreProtocol {
+    func fetchRoster(teamID id: Int, date: Date) async throws -> Roster {
+        fatalError()
+    }
+    
     
     let games: [Int: Game]
     let gameSearchResults: [GameSearch.Result]

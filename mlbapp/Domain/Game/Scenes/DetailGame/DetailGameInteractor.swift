@@ -16,6 +16,9 @@ protocol DetailGameDataStore  {
     var gameID: Int { get set }
     var playerHash: [Int: Player]? { get }
     var boxscore: Boxscore? { get }
+    var homeTeam: Team? { get }
+    var awayTeam: Team? { get }
+    var gameDate: Date? { get }
 }
 
 class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore, ObservableObject {
@@ -26,6 +29,9 @@ class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore, Obser
     
     var playerHash: [Int: Player]? = nil
     var boxscore: Boxscore? = nil
+    var homeTeam: Team? = nil
+    var awayTeam: Team? = nil
+    var gameDate: Date? = nil
     
     init(gameID: Int, presenter: DetailGamePresentationLogic) {
         self.gameID = gameID
@@ -40,7 +46,9 @@ class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore, Obser
                 
                 self.playerHash = game.players
                 self.boxscore = game.boxscore
-                
+                self.homeTeam = game.homeTeam
+                self.awayTeam = game.awayTeam
+                self.gameDate = game.date
                 
                 presenter.presentGame(response: response)
             } catch {

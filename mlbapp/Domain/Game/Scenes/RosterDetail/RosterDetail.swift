@@ -16,13 +16,18 @@ enum RosterDetail {
     class ViewModel: ObservableObject {
         let navigationTitle = "Rosters"
         
-        @Published var state: State = .loading
+        @Published var state: State = .loaded
         @Published var teamSelection: Int = 0
+        
+        @Published var homeRoster: [RosterRowViewModel] = []
+        @Published var awayRoster: [RosterRowViewModel] = []
+        
         @Published var sceneError: SceneError = SceneError()
 
     }
     
     struct Output {
-        
+        let homeRoster: Roster
+        let awayRoster: Roster
     }
 }

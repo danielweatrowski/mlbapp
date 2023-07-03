@@ -7,7 +7,16 @@
 
 import Foundation
 
-struct Team: Codable {
+struct Team: Codable, Hashable {
+    
+    static func == (lhs: Team, rhs: Team) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        return hasher.combine(id)
+    }
+    
     let id: Int
     let name: String
     let abbreviation: String

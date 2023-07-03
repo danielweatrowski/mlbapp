@@ -15,6 +15,15 @@ struct ScoresListDatePickerView: View {
     var didTapNextDate: (() -> ())?
     var didTapPreviousDate: (() -> ())?
     
+    @ViewBuilder
+    private var dateText: some View {
+        Calendar.current.isDateInToday(selectedDate)
+        ? Text("Today")
+        :                 Text(selectedDate, style: .date)
+
+        
+    }
+    
     var body: some View {
         HStack {
             Button(action: {
@@ -28,8 +37,9 @@ struct ScoresListDatePickerView: View {
             Button(action: {
                 didTapDate?()
             }, label: {
-                Text(selectedDate, style: .date)
+                dateText
             })
+            .frame(width: 120)
             Divider()
             Button(action: {
                 didTapNextDate?()

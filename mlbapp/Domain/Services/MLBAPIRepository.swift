@@ -7,7 +7,33 @@
 
 import Foundation
 
-struct MLBAPIRepository: GameStoreProtocol {    
+struct MLBAPIRepository: GameStoreProtocol {
+    
+    func fetchRoster(teamID id: Int, date: Date) async throws -> Roster {
+        let rosterParameters = SwiftMLBRequest.RosterParameters(teamIdentifier: id,
+                                                                type: .active,
+                                                                range: .date(date))
+        
+        let rosterDTO = try await SwiftMLB.roster(paramters: rosterParameters)
+        
+        let rosterPlayers: [Roster.Player] = rosterDTO.roster.compactMap { playerDTO in
+            guard let personID = playerDTO.person?.id, let fullName = playerDTO.person?.fullName, let statusCode = playerDTO.status?.code, let statusDesc = playerDTO.status?.description else {
+                return nil
+            }
+            return Roster.Player(personID: personID,
+                                 fullName: fullName,
+                                 position: .init(code: playerDTO.position?.code,
+                                                 type: playerDTO.position?.type,
+                                                 name: playerDTO.position?.name,
+                                                 abbreviation: playerDTO.position?.abbreviation),
+                                 statusCode: statusCode,
+                                 statusDescription: statusDesc,
+                                 jerseyNumber: playerDTO.jerseyNumber ?? "-")
+        }
+        
+        return Roster(players: rosterPlayers)
+    }
+    
     func searchGame(with parameters: GameSearch.SearchParameters) async throws -> [GameSearch.Result] {
         
         let searchParameters = SwiftMLBRequest.ScheduleParameters(startDate: parameters.startDate,

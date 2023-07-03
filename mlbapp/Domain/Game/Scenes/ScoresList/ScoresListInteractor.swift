@@ -14,7 +14,7 @@ protocol ScoresListBusinessLogic {
     func getPreviousDay(from date: Date?) -> Date
 }
 
-class ScoresListInteractor: ScoresListBusinessLogic {
+class ScoresListInteractor: ObservableObject, ScoresListBusinessLogic {
     
     let presenter: ScoresListPresentationLogic?
     
@@ -22,6 +22,10 @@ class ScoresListInteractor: ScoresListBusinessLogic {
     
     init(presenter: ScoresListPresentationLogic?) {
         self.presenter = presenter
+    }
+    
+    deinit {
+        print("DEINITING")
     }
     
     func loadScores(for date: Date) {

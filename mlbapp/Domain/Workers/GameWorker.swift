@@ -13,10 +13,11 @@ protocol GameStoreProtocol {
     func searchGame(with parameters: GameSearch.SearchParameters) async throws -> [GameSearch.Result]
     func fetchAllPlays(forGameID id: Int) async throws -> [P]
     func fetchBoxscore(forGameID id: Int) async throws -> Boxscore
+    func fetchRoster(teamID id: Int, date: Date) async throws -> Roster
 }
 
 struct GameWorker<Store: GameStoreProtocol> {
-
+    
     var store: Store
     
     func fetchGame(withID id: Int) async throws -> Game {
@@ -33,6 +34,10 @@ struct GameWorker<Store: GameStoreProtocol> {
     
     func fetchBoxscore(forGameID id: Int) async throws -> Boxscore {
         return try await store.fetchBoxscore(forGameID: id)
+    }
+    
+    func fetchRoster(teamID id: Int, date: Date) async throws -> Roster {
+        return try await store.fetchRoster(teamID: id, date: date)
     }
 
 

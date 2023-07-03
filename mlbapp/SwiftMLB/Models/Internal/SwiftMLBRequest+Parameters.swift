@@ -109,4 +109,40 @@ public extension SwiftMLBRequest {
             return [URLQueryItem(name: "hydrate", value: value)]
         }
     }
+    
+    struct RosterParameters {
+        
+        enum RosterType: String  {
+            case fortyMan = "40man"
+            case active = "active"
+            case fullRoster = "fullRoster"
+        }
+        
+        enum RangeType {
+            case date(_ date: Date)
+            case season(_ yearString: String)
+        }
+        
+        let teamIdentifier: Int
+        let type: RosterType
+        let range: RangeType
+        
+        func toQueryItems() -> [URLQueryItem] {
+            var items = [URLQueryItem]()
+            
+            let rosterTypeItem = URLQueryItem(name: "rosterType", value: type.rawValue)
+            items.append(rosterTypeItem)
+            
+            if case .date(let date) = range {
+                let rosterRangeItem = URLQueryItem(name: "date", value: date.formatted(date: .numeric, time: .omitted))
+                items.append(rosterRangeItem)
+            } else if case .season(let year) = range {
+                let rosterRangeItem = URLQueryItem(name: "season", value: year)
+                items.append(rosterRangeItem)
+            }
+            
+            return items
+        }
+
+    }
 }

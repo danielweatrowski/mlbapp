@@ -59,6 +59,7 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
         }
         
         DispatchQueue.main.async {
+            viewModel.rows = []
             viewModel.rows = listGameRows
             viewModel.state = .loaded
         }
