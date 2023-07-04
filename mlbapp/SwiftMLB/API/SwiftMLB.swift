@@ -9,5 +9,5 @@ import Foundation
 
 
 public class SwiftMLB {
-    
+    internal static let networkService = HTTPClientService()
 }

@@ -1,36 +1,25 @@
 //
-//  SwiftMLB+GameLookup.swift
+//  SwiftMLB+Schedule.swift
 //  mlbapp
 //
-//  Created by Daniel Weatrowski on 11/4/22.
+//  Created by Daniel Weatrowski on 1/16/23.
 //
 
 import Foundation
-import Combine
 
-public extension SwiftMLB {
+extension SwiftMLB {
     
-    static func schedule(from startDate: Date, to endDate: Date, teamIdentifier: Int, opponentIdentifier: Int?) -> AnyPublisher<GameLookupResponse, Error> {
-        // format dates
-        let startDateFormatted = startDate.formatted(date: .numeric, time: .omitted)
-        let endDateFormatted = endDate.formatted(date: .numeric, time: .omitted)
-        var urlString = "https://statsapi.mlb.com/api/v1/schedule?startDate=\(startDateFormatted)&endDate=\(endDateFormatted)&teamId=\(teamIdentifier)"
+    static func schedule(parameters: SwiftMLBRequest.ScheduleParameters) async throws -> MLBSchedule {
+        let request: SwiftMLBRequest = .schedule(parameters)
+        let data = try await networkService.load(request)
+
+        let serializer = SwiftMLBSerialization(data: data, builder: ScheduleBuilder())
+        let scheduleData = try serializer.data()
         
-        if let opponentIdentifier = opponentIdentifier {
-            urlString.append("&opponentId=\(opponentIdentifier)")
-        }
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        let schedule = try decoder.decode(MLBSchedule.self, from: scheduleData)
         
-        urlString.append("&sportId=1")
-        // https://statsapi.mlb.com/api/v1/schedule?startDate=07/01/2018&endDate=07/31/2018&teamId=143&opponentId=121&sportId=1
-        print(urlString)
-        let url = URL(string: urlString)!
-        //"https://statsapi.mlb.com/api/v1/schedule?startDate=\(startDateFormatted)&endDate=\(endDateFormatted)&teamId=\(teamIdentifier)&opponentId=\(opponentIdentifier)&sportId=1")!
-        
-        return URLSession.shared.dataTaskPublisher(for: url)
-            .map(\.data)
-            .decode(type: GameLookupResponse.self,
-                    decoder: JSONDecoder())
-            .eraseToAnyPublisher()
+        return schedule
     }
 }
-

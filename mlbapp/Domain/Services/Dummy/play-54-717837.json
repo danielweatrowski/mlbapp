@@ -1,0 +1,356 @@
+{
+  "result": {
+    "type": "atBat",
+    "event": "Home Run",
+    "eventType": "home_run",
+    "description": "Mookie Betts homers (17) on a fly ball to left field.   Miguel Vargas scores.",
+    "rbi": 2,
+    "awayScore": 3,
+    "homeScore": 4,
+    "isOut": false
+  },
+  "about": {
+    "atBatIndex": 54,
+    "halfInning": "top",
+    "isTopInning": true,
+    "inning": 7,
+    "startTime": "2023-06-10T01:10:50.289Z",
+    "endTime": "2023-06-10T01:12:24.677Z",
+    "isComplete": true,
+    "isScoringPlay": true,
+    "hasReview": false,
+    "hasOut": false,
+    "captivatingIndex": 38
+  },
+  "count": {
+    "balls": 2,
+    "strikes": 0,
+    "outs": 2
+  },
+  "matchup": {
+    "batter": {
+      "id": 605141,
+      "fullName": "Mookie Betts",
+      "link": "/api/v1/people/605141"
+    },
+    "batSide": {
+      "code": "R",
+      "description": "Right"
+    },
+    "pitcher": {
+      "id": 621381,
+      "fullName": "Matt Strahm",
+      "link": "/api/v1/people/621381"
+    },
+    "pitchHand": {
+      "code": "L",
+      "description": "Left"
+    },
+    "batterHotColdZones": [
+      
+    ],
+    "pitcherHotColdZones": [
+      
+    ],
+    "splits": {
+      "batter": "vs_LHP",
+      "pitcher": "vs_RHB",
+      "menOnBase": "Empty"
+    }
+  },
+  "pitchIndex": [
+    0,
+    1,
+    2
+  ],
+  "actionIndex": [
+    
+  ],
+  "runnerIndex": [
+    0,
+    1
+  ],
+  "runners": [
+    {
+      "movement": {
+        "originBase": null,
+        "start": null,
+        "end": "score",
+        "outBase": null,
+        "isOut": false,
+        "outNumber": null
+      },
+      "details": {
+        "event": "Home Run",
+        "eventType": "home_run",
+        "movementReason": null,
+        "runner": {
+          "id": 605141,
+          "fullName": "Mookie Betts",
+          "link": "/api/v1/people/605141"
+        },
+        "responsiblePitcher": {
+          "id": 621381,
+          "link": "/api/v1/people/621381"
+        },
+        "isScoringEvent": true,
+        "rbi": true,
+        "earned": true,
+        "teamUnearned": false,
+        "playIndex": 2
+      },
+      "credits": [
+        
+      ]
+    },
+    {
+      "movement": {
+        "originBase": "1B",
+        "start": "1B",
+        "end": "score",
+        "outBase": null,
+        "isOut": false,
+        "outNumber": null
+      },
+      "details": {
+        "event": "Home Run",
+        "eventType": "home_run",
+        "movementReason": "r_adv_force",
+        "runner": {
+          "id": 678246,
+          "fullName": "Miguel Vargas",
+          "link": "/api/v1/people/678246"
+        },
+        "responsiblePitcher": {
+          "id": 621381,
+          "link": "/api/v1/people/621381"
+        },
+        "isScoringEvent": true,
+        "rbi": true,
+        "earned": true,
+        "teamUnearned": false,
+        "playIndex": 2
+      },
+      "credits": [
+        
+      ]
+    }
+  ],
+  "playEvents": [
+    {
+      "details": {
+        "call": {
+          "code": "B",
+          "description": "Ball"
+        },
+        "description": "Ball",
+        "code": "B",
+        "ballColor": "rgba(39, 161, 39, 1.0)",
+        "trailColor": "rgba(188, 0, 33, 1.0)",
+        "isInPlay": false,
+        "isStrike": false,
+        "isBall": true,
+        "type": {
+          "code": "FF",
+          "description": "Four-Seam Fastball"
+        },
+        "isOut": false,
+        "hasReview": false
+      },
+      "count": {
+        "balls": 1,
+        "strikes": 0,
+        "outs": 2
+      },
+      "pitchData": {
+        "startSpeed": 93.0,
+        "endSpeed": 84.6,
+        "strikeZoneTop": 3.11,
+        "strikeZoneBottom": 1.46,
+        "coordinates": {
+          "aY": 30.064433076822016,
+          "aZ": -12.680175449509152,
+          "pfxX": 5.533541867700067,
+          "pfxZ": 10.569914558035888,
+          "pX": -1.1746204662949347,
+          "pZ": 3.9564587477927975,
+          "vX0": -9.117244327355358,
+          "vY0": -135.10959975776473,
+          "vZ0": -1.390412473648563,
+          "x": 161.77,
+          "y": 131.96,
+          "x0": 1.528236038044462,
+          "y0": 50.00486368084224,
+          "z0": 5.371040356950166,
+          "aX": 10.20833322627191
+        },
+        "breaks": {
+          "breakAngle": 32.4,
+          "breakLength": 3.6,
+          "breakY": 24.0,
+          "spinRate": 2420,
+          "spinDirection": 137
+        },
+        "zone": 11,
+        "typeConfidence": 0.91,
+        "plateTime": 0.4057384839184488,
+        "extension": 6.2511303163356295
+      },
+      "index": 0,
+      "playId": "e5a57bb7-76e1-49e6-8fa1-85fc7b65a9ed",
+      "pitchNumber": 1,
+      "startTime": "2023-06-10T01:11:08.653Z",
+      "endTime": "2023-06-10T01:11:12.578Z",
+      "isPitch": true,
+      "type": "pitch"
+    },
+    {
+      "details": {
+        "call": {
+          "code": "B",
+          "description": "Ball"
+        },
+        "description": "Ball",
+        "code": "B",
+        "ballColor": "rgba(39, 161, 39, 1.0)",
+        "trailColor": "rgba(188, 0, 33, 1.0)",
+        "isInPlay": false,
+        "isStrike": false,
+        "isBall": true,
+        "type": {
+          "code": "FF",
+          "description": "Four-Seam Fastball"
+        },
+        "isOut": false,
+        "hasReview": false
+      },
+      "count": {
+        "balls": 2,
+        "strikes": 0,
+        "outs": 2
+      },
+      "pitchData": {
+        "startSpeed": 94.0,
+        "endSpeed": 85.3,
+        "strikeZoneTop": 3.21370702038175,
+        "strikeZoneBottom": 1.63945134855074,
+        "coordinates": {
+          "aY": 32.3091880984349,
+          "aZ": -9.553697982916864,
+          "pfxX": 5.14670720235945,
+          "pfxZ": 12.089139797910367,
+          "pX": -0.5422817609253305,
+          "pZ": 1.3896737347901382,
+          "vX0": -7.593310064766707,
+          "vY0": -136.476204139755,
+          "vZ0": -8.215885520731245,
+          "x": 137.67,
+          "y": 201.26,
+          "x0": 1.6178670648853555,
+          "y0": 50.00393781232661,
+          "z0": 5.112081932137367,
+          "aX": 9.631512891058335
+        },
+        "breaks": {
+          "breakAngle": 34.8,
+          "breakLength": 3.6,
+          "breakY": 24.0,
+          "spinRate": 2468,
+          "spinDirection": 133
+        },
+        "zone": 13,
+        "typeConfidence": 0.91,
+        "plateTime": 0.4025884978967267,
+        "extension": 6.413659745003852
+      },
+      "index": 1,
+      "playId": "6f7d0bd7-e579-4cf9-a7df-1fea89ef4ad5",
+      "pitchNumber": 2,
+      "startTime": "2023-06-10T01:11:28.657Z",
+      "endTime": "2023-06-10T01:11:33.292Z",
+      "isPitch": true,
+      "type": "pitch"
+    },
+    {
+      "details": {
+        "call": {
+          "code": "E",
+          "description": "In play, run(s)"
+        },
+        "description": "In play, run(s)",
+        "code": "E",
+        "ballColor": "rgba(26, 86, 190, 1.0)",
+        "trailColor": "rgba(0, 0, 254, 1.0)",
+        "isInPlay": true,
+        "isStrike": false,
+        "isBall": false,
+        "type": {
+          "code": "SL",
+          "description": "Slider"
+        },
+        "isOut": false,
+        "hasReview": false
+      },
+      "count": {
+        "balls": 2,
+        "strikes": 0,
+        "outs": 2
+      },
+      "pitchData": {
+        "startSpeed": 82.5,
+        "endSpeed": 76.4,
+        "strikeZoneTop": 3.11,
+        "strikeZoneBottom": 1.46,
+        "coordinates": {
+          "aY": 22.349094767014435,
+          "aZ": -28.61974634794535,
+          "pfxX": -6.090368287988301,
+          "pfxZ": 2.418925629247032,
+          "pX": -0.49708133763636364,
+          "pZ": 1.6052297900343366,
+          "vX0": -3.7337274702500722,
+          "vY0": -120.13800379134238,
+          "vZ0": -2.996379140888885,
+          "x": 135.95,
+          "y": 195.44,
+          "x0": 1.8660455995168062,
+          "y0": 50.00042962537224,
+          "z0": 5.401083181384762,
+          "aX": -8.938966335970242
+        },
+        "breaks": {
+          "breakAngle": 18.0,
+          "breakLength": 8.4,
+          "breakY": 24.0,
+          "spinRate": 2856,
+          "spinDirection": 291
+        },
+        "zone": 7,
+        "typeConfidence": 0.9,
+        "plateTime": 0.45517533607137306,
+        "extension": 6.084644638474341
+      },
+      "hitData": {
+        "launchSpeed": 104.9,
+        "launchAngle": 35.0,
+        "totalDistance": 403.0,
+        "trajectory": "fly_ball",
+        "hardness": "medium",
+        "location": "7",
+        "coordinates": {
+          "coordX": 24.59,
+          "coordY": 70.06
+        }
+      },
+      "index": 2,
+      "playId": "8d203166-226a-4009-b234-366ca6122c34",
+      "pitchNumber": 3,
+      "startTime": "2023-06-10T01:11:59.126Z",
+      "endTime": "2023-06-10T01:12:24.677Z",
+      "isPitch": true,
+      "type": "pitch"
+    }
+  ],
+  "playEndTime": "2023-06-10T01:12:24.677Z",
+  "atBatIndex": 54
+}

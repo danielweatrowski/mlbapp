@@ -8,17 +8,18 @@
 import Foundation
 import Combine
 
-public extension SwiftMLB {
-    
-    static func team(withIdentifer teamIdentifier: Int) -> AnyPublisher<[Team], Never> {
-        let url = URL(string: "https://statsapi.mlb.com/api/v1/teams/\(teamIdentifier)")!
-        
-        return URLSession.shared.dataTaskPublisher(for: url)
-            .map(\.data)
-            .decode(type: TeamResponse.self, decoder: JSONDecoder())
-            .map(\.teams)
-            .replaceError(with: [Team]())
-            .eraseToAnyPublisher() 
-    }
-}
+// TODO: Convert to Async/Await
+//public extension SwiftMLB {
+//
+//    static func team(withIdentifer teamIdentifier: Int) -> AnyPublisher<[Team], Never> {
+//        let url = URL(string: "https://statsapi.mlb.com/api/v1/teams/\(teamIdentifier)")!
+//
+//        return URLSession.shared.dataTaskPublisher(for: url)
+//            .map(\.data)
+//            .decode(type: TeamResponse.self, decoder: JSONDecoder())
+//            .map(\.teams)
+//            .replaceError(with: [Team]())
+//            .eraseToAnyPublisher()
+//    }
+//}
  

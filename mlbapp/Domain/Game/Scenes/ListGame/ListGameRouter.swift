@@ -8,5 +8,12 @@
 import Foundation
 
 protocol ListGameRoutingLogic {
+    func routeToDetailGame(gameID: Int) -> DetailGameView
+}
+
+class ListGameRouter: ObservableObject, ListGameRoutingLogic {
     
+    func routeToDetailGame(gameID: Int) -> DetailGameView {
+        return DetailGameConfigurator.configure(for: gameID)
+    }
 }

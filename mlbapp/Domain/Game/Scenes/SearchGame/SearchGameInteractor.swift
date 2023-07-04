@@ -8,54 +8,58 @@
 import Foundation
 import Combine
 
-// TODO:
-// - Custom errors with combine
-
 protocol SearchGameBusinessLogic {
-    func createSearchGame(request: LookupGame.LookupGame.Request)
+    func createSearchGame(request: SearchGame.Request)
 }
 
 protocol SearchGameDataStore {
-    
+    var lookupResults: [GameSearch.Result] { get set }
 }
 
-class SearchGameInteractor: SearchGameBusinessLogic {
+class SearchGameInteractor: SearchGameBusinessLogic, SearchGameDataStore {
     
-    var presenter: LookupGamePresentationLogic?
-    private var worker: LookupGameWorker = LookupGameWorker()
+    var presenter: SearchGamePresentationLogic
+    var gameWorker = GameWorker(store: MLBAPIRepository())
+
     private var cancellable: AnyCancellable?
     
-    init() {
-        // subscribe to worker publisher to receive the lookup results
-        subscribeToWorker()
+    // Data store
+    var lookupResults: [GameSearch.Result] = []
+    
+    init(presenter: SearchGamePresentationLogic) {
+        self.presenter = presenter
     }
     
-    func subscribeToWorker() {
-        cancellable = worker.publisher.sink { completion in
-            switch(completion) {
-            case .failure(let error):
-                print(error)
-            case .finished:
-                break
-            }
-        } receiveValue: { [weak self] games in
-            if games.isEmpty {
-                self?.presenter?.presentLookupError(error: .noGamesFound)
-            } else {
-                let response = LookupGame.LookupGame.Response(results: games)
-                self?.presenter?.presentLookupGames(response: response)
-            }
-        }
-    }
-    
-    func createSearchGame(request: LookupGame.LookupGame.Request) {
+    @MainActor
+    func createSearchGame(request: SearchGame.Request) {
         
-        if request.homeTeamIndex == .max {
-            presenter?.presentLookupError(error: .missingTeamID)
+        guard let homeTeamID = request.homeTeamID else {
+            presenter.presentLookupError(error: .missingTeamID)
             return
         }
         
-        worker.lookupGames(for: request)
+        Task {
+            do {
+                let parameters = GameSearch.SearchParameters(homeTeamID: homeTeamID,
+                                                             awayTeamID: request.awayTeamID,
+                                                             startDate: request.startDate,
+                                                             endDate: request.endDate)
+                
+                let lookupResults = try await gameWorker.searchGame(with: parameters)
+                
+                guard lookupResults.isEmpty == false else {
+                    presenter.presentLookupError(error: .noGamesFound)
+                    return
+                }
+                
+                // present games
+                let response = SearchGame.Response(results: lookupResults)
+                presenter.presentLookupGames(response: response)
+                self.lookupResults = lookupResults
+            } catch {
+                print(error.localizedDescription)
+                presenter.presentLookupError(error: .unknown(error.localizedDescription))
+            }
+        }
     }
-    
 }
