@@ -22,8 +22,6 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
     }
     
     func presentScoresList(output: ScoresList.Output) {
-        print("PRESENTING GAME")
-
         let listGameRows = output.results.map { result in
             
             let homeTeam = ActiveTeam.team(withIdentifier: result.homeTeam.id)
@@ -59,7 +57,6 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
         }
         
         DispatchQueue.main.async {
-            viewModel.rows = []
             viewModel.rows = listGameRows
             viewModel.state = .loaded
         }
