@@ -12,7 +12,7 @@ struct ScoresListView: View {
     @EnvironmentObject var router: Router
     @StateObject var interactor: ScoresListInteractor
     @StateObject private var viewModel: ScoresList.ViewModel
-    
+        
     var columns = [
         GridItem(.flexible(), spacing: 0)
     ]
@@ -52,6 +52,21 @@ struct ScoresListView: View {
                 .padding([.horizontal])
                 .presentationDetents([.medium])
         }
+        .toolbar {
+            Menu {
+                Picker(selection: $viewModel.filterType, label: Text("Filter Games")) {
+                    ForEach(ScoresList.FilterType.allCases) { option in
+                         Text(String(describing: option))
+
+                     }
+                }
+            } label: {
+                Image(systemName: "ellipsis.circle")
+            }
+            .onReceive(viewModel.$filterType) { newFilter in
+                print(newFilter)
+            }
+        }
         .background(
             Color(uiColor: .systemGroupedBackground)
         )
@@ -64,11 +79,12 @@ struct ScoresListView: View {
             viewModel.state = .loading
             interactor.loadScores(for: newDate)
         }
+
     }
     
     @ViewBuilder
     var gameList: some View {
-        if let rows = viewModel.rows {
+        if let rows = viewModel.filteredRows {
             LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(rows, id: \.id) { row in
                     
