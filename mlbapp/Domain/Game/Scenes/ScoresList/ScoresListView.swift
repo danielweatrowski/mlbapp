@@ -57,7 +57,6 @@ struct ScoresListView: View {
                 Picker(selection: $viewModel.filterType, label: Text("Filter Games")) {
                     ForEach(ScoresList.FilterType.allCases) { option in
                          Text(String(describing: option))
-
                      }
                 }
             } label: {

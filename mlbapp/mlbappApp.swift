@@ -24,6 +24,17 @@ struct mlbappApp: App {
                 }
                 .environmentObject(MLBLogoService())
                 .environmentObject(router)
+                
+                NavigationStack(path: $router.path) {
+                    StandingsListView
+                        .configure()
+                        .withRouter()
+                }
+                .tabItem {
+                    Label("Standings", systemImage: "flag.2.crossed")
+                }
+                .environmentObject(MLBLogoService())
+                .environmentObject(router)
             }
             .onAppear {
                 let tabBarAppearance = UITabBarAppearance()
