@@ -25,33 +25,35 @@ struct ScoresListDatePickerView: View {
     }
     
     var body: some View {
-        HStack {
-            Button(action: {
-                didTapPreviousDate?()
-            }, label: {
-                Image(systemName: "chevron.left")
-            })
-            .frame(width: 25, height: 25)
-            
-            Divider()
-            Button(action: {
-                didTapDate?()
-            }, label: {
-                dateText
-            })
-            .frame(width: 120)
-            Divider()
-            Button(action: {
-                didTapNextDate?()
-            }, label: {
-                Image(systemName: "chevron.right")
-            })
-            .frame(width: 25, height: 25)
-
+        VStack(spacing: 0) {
+            //Divider()
+            HStack {
+                Button(action: {
+                    didTapPreviousDate?()
+                }, label: {
+                    Image(systemName: "chevron.left")
+                })
+                .frame(width: 25, height: 25)
+                
+                Divider()
+                Button(action: {
+                    didTapDate?()
+                }, label: {
+                    dateText
+                })
+                .frame(maxWidth: .infinity)
+                Divider()
+                Button(action: {
+                    didTapNextDate?()
+                }, label: {
+                    Image(systemName: "chevron.right")
+                })
+                .frame(width: 25, height: 25)
+                
+            }
+            .frame(height: 40)
+            .padding(.horizontal)
+            .background(.ultraThickMaterial)
         }
-        .frame(height: 46)
-        .padding(.horizontal)
-        .background(.thickMaterial)
-        .cornerRadius(16)
     }
 }

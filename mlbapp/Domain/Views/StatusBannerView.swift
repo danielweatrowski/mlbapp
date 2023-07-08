@@ -9,9 +9,9 @@ import SwiftUI
 
 struct StatusBannerViewModel {
     let statusText: String
-    var statusTextColor: Color = .primary
+    var statusTextColor: Color = .black
     var secondaryStatusText: String?
-    var secondaryStatusTextColor: Color = .primary
+    var secondaryStatusTextColor: Color = .black
     let backgroundColor: Color
     var divider: Bool = false
     var chevronIndicator: Bool = true

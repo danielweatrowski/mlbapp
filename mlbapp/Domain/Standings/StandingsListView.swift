@@ -16,33 +16,42 @@ struct StandingsListView: View {
     @State private var selectedLeague: Int = 0
     
     var body: some View {
-        Group {
-            switch viewModel.state {
-            case .loaded:
-                if selectedLeague == 0, let listViewModel = viewModel.nationalListViewModel {
-                    standingsList(listViewModel)
-                } else if selectedLeague == 1, let listViewModel = viewModel.americanListViewModel {
-                    standingsList(listViewModel)
-                }
-            case .loading:
-                ProgressView()
-            default: EmptyView()
-            }
-        }
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                HStack(alignment: .center) {
-                    Picker(selection: $selectedLeague, label: Text("League")) {
-                        Text(ActiveLeague.national.nameShort)
-                            .tag(0)
-                        Text(ActiveLeague.american.nameShort)
-                            .tag(1)
+        ZStack {
+            Group {
+                switch viewModel.state {
+                case .loaded:
+                    if selectedLeague == 0, let listViewModel = viewModel.nationalListViewModel {
+                        standingsList(listViewModel)
+                    } else if selectedLeague == 1, let listViewModel = viewModel.americanListViewModel {
+                        standingsList(listViewModel)
                     }
-                    .pickerStyle(.segmented)
-                    .padding(.horizontal)
+                case .loading:
+                    ProgressView()
+                default: EmptyView()
                 }
             }
+            VStack(spacing: 0) {
+                Spacer()
+                
+                ToolbarPickerView(title: "League", item0Title: ActiveLeague.national.nameShort, item1Title: ActiveLeague.american.nameShort, selection: $selectedLeague)
+                    .frame(maxWidth: .infinity, alignment: .center)
+
+            }
         }
+//        .toolbar {
+//            ToolbarItem(placement: .bottomBar) {
+//                HStack(alignment: .center) {
+//                    Picker(selection: $selectedLeague, label: Text("League")) {
+//                        Text(ActiveLeague.national.nameShort)
+//                            .tag(0)
+//                        Text(ActiveLeague.american.nameShort)
+//                            .tag(1)
+//                    }
+//                    .pickerStyle(.segmented)
+//                    .padding(.horizontal)
+//                }
+//            }
+//        }
         .navigationTitle(viewModel.navigationTitle)
         .withSceneError($viewModel.sceneError)
         .task {

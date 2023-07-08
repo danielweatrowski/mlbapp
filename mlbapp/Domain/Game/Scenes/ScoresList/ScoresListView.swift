@@ -41,7 +41,6 @@ struct ScoresListView: View {
                 }, didTapPreviousDate: {
                     viewModel.selectedDate = interactor.getPreviousDay(from: viewModel.selectedDate)
                 })
-                .padding(.bottom, 4)
             }
             .frame(maxWidth: .infinity, alignment: .center)
         }
