@@ -11,19 +11,28 @@ import SwiftUI
 struct StandingsListView: View {
     
     @StateObject var viewModel: StandingsList.ViewModel
+    let interactor: StandingsListBusinessLogic?
+    
+    @State private var selectedLeague: Int = 0
     
     var body: some View {
         Group {
             switch viewModel.state {
             case .loaded:
-                standingsList
+                if selectedLeague == 0, let listViewModel = viewModel.nationalListViewModel {
+                    standingsList(listViewModel)
+                } else if selectedLeague == 1, let listViewModel = viewModel.americanListViewModel {
+                    standingsList(listViewModel)
+                }
+            case .loading:
+                ProgressView()
             default: EmptyView()
             }
         }
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
                 HStack(alignment: .center) {
-                    Picker(selection: $viewModel.selectedLeague, label: Text("League")) {
+                    Picker(selection: $selectedLeague, label: Text("League")) {
                         Text(ActiveLeague.national.nameShort)
                             .tag(0)
                         Text(ActiveLeague.american.nameShort)
@@ -36,39 +45,27 @@ struct StandingsListView: View {
         }
         .navigationTitle(viewModel.navigationTitle)
         .withSceneError($viewModel.sceneError)
-        
+        .task {
+            await interactor?.loadStandings()
+        }
     }
     
     @ViewBuilder
-    var standingsList: some View {
+    func standingsList(_ listViewModel: StandingsList.ListViewModel) -> some View {
+        
         List {
-            ForEach(ActiveLeague.national.divisions, id: \.rawValue) { division in
-                Section(division.nameShort) {
+            ForEach(listViewModel.sections, id: \.title) { section in
+                Section(section.title) {
                     Grid {
                         StandingsHeaderRowView()
                         Divider()
-                        GridRow {
-                            Text("LAD")
-                                .frame(width: 46, alignment: .leading)
-                                .bold()
-                            Text("50")
-                            Text("37")
-                            Text(".560")
-                            Text("2.5")
-                            Text("6-4")
-                            Text("W1")
-                        }
-                        Divider()
-                        GridRow {
-                            Text("SF")
-                                .frame(width: 46, alignment: .leading)
-                                .bold()
-                            Text("50")
-                            Text("37")
-                            Text(".560")
-                            Text("2.5")
-                            Text("6-4")
-                            Text("L1")
+                        
+                        ForEach(section.rows, id: \.self) { rowViewModel in
+                            StandingsRowView(viewModel: rowViewModel)
+                            
+                            if rowViewModel != section.rows.last {
+                                Divider()
+                            }
                         }
                     }
                 }
@@ -80,6 +77,8 @@ struct StandingsListView: View {
 extension StandingsListView {
     static func configure() -> Self {
         let viewModel = StandingsList.ViewModel()
-        return StandingsListView(viewModel: viewModel)
+        let presenter = StandingsListPresenter(viewModel: viewModel)
+        let interactor = StandingsListInteractor(presenter: presenter)
+        return StandingsListView(viewModel: viewModel, interactor: interactor)
     }
 }

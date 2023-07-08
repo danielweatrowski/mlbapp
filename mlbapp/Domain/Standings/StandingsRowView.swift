@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StandingsRowViewModel {
+struct StandingsRowViewModel: Hashable {
     let teamAbbreviation: String
     let wins: String
     let losses: String
