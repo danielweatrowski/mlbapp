@@ -51,8 +51,8 @@ struct SummaryGameView: View {
         HStack(alignment: .center, spacing: 0) {
             Picker("Play Picker", selection: $selection) {
                 Text("All").tag(0)
-                Text("Home").tag(1)
-                Text("Away").tag(2)
+                Text(viewModel.homeTeamName).tag(1)
+                Text(viewModel.awayTeamName).tag(2)
             }
             .pickerStyle(.segmented)
             .padding(.horizontal)
@@ -79,8 +79,8 @@ struct SummaryGameView: View {
 }
 
 extension SummaryGameView {
-    static func configure(gameID: Int) -> Self {
-        let viewModel = SummaryGame.ViewModel(gameID: gameID)
+    static func configure(gameID: Int, homeTeamName: String, awayTeamName: String) -> Self {
+        let viewModel = SummaryGame.ViewModel(gameID: gameID, homeTeamName: homeTeamName, awayTeamName: awayTeamName)
         let presenter = SummaryGamePresenter(viewModel: viewModel)
         let interactor = SummaryGameInteractor(presenter: presenter, gameID: gameID)
         return SummaryGameView(viewModel: viewModel, interactor: interactor)

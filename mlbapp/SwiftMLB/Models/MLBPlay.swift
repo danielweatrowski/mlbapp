@@ -42,4 +42,12 @@ struct MLBPlay: Decodable {
         let strikes: Int
         let outs: Int
     }
+    
+    struct EventType: Decodable {
+        let plateAppearance: Bool
+        let hit: Bool
+        let code: String
+        let baseRunningEvent: Bool
+        let description: String
+    }
 }

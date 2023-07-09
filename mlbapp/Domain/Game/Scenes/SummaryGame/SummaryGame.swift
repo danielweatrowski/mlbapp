@@ -31,11 +31,15 @@ struct SummaryGame {
             case loading, loaded, error
         }
         
-        init(gameID: Int) {
+        init(gameID: Int, homeTeamName: String, awayTeamName: String) {
             self.gameID = gameID
+            self.homeTeamName = homeTeamName
+            self.awayTeamName = awayTeamName
         }
         
         var gameID: Int
+        var homeTeamName: String
+        var awayTeamName: String
         let navigationTitle = "Summary"
         @Published var state: State = .loading
         @Published var sections: [InningSectionViewModel] = []
@@ -57,7 +61,7 @@ struct SummaryGame {
         var description: String {
             switch self {
             case .all: return "All"
-            case .hits: return "Hit"
+            case .hits: return "Hits"
             case .homeruns: return "Home Runs"
             case .scoring: return "Scoring Plays"
             }

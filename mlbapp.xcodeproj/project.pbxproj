@@ -26,6 +26,8 @@
 		66139FC92A58F3BF00244001 /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66139FC82A58F3BF00244001 /* ToolbarPickerView.swift */; };
 		66139FCB2A58F97000244001 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66139FCA2A58F97000244001 /* Color+Hex.swift */; };
 		66139FCD2A5918D600244001 /* Standings+Wildcard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66139FCC2A5918D600244001 /* Standings+Wildcard.swift */; };
+		66139FCF2A5B3CA400244001 /* SwiftMLB+Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66139FCE2A5B3CA400244001 /* SwiftMLB+Meta.swift */; };
+		66139FD12A5B3E9E00244001 /* SwiftMLB+PlayEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66139FD02A5B3E9E00244001 /* SwiftMLB+PlayEventType.swift */; };
 		6617F7F5294680A100BC1BBF /* DetailPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617F7F4294680A100BC1BBF /* DetailPlayerView.swift */; };
 		6617F7F72946883F00BC1BBF /* DetailPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617F7F62946883F00BC1BBF /* DetailPlayerViewModel.swift */; };
 		6617F7F929468C6200BC1BBF /* DetailPlayerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617F7F829468C6200BC1BBF /* DetailPlayerInteractor.swift */; };
@@ -215,6 +217,8 @@
 		66139FC82A58F3BF00244001 /* ToolbarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarPickerView.swift; sourceTree = "<group>"; };
 		66139FCA2A58F97000244001 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		66139FCC2A5918D600244001 /* Standings+Wildcard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Standings+Wildcard.swift"; sourceTree = "<group>"; };
+		66139FCE2A5B3CA400244001 /* SwiftMLB+Meta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMLB+Meta.swift"; sourceTree = "<group>"; };
+		66139FD02A5B3E9E00244001 /* SwiftMLB+PlayEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMLB+PlayEventType.swift"; sourceTree = "<group>"; };
 		6617F7F4294680A100BC1BBF /* DetailPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlayerView.swift; sourceTree = "<group>"; };
 		6617F7F62946883F00BC1BBF /* DetailPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlayerViewModel.swift; sourceTree = "<group>"; };
 		6617F7F829468C6200BC1BBF /* DetailPlayerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlayerInteractor.swift; sourceTree = "<group>"; };
@@ -736,6 +740,8 @@
 				66589E4C2A17FF52009380D6 /* SwiftMLB+StartingLineups.swift */,
 				6646170D2A51146B006FFDD6 /* SwiftMLB+Roster.swift */,
 				66139FC32A58971100244001 /* SwiftMLB+Standings.swift */,
+				66139FCE2A5B3CA400244001 /* SwiftMLB+Meta.swift */,
+				66139FD02A5B3E9E00244001 /* SwiftMLB+PlayEventType.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1076,6 +1082,7 @@
 				6612584329BBA27B00C704AE /* MLBBoxscore+Player.swift in Sources */,
 				66EBDF312918924400BEF1A5 /* DetailGame.swift in Sources */,
 				66D46A3A292EB95200DCA9D0 /* SwiftMLB+Game.swift in Sources */,
+				66139FD12A5B3E9E00244001 /* SwiftMLB+PlayEventType.swift in Sources */,
 				6646171D2A54BF02006FFDD6 /* StandingsRowView.swift in Sources */,
 				6652D70929F30DDE00DEE161 /* Play.swift in Sources */,
 				662001D029C7C8E70027727A /* ListSection.swift in Sources */,
@@ -1099,6 +1106,7 @@
 				6652D70B29F3495900DEE161 /* SummaryGame.swift in Sources */,
 				66EBDF3A2921D0E900BEF1A5 /* SwiftMLB+LinescoreData.swift in Sources */,
 				660472D82916F27000AD9A42 /* SwiftMLB+ScheduleData.swift in Sources */,
+				66139FCF2A5B3CA400244001 /* SwiftMLB+Meta.swift in Sources */,
 				66510D6B2A34F51700DB41B8 /* Bundle+Decode.swift in Sources */,
 				66C3CEF3295E9C8F001E6CC7 /* SwiftMLB+BoxscoreData.swift in Sources */,
 				660472E02916FE1B00AD9A42 /* ListGame.swift in Sources */,
