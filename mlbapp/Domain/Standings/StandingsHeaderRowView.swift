@@ -19,7 +19,7 @@ struct StandingsHeaderRowView: View {
             Text("L10")
             Text("STRK")
         }
-        .foregroundColor(.secondary)
+        .bold()
         .font(.subheadline)
     }
 }

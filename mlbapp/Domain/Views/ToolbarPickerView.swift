@@ -13,6 +13,7 @@ struct ToolbarPickerView<S: StringProtocol>: View {
     
     let item0Title: String
     let item1Title: String
+    var item2Title: String? = nil
     
     @Binding var selection: Int
     
@@ -21,6 +22,9 @@ struct ToolbarPickerView<S: StringProtocol>: View {
             Picker(title, selection: $selection) {
                 Text(item0Title).tag(0)
                 Text(item1Title).tag(1)
+                if let item2Title = item2Title {
+                    Text(item2Title).tag(2)
+                }
             }
             .pickerStyle(.segmented)
             .padding(.horizontal)

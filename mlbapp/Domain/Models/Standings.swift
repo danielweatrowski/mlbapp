@@ -9,12 +9,15 @@ import Foundation
 
 struct Standings {
     
-    struct TeamRecord {
+    struct TeamRecord: Hashable, Identifiable {
         let teamID: Int
         let teamAbbreviation: String
         let teamName: String
         
         let rank: Int
+        let wildCardRank: Int
+        let wildCardGamesBack: String
+        
         let division: ActiveDivision
         let league: ActiveLeague
         
@@ -25,6 +28,10 @@ struct Standings {
         let winPercentage: String
         let last10Record: String
         let streak: String
+        
+        var id: Int {
+            return teamID
+        }
     }
     
     struct DivisionRecord {
@@ -37,6 +44,16 @@ struct Standings {
         let east: DivisionRecord
         let central: DivisionRecord
         let west: DivisionRecord
+        
+        var allRecords: Set<TeamRecord> {
+            var records = Set<TeamRecord>()
+            
+            records.formUnion(west.teamStandings)
+            records.formUnion(east.teamStandings)
+            records.formUnion(central.teamStandings)
+            
+            return records
+        }
         
         static func createAmericanLeague(eastTeamRecords: [TeamRecord], centralTeamRecords: [TeamRecord], westTeamRecords: [TeamRecord]) -> Self {
             

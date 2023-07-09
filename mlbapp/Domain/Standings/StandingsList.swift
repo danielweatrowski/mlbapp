@@ -17,6 +17,7 @@ enum StandingsList {
     struct ListViewModel {
         
         struct SectionItem {
+            let id: UUID = UUID()
             let title: String
             let rows: [StandingsRowViewModel]
         }
@@ -30,6 +31,7 @@ enum StandingsList {
         
         @Published var americanListViewModel: ListViewModel?
         @Published var nationalListViewModel: ListViewModel?
+        @Published var wildcardListViewModel: ListViewModel?
         
         // errors
         @Published var sceneError: SceneError = SceneError()
@@ -38,5 +40,12 @@ enum StandingsList {
     struct Output {
         let nationalLeagueStandings: Standings.LeagueRecord
         let americanLeagueStandings: Standings.LeagueRecord
+    }
+    
+    enum Wildcard {
+        struct Output {
+            let nationalLeagueWildcard: Standings.Wildcard.LeagueStanding
+            let americanLeagueWildcard: Standings.Wildcard.LeagueStanding
+        }
     }
 }

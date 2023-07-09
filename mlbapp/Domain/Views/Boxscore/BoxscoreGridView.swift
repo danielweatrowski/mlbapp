@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EmptyGridItem: View {
-    let color: Color = Color(uiColor: .secondarySystemBackground)
+    let color: Color = .clear
     
     var body: some View {
         color

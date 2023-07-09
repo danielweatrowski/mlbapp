@@ -24,6 +24,8 @@ struct StandingsListView: View {
                         standingsList(listViewModel)
                     } else if selectedLeague == 1, let listViewModel = viewModel.americanListViewModel {
                         standingsList(listViewModel)
+                    } else if selectedLeague == 2, let listViewModel = viewModel.wildcardListViewModel {
+                        standingsList(listViewModel)
                     }
                 case .loading:
                     ProgressView()
@@ -33,29 +35,18 @@ struct StandingsListView: View {
             VStack(spacing: 0) {
                 Spacer()
                 
-                ToolbarPickerView(title: "League", item0Title: ActiveLeague.national.nameShort, item1Title: ActiveLeague.american.nameShort, selection: $selectedLeague)
+                ToolbarPickerView(title: "League", item0Title: ActiveLeague.national.nameShort, item1Title: ActiveLeague.american.nameShort, item2Title: "Wildcard", selection: $selectedLeague)
                     .frame(maxWidth: .infinity, alignment: .center)
-
             }
         }
-//        .toolbar {
-//            ToolbarItem(placement: .bottomBar) {
-//                HStack(alignment: .center) {
-//                    Picker(selection: $selectedLeague, label: Text("League")) {
-//                        Text(ActiveLeague.national.nameShort)
-//                            .tag(0)
-//                        Text(ActiveLeague.american.nameShort)
-//                            .tag(1)
-//                    }
-//                    .pickerStyle(.segmented)
-//                    .padding(.horizontal)
-//                }
-//            }
-//        }
         .navigationTitle(viewModel.navigationTitle)
         .withSceneError($viewModel.sceneError)
         .task {
             await interactor?.loadStandings()
+        }
+        .onChange(of: selectedLeague) { selection in
+            guard selection == 2 else { return }
+            interactor?.loadWildcardStandings()
         }
     }
     
@@ -63,7 +54,7 @@ struct StandingsListView: View {
     func standingsList(_ listViewModel: StandingsList.ListViewModel) -> some View {
         
         List {
-            ForEach(listViewModel.sections, id: \.title) { section in
+            ForEach(listViewModel.sections, id: \.id) { section in
                 Section(section.title) {
                     Grid {
                         StandingsHeaderRowView()
@@ -71,15 +62,22 @@ struct StandingsListView: View {
                         
                         ForEach(section.rows, id: \.self) { rowViewModel in
                             StandingsRowView(viewModel: rowViewModel)
-                            
+
                             if rowViewModel != section.rows.last {
                                 Divider()
+                                    .edgesIgnoringSafeArea(.horizontal)
+                                    .if(rowViewModel.teamRank == 3 && selectedLeague == 2) { view in
+                                        view
+                                            .frame(height: 2)
+                                            .overlay(.primary)
+                                    }
                             }
                         }
                     }
                 }
             }
         }
+        .padding(.bottom, 46)
     }
 }
 

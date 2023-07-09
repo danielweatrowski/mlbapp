@@ -39,6 +39,7 @@ struct SummaryGame {
         let navigationTitle = "Summary"
         @Published var state: State = .loading
         @Published var sections: [InningSectionViewModel] = []
+        @Published var filterType: FilterType = .all
         
         // errors
         @Published var sceneError: SceneError = SceneError()
@@ -46,5 +47,20 @@ struct SummaryGame {
     
     struct Output<P: PlayProtocol> {
         var plays: [P]
+    }
+    
+    enum FilterType: CaseIterable, Identifiable, CustomStringConvertible {
+        case all, hits, homeruns, scoring
+        
+        var id: Self { self }
+        
+        var description: String {
+            switch self {
+            case .all: return "All"
+            case .hits: return "Hit"
+            case .homeruns: return "Home Runs"
+            case .scoring: return "Scoring Plays"
+            }
+        }
     }
 }

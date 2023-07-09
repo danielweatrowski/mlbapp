@@ -29,11 +29,12 @@ extension MLBAPIRepository: StandingsStoreProtocol {
                     // TODO: Handle error here
                     throw SwiftMLBError.notFound
                 }
-                
                 let standing = Standings.TeamRecord(teamID: teamRecordDTO.team.id,
                                                     teamAbbreviation: teamRecordDTO.team.abbreviation,
                                                     teamName: teamRecordDTO.team.name,
                                                     rank: Int(teamRecordDTO.divisionRank)!,
+                                                    wildCardRank: Int(teamRecordDTO.wildCardRank ?? "0")!,
+                                                    wildCardGamesBack: teamRecordDTO.wildCardGamesBack,
                                                     division: division,
                                                     league: league,
                                                     wins: teamRecordDTO.wins,

@@ -120,7 +120,7 @@ struct ListGameRow: View {
             }
             .padding()
         }
-        .background(Color(uiColor: .secondarySystemBackground))
+        .background(.clear)
     }
     
     @ViewBuilder

@@ -15,6 +15,7 @@ struct MLBPlay: Decodable {
     
     let result: Result
     let about: About
+    let count: Count?
     
     struct Result: Decodable {
         let type: String
@@ -34,5 +35,11 @@ struct MLBPlay: Decodable {
         let startTime: Date
         let endTime: Date
         let hasOut: Bool
+    }
+    
+    struct Count: Decodable {
+        let balls: Int
+        let strikes: Int
+        let outs: Int
     }
 }

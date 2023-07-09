@@ -9,6 +9,7 @@ import Foundation
 
 protocol StandingsListPresentationLogic: SceneErrorPresentable {
     func presentStandingsList(output: StandingsList.Output)
+    func presentWildcardStandingsList(output: StandingsList.Wildcard.Output)
 }
 
 struct StandingsListPresenter: StandingsListPresentationLogic {
@@ -40,6 +41,27 @@ struct StandingsListPresenter: StandingsListPresentationLogic {
         }
     }
     
+    func presentWildcardStandingsList(output: StandingsList.Wildcard.Output) {
+        var wildcardSections = [StandingsList.ListViewModel.SectionItem]()
+        
+        for wildcard in [output.nationalLeagueWildcard, output.americanLeagueWildcard] {
+            
+            let leadersSection = StandingsList.ListViewModel.SectionItem(title: "Leaders",
+                                                                         rows: formatSectionRows(wildcard.teamLeaders))
+            let contendersSection = StandingsList.ListViewModel.SectionItem(title: "Wildcard",
+                                                                            rows: formatSectionRows(wildcard.wildcardTeamStandings))
+            
+            wildcardSections.append(leadersSection)
+            wildcardSections.append(contendersSection)
+
+        }
+        
+        DispatchQueue.main.async {
+            viewModel.wildcardListViewModel = StandingsList.ListViewModel(sections: wildcardSections)
+        }
+    }
+
+    
     func presentSceneError(_ sceneError: SceneError) {
         DispatchQueue.main.async {
             self.viewModel.sceneError.presentAlert(sceneError)
@@ -52,12 +74,19 @@ struct StandingsListPresenter: StandingsListPresentationLogic {
         }
     }
     
-    private func formatTeam(_ team: Standings.TeamRecord) -> StandingsRowViewModel {
-        return StandingsRowViewModel(teamAbbreviation: team.teamAbbreviation,
+    private func formatSectionRows(_ teams: [Standings.TeamRecord]) -> [StandingsRowViewModel] {
+        return teams.map { team in
+            return formatTeam(team, isWildcard: true)
+        }
+    }
+    
+    private func formatTeam(_ team: Standings.TeamRecord, isWildcard: Bool = false) -> StandingsRowViewModel {
+        return StandingsRowViewModel(teamRank: team.wildCardRank,
+                                     teamAbbreviation: team.teamAbbreviation,
                                      wins: String(team.wins),
                                      losses: String(team.losses),
                                      winningPCT: team.winPercentage,
-                                     gamesBehind: team.gamesBehind,
+                                     gamesBehind: isWildcard ? team.wildCardGamesBack : team.gamesBehind,
                                      lastTenRecord: "-",
                                      streak: team.streak)
     }
