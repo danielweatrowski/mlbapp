@@ -13,12 +13,9 @@ extension SwiftMLB {
         let request: SwiftMLBRequest = .plays(gameID)
         let data = try await networkService.load(request)
         
-        let serializer = SwiftMLBSerialization(data: data, builder: PlaysBuilder())
-        let playsData = try serializer.data()
-        
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.iso8601TimeZoneOmitted)
-        let plays = try decoder.decode(MLBPlays.self, from: playsData)
+        let plays = try decoder.decode(MLBPlays.self, from: data)
         
         return plays
     }

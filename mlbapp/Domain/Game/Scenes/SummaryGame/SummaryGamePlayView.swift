@@ -29,9 +29,3 @@ struct SummaryGamePlayView: View {
         }
     }
 }
-
-struct SummaryGamePlayView_Previews: PreviewProvider {
-    static var previews: some View {
-        SummaryGamePlayView(viewModel: .init(playID: 1, eventName: "Home Run", description: "Freddie Freeman homers (19) on a fly ball to center field. Trea Turner scores.", time: "4:40 PM", numberOfOuts: nil))
-    }
-}

@@ -8,6 +8,10 @@
 import Foundation
 
 struct DummyMLBRepository: GameStoreProtocol {
+    func fetchPlayEventTypes() async throws -> [String: Play.EventType] {
+        fatalError()
+    }
+    
     func fetchRoster(teamID id: Int, date: Date) async throws -> Roster {
         fatalError()
     }

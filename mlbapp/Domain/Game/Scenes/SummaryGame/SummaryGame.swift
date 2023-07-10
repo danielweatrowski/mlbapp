@@ -49,12 +49,13 @@ struct SummaryGame {
         @Published var sceneError: SceneError = SceneError()
     }
     
-    struct Output<P: PlayProtocol> {
-        var plays: [P]
+    struct Output {
+        var plays: [Play]
+        var totalInningsPlayed: Int
     }
     
     enum FilterType: CaseIterable, Identifiable, CustomStringConvertible {
-        case all, hits, homeruns, scoring
+        case all, hits, strikeOut, homeruns, scoring
         
         var id: Self { self }
         
@@ -62,8 +63,23 @@ struct SummaryGame {
             switch self {
             case .all: return "All"
             case .hits: return "Hits"
+            case .strikeOut: return "Strike Outs"
             case .homeruns: return "Home Runs"
-            case .scoring: return "Scoring Plays"
+            case .scoring: return "Scoring"
+            }
+        }
+    }
+    
+    enum TeamSelectionType: Int {
+        case all, home, away
+        
+        var id: Self { self }
+        
+        var description: String {
+            switch self {
+            case .all: return "All"
+            case .home: return "Home"
+            case .away: return "Away"
             }
         }
     }

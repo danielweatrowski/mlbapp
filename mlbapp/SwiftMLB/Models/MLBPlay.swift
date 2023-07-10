@@ -35,6 +35,7 @@ struct MLBPlay: Decodable {
         let startTime: Date
         let endTime: Date
         let hasOut: Bool
+        let isScoringPlay: Bool?
     }
     
     struct Count: Decodable {

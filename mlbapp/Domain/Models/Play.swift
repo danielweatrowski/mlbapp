@@ -7,36 +7,35 @@
 
 import Foundation
 
-protocol PlayProtocol {
-    associatedtype Result = PlayResultProtocol
-    associatedtype Detail = PlayDetailProtocol
-    var result: Result { get }
-    var about: Detail { get }
-}
-
-protocol PlayResultProtocol {
-    var type: String { get }
-    var event: String { get }
-    var eventType: String { get }
-    var description: String { get }
-    var rbi: Int { get }
-    var awayScore: Int { get }
-    var homeScore: Int { get }
-    var isOut: Bool { get }
-}
-
-protocol PlayDetailProtocol {
-    var atBatIndex: Int { get }
-    var halfInning: String { get }
-    var inning: Int { get }
-    var hasOut: Bool { get }
-    var endTime: Date { get }
-}
-
-struct Play: PlayProtocol {
+struct Play {
     
     var result: Result
     var about: Detail
+    var filterParamters: FilterParameters?
+    
+    var isHomerun: Bool {
+        return result.eventType == "home_run"
+    }
+    
+    var isScoringPlay: Bool {
+        return about.isScoringPlay
+    }
+    
+    var isStrikeOut: Bool {
+        return result.eventType == "strikeout"
+        || result.eventType == "strike_out"
+        || result.eventType == "stikeout_double_play"
+        || result.eventType == "stikeout_triple_play"
+    }
+    
+    var isHomeTeam: Bool {
+        return about.halfInning == "bottom"
+    }
+    
+    var isAwayTeam: Bool {
+        return about.halfInning == "top"
+    }
+    
 //    var count: Count
 //    
 //    var runners: [RunnerAction]
@@ -44,7 +43,7 @@ struct Play: PlayProtocol {
 //    let batterID: Int
 //    let pitcherID: Int
     
-    struct Result: PlayResultProtocol {
+    struct Result {
         var type: String
         var event: String
         var eventType: String
@@ -55,12 +54,13 @@ struct Play: PlayProtocol {
         var isOut: Bool
     }
     
-    struct Detail: PlayDetailProtocol {
+    struct Detail {
         var atBatIndex: Int
         var halfInning: String
         var inning: Int
         var hasOut: Bool
         var endTime: Date
+        var isScoringPlay: Bool
     }
     
     struct RunnerAction {
@@ -72,6 +72,19 @@ struct Play: PlayProtocol {
         
         let isOut: Bool
         let outNumber: Int?
+    }
+    
+    struct EventType {
+        let plateAppearance: Bool
+        let hit: Bool
+        let code: String
+        let baseRunningEvent: Bool
+        let description: String
+    }
+    
+    struct FilterParameters {
+        var isHit: Bool
+        var isScoringPlay: Bool
     }
 }
 

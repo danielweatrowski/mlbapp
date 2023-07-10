@@ -39,8 +39,10 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
         switch self {
         case .schedule(_):
             return "/api/v1/schedule"
-        case let .scoringPlays(gameID), let .plays(gameID):
+        case let .scoringPlays(gameID):
             return "/api/v1.1/game/\(gameID)/feed/live"
+        case let .plays(gameID):
+            return "/api/v1/game/\(gameID)/playByPlay"
         case .players(_):
             return "/api/v1.1/sports/1/players"
         case let .player(parameters):
@@ -64,7 +66,7 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
     
     var queryItems: [URLQueryItem]? {
         switch self {
-        case .scoringPlays, .plays:
+        case .scoringPlays:
             return [
                 URLQueryItem(name: "fields",
                              value: "gamePk,link,gameData,game,pk,teams,away,id,name,teamCode,fileCode,abbreviation,teamName,locationName,shortName,home,liveData,plays,allPlays,scoringPlays,scoringPlays,atBatIndex,result,type,event,eventType,description,awayScore,homeScore,rbi,isOut,about,halfInning,inning,endTime,startTime,hasOut")
@@ -92,7 +94,7 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
             return parameters.toQueryItems()
         case let .standings(parameters):
             return parameters.toQueryParameters()
-        case .headshot, .game, .meta:
+        case .headshot, .game, .meta, .plays:
             return nil
         }
     }

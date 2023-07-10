@@ -10,9 +10,9 @@ import SwiftUI
 struct SummaryGameView: View {
     
     @StateObject var viewModel: SummaryGame.ViewModel
-    let interactor: SummaryGameBusinessLogic?
+    @StateObject var interactor: SummaryGameInteractor
     
-    @State var selection: Int = 0
+    @State var teamSelection: Int = 0
     
     var body: some View {
         ZStack {
@@ -28,6 +28,7 @@ struct SummaryGameView: View {
                             }
                         }
                     }
+                    .padding(.bottom, 46)
                 case .loading:
                     ProgressView()
                 case .error:
@@ -41,15 +42,24 @@ struct SummaryGameView: View {
         }
         .withSceneError($viewModel.sceneError)
         .navigationTitle(viewModel.navigationTitle)
-        .onAppear {
-            interactor?.loadGameSummary()
+        .task {
+            await interactor.loadAllPlays()
+        }
+        .onChange(of: viewModel.filterType) { filterType in
+            viewModel.state = .loading
+            interactor.filterPlays(by: filterType)
+        }
+        .onChange(of: teamSelection) { selection in
+            if let type = SummaryGame.TeamSelectionType(rawValue: selection) {
+                interactor.filterPlays(by: type)
+            }
         }
     }
     
     @ViewBuilder
     var toolbar: some View {
         HStack(alignment: .center, spacing: 0) {
-            Picker("Play Picker", selection: $selection) {
+            Picker("Play Picker", selection: $teamSelection) {
                 Text("All").tag(0)
                 Text(viewModel.homeTeamName).tag(1)
                 Text(viewModel.awayTeamName).tag(2)

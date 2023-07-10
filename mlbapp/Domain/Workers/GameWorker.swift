@@ -8,12 +8,12 @@
 import Foundation
 
 protocol GameStoreProtocol {
-    associatedtype P: PlayProtocol
     func fetchGame(withID id: Int) async throws -> Game
     func searchGame(with parameters: GameSearch.SearchParameters) async throws -> [GameSearch.Result]
-    func fetchAllPlays(forGameID id: Int) async throws -> [P]
+    func fetchAllPlays(forGameID id: Int) async throws -> [Play]
     func fetchBoxscore(forGameID id: Int) async throws -> Boxscore
     func fetchRoster(teamID id: Int, date: Date) async throws -> Roster
+    func fetchPlayEventTypes() async throws -> [String: Play.EventType]
 }
 
 struct GameWorker<Store: GameStoreProtocol> {
@@ -28,7 +28,7 @@ struct GameWorker<Store: GameStoreProtocol> {
         return try await store.searchGame(with: parameters)
     }
     
-    func fetchAllPlays(forGameID id: Int) async throws -> [Store.P] {
+    func fetchAllPlays(forGameID id: Int) async throws -> [Play] {
         return try await store.fetchAllPlays(forGameID: id)
     }
     
@@ -40,5 +40,8 @@ struct GameWorker<Store: GameStoreProtocol> {
         return try await store.fetchRoster(teamID: id, date: date)
     }
 
+    func fetchPlayEventTypes() async throws -> [String: Play.EventType] {
+        return try await store.fetchPlayEventTypes()
+    }
 
 }

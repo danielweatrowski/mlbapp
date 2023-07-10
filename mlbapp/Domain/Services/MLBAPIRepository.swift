@@ -223,7 +223,8 @@ struct MLBAPIRepository: GameStoreProtocol {
                                     halfInning: playDTO.about.halfInning,
                                     inning: playDTO.about.inning,
                                     hasOut: playDTO.about.hasOut,
-                                    endTime: playDTO.about.endTime)
+                                    endTime: playDTO.about.endTime,
+                                    isScoringPlay: playDTO.about.isScoringPlay ?? false)
             
             return Play(result: result, about: about)
         }
@@ -231,4 +232,17 @@ struct MLBAPIRepository: GameStoreProtocol {
         return plays
             .compactMap({$0})
     }
+    
+    func fetchPlayEventTypes() async throws -> [String: Play.EventType] {
+        let eventTypeDTOs = try await SwiftMLB.eventTypes()
+                
+        return eventTypeDTOs.reduce(into: [String: Play.EventType]()) {
+            $0[$1.code] = Play.EventType(plateAppearance: $1.plateAppearance,
+                           hit: $1.hit,
+                           code: $1.code,
+                           baseRunningEvent: $1.baseRunningEvent,
+                           description: $1.description)
+        }
+    }
+
 }

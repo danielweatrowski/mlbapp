@@ -9,7 +9,7 @@ import Foundation
 
 extension SwiftMLB {
     static func eventTypes() async throws -> [MLBPlay.EventType] {
-        let request: SwiftMLBRequest = .meta("eventType")
+        let request: SwiftMLBRequest = .meta("eventTypes")
 
         let data = try await networkService.load(request)
         let decoder = JSONDecoder()
