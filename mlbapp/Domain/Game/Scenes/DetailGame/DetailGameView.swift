@@ -50,6 +50,7 @@ struct DetailGameView: View {
                                                                                  homeTeamAbbreviation: viewModel.homeTeamAbbreviation,
                                                                                  awayTeamAbbreviation: viewModel.awayTeamAbbreviation,
                                                                                  players: interactor.playerHash ?? [:]))
+                    NavigationLink("Videos", value: RouterDestination.videosList(viewModel.gameID))
                 }
             }
             
