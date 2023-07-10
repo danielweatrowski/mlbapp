@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct SummaryGamePlayView: View {
+struct PlaysListRowView: View {
     
-    var viewModel: SummaryGame.InningPlayViewModel
+    var viewModel: PlaysList.InningPlayViewModel
     
     var body: some View {
         HStack(alignment: .center) {

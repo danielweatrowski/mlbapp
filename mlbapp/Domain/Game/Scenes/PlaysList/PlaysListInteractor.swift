@@ -7,22 +7,22 @@
 
 import Foundation
 
-protocol SummaryGameBusinessLogic {
+protocol PlaysListBusinessLogic {
     func loadAllPlays() async
-    func filterPlays(by filterType: SummaryGame.FilterType)
-    func filterPlays(by teamSelectionType: SummaryGame.TeamSelectionType)
+    func filterPlays(by filterType: PlaysList.FilterType)
+    func filterPlays(by teamSelectionType: PlaysList.TeamSelectionType)
 }
 
-protocol SummaryGameDataStore  {
+protocol PlaysListDataStore  {
     var gameID: Int { get set }
     var plays: [Play]? { get }
     var eventTypeHash: [String: Play.EventType]? { get }
     var inningsPlayed: Int { get }
 }
 
-class SummaryGameInteractor: ObservableObject, SummaryGameBusinessLogic & SummaryGameDataStore {
+class PlaysListInteractor: ObservableObject, PlaysListBusinessLogic & PlaysListDataStore {
     
-    let presenter: SummaryGamePresentationLogic?
+    let presenter: PlaysListPresentationLogic?
     let gameWorker = GameWorker(store: MLBAPIRepository())
     var gameID: Int
     
@@ -33,7 +33,7 @@ class SummaryGameInteractor: ObservableObject, SummaryGameBusinessLogic & Summar
         return plays?.last?.about.inning ?? 0
     }
     
-    internal init(presenter: SummaryGamePresentationLogic? = nil, gameID: Int) {
+    internal init(presenter: PlaysListPresentationLogic? = nil, gameID: Int) {
         self.presenter = presenter
         self.gameID = gameID
     }
@@ -44,7 +44,7 @@ class SummaryGameInteractor: ObservableObject, SummaryGameBusinessLogic & Summar
             self.plays = data.plays
             self.eventTypeHash = data.eventTypes
             
-            let output = SummaryGame.Output(plays: data.plays,
+            let output = PlaysList.Output(plays: data.plays,
                                             totalInningsPlayed: data.plays.last?.about.inning ?? 0)
             presenter?.presentPlaysList(output: output)
         } catch {
@@ -53,7 +53,7 @@ class SummaryGameInteractor: ObservableObject, SummaryGameBusinessLogic & Summar
         }
     }
     
-    func filterPlays(by filterType: SummaryGame.FilterType) {
+    func filterPlays(by filterType: PlaysList.FilterType) {
         guard let allPlays = plays, let eventTypeHash = eventTypeHash else {
             let sceneError = SceneError(errorDescription: "No data found.")
             presenter?.presentSceneError(sceneError)
@@ -86,7 +86,7 @@ class SummaryGameInteractor: ObservableObject, SummaryGameBusinessLogic & Summar
         }
     }
     
-    func filterPlays(by teamSelectionType: SummaryGame.TeamSelectionType) {
+    func filterPlays(by teamSelectionType: PlaysList.TeamSelectionType) {
         guard let allPlays = plays else {
             let sceneError = SceneError(errorDescription: "No data found.")
             presenter?.presentSceneError(sceneError)
@@ -125,7 +125,7 @@ class SummaryGameInteractor: ObservableObject, SummaryGameBusinessLogic & Summar
     }
     
     private func present(plays: [Play], thru innings: Int) {
-        let output = SummaryGame.Output(plays: plays, totalInningsPlayed: innings)
+        let output = PlaysList.Output(plays: plays, totalInningsPlayed: innings)
         presenter?.presentPlaysList(output: output)
     }
 }

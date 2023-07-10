@@ -42,7 +42,7 @@ struct DetailGameView: View {
                                       embedInScrollView: true)
                         .listRowInsets(EdgeInsets())
                         .padding()
-                    NavigationLink("Summary", value: RouterDestination.summaryGame(gameID: viewModel.gameID,
+                    NavigationLink("Plays", value: RouterDestination.summaryGame(gameID: viewModel.gameID,
                                                                                    homeTeamName: viewModel.homeTeamAbbreviation,
                                                                                    awayTeamName: viewModel.awayTeamAbbreviation))
                     NavigationLink("Boxscore", value: RouterDestination.boxscore(gameID: viewModel.gameID,

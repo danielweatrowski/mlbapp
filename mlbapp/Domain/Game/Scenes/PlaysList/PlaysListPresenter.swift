@@ -7,16 +7,16 @@
 
 import Foundation
 
-protocol SummaryGamePresentationLogic: SceneErrorPresentable {
-    func presentPlaysList(output: SummaryGame.Output)
+protocol PlaysListPresentationLogic: SceneErrorPresentable {
+    func presentPlaysList(output: PlaysList.Output)
     func presentSceneError(_ sceneError: SceneError)
 }
 
-struct SummaryGamePresenter: SummaryGamePresentationLogic {
+struct PlaysListPresenter: PlaysListPresentationLogic {
     
-    typealias PlaysPerInning = [Int: [SummaryGame.InningPlayViewModel]]
+    typealias PlaysPerInning = [Int: [PlaysList.InningPlayViewModel]]
         
-    let viewModel: SummaryGame.ViewModel
+    let viewModel: PlaysList.ViewModel
     
     func presentSceneError(_ sceneError: SceneError) {
         DispatchQueue.main.async {
@@ -24,18 +24,18 @@ struct SummaryGamePresenter: SummaryGamePresentationLogic {
         }
     }
     
-    func presentPlaysList(output: SummaryGame.Output) {
+    func presentPlaysList(output: PlaysList.Output) {
         
         // Create two dicts that map inning number to the plays that occured in that inning
-        var homeInningPlays: [Int: [SummaryGame.InningPlayViewModel]] = [:]
-        var awayInningPlays:  [Int: [SummaryGame.InningPlayViewModel]] = [:]
+        var homeInningPlays: [Int: [PlaysList.InningPlayViewModel]] = [:]
+        var awayInningPlays:  [Int: [PlaysList.InningPlayViewModel]] = [:]
         
         for play in output.plays {
             
             let inningHashID = play.about.inning
             let timeFormatted = play.about.endTime.formatted(date: .omitted, time: .shortened)
             
-            let playViewModel = SummaryGame.InningPlayViewModel(playID: play.about.atBatIndex,
+            let playViewModel = PlaysList.InningPlayViewModel(playID: play.about.atBatIndex,
                                                                 eventName: play.result.event,
                                                                 description: play.result.description,
                                                                 time: timeFormatted,
@@ -67,15 +67,15 @@ struct SummaryGamePresenter: SummaryGamePresentationLogic {
         }
     }
     
-    private func formatInningSections(homeInningPlays: PlaysPerInning, awayInningPlays: PlaysPerInning, innings: Int) -> [SummaryGame.InningSectionViewModel] {
+    private func formatInningSections(homeInningPlays: PlaysPerInning, awayInningPlays: PlaysPerInning, innings: Int) -> [PlaysList.InningSectionViewModel] {
         
-        var sectionsViewModel: [SummaryGame.InningSectionViewModel] = []
+        var sectionsViewModel: [PlaysList.InningSectionViewModel] = []
         for i in 1..<innings + 1 {
             
             let topInningPlays = awayInningPlays[i] ?? []
             if !topInningPlays.isEmpty {
                 
-                let topSectionViewModel = SummaryGame.InningSectionViewModel(inningNumber: i,
+                let topSectionViewModel = PlaysList.InningSectionViewModel(inningNumber: i,
                                                                              inningName: "Top \(i)",
                                                                              plays: topInningPlays)
                 sectionsViewModel.append(topSectionViewModel)
@@ -83,7 +83,7 @@ struct SummaryGamePresenter: SummaryGamePresentationLogic {
             
             let botInningPlays = homeInningPlays[i] ?? []
             if !botInningPlays.isEmpty {
-                let botSectionViewModel = SummaryGame.InningSectionViewModel(inningNumber: i,
+                let botSectionViewModel = PlaysList.InningSectionViewModel(inningNumber: i,
                                                                              inningName: "Bottom \(i)",
                                                                              plays: botInningPlays)
                 

@@ -43,7 +43,7 @@ extension View {
             case let .boxscore(id, date, homeAbbr, awayAbbr, players):
                 BoxscoreDetailView.configure(gameID: id, formattedGameDate: date, homeTeamAbbreviation: homeAbbr, awayTeamAbbreviation: awayAbbr, players: players)
             case let .summaryGame(gameID: gameID, homeTeamName: homeTeamName, awayTeamName: awayTeamName):
-                SummaryGameView.configure(gameID: gameID, homeTeamName: homeTeamName, awayTeamName: awayTeamName)
+                PlaysListView.configure(gameID: gameID, homeTeamName: homeTeamName, awayTeamName: awayTeamName)
             case let .lineupDetail(gameID: gameID, boxscore: boxscore):
                 LineupDetailView.configure(gameID: gameID, boxscore: boxscore)
             case let .rosterDetail(homeTeam: homeTeam, awayTeam: awayTeam, gameDate: gameDate):

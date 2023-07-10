@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct SummaryGameView: View {
+struct PlaysListView: View {
     
-    @StateObject var viewModel: SummaryGame.ViewModel
-    @StateObject var interactor: SummaryGameInteractor
+    @StateObject var viewModel: PlaysList.ViewModel
+    @StateObject var interactor: PlaysListInteractor
     
     @State var teamSelection: Int = 0
     
@@ -23,7 +23,7 @@ struct SummaryGameView: View {
                         ForEach(viewModel.sections, id: \.id) { section in
                             Section(header: Text(section.inningName)) {
                                 ForEach(section.plays, id: \.id) { playVM in
-                                    SummaryGamePlayView(viewModel: playVM)
+                                    PlaysListRowView(viewModel: playVM)
                                 }
                             }
                         }
@@ -50,7 +50,7 @@ struct SummaryGameView: View {
             interactor.filterPlays(by: filterType)
         }
         .onChange(of: teamSelection) { selection in
-            if let type = SummaryGame.TeamSelectionType(rawValue: selection) {
+            if let type = PlaysList.TeamSelectionType(rawValue: selection) {
                 interactor.filterPlays(by: type)
             }
         }
@@ -69,7 +69,7 @@ struct SummaryGameView: View {
             
             Menu {
                 Picker(selection: $viewModel.filterType, label: Text("Filter Plays")) {
-                    ForEach(SummaryGame.FilterType.allCases) { option in
+                    ForEach(PlaysList.FilterType.allCases) { option in
                          Text(String(describing: option))
                      }
                 }
@@ -88,11 +88,11 @@ struct SummaryGameView: View {
     }
 }
 
-extension SummaryGameView {
+extension PlaysListView {
     static func configure(gameID: Int, homeTeamName: String, awayTeamName: String) -> Self {
-        let viewModel = SummaryGame.ViewModel(gameID: gameID, homeTeamName: homeTeamName, awayTeamName: awayTeamName)
-        let presenter = SummaryGamePresenter(viewModel: viewModel)
-        let interactor = SummaryGameInteractor(presenter: presenter, gameID: gameID)
-        return SummaryGameView(viewModel: viewModel, interactor: interactor)
+        let viewModel = PlaysList.ViewModel(gameID: gameID, homeTeamName: homeTeamName, awayTeamName: awayTeamName)
+        let presenter = PlaysListPresenter(viewModel: viewModel)
+        let interactor = PlaysListInteractor(presenter: presenter, gameID: gameID)
+        return PlaysListView(viewModel: viewModel, interactor: interactor)
     }
 }

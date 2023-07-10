@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SummaryGame {
+struct PlaysList {
     
     struct InningSectionViewModel: Identifiable {
         let id = UUID()
