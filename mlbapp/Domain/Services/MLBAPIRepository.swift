@@ -244,5 +244,17 @@ struct MLBAPIRepository: GameStoreProtocol {
                            description: $1.description)
         }
     }
+    
+    func fetchHighlightVideos(forGameID id: Int) async throws -> [HighlightVideo] {
+        let tempVideo = HighlightVideo(id: "david-peralta-homers-7-on-a-fly-ball-to-right-field-j5x9qc",
+                                       date: Date(),
+                                       title: "David Peralta's solo homer (7)",
+                                       description: "David Peralta launches a solo homer to right field in the bottom of the 7th inning to extend the Dodgers' lead to 10-4",
+                                       duration: "00:00:23",
+                                       playbackURLString: "https://mlb-cuts-diamond.mlb.com/FORGE/2023/2023-07/08/64e61956-4c1f1627-7531ed43-csvm-diamondx64-asset_1280x720_59_4000K.mp4",
+                                       thumnailURLString: "https://img.mlbstatic.com/mlb-images/image/upload/w_215,h_121,f_jpg,c_fill,g_auto/mlb/glfyrsdzqsn3rky5dvwz.jpg")
+        return [tempVideo]
+    }
+
 
 }

@@ -22,8 +22,10 @@ enum RouterDestination: Hashable {
 
 @MainActor
 class Router: ObservableObject {
-    @Published public var path: [RouterDestination] = []
     
+    @Published public var path: [RouterDestination] = []
+    @Published public var presentedSheet: Sheet?
+
     public func navigate(to: RouterDestination) {
       path.append(to)
     }

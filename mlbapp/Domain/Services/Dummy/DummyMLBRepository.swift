@@ -60,4 +60,8 @@ struct DummyMLBRepository: GameStoreProtocol {
         fatalError()
     }
     
+    func fetchHighlightVideos(forGameID id: Int) async throws -> [HighlightVideo] {
+        fatalError()
+    }
+    
 }

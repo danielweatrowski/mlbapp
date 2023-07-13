@@ -11,9 +11,15 @@ enum VideosList {
     
     class ViewModel: ObservableObject {
         let navigationTitle: String = "Videos"
+        
+        @Published
+        var videoRows: [VideosListRowViewModel] = []
+        
+        @Published
+        var sceneError: SceneError = SceneError()
     }
     
     struct Output {
-        
+        let videos: [HighlightVideo]
     }
 }

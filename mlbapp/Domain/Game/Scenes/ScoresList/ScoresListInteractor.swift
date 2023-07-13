@@ -24,10 +24,6 @@ class ScoresListInteractor: ObservableObject, ScoresListBusinessLogic {
         self.presenter = presenter
     }
     
-    deinit {
-        print("DEINITING")
-    }
-    
     func loadScores(for date: Date) {
         
         Task {

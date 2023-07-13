@@ -17,6 +17,7 @@ struct mlbappApp: App {
                 NavigationStack(path: $router.path) {
                     ScoresListView
                         .configure()
+                        .withRouterSheets(sheetItem: $router.presentedSheet)
                         .withRouter()
                 }
                 .tabItem {

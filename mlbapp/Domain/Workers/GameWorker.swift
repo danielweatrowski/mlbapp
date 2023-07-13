@@ -14,6 +14,7 @@ protocol GameStoreProtocol {
     func fetchBoxscore(forGameID id: Int) async throws -> Boxscore
     func fetchRoster(teamID id: Int, date: Date) async throws -> Roster
     func fetchPlayEventTypes() async throws -> [String: Play.EventType]
+    func fetchHighlightVideos(forGameID id: Int) async throws -> [HighlightVideo]
 }
 
 struct GameWorker<Store: GameStoreProtocol> {
@@ -42,6 +43,10 @@ struct GameWorker<Store: GameStoreProtocol> {
 
     func fetchPlayEventTypes() async throws -> [String: Play.EventType] {
         return try await store.fetchPlayEventTypes()
+    }
+
+    func fetchHighlightVideos(forGameID id: Int) async throws -> [HighlightVideo] {
+        return try await store.fetchHighlightVideos(forGameID: id)
     }
 
 }

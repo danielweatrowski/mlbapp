@@ -10,24 +10,35 @@ import SwiftUI
 struct VideosListView: View {
     
     @StateObject var viewModel: VideosList.ViewModel
-    let iteractor: VideosListBusinessLogic
+    let interactor: VideosListBusinessLogic
+    
+    @EnvironmentObject var router: Router
+    
+    @State var isPresented: Bool = false
     
     var body: some View {
         Group {
             ScrollView {
                 LazyVStack {
-                    VideosListRowView(viewModel: .init(id: "david-peralta-homers-7-on-a-fly-ball-to-right-field-j5x9qc",
-                                                       title: "David Peralta's solo homer (7)",
-                                                       description: "David Peralta launches a solo homer to right field in the bottom of the 7th inning to extend the Dodgers' lead to 10-4",
-                                                       duration: "00:00:23",
-                                                       thumbnailURLString: "https://img.mlbstatic.com/mlb-images/image/upload/w_215,h_121,f_jpg,c_fill,g_auto/mlb/glfyrsdzqsn3rky5dvwz.jpg",
-                                                       urlString: "https://mlb-cuts-diamond.mlb.com/FORGE/2023/2023-07/08/64e61956-4c1f1627-7531ed43-csvm-diamondx64-asset_1280x720_59_4000K.mp4"))
+                    ForEach(viewModel.videoRows, id: \.id) { rowViewModel in
+                        VideosListRowView(viewModel: rowViewModel)
+                            .onTapGesture {
+                                let url = URL(string: rowViewModel.urlString)!
+                                router.presentedSheet = .videoPlayer(url)
+                            }
+                    }
+                    .onTapGesture {
+                        isPresented = true
+                    }
                 }
                 .padding(.horizontal)
             }
         }
         .navigationTitle(viewModel.navigationTitle)
         .background(Color(uiColor: .systemGroupedBackground))
+        .task {
+            await interactor.loadVideos()
+        }
     }
 }
 
@@ -38,7 +49,7 @@ extension VideosListView {
         let interactor = VideosListInteractor(presenter: presenter, gameID: gameID)
         
         return VideosListView(viewModel: viewModel,
-                              iteractor: interactor)
+                              interactor: interactor)
     }
 }
 

@@ -33,6 +33,7 @@
 		66139FD82A5BA01E00244001 /* VideosListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66139FD72A5BA01E00244001 /* VideosListInteractor.swift */; };
 		66139FDA2A5BA02700244001 /* VideosListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66139FD92A5BA02700244001 /* VideosListPresenter.swift */; };
 		66139FDC2A5BA04000244001 /* VideosListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66139FDB2A5BA04000244001 /* VideosListRowView.swift */; };
+		66139FDE2A5CB2D700244001 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66139FDD2A5CB2D700244001 /* VideoPlayerView.swift */; };
 		6617F7F5294680A100BC1BBF /* DetailPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617F7F4294680A100BC1BBF /* DetailPlayerView.swift */; };
 		6617F7F72946883F00BC1BBF /* DetailPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617F7F62946883F00BC1BBF /* DetailPlayerViewModel.swift */; };
 		6617F7F929468C6200BC1BBF /* DetailPlayerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6617F7F829468C6200BC1BBF /* DetailPlayerInteractor.swift */; };
@@ -118,6 +119,8 @@
 		6672990C29AD48D900E4E453 /* GameWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6672990B29AD48D900E4E453 /* GameWorker.swift */; };
 		667ECBF8294FDB2B00213B58 /* SwiftMLBRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667ECBF7294FDB2B00213B58 /* SwiftMLBRequest+Parameters.swift */; };
 		6687811B2915CE630086A07E /* ListGameRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6687811A2915CE630086A07E /* ListGameRow.swift */; };
+		6695086C2A5CD59700DB011B /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6695086B2A5CD59700DB011B /* Sheet.swift */; };
+		6695086F2A5CDCC500DB011B /* HighlightVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6695086E2A5CDCC500DB011B /* HighlightVideo.swift */; };
 		669BC5902A1C5F7900934A96 /* ScoresListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BC58F2A1C5F7900934A96 /* ScoresListView.swift */; };
 		669BC5922A1C601600934A96 /* ScoresListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BC5912A1C601600934A96 /* ScoresListInteractor.swift */; };
 		669BC5942A1C602000934A96 /* ScoresListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BC5932A1C602000934A96 /* ScoresListPresenter.swift */; };
@@ -229,6 +232,7 @@
 		66139FD72A5BA01E00244001 /* VideosListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListInteractor.swift; sourceTree = "<group>"; };
 		66139FD92A5BA02700244001 /* VideosListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListPresenter.swift; sourceTree = "<group>"; };
 		66139FDB2A5BA04000244001 /* VideosListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListRowView.swift; sourceTree = "<group>"; };
+		66139FDD2A5CB2D700244001 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		6617F7F4294680A100BC1BBF /* DetailPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlayerView.swift; sourceTree = "<group>"; };
 		6617F7F62946883F00BC1BBF /* DetailPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlayerViewModel.swift; sourceTree = "<group>"; };
 		6617F7F829468C6200BC1BBF /* DetailPlayerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlayerInteractor.swift; sourceTree = "<group>"; };
@@ -314,6 +318,8 @@
 		6672990B29AD48D900E4E453 /* GameWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWorker.swift; sourceTree = "<group>"; };
 		667ECBF7294FDB2B00213B58 /* SwiftMLBRequest+Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMLBRequest+Parameters.swift"; sourceTree = "<group>"; };
 		6687811A2915CE630086A07E /* ListGameRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameRow.swift; sourceTree = "<group>"; };
+		6695086B2A5CD59700DB011B /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
+		6695086E2A5CDCC500DB011B /* HighlightVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightVideo.swift; sourceTree = "<group>"; };
 		669BC58F2A1C5F7900934A96 /* ScoresListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresListView.swift; sourceTree = "<group>"; };
 		669BC5912A1C601600934A96 /* ScoresListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresListInteractor.swift; sourceTree = "<group>"; };
 		669BC5932A1C602000934A96 /* ScoresListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresListPresenter.swift; sourceTree = "<group>"; };
@@ -656,6 +662,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		6695086D2A5CD5E800DB011B /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				662001D129C7F2C50027727A /* Router.swift */,
+				6695086B2A5CD59700DB011B /* Sheet.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		669BC58E2A1C5E1F00934A96 /* ScoresList */ = {
 			isa = PBXGroup;
 			children = (
@@ -772,10 +787,10 @@
 		66ADAC6D298DF596004DD82F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6695086D2A5CD5E800DB011B /* Router */,
 				664616FA2A50A07B006FFDD6 /* SceneError.swift */,
 				66ADAC6E298DF5CC004DD82F /* InterfaceSize.swift */,
 				66D4D07C29BEB46100F4AB26 /* CoreSVG.swift */,
-				662001D129C7F2C50027727A /* Router.swift */,
 				66510D6A2A34F51700DB41B8 /* Bundle+Decode.swift */,
 				66139FCA2A58F97000244001 /* Color+Hex.swift */,
 			);
@@ -807,6 +822,7 @@
 				664617112A521CED006FFDD6 /* Roster.swift */,
 				66139FBD2A58749100244001 /* Standings.swift */,
 				66139FCC2A5918D600244001 /* Standings+Wildcard.swift */,
+				6695086E2A5CDCC500DB011B /* HighlightVideo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -840,6 +856,7 @@
 				66510D512A2D9BEB00DB41B8 /* ProbablePitchersView.swift */,
 				66510D5B2A2E8C6300DB41B8 /* StatusBannerView.swift */,
 				66139FC82A58F3BF00244001 /* ToolbarPickerView.swift */,
+				66139FDD2A5CB2D700244001 /* VideoPlayerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1044,6 +1061,7 @@
 				66139FCB2A58F97000244001 /* Color+Hex.swift in Sources */,
 				66D4D07D29BEB46100F4AB26 /* CoreSVG.swift in Sources */,
 				663D88A8297F5BF900527594 /* BoxscoreRowView.swift in Sources */,
+				66139FDE2A5CB2D700244001 /* VideoPlayerView.swift in Sources */,
 				664616FF2A50C4DA006FFDD6 /* GameLiveInfo.swift in Sources */,
 				66D46A41292EE61D00DCA9D0 /* MLBLinescore.swift in Sources */,
 				66221BFF2A358649004D37D7 /* CurrentPlayView.swift in Sources */,
@@ -1064,6 +1082,7 @@
 				663D88A6297F51EB00527594 /* BoxscoreGridViewModel.swift in Sources */,
 				66C3CF0729722A91001E6CC7 /* SwiftMLB+Boxscore.swift in Sources */,
 				66139FD62A5BA01300244001 /* VideosListView.swift in Sources */,
+				6695086C2A5CD59700DB011B /* Sheet.swift in Sources */,
 				6687811B2915CE630086A07E /* ListGameRow.swift in Sources */,
 				66EBDF292918547500BEF1A5 /* LinescoreGridView.swift in Sources */,
 				6646170C2A50DB6C006FFDD6 /* RosterRowView.swift in Sources */,
@@ -1081,6 +1100,7 @@
 				66589E512A180492009380D6 /* LineupDetail.swift in Sources */,
 				6617F7FB29468EE600BC1BBF /* DetailPlayerPresenter.swift in Sources */,
 				66291E26290783000055DC93 /* SearchGameView.swift in Sources */,
+				6695086F2A5CDCC500DB011B /* HighlightVideo.swift in Sources */,
 				662001D729D7C9E00027727A /* BoxscoreDetailView.swift in Sources */,
 				66A1204A2A43AAD400E6B335 /* LineupRowView.swift in Sources */,
 				6617F7F929468C6200BC1BBF /* DetailPlayerInteractor.swift in Sources */,
