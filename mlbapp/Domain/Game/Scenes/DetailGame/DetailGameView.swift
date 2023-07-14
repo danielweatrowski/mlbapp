@@ -98,12 +98,4 @@ struct DetailGameView: View {
     
 }
 
-struct DetailGameView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        DetailGameConfigurator.configure(for: Seeds.Games.PHI_NYM_20190424.id)
-        
-    }
-}
-
 

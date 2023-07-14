@@ -106,7 +106,7 @@ struct ScoresListView: View {
 }
 
 extension ScoresListView {
-    static func configure() -> ScoresListView {
+    static func configure<S: GameStoreProtocol>(gameStore: S) -> ScoresListView {
         let viewModel = ScoresList.ViewModel()
         let presenter = ScoresListPresenter(viewModel: viewModel)
         let interactor = ScoresListInteractor(presenter: presenter)

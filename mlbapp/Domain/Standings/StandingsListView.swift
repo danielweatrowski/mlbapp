@@ -82,10 +82,10 @@ struct StandingsListView: View {
 }
 
 extension StandingsListView {
-    static func configure() -> Self {
+    static func configure<S: StandingsStoreProtocol>(with store: S) -> Self {
         let viewModel = StandingsList.ViewModel()
         let presenter = StandingsListPresenter(viewModel: viewModel)
-        let interactor = StandingsListInteractor(presenter: presenter)
+        let interactor = StandingsListInteractor(presenter: presenter, standingsStore: store)
         return StandingsListView(viewModel: viewModel, interactor: interactor)
     }
 }

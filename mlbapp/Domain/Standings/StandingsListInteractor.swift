@@ -18,24 +18,25 @@ protocol StandingsListDataStore {
     var americanLeagueStandings: Standings.LeagueRecord? { get }
 }
 
-class StandingsListInteractor: StandingsListBusinessLogic & StandingsListDataStore {
+class StandingsListInteractor<S: StandingsStoreProtocol>: StandingsListBusinessLogic & StandingsListDataStore {
     
     let presenter: StandingsListPresentationLogic
-    let standingsWorker = StandingsWorker(store: MLBAPIRepository())
+    let standingsService: StandingsWorker<S>
     
     var nationalLeagueStandings: Standings.LeagueRecord?
     var americanLeagueStandings: Standings.LeagueRecord?
     
-    init(presenter: StandingsListPresentationLogic, nationalLeagueStandings: Standings.LeagueRecord? = nil, americanLeagueStandings: Standings.LeagueRecord? = nil) {
+    init(presenter: StandingsListPresentationLogic, standingsStore: S, nationalLeagueStandings: Standings.LeagueRecord? = nil, americanLeagueStandings: Standings.LeagueRecord? = nil) {
         self.presenter = presenter
         self.nationalLeagueStandings = nationalLeagueStandings
         self.americanLeagueStandings = americanLeagueStandings
+        self.standingsService = StandingsWorker(store: standingsStore)
     }
     
     func loadStandings() async {
         
         do {
-            let standings = try await standingsWorker.fetchStandings(for: Date())
+            let standings = try await standingsService.fetchStandings(for: Date())
             
             let output = StandingsList.Output(nationalLeagueStandings: standings.nationalLeagueRecords,
                                               americanLeagueStandings: standings.americanLeagueRecords)
@@ -63,8 +64,8 @@ class StandingsListInteractor: StandingsListBusinessLogic & StandingsListDataSto
         let nationalLeagueLeaders = nationalLeagueStandings.allRecords.filter({Int($0.rank) == 1})
         let americanLeagueLeaders = americanLeagueStandings.allRecords.filter({Int($0.rank) == 1})
         
-        var nationalLeagueContenders = nationalLeagueStandings.allRecords.subtracting(nationalLeagueLeaders)
-        var americanLeagueContenders = americanLeagueStandings.allRecords.subtracting(americanLeagueLeaders)
+        let nationalLeagueContenders = nationalLeagueStandings.allRecords.subtracting(nationalLeagueLeaders)
+        let americanLeagueContenders = americanLeagueStandings.allRecords.subtracting(americanLeagueLeaders)
         
         let nlContendersSorted = nationalLeagueContenders.sorted {
             return $0.wildCardRank < $1.wildCardRank

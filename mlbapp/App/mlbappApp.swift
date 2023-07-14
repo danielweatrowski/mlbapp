@@ -11,31 +11,23 @@ import SwiftUI
 struct mlbappApp: App {
     
     @StateObject var router = Router()
+    let dataProvider: DataProvider = DataProvider()
+    
     var body: some Scene {
         WindowGroup {
             TabView {
-                NavigationStack(path: $router.path) {
-                    ScoresListView
-                        .configure()
-                        .withRouterSheets(sheetItem: $router.presentedSheet)
-                        .withRouter()
-                }
+                ScoresTab(dataProvider: dataProvider)
                 .tabItem {
                     Label("Scores", systemImage: "squareshape.split.2x2")
                 }
                 .environmentObject(MLBLogoService())
                 .environmentObject(router)
                 
-                NavigationStack(path: $router.path) {
-                    StandingsListView
-                        .configure()
-                        .withRouter()
-                }
-                .tabItem {
-                    Label("Standings", systemImage: "flag.2.crossed")
-                }
-                .environmentObject(MLBLogoService())
-                .environmentObject(router)
+                StandingsTab(dataProvider: dataProvider)
+                    .tabItem {
+                        Label("Standings", systemImage: "flag.2.crossed")
+                    }
+                    .environmentObject(router)
             }
             .onAppear {
                 let tabBarAppearance = UITabBarAppearance()
