@@ -24,25 +24,22 @@ enum DetailGame {
         @Published var awayTeamAbbreviation: String = ""
         @Published var headerViewModel: DetailGameHeaderViewModel?
         @Published var lineScoreViewModel: LinescoreGridViewModel?
-        @Published var decisionsViewModel: DecisionsInfoViewModel?
-        @Published var probablePitchersViewModel: ProbablePitchersViewModel?
         @Published var currentPlayViewModel: CurrentPlayViewModel?
         @Published var infoItems: [GameInfoItem] = []
         
+        @Published var winnerViewModel: GameDetailPitcherViewModel?
+        @Published var loserViewModel: GameDetailPitcherViewModel?
+        @Published var saverViewModel: GameDetailPitcherViewModel?
+        
+        @Published var probableHomeStarter: GameDetailPitcherViewModel?
+        @Published var probableAwayStarter: GameDetailPitcherViewModel?
+
         // errors
         @Published var sceneError: SceneError = SceneError()
         
         
         init(gameID: Int) {
             self.gameID = gameID
-        }
-        
-        var showProbablePitchers: Bool {
-            return probablePitchersViewModel != nil && gameStatus == .preview
-        }
-        
-        var showDecisions: Bool {
-            return decisionsViewModel != nil
         }
         
         var isGameLiveOrFinal: Bool {

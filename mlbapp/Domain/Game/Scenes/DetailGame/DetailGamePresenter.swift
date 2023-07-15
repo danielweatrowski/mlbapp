@@ -45,23 +45,106 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                                         statusBannerViewModel: bannerViewModel)
 
         let lineScoreViewModel = formatLineScore(for: game)
+
+        formatProbablePitchers(game: game)
+        formatInfoItems(game: game)
+        formatDecisions(game: game)
         
-        let decisionsViewModel = formatDecisions(decisions: game.decisions,
-                                                 boxscore: game.boxscore,
-                                                 players: game.players)
+        DispatchQueue.main.async {
+            viewModel.navigationTitle = "\(game.awayTeam.abbreviation) @ \(game.homeTeam.abbreviation)"
+            viewModel.headerViewModel = headerViewModel
+            viewModel.lineScoreViewModel = lineScoreViewModel
+            viewModel.homeTeamAbbreviation = game.homeTeam.abbreviation
+            viewModel.awayTeamAbbreviation = game.awayTeam.abbreviation
+            viewModel.gameStatus = game.status
+            viewModel.state = .loaded
+        }
+    }
+   
+    private func formatLineScore(for game: Game) -> LinescoreGridViewModel? {
         
-        let probablePitchersViewModel = formatProbablePitchers(probablePitchers: game.probablePitchers,
-                                                               homeTeamName: game.homeTeam.teamName,
-                                                               awayTeamName: game.awayTeam.teamName)
+        guard let linescore = game.linescore else {
+            return nil
+        }
         
-        let currentPlayViewModel = CurrentPlayViewModel(numberOfOuts: 2,
-                                                        countText: "2-2",
-                                                        batterNameText: "Betts, M",
-                                                        batterStatsText: "0-2, .200 AVG",
-                                                        pitcherNameText: "Strahm",
-                                                        pitcherStatsText: "2 IP, 2K, 3.33 ERA",
-                                                        isRunnerOn1B: true)
+        return LinescoreGridViewModel(homeAbbreviation: game.homeTeam.abbreviation,
+                                      awayAbbreviation: game.awayTeam.abbreviation,
+                                      linescore)
+    }
+    
+    private func formatBanner(game: Game) -> StatusBannerViewModel {
+        switch game.status {
+        case .live:
+            
+            var currentInningText: String?
+            if let liveInfo = game.liveInfo {
+                currentInningText = "\(liveInfo.inningState) \(liveInfo.currentInningDescription)"
+            }
+            
+            return StatusBannerViewModel(statusText: currentInningText ?? "LIVE", secondaryStatusText: game.venue.name, backgroundColor: .green, chevronIndicator: false)
+        case .final:
+            return StatusBannerViewModel(statusText: "FINAL", statusTextColor: .red, secondaryStatusText: game.venue.name, secondaryStatusTextColor: .secondary, backgroundColor: .clear, divider: true, chevronIndicator: false)
+        default:
+            let text = game.date.formatted(date: .omitted, time: .shortened)
+            return StatusBannerViewModel(statusText: text, statusTextColor: .secondary, secondaryStatusText: game.venue.name, secondaryStatusTextColor: .secondary, backgroundColor: .clear, divider: true, chevronIndicator: false)
+        }
+    }
+}
+
+// MARK: Decisions
+extension DetailGamePresenter {
+    func formatDecisions(game: Game) {
+        if let decisions = game.decisions {
+            let winnerId = decisions.winner.id
+            let winnerViewModel = formatDecision(title: "Win",
+                                                 pitcher: game.boxscore?.pitcher(withID: winnerId),
+                                                 player: game.players[winnerId])
+            
+            DispatchQueue.main.async {
+                viewModel.winnerViewModel = winnerViewModel
+            }
+            
+            let loserId = decisions.loser.id
+            let loserViewModel = formatDecision(title: "Loss",
+                                                 pitcher: game.boxscore?.pitcher(withID: loserId),
+                                                 player: game.players[loserId])
+            
+            DispatchQueue.main.async {
+                viewModel.loserViewModel = loserViewModel
+            }
+            
+            if let saverId = decisions.save?.id {
+                
+                let saverViewModel = formatDecision(title: "Save",
+                                                    pitcher: game.boxscore?.pitcher(withID: saverId),
+                                                    player: game.players[saverId])
+                
+                DispatchQueue.main.async {
+                    viewModel.saverViewModel = saverViewModel
+                }
+            }
+        }
+    }
+    
+    func formatDecision(title: String, pitcher: Boxscore.Pitcher?, player: Player?) -> GameDetailPitcherViewModel? {
+        guard let pitcher = pitcher, let _ = player else {
+            return nil
+        }
         
+        return GameDetailPitcherViewModel(titleText: title,
+                                          pitcherNameText: pitcher.fullName,
+                                          pitcherRecordText: pitcher.stats.recordText ?? "",
+                                          details: [
+                                            .init(text: pitcher.stats.inningsPitched ?? "-1", secondaryText: "IP"),
+                                            .init(text: pitcher.stats.era ?? "99", secondaryText: "ER"),
+                                            .init(text: pitcher.stats.strikeOuts.formattedStat(), secondaryText: "SO"),
+                                            .init(text: pitcher.stats.baseOnBalls.formattedStat(), secondaryText: "BB")
+                                          ])
+    }
+}
+
+extension DetailGamePresenter {
+    func formatInfoItems(game: Game) {
         // remove all previous info items to avoid duplication
         DispatchQueue.main.async {
             viewModel.infoItems.removeAll()
@@ -96,82 +179,42 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                 }
             }
         }
-        
-        DispatchQueue.main.async {
-            viewModel.navigationTitle = "\(game.awayTeam.abbreviation) @ \(game.homeTeam.abbreviation)"
-            viewModel.headerViewModel = headerViewModel
-            viewModel.lineScoreViewModel = lineScoreViewModel
-            viewModel.decisionsViewModel = decisionsViewModel
-            viewModel.homeTeamAbbreviation = game.homeTeam.abbreviation
-            viewModel.awayTeamAbbreviation = game.awayTeam.abbreviation
-            viewModel.probablePitchersViewModel = probablePitchersViewModel
-            viewModel.currentPlayViewModel = currentPlayViewModel
-            viewModel.gameStatus = game.status
-            viewModel.state = .loaded
-        }
     }
-    
-    func formatProbablePitchers(probablePitchers: ProbablePitchers?, homeTeamName: String, awayTeamName: String) -> ProbablePitchersViewModel? {
-        guard let probablePitchers = probablePitchers, probablePitchers.hasPitcherData else {
-            return nil
-        }
-        
-        return ProbablePitchersViewModel(homeTeamName: homeTeamName,
-                                         homeTeamProbablePitcher: probablePitchers.home?.fullName,
-                                         awayTeamName: awayTeamName,
-                                         awayTeamProbablePitcher: probablePitchers.away?.fullName)
-    }
-    
-    func formatDecisions(decisions: Decisions?, boxscore: Boxscore?, players: [Int: Player]) -> DecisionsInfoViewModel? {
-        guard let decisions = decisions, let losingPitcher = boxscore?.pitcher(withID: decisions.loser.id), let winningPitcher = boxscore?.pitcher(withID: decisions.winner.id) else {
-            return nil
-        }
-        
-        var savingPitcher: Boxscore.Pitcher?
-        if let savingPitcherID = decisions.save?.id {
-            savingPitcher = boxscore?.pitcher(withID: savingPitcherID)
-        }
-        
-        return DecisionsInfoViewModel(winningPitcherName: players[winningPitcher.playerID]?.boxscoreName ?? winningPitcher.fullName,
-                                             winningPitcherWins: winningPitcher.stats.seasonWins ?? 0,
-                                             winningPitcherLosses: winningPitcher.stats.seasonLosses ?? 0,
-                                             winningPitcherERA: winningPitcher.stats.era ?? "--",
-                                      losingPitcherName: players[losingPitcher.playerID]?.boxscoreName ?? losingPitcher.fullName,
-                                             losingPitcherWins: losingPitcher.stats.seasonWins ?? 0,
-                                             losingPitcherLosses: losingPitcher.stats.seasonLosses ?? 0,
-                                      losingPitcherERA: losingPitcher.stats.era ?? "--",
-                                      savingPitcherName: players[savingPitcher?.playerID ?? -1]?.boxscoreName,
-                                      savingPitcherWins: savingPitcher?.stats.seasonWins ?? 0,
-                                      savingPitcherLosses: savingPitcher?.stats.seasonLosses ?? 0, savingPitcherERA: savingPitcher?.stats.era ?? "--")
-    }
-   
-    private func formatLineScore(for game: Game) -> LinescoreGridViewModel? {
-        
-        guard let linescore = game.linescore else {
-            return nil
-        }
-        
-        return LinescoreGridViewModel(homeAbbreviation: game.homeTeam.abbreviation,
-                                      awayAbbreviation: game.awayTeam.abbreviation,
-                                      linescore)
-    }
-    
-    private func formatBanner(game: Game) -> StatusBannerViewModel {
-        switch game.status {
-        case .live:
+}
+
+extension DetailGamePresenter {
+    func formatProbablePitchers(game: Game) {
+        if let probablePitchers = game.probablePitchers {
             
-            var currentInningText: String?
-            if let liveInfo = game.liveInfo {
-                currentInningText = "\(liveInfo.inningState) \(liveInfo.currentInningDescription)"
+            if let homeStarterId = probablePitchers.home?.id {
+                let homeViewModel = formatProbablePitcher(title: game.homeTeam.teamName,
+                                                            player: game.players[homeStarterId])
+                
+                DispatchQueue.main.async {
+                    viewModel.probableHomeStarter = homeViewModel
+                }
             }
-            
-            return StatusBannerViewModel(statusText: currentInningText ?? "LIVE", secondaryStatusText: game.venue.name, backgroundColor: .green, chevronIndicator: false)
-        case .final:
-            return StatusBannerViewModel(statusText: "FINAL", statusTextColor: .red, secondaryStatusText: game.venue.name, secondaryStatusTextColor: .secondary, backgroundColor: .clear, divider: true, chevronIndicator: false)
-        default:
-            let text = game.date.formatted(date: .omitted, time: .shortened)
-            return StatusBannerViewModel(statusText: text, statusTextColor: .secondary, secondaryStatusText: game.venue.name, secondaryStatusTextColor: .secondary, backgroundColor: .clear, divider: true, chevronIndicator: false)
+
+            if let awayStarterId = probablePitchers.away?.id {
+                let awyViewModel = formatProbablePitcher(title: game.awayTeam.teamName,
+                                                            player: game.players[awayStarterId])
+                
+                DispatchQueue.main.async {
+                    viewModel.probableAwayStarter = awyViewModel
+                }
+            }
         }
+    }
+    
+    func formatProbablePitcher(title: String, player: Player?) -> GameDetailPitcherViewModel? {
+        guard let player = player else {
+            return nil
+        }
+        
+        return GameDetailPitcherViewModel(titleText: title,
+                                          pitcherNameText: player.fullName,
+                                          pitcherRecordText: "",
+                                          details: [])
     }
 }
 
@@ -184,3 +227,4 @@ extension Optional where Wrapped == Int {
         }
     }
 }
+

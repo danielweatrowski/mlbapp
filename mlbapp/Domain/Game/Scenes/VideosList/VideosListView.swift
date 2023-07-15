@@ -47,10 +47,3 @@ extension VideosListView {
                               interactor: interactor)
     }
 }
-
-// TODO: Remove
-struct VideosListView_Previews: PreviewProvider {
-    static var previews: some View {
-        VideosListView.configure(gameID: 0)
-    }
-}

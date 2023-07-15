@@ -74,6 +74,13 @@ struct Boxscore: Hashable, Equatable, Codable {
         let seasonLosses: Int?
         let didWin: Bool
         let didLose: Bool
+        
+        var recordText: String? {
+            guard let seasonWins = seasonWins, let seasonLosses = seasonLosses else {
+                return nil
+            }
+            return "\(seasonWins)-\(seasonLosses)"
+        }
     }
     
     struct GameDetail: Hashable, Codable {
