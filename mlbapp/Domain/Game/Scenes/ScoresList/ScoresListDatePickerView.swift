@@ -53,7 +53,7 @@ struct ScoresListDatePickerView: View {
             }
             .frame(height: 40)
             .padding(.horizontal)
-            .background(.ultraThickMaterial)
+            .background(.bar)
         }
     }
 }

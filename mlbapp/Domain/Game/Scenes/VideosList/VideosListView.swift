@@ -13,9 +13,7 @@ struct VideosListView: View {
     let interactor: VideosListBusinessLogic
     
     @EnvironmentObject var router: Router
-    
-    @State var isPresented: Bool = false
-    
+        
     var body: some View {
         Group {
             ScrollView {
@@ -26,9 +24,6 @@ struct VideosListView: View {
                                 let url = URL(string: rowViewModel.urlString)!
                                 router.presentedSheet = .videoPlayer(url)
                             }
-                    }
-                    .onTapGesture {
-                        isPresented = true
                     }
                 }
                 .padding(.horizontal)

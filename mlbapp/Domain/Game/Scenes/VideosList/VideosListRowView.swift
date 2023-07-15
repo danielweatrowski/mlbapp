@@ -23,11 +23,25 @@ struct VideosListRowView: View {
     var body: some View {
         VStack {
             AsyncImage(url: URL(string: viewModel.thumbnailURLString)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(16/9, contentMode: .fit)
-                    .border(.secondary)
-                    .cornerRadius(12)
+                ZStack {
+                    image
+                        .resizable()
+                        .aspectRatio(16/9, contentMode: .fit)
+                        .cornerRadius(12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(.secondary, lineWidth: 0.5)
+                        )
+                    
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            durationView
+                                .padding(12)
+                        }
+                    }
+                }
 
             } placeholder: {
                 ProgressView()
@@ -48,5 +62,18 @@ struct VideosListRowView: View {
         .background()
         .cornerRadius(12)
         
+    }
+    
+    @ViewBuilder
+    var durationView: some View {
+        Text(viewModel.duration)
+            .foregroundColor(.white)
+            .font(.caption)
+            .padding(.vertical, 4)
+            .padding(.horizontal, 8)
+            .background(
+                Capsule()
+                    .fill(.black)
+            )
     }
 }
