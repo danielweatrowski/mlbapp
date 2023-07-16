@@ -136,7 +136,7 @@ extension DetailGamePresenter {
                                           pitcherRecordText: pitcher.stats.recordText ?? "",
                                           details: [
                                             .init(text: pitcher.stats.inningsPitched ?? "-1", secondaryText: "IP"),
-                                            .init(text: pitcher.stats.era ?? "99", secondaryText: "ER"),
+                                            .init(text: pitcher.stats.earnedRuns.formattedStat(), secondaryText: "ER"),
                                             .init(text: pitcher.stats.strikeOuts.formattedStat(), secondaryText: "SO"),
                                             .init(text: pitcher.stats.baseOnBalls.formattedStat(), secondaryText: "BB")
                                           ])
@@ -182,13 +182,15 @@ extension DetailGamePresenter {
     }
 }
 
+// MARK: - Propable Pitcher
 extension DetailGamePresenter {
     func formatProbablePitchers(game: Game) {
         if let probablePitchers = game.probablePitchers {
             
             if let homeStarterId = probablePitchers.home?.id {
                 let homeViewModel = formatProbablePitcher(title: game.homeTeam.teamName,
-                                                            player: game.players[homeStarterId])
+                                                          player: game.players[homeStarterId],
+                                                          pitcher: game.boxscore?.pitcher(withID: homeStarterId))
                 
                 DispatchQueue.main.async {
                     viewModel.probableHomeStarter = homeViewModel
@@ -197,7 +199,8 @@ extension DetailGamePresenter {
 
             if let awayStarterId = probablePitchers.away?.id {
                 let awyViewModel = formatProbablePitcher(title: game.awayTeam.teamName,
-                                                            player: game.players[awayStarterId])
+                                                         player: game.players[awayStarterId],
+                                                         pitcher: game.boxscore?.pitcher(withID: awayStarterId))
                 
                 DispatchQueue.main.async {
                     viewModel.probableAwayStarter = awyViewModel
@@ -206,15 +209,19 @@ extension DetailGamePresenter {
         }
     }
     
-    func formatProbablePitcher(title: String, player: Player?) -> GameDetailPitcherViewModel? {
-        guard let player = player else {
+    func formatProbablePitcher(title: String, player: Player?, pitcher: Boxscore.Pitcher?) -> GameDetailPitcherViewModel? {
+        guard let player = player, let pitcher = pitcher else {
             return nil
         }
         
         return GameDetailPitcherViewModel(titleText: title,
                                           pitcherNameText: player.fullName,
-                                          pitcherRecordText: "",
-                                          details: [])
+                                          pitcherRecordText: pitcher.stats.recordText ?? "",
+                                          details: [
+                                            .init(text: pitcher.stats.era ?? "99", secondaryText: "ERA"),
+                                            .init(text: pitcher.stats.seasonStrikeouts.formattedStat(), secondaryText: "SO"),
+                                            .init(text: pitcher.stats.seasonBaseOnBalls.formattedStat(), secondaryText: "BB")
+                                          ])
     }
 }
 

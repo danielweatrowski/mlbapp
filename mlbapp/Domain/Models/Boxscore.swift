@@ -74,6 +74,8 @@ struct Boxscore: Hashable, Equatable, Codable {
         let seasonLosses: Int?
         let didWin: Bool
         let didLose: Bool
+        let seasonStrikeouts: Int?
+        let seasonBaseOnBalls: Int?
         
         var recordText: String? {
             guard let seasonWins = seasonWins, let seasonLosses = seasonLosses else {

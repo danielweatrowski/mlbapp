@@ -68,7 +68,9 @@ struct BoxscoreAdapter {
                                                            seasonWins: seasonStats?.wins,
                                                            seasonLosses: seasonStats?.losses,
                                                            didWin: gameStats?.wins == 1,
-                                                           didLose: gameStats?.losses == 1)
+                                                           didLose: gameStats?.losses == 1,
+                                                           seasonStrikeouts: seasonStats?.strikeOuts,
+                                                           seasonBaseOnBalls: seasonStats?.baseOnBalls)
                 
                 
                 return Boxscore.Pitcher(playerID: playerDTO.id,
@@ -103,7 +105,9 @@ struct BoxscoreAdapter {
                                           seasonWins: nil,
                                           seasonLosses: nil,
                                           didWin: false,
-                                          didLose: false)
+                                          didLose: false,
+                                          seasonStrikeouts: nil,
+                                          seasonBaseOnBalls: nil)
         }
         
         let teamBattingDetailDTOs = [boxscore.home.battingInfo, boxscore.away.battingInfo]
