@@ -120,15 +120,28 @@ struct BoxscoreBuilder: JSONBuilder {
             }
         }
         
+        // home all players
+        var homePlayers = [[String: Any]]()
+        for player in homePlayerInfo.values {
+            //let playerDict = buildPlayerInfo(from: player as! [String: Any])
+            homePlayers.append(player as! [String: Any])
+        }
+        
         // home batters
         var homeBatters = [[String: Any]]()
         for playerID in homeBatterIDs {
             let playerKey = "ID\(playerID)"
             
             if let playerDict = homePlayerInfo[playerKey] as? [String: Any] {
-                let batterDict = buildPlayerInfo(from: playerDict)//buildBatterInfo(from: playerDict)
+                let batterDict = buildPlayerInfo(from: playerDict)
                 homeBatters.append(batterDict)
             }
+        }
+        
+        // home all players
+        var awayPlayers = [[String: Any]]()
+        for player in awayPlayerInfo.values {
+            awayPlayers.append(player as! [String: Any])
         }
         
         // away batters
@@ -227,6 +240,7 @@ struct BoxscoreBuilder: JSONBuilder {
         }
 
         let homeJSON: [String: Any] = [
+            "players": homePlayers,
             "batters": homeBatters,
             "pitchers": homePitchers,
             "bench": homeBench,
@@ -239,6 +253,7 @@ struct BoxscoreBuilder: JSONBuilder {
         ]
         
         let awayJSON: [String: Any] = [
+            "players": awayPlayers,
             "batters": awayBatters,
             "pitchers": awayPitchers,
             "bench" : awayBench,

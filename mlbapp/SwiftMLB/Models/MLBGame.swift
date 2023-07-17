@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MLBGame: Codable {
+struct MLBGame: Decodable {
     let id: Int
     let gameID: String
     let type: String
@@ -19,7 +19,7 @@ struct MLBGame: Codable {
     let weather: WeatherInfo?
     
     let linescore: MLBLinescore
-    let boxscore: MLBBoxscore
+    let boxscore: MLBBoxscore_V2
     let teams: GameTeams
     let players: [MLBPlayer]
     let decisions: MLBGameDecision?

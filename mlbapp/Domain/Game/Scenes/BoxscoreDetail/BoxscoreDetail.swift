@@ -55,6 +55,6 @@ enum BoxscoreDetail {
     }
     
     struct Output {
-        let boxscore: Boxscore
+        let boxscore: Boxscore_V2
     }
 }

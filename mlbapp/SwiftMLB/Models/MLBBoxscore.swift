@@ -7,46 +7,48 @@
 
 import Foundation
 
-protocol MLBBoxscoreProtocol {
+struct MLBBoxscore_V2: Decodable {
+    struct Teams: Decodable {
+        let away: Team
+        let home: Team
+    }
     
-}
-
-struct MLBBoxscore: Codable, MLBBoxscoreProtocol {
-    let gameId: String
-    let home: Team
-    let away: Team
-        
-    struct BoxscoreInfo: Codable {
-        let label: String
+    struct TeamInfo: Decodable {
+        let id: Int
+        let name: String
+        let link: String
+    }
+    
+    struct Team: Decodable {
+        let team: TeamInfo
+        let teamStats: MLBStatistics.TotalStats?
+        let players: [String: Player]?
+        let batters: [Int]?
+        let pitchers: [Int]?
+        let bench: [Int]?
+        let battingOrder: [Int]?
+        let info: [Info]?
+        let note: [ListItem]?
+    }
+    
+    struct Info: Decodable {
+        let title: String
+        let fieldList: [ListItem]?
+    }
+    
+    struct ListItem: Decodable {
         let value: String
+        let label: String
+    }
+            
+    struct Player: Decodable {
+        let person: MLBPerson
+        let jerseyNumber: String?
+        let position: MLBPosition
+        let stats: MLBStatistics.GameStats?
+        let seasonStats: MLBStatistics.TotalStats?
     }
     
-    // Decisions
-    // boxscore node does not contain decision data
-    var winningPitcher: Player? {
-        let homePitcher = home.pitchers.first(where: {$0.stats?.pitching?.wins == 1})
-        if let pitcher = homePitcher {
-            return pitcher
-        }
-        
-        let awayPitcher = away.pitchers.first(where: {$0.stats?.pitching?.wins == 1})
-        if let pitcher = awayPitcher {
-            return pitcher
-        }
-        return nil
-    }
-    
-    var losingPitcher: Player? {
-        let homePitcher = home.pitchers.first(where: {$0.stats?.pitching?.losses == 1})
-        if let pitcher = homePitcher {
-            return pitcher
-        }
-        
-        let awayPitcher = away.pitchers.first(where: {$0.stats?.pitching?.losses == 1})
-        if let pitcher = awayPitcher {
-            return pitcher
-        }
-        
-        return nil
-    }
+    let teams: Teams
+    //let info: [ListItem]?
 }

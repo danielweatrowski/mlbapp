@@ -57,7 +57,7 @@ struct GameBuilder: JSONBuilder {
         let weatherJSON = gameData["weather"] as? [String: Any]
         let gameInfoJSON = gameData["gameInfo"] as? [String: Any]
         let linescoreJSON = liveData["linescore"] as? [String: Any]
-        let boxscoreJSON = try boxscoreBuilder.build(with: data)
+        let boxscoreJSON = liveData["boxscore"] as? [String: Any]
         let venueJSON = buildVenue(venueDict: venueInfo)
         let awayJSON = try buildTeam(teamDict: awayData)
         let homeJSON = try buildTeam(teamDict: homeData)

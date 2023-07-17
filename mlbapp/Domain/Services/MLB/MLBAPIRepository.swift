@@ -147,8 +147,7 @@ struct MLBAPIRepository: GameStoreProtocol {
         let linescoreAdapter = LinescoreAdapter(dataObject: gameDTO.linescore)
         let linescore = linescoreAdapter.toDomain()
         
-        let boxscoreAdapter = BoxscoreAdapter(dataObject: gameDTO.boxscore)
-        let boxscore = boxscoreAdapter.toDomain()
+
         
         let decisionsAdapter = DecisionsAdapter(dataObject: gameDTO.decisions)
         let decisions = decisionsAdapter.toDomain()
@@ -186,13 +185,13 @@ struct MLBAPIRepository: GameStoreProtocol {
                         decisions: decisions,
                         probablePitchers: probablePitchers,
                         linescore: linescore,
-                        boxscore: boxscore,
+                        boxscore: nil,
                         liveInfo: liveInfo)
         
         return game
     }
     
-    func fetchBoxscore(forGameID id: Int) async throws -> Boxscore {
+    func fetchBoxscore(forGameID id: Int) async throws -> Boxscore_V2 {
         let boxscoreDTO = try await SwiftMLB.boxscore(gameIdentifier: id)
         
         let boxscoreAdapter = BoxscoreAdapter(dataObject: boxscoreDTO)
