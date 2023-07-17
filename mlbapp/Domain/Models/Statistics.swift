@@ -31,6 +31,7 @@ enum Statistics {
             
             let atBatsPerHomeRun, avg, babip, obp, ops: Stat<String>
             let slg, stolenBasePercentage: Stat<String>
+            
         }
     }
     
@@ -82,6 +83,15 @@ enum Statistics {
             let runsScoredPer9, homeRunsPer9: Stat<String>
             let inheritedRunners, inheritedRunnersScored, catchersInterference, sacBunts: Stat<Int>
             let sacFlies, passedBall: Stat<Int>
+            
+            var record: Stat<String> {
+                
+                guard let seasonWins = wins.value, let seasonLosses = losses.value else {
+                    return .init(value: nil)
+                }
+                return .init(value: "\(seasonWins)-\(seasonLosses)")
+                
+            }
         }
     }
     

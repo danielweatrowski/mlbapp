@@ -13,9 +13,9 @@ enum RouterDestination: Hashable {
     case gameList(results: [GameSearch.Result])
     case searchGame
     case gameDetail(gameID: Int)
-    case boxscore(gameID: Int, formattedGameDate: String, homeTeamAbbreviation: String, awayTeamAbbreviation: String, players: [Int: Player])
+    case boxscore(gameID: Int, formattedGameDate: String, homeTeamAbbreviation: String, awayTeamAbbreviation: String, boxscore: Boxscore_V2?, players: [Int: Player])
     case summaryGame(gameID: Int, homeTeamName: String, awayTeamName: String)
-    case lineupDetail(gameID: Int, boxscore: Boxscore?)
+    case lineupDetail(gameID: Int, boxscore: Boxscore_V2?)
     case rosterDetail(homeTeam: Team?, awayTeam: Team?, gameDate: Date?)
     case videosList(_ gameID: Int)
 }
@@ -43,8 +43,8 @@ extension View {
                 SearchGameView.configure()
             case let .gameDetail(id):
                 DetailGameConfigurator.configure(for: id)
-            case let .boxscore(id, date, homeAbbr, awayAbbr, players):
-                BoxscoreDetailView.configure(gameID: id, formattedGameDate: date, homeTeamAbbreviation: homeAbbr, awayTeamAbbreviation: awayAbbr, players: players)
+            case let .boxscore(id, date, homeAbbr, awayAbbr, boxscore, players):
+                BoxscoreDetailView.configure(gameID: id, formattedGameDate: date, homeTeamAbbreviation: homeAbbr, awayTeamAbbreviation: awayAbbr, boxscore: boxscore, players: players)
             case let .summaryGame(gameID: gameID, homeTeamName: homeTeamName, awayTeamName: awayTeamName):
                 PlaysListView.configure(gameID: gameID, homeTeamName: homeTeamName, awayTeamName: awayTeamName)
             case let .lineupDetail(gameID: gameID, boxscore: boxscore):

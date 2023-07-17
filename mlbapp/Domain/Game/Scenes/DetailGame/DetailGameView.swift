@@ -48,7 +48,7 @@ struct DetailGameView: View {
                     NavigationLink("Boxscore", value: RouterDestination.boxscore(gameID: viewModel.gameID,
                                                                                  formattedGameDate: viewModel.gameDate,
                                                                                  homeTeamAbbreviation: viewModel.homeTeamAbbreviation,
-                                                                                 awayTeamAbbreviation: viewModel.awayTeamAbbreviation,
+                                                                                 awayTeamAbbreviation: viewModel.awayTeamAbbreviation, boxscore: interactor.boxscore,
                                                                                  players: interactor.playerHash ?? [:]))
                     NavigationLink("Videos", value: RouterDestination.videosList(viewModel.gameID))
                 }

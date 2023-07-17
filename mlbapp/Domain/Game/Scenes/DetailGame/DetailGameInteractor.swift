@@ -15,7 +15,7 @@ protocol DetailGameBusinessLogic {
 protocol DetailGameDataStore  {
     var gameID: Int { get set }
     var playerHash: [Int: Player]? { get }
-    var boxscore: Boxscore? { get }
+    var boxscore: Boxscore_V2? { get }
     var homeTeam: Team? { get }
     var awayTeam: Team? { get }
     var gameDate: Date? { get }
@@ -28,7 +28,7 @@ class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore, Obser
     var gameID: Int
     
     var playerHash: [Int: Player]? = nil
-    var boxscore: Boxscore? = nil
+    var boxscore: Boxscore_V2? = nil
     var homeTeam: Team? = nil
     var awayTeam: Team? = nil
     var gameDate: Date? = nil

@@ -8,11 +8,12 @@
 import Foundation
 
 protocol BoxscoreDetailBusinessLogic {
-    func loadBoxscore()
+    func loadBoxscore() async
 }
 
 protocol BoxscoreDetailDataStore  {
     var gameID: Int { get set }
+    var boxscore: Boxscore_V2? { get }
 }
 
 struct BoxscoreDetailInteractor: BoxscoreDetailBusinessLogic & BoxscoreDetailDataStore {
@@ -20,9 +21,14 @@ struct BoxscoreDetailInteractor: BoxscoreDetailBusinessLogic & BoxscoreDetailDat
     let presenter: BoxscoreDetailPresentationLogic?
     var gameWorker = GameWorker(store: MLBAPIRepository())
     var gameID: Int
+    var boxscore: Boxscore_V2?
     
-    func loadBoxscore() {
-        Task {
+    func loadBoxscore() async {
+        
+        if let boxscore = boxscore {
+            let output = BoxscoreDetail.Output(boxscore: boxscore)
+            presenter?.presentBoxscore(output: output)
+        } else {
             do {
                 let boxscore = try await gameWorker.fetchBoxscore(forGameID: gameID)
                 let output = BoxscoreDetail.Output(boxscore: boxscore)

@@ -21,6 +21,12 @@ struct BoxscoreDetailPresenter: BoxscoreDetailPresentationLogic {
             self.viewModel.sceneError.presentAlert(sceneError)
         }
     }
+    
+    func presentBoxscore(output: BoxscoreDetail.Output) {
+        
+    }
+
+    /*
 
     func presentBoxscore(output: BoxscoreDetail.Output) {
         let boxscore = output.boxscore
@@ -153,4 +159,5 @@ struct BoxscoreDetailPresenter: BoxscoreDetailPresentationLogic {
                                  awayTotalsRow: totals[1],
                                  type: .pitchers)
     }
+     */
 }

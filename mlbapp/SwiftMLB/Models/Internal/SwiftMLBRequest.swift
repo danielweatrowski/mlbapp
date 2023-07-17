@@ -51,7 +51,7 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
         case let .headshot(personID):
             return "/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_213,q_auto:best/v1/people/\(personID)/headshot/67/current"
         case let .boxscore(gameID):
-            return "/api/v1.1/game/\(gameID)/feed/live"
+            return "/api/v1/game/\(gameID)/boxscore"
         case let .linescore(gameID):
             return "/api/v1.1/game/\(gameID)/feed/live"
         case let .game(gameID):
@@ -83,10 +83,6 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
             ]
         case let .schedule(parameters):
             return parameters.toQueryItems()
-        case .boxscore:
-            return [
-                URLQueryItem(name: "fields", value: "gameData,game,teams,teamName,shortName,teamStats,batting,atBats,runs,hits,doubles,triples,homeRuns,rbi,stolenBases,strikeOuts,baseOnBalls,leftOnBase,pitching,inningsPitched,earnedRuns,homeRuns,players,boxscoreName,liveData,boxscore,teams,players,id,fullName,allPositions,abbreviation,seasonStats,batting,avg,ops,obp,slg,era,pitchesThrown,numberOfPitches,strikes,battingOrder,info,title,fieldList,note,label,value,wins,losses,holds,blownSaves,saves,balls,battersFaced")
-            ]
         case .linescore:
             return [
                 URLQueryItem(name: "fields", value: "gameData,teams,teamName,shortName,status,abstractGameState,liveData,linescore,innings,num,home,away,runs,hits,errors,decisions,winner,loser,id,fullName")
@@ -97,7 +93,7 @@ public enum SwiftMLBRequest: HTTPRequestProtocol {
             return parameters.toQueryItems()
         case let .standings(parameters):
             return parameters.toQueryParameters()
-        case .headshot, .game, .meta, .plays, .content:
+        case .headshot, .game, .meta, .plays, .content, .boxscore:
             return nil
         }
     }

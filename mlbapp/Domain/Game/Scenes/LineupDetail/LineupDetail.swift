@@ -14,8 +14,8 @@ enum LineupDetail {
     }
     
     struct GameLineups {
-        var home: [Boxscore.Batter]?
-        var away: [Boxscore.Batter]?
+        var home: [Boxscore_V2.Player]?
+        var away: [Boxscore_V2.Player]?
     }
     
     struct Output {

@@ -97,7 +97,7 @@ extension DetailGamePresenter {
         if let decisions = game.decisions {
             let winnerId = decisions.winner.id
             let winnerViewModel = formatDecision(title: "Win",
-                                                 pitcher: game.boxscore?.pitcher(withID: winnerId),
+                                                 pitcher: game.boxscore?.player(withID: winnerId),
                                                  player: game.players[winnerId])
             
             DispatchQueue.main.async {
@@ -106,7 +106,7 @@ extension DetailGamePresenter {
             
             let loserId = decisions.loser.id
             let loserViewModel = formatDecision(title: "Loss",
-                                                 pitcher: game.boxscore?.pitcher(withID: loserId),
+                                                 pitcher: game.boxscore?.player(withID: loserId),
                                                  player: game.players[loserId])
             
             DispatchQueue.main.async {
@@ -116,7 +116,7 @@ extension DetailGamePresenter {
             if let saverId = decisions.save?.id {
                 
                 let saverViewModel = formatDecision(title: "Save",
-                                                    pitcher: game.boxscore?.pitcher(withID: saverId),
+                                                    pitcher: game.boxscore?.player(withID: saverId),
                                                     player: game.players[saverId])
                 
                 DispatchQueue.main.async {
@@ -126,19 +126,19 @@ extension DetailGamePresenter {
         }
     }
     
-    func formatDecision(title: String, pitcher: Boxscore.Pitcher?, player: Player?) -> GameDetailPitcherViewModel? {
-        guard let pitcher = pitcher, let _ = player else {
+    func formatDecision(title: String, pitcher: Boxscore_V2.Player?, player: Player?) -> GameDetailPitcherViewModel? {
+        guard let pitcher = pitcher, let pitchingStats = pitcher.stats?.pitching, let seasonStats = pitcher.seasonStats?.pitching, let _ = player else {
             return nil
         }
         
         return GameDetailPitcherViewModel(titleText: title,
                                           pitcherNameText: pitcher.fullName,
-                                          pitcherRecordText: pitcher.stats.recordText ?? "",
+                                          pitcherRecordText: seasonStats.record.formatted(.pitchingRecord),
                                           details: [
-                                            .init(text: pitcher.stats.inningsPitched ?? "-1", secondaryText: "IP"),
-                                            .init(text: pitcher.stats.earnedRuns.formattedStat(), secondaryText: "ER"),
-                                            .init(text: pitcher.stats.strikeOuts.formattedStat(), secondaryText: "SO"),
-                                            .init(text: pitcher.stats.baseOnBalls.formattedStat(), secondaryText: "BB")
+                                            .init(text: pitchingStats.inningsPitched.formatted(), secondaryText: "IP"),
+                                            .init(text: pitchingStats.earnedRuns.formatted(), secondaryText: "ER"),
+                                            .init(text: pitchingStats.strikeOuts.formatted(), secondaryText: "SO"),
+                                            .init(text: pitchingStats.baseOnBalls.formatted(), secondaryText: "BB")
                                           ])
     }
 }
@@ -190,7 +190,7 @@ extension DetailGamePresenter {
             if let homeStarterId = probablePitchers.home?.id {
                 let homeViewModel = formatProbablePitcher(title: game.homeTeam.teamName,
                                                           player: game.players[homeStarterId],
-                                                          pitcher: game.boxscore?.pitcher(withID: homeStarterId))
+                                                          pitcher: game.boxscore?.player(withID: homeStarterId))
                 
                 DispatchQueue.main.async {
                     viewModel.probableHomeStarter = homeViewModel
@@ -200,7 +200,7 @@ extension DetailGamePresenter {
             if let awayStarterId = probablePitchers.away?.id {
                 let awyViewModel = formatProbablePitcher(title: game.awayTeam.teamName,
                                                          player: game.players[awayStarterId],
-                                                         pitcher: game.boxscore?.pitcher(withID: awayStarterId))
+                                                         pitcher: game.boxscore?.player(withID: awayStarterId))
                 
                 DispatchQueue.main.async {
                     viewModel.probableAwayStarter = awyViewModel
@@ -209,29 +209,19 @@ extension DetailGamePresenter {
         }
     }
     
-    func formatProbablePitcher(title: String, player: Player?, pitcher: Boxscore.Pitcher?) -> GameDetailPitcherViewModel? {
-        guard let player = player, let pitcher = pitcher else {
+    func formatProbablePitcher(title: String, player: Player?, pitcher: Boxscore_V2.Player?) -> GameDetailPitcherViewModel? {
+        guard let player = player, let pitcher = pitcher, let pitchingStats = pitcher.seasonStats?.pitching else {
             return nil
         }
         
         return GameDetailPitcherViewModel(titleText: title,
                                           pitcherNameText: player.fullName,
-                                          pitcherRecordText: pitcher.stats.recordText ?? "",
+                                          pitcherRecordText: pitchingStats.record.formatted(.pitchingRecord),
                                           details: [
-                                            .init(text: pitcher.stats.era ?? "99", secondaryText: "ERA"),
-                                            .init(text: pitcher.stats.seasonStrikeouts.formattedStat(), secondaryText: "SO"),
-                                            .init(text: pitcher.stats.seasonBaseOnBalls.formattedStat(), secondaryText: "BB")
+                                            .init(text: pitchingStats.era.formatted(), secondaryText: "ERA"),
+                                            .init(text: pitchingStats.strikeOuts.formatted(), secondaryText: "SO"),
+                                            .init(text: pitchingStats.balls.formatted(), secondaryText: "BB")
                                           ])
-    }
-}
-
-extension Optional where Wrapped == Int {
-    func formattedStat() -> String {
-        if let stat = self {
-            return String(stat)
-        } else {
-            return "-"
-        }
     }
 }
 

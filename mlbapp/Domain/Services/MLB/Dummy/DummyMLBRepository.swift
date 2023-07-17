@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DummyMLBRepository: GameStoreProtocol {
+struct DummyMLBRepository {
     func fetchPlayEventTypes() async throws -> [String: Play.EventType] {
         fatalError()
     }
@@ -22,18 +22,18 @@ struct DummyMLBRepository: GameStoreProtocol {
     
     init() {
         // TODO: Load data
-        let gameLive1 = Bundle.main.decode(Game.self, from: "game-live-717841.json")
-        let gameLive2 = Bundle.main.decode(Game.self, from: "game-live-717837.json")
+//        let gameLive1 = Bundle.main.decode(Game.self, from: "game-live-717841.json")
+//        let gameLive2 = Bundle.main.decode(Game.self, from: "game-live-717837.json")
+//
+//        let gameResult1 = Bundle.main.decode(GameSearch.Result.self, from: "game-search-live-717841.json")
+//        let gameResult2 = Bundle.main.decode(GameSearch.Result.self, from: "game-search-live-717837.json")
         
-        let gameResult1 = Bundle.main.decode(GameSearch.Result.self, from: "game-search-live-717841.json")
-        let gameResult2 = Bundle.main.decode(GameSearch.Result.self, from: "game-search-live-717837.json")
+        self.games = [:]
+//            gameLive1.id: gameLive1,
+//            gameLive2.id: gameLive2
+//        ]
         
-        self.games = [
-            gameLive1.id: gameLive1,
-            gameLive2.id: gameLive2
-        ]
-        
-        self.gameSearchResults = [gameResult1, gameResult2]
+        self.gameSearchResults = []//[gameResult1, gameResult2]
     }
     
     func fetchGame(withID id: Int) async throws -> Game {
@@ -51,17 +51,6 @@ struct DummyMLBRepository: GameStoreProtocol {
         
         return gameSearchResults
     }
-    
-    func fetchBoxscore(forGameID id: Int) async throws -> Boxscore {
-        fatalError()
-    }
-    
-    func fetchAllPlays(forGameID id: Int) async throws -> [Play]  {
-        fatalError()
-    }
-    
-    func fetchHighlightVideos(forGameID id: Int) async throws -> [HighlightVideo] {
-        fatalError()
-    }
+
     
 }

@@ -65,7 +65,7 @@ struct LineupDetailView: View {
 }
 
 extension LineupDetailView {
-    static func configure(gameID: Int, boxscore: Boxscore?) -> LineupDetailView {
+    static func configure(gameID: Int, boxscore: Boxscore_V2?) -> LineupDetailView {
         let viewModel = LineupDetail.ViewModel()
         let presenter = LineupDetailPresenter(viewModel: viewModel)
         let interactor = LineupDetailInteractor(gameID: gameID, boxscore: boxscore, presenter: presenter)

@@ -28,11 +28,12 @@ struct LineupDetailPresenter: LineupDetailPresentationLogic {
         }
         
         // TODO: DRY
-        let players = homeLineup
-            .filter({$0.battingOrderIndex != nil})
-            .map { player in
-                let battingIndex = Int(player.battingOrderIndex ?? "0") ?? 0
-                return LineupRowViewModel(systemImageName: "\(battingIndex / 100).circle.fill",
+        let players: [LineupRowViewModel] = homeLineup
+            .compactMap { player in
+                guard let battingIndex = player.battingOrderIndex else {
+                    return nil
+                }
+                return LineupRowViewModel(systemImageName: "\(battingIndex).circle.fill",
                                           playerNameText: player.fullName,
                                           playerPositionText: player.position.abbreviation ?? "-",
                                           playerInfoText: "")
@@ -47,11 +48,12 @@ struct LineupDetailPresenter: LineupDetailPresentationLogic {
             return
         }
         
-        let awayPlayers = awayLineup
-            .filter({$0.battingOrderIndex != nil})
-            .map { player in
-                let battingIndex = Int(player.battingOrderIndex ?? "0") ?? 0
-                return LineupRowViewModel(systemImageName: "\(battingIndex / 100).circle.fill",
+        let awayPlayers: [LineupRowViewModel] = awayLineup
+            .compactMap { player in
+                guard let battingIndex = player.battingOrderIndex else {
+                    return nil
+                }
+                return LineupRowViewModel(systemImageName: "\(battingIndex).circle.fill",
                                           playerNameText: player.fullName,
                                           playerPositionText: player.position.abbreviation ?? "-",
                                           playerInfoText: "")

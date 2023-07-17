@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Game: Codable {
+struct Game {
     let id: Int
     let date: Date
     let homeTeam: Team
@@ -23,7 +23,7 @@ struct Game: Codable {
     let decisions: Decisions?
     let probablePitchers: ProbablePitchers?
     let linescore: Linescore?
-    let boxscore: Boxscore?
+    let boxscore: Boxscore_V2?
     let liveInfo: GameLiveInfo?
     
     lazy var winningPitcher: Player? = {

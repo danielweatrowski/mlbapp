@@ -13,18 +13,18 @@ protocol LineupDetailBusinessLogic {
 
 protocol LineupDetailDataStore  {
     var gameID: Int { get set }
-    var boxscore: Boxscore? { get set }
+    var boxscore: Boxscore_V2? { get set }
 }
 
 struct LineupDetailInteractor: LineupDetailBusinessLogic, LineupDetailDataStore {
 
     var gameID: Int
-    var boxscore: Boxscore?
+    var boxscore: Boxscore_V2?
     
     let presenter: LineupDetailPresentationLogic?
     
     func getLineups() {
-        
+        print(boxscore?.home.players.count)
         if let boxscore = boxscore {
             let lineups = LineupDetail.GameLineups(home: boxscore.home.startingLineup,
                                                    away: boxscore.away.startingLineup)
@@ -33,10 +33,7 @@ struct LineupDetailInteractor: LineupDetailBusinessLogic, LineupDetailDataStore 
             presenter?.presentLineups(output: output)
         } else {
             let sceneError = SceneError(errorDescription: "Did fail to unwrap boxscore")
+            presenter?.presentSceneError(sceneError)
         }
-    }
-    
-    private func getLineupFromBoxscore(_ boxscore: Boxscore) {
-        
     }
 }

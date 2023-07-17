@@ -53,8 +53,8 @@ struct BoxscoreDetailView: View {
             }
         }
         .navigationTitle(viewModel.navigationTitle)
-        .onAppear {
-            interactor?.loadBoxscore()
+        .task {
+            await interactor?.loadBoxscore()
         }
     }
     
@@ -138,13 +138,13 @@ struct BoxscoreDetailView: View {
 }
 
 extension BoxscoreDetailView {
-    static func configure(gameID: Int, formattedGameDate: String, homeTeamAbbreviation: String, awayTeamAbbreviation: String, players: [Int: Player]) -> Self {
+    static func configure(gameID: Int, formattedGameDate: String, homeTeamAbbreviation: String, awayTeamAbbreviation: String, boxscore: Boxscore_V2?, players: [Int: Player]) -> Self {
         let viewModel = BoxscoreDetail.ViewModel(gameID: gameID,
                                                  formattedGameDate: formattedGameDate,
                                                  homeTeamAbbreviation: homeTeamAbbreviation,
                                                  awayTeamAbbreviation: awayTeamAbbreviation)
         let presenter = BoxscoreDetailPresenter(viewModel: viewModel,  players: players)
-        let interactor = BoxscoreDetailInteractor(presenter: presenter, gameID: gameID)
+        let interactor = BoxscoreDetailInteractor(presenter: presenter, gameID: gameID, boxscore: boxscore)
         
         return .init(interactor: interactor,
                      viewModel: viewModel)

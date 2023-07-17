@@ -17,24 +17,42 @@ struct BoxscoreAdapter {
         let h_team = boxscore.teams.home
         let a_team = boxscore.teams.away
         
-        let teams = [h_team, a_team].map { teamDTO in
-            return Boxscore_V2.Team(id: teamDTO.team.id,
-                                    name: teamDTO.team.name,
-                                    teamStats: formatStats(from: teamDTO.teamStats),
-                                    players: formatPlayers(from: teamDTO.players),
-                                    batters: teamDTO.batters ?? [],
-                                    pitchers: teamDTO.pitchers ?? [],
-                                    bench: teamDTO.bench ?? [],
-                                    battingOrder: teamDTO.battingOrder ?? [],
-                                    info: formatInfo(from: teamDTO.info),
-                                    note: formatNotes(from: teamDTO.note))
-        }
+        let homeTeam = Boxscore_V2.Team(id: h_team.team.id,
+                                        name: h_team.team.name,
+                                        teamStats: formatStats(from: h_team.teamStats),
+                                        players: formatPlayers(from: h_team.players),
+                                        batters: formatPlayerKeys(h_team.batters),
+                                        pitchers: formatPlayerKeys(h_team.pitchers),
+                                        bench: formatPlayerKeys(h_team.bench),
+                                        battingOrder: formatPlayerKeys(h_team.battingOrder),
+                                        info: formatInfo(from: h_team.info),
+                                        note: formatNotes(from: h_team.note))
         
-        return Boxscore_V2(away: teams[1],
-                           home: teams[0])
+        let awayTeam = Boxscore_V2.Team(id: a_team.team.id,
+                                        name: a_team.team.name,
+                                        teamStats: formatStats(from: a_team.teamStats),
+                                        players: formatPlayers(from: a_team.players),
+                                        batters: formatPlayerKeys(a_team.batters),
+                                        pitchers: formatPlayerKeys(a_team.pitchers),
+                                        bench: formatPlayerKeys(a_team.bench),
+                                        battingOrder: formatPlayerKeys(a_team.battingOrder),
+                                        info: formatInfo(from: a_team.info),
+                                        note: formatNotes(from: a_team.note))
+        
+        
+        return Boxscore_V2(away: awayTeam,
+                           home: homeTeam)
     }
     
-    private func formatStats(from statsDTO: MLBStatistics.GameStats?) -> Statistics.SeasonStats {
+    private func formatPlayerKeys(_ ids: [Int]?) -> [String] {
+        if let ids = ids {
+            return ids.map { "ID\($0)" }
+        }
+        
+        return []
+    }
+    
+    private func formatStats(from statsDTO: MLBStatistics.GameStats?) -> Statistics.GameStats {
         return Statistics.GameStats(batting: formatBattingStats(from: statsDTO?.batting),
                                       fielding: formatFieldingStats(from: statsDTO?.fielding),
                                       pitching: formatPitchingStats(from: statsDTO?.pitching))
@@ -262,10 +280,14 @@ struct BoxscoreAdapter {
     
     
     private func formatPlayers(from playerDictDTO: [String: MLBBoxscore_V2.Player]?) -> [String: Boxscore_V2.Player] {
-        return playerDictDTO?.mapValues { playerDTO in
+        guard let dict = playerDictDTO else {
+            return [:]
+        }
+        return dict.mapValues { playerDTO in
             return Boxscore_V2.Player(id: playerDTO.person.id,
                                       fullName: playerDTO.person.fullName,
-                                      jerseyNumber: playerDTO.jerseyNumber,
+                                      jerseyNumber: playerDTO.jerseyNumber ?? "",
+                                      battingOrder: Int(playerDTO.battingOrder ?? "") ?? nil,
                                       position: .init(code: playerDTO.position.code, type: playerDTO.position.type, name: playerDTO.position.name, abbreviation: playerDTO.position.abbreviation),
                                       stats: formatStats(from: playerDTO.stats),
                                       seasonStats: formatStats(from: playerDTO.seasonStats))
@@ -273,18 +295,37 @@ struct BoxscoreAdapter {
     }
     
     private func formatInfo(from infoDTO: [MLBBoxscore_V2.Info]?) -> Boxscore_V2.Info {
+        
         var battingInfo: [Boxscore_V2.ListItem] = []
         var fieldingInfo: [Boxscore_V2.ListItem] = []
         var baserunningInfo: [Boxscore_V2.ListItem] = []
         
+        guard let infoDTO = infoDTO else {
+            return Boxscore_V2.Info(batting: battingInfo,
+                                    fielding: fieldingInfo,
+                                    baserunning: baserunningInfo)
+        }
+        
         for info in infoDTO {
             switch info.title {
             case "BATTING":
-                break
+                if let list = info.fieldList {
+                    battingInfo = list.map { item in
+                        return Boxscore_V2.ListItem(value: item.value, label: item.label)
+                    }
+                }
             case "FIELDING":
-                break
+                if let list = info.fieldList {
+                    fieldingInfo = list.map { item in
+                        return Boxscore_V2.ListItem(value: item.value, label: item.label)
+                    }
+                }
             case "BASERUNNING":
-                break
+                if let list = info.fieldList {
+                    baserunningInfo = list.map { item in
+                        return Boxscore_V2.ListItem(value: item.value, label: item.label)
+                    }
+                }
             default:
                 break
             }
@@ -296,6 +337,10 @@ struct BoxscoreAdapter {
     }
     
     private func formatNotes(from notesDTO: [MLBBoxscore_V2.ListItem]?) -> [Boxscore_V2.ListItem] {
+        guard let notesDTO = notesDTO else {
+            return []
+        }
+        
         return notesDTO.map({
             Boxscore_V2.ListItem(value: $0.value, label: $0.label)
         })

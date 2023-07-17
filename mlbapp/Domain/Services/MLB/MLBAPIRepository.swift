@@ -147,7 +147,8 @@ struct MLBAPIRepository: GameStoreProtocol {
         let linescoreAdapter = LinescoreAdapter(dataObject: gameDTO.linescore)
         let linescore = linescoreAdapter.toDomain()
         
-
+        let boxscoreAdapter = BoxscoreAdapter(dataObject: gameDTO.boxscore)
+        let boxscore = boxscoreAdapter.toDomain()
         
         let decisionsAdapter = DecisionsAdapter(dataObject: gameDTO.decisions)
         let decisions = decisionsAdapter.toDomain()
@@ -185,7 +186,7 @@ struct MLBAPIRepository: GameStoreProtocol {
                         decisions: decisions,
                         probablePitchers: probablePitchers,
                         linescore: linescore,
-                        boxscore: nil,
+                        boxscore: boxscore,
                         liveInfo: liveInfo)
         
         return game

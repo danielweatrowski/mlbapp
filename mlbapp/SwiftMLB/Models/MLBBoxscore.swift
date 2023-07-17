@@ -44,6 +44,7 @@ struct MLBBoxscore_V2: Decodable {
     struct Player: Decodable {
         let person: MLBPerson
         let jerseyNumber: String?
+        let battingOrder: String?
         let position: MLBPosition
         let stats: MLBStatistics.GameStats?
         let seasonStats: MLBStatistics.TotalStats?
