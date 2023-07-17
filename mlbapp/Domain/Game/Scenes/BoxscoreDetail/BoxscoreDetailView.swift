@@ -17,45 +17,55 @@ struct BoxscoreDetailView: View {
     private var teamBoxSelection = 0
     
     var body: some View {
-        Group {
-            switch viewModel.state {
-            case .loading:
-                ProgressView()
-            case .loaded:
-                List {
-                    Section {
-                        BoxscoreGridView(viewModel: $viewModel.boxscoreViewModel, teamBoxSelection: $teamBoxSelection)
+        ZStack {
+            Group {
+                switch viewModel.state {
+                case .loading:
+                    ProgressView()
+                case .loaded:
+                    List {
+                        Section {
+                            BoxscoreGridView(viewModel: $viewModel.battingBoxscoreViewModel, teamBoxSelection: $teamBoxSelection)
+                        }
+                        
+                        battingDetailsSection
+                        runningDetailsSection
+                        fieldingDetailsSection
+                        
+                        Section {
+                            BoxscoreGridView(viewModel: $viewModel.pitchingBoxscoreViewModel, teamBoxSelection: $teamBoxSelection)
+                        }
                     }
-                    
-                    battingDetailsSection
-                    runningDetailsSection
-                    fieldingDetailsSection
-                    
-                    Section {
-                        BoxscoreGridView(viewModel: $viewModel.pitchingBoxscoreViewModel, teamBoxSelection: $teamBoxSelection)
-                    }
+                    .listStyle(.insetGrouped)
+                case .error:
+                    EmptyView()
                 }
-                .listStyle(.insetGrouped)
-            case .error:
-                EmptyView()
+            }
+            VStack(spacing: 0) {
+                Spacer()
+                toolbar
             }
         }
         .withSceneError($viewModel.sceneError)
-        .toolbar(.hidden, for: .tabBar)
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                Picker("Teams", selection: $teamBoxSelection) {
-                    Text(viewModel.homeTeamAbbreviation).tag(0)
-                    Text(viewModel.awayTeamAbbreviation).tag(1)
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal)
-            }
-        }
         .navigationTitle(viewModel.navigationTitle)
         .task {
             await interactor?.loadBoxscore()
         }
+    }
+    
+    @ViewBuilder
+    var toolbar: some View {
+        HStack(alignment: .center, spacing: 0) {
+            Picker("Teams", selection: $teamBoxSelection) {
+                Text(viewModel.homeTeamAbbreviation).tag(0)
+                Text(viewModel.awayTeamAbbreviation).tag(1)
+            }
+            .pickerStyle(.segmented)
+            .padding(.horizontal)
+        }
+        .frame(height: 40)
+        .padding(.vertical, 4)
+        .background(.ultraThickMaterial)
     }
     
     @ViewBuilder
@@ -65,14 +75,14 @@ struct BoxscoreDetailView: View {
         : viewModel.awayTeamBattingDetails
         
         if let details = teamDetails, !details.isEmpty {
-            Section("Batters") {
+            Section("Batting") {
                 VStack(alignment: .leading, spacing: 12) {
                     ForEach(details, id: \.self) { detail in
                         Group {
-                            Text(detail.title)
+                            Text(detail.label)
                                 .bold()
                                 .font(.subheadline)
-                            + Text(" \(detail.detail)")
+                            + Text(" \(detail.value)")
                                 .font(.subheadline)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -95,10 +105,10 @@ struct BoxscoreDetailView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     ForEach(details, id: \.self) { detail in
                         Group {
-                            Text(detail.title)
+                            Text(detail.label)
                                 .bold()
                                 .font(.subheadline)
-                            + Text(" \(detail.detail)")
+                            + Text(" \(detail.value)")
                                 .font(.subheadline)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -121,10 +131,10 @@ struct BoxscoreDetailView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     ForEach(details, id: \.self) { detail in
                         Group {
-                            Text(detail.title)
+                            Text(detail.label)
                                 .bold()
                                 .font(.subheadline)
-                            + Text(" \(detail.detail)")
+                            + Text(" \(detail.value)")
                                 .font(.subheadline)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)

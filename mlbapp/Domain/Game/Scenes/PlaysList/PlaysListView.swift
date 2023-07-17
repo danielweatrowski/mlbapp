@@ -83,7 +83,7 @@ struct PlaysListView: View {
         .frame(height: 40)
 
         .padding(.vertical, 4)
-        .background(.ultraThickMaterial)
+        .background(.bar)
         
     }
 }

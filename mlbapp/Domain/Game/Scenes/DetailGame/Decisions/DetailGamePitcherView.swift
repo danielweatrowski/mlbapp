@@ -58,17 +58,6 @@ struct DetailGamePitcherView: View {
                             .frame(height: 20)
                     }
                 }
-                /*
-                VStack(alignment: .leading) {
-                    Text("6.0")
-                    + Text(" IP")
-                        .font(.footnote)
-                        .bold()
-                    
-                }
-                .padding(.trailing)
-                */
-
             }
             .frame(height: 20)
         }

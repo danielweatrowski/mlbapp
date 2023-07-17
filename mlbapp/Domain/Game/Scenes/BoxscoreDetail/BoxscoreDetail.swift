@@ -24,26 +24,27 @@ enum BoxscoreDetail {
         var navigationTitle: String = "Boxscore"
         @Published var state: State = .loading
         
-        @Published var boxscoreViewModel: BoxscoreGridViewModel?
+        @Published var battingBoxscoreViewModel: BoxscoreGridViewModel?
         @Published var pitchingBoxscoreViewModel: BoxscoreGridViewModel?
         
-        @Published var homeTeamBattingDetails: [Boxscore.GameDetail]?
-        @Published var awayTeamBattingDetails: [Boxscore.GameDetail]?
-        @Published var homeTeamFieldingDetails: [Boxscore.GameDetail]?
-        @Published var awayTeamFieldingDetails: [Boxscore.GameDetail]?
-        @Published var homeTeamRunningDetails: [Boxscore.GameDetail]?
-        @Published var awayTeamRunningDetails: [Boxscore.GameDetail]?
+        @Published var homeTeamBattingDetails: [Boxscore_V2.ListItem]?
+        @Published var awayTeamBattingDetails: [Boxscore_V2.ListItem]?
+        @Published var homeTeamFieldingDetails: [Boxscore_V2.ListItem]?
+        @Published var awayTeamFieldingDetails: [Boxscore_V2.ListItem]?
+        @Published var homeTeamRunningDetails: [Boxscore_V2.ListItem]?
+        @Published var awayTeamRunningDetails: [Boxscore_V2.ListItem]?
         
         // error
         @Published var sceneError: SceneError = SceneError()
         
-        init(gameID: Int, formattedGameDate: String, homeTeamAbbreviation: String, awayTeamAbbreviation: String, navigationTitle: String = "Boxscore", boxscoreViewModel: BoxscoreGridViewModel? = nil, pitchingBoxscoreViewModel: BoxscoreGridViewModel? = nil, homeTeamBattingDetails: [Boxscore.GameDetail]? = nil, awayTeamBattingDetails: [Boxscore.GameDetail]? = nil, homeTeamFieldingDetails: [Boxscore.GameDetail]? = nil, awayTeamFieldingDetails: [Boxscore.GameDetail]? = nil, homeTeamRunningDetails: [Boxscore.GameDetail]? = nil, awayTeamRunningDetails: [Boxscore.GameDetail]? = nil) {
+        internal init(gameID: Int, formattedGameDate: String, homeTeamAbbreviation: String, awayTeamAbbreviation: String, navigationTitle: String = "Boxscore", state: BoxscoreDetail.ViewModel.State = .loading, boxscoreViewModel: BoxscoreGridViewModel? = nil, pitchingBoxscoreViewModel: BoxscoreGridViewModel? = nil, homeTeamBattingDetails: [Boxscore_V2.ListItem]? = nil, awayTeamBattingDetails: [Boxscore_V2.ListItem]? = nil, homeTeamFieldingDetails: [Boxscore_V2.ListItem]? = nil, awayTeamFieldingDetails: [Boxscore_V2.ListItem]? = nil, homeTeamRunningDetails: [Boxscore_V2.ListItem]? = nil, awayTeamRunningDetails: [Boxscore_V2.ListItem]? = nil, sceneError: SceneError = SceneError()) {
             self.gameID = gameID
             self.formattedGameDate = formattedGameDate
             self.homeTeamAbbreviation = homeTeamAbbreviation
             self.awayTeamAbbreviation = awayTeamAbbreviation
             self.navigationTitle = navigationTitle
-            self.boxscoreViewModel = boxscoreViewModel
+            self.state = state
+            self.battingBoxscoreViewModel = boxscoreViewModel
             self.pitchingBoxscoreViewModel = pitchingBoxscoreViewModel
             self.homeTeamBattingDetails = homeTeamBattingDetails
             self.awayTeamBattingDetails = awayTeamBattingDetails
@@ -51,6 +52,7 @@ enum BoxscoreDetail {
             self.awayTeamFieldingDetails = awayTeamFieldingDetails
             self.homeTeamRunningDetails = homeTeamRunningDetails
             self.awayTeamRunningDetails = awayTeamRunningDetails
+            self.sceneError = sceneError
         }
     }
     

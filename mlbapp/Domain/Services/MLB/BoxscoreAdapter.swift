@@ -44,12 +44,12 @@ struct BoxscoreAdapter {
                            home: homeTeam)
     }
     
-    private func formatPlayerKeys(_ ids: [Int]?) -> [String] {
-        if let ids = ids {
-            return ids.map { "ID\($0)" }
-        }
+    private func formatPlayerKeys(_ ids: [Int]?) -> [Int] {
+//        if let ids = ids {
+//            return ids.map { "ID\($0)" }
+//        }
         
-        return []
+        return ids ?? []
     }
     
     private func formatStats(from statsDTO: MLBStatistics.GameStats?) -> Statistics.GameStats {
@@ -167,7 +167,7 @@ struct BoxscoreAdapter {
     
     private func formatBattingStats(from statsDTO: MLBStatistics.Batting.SeasonStatistics?) -> Statistics.Batting.Season {
         return Statistics.Batting.Season(atBats: .init(value: statsDTO?.atBats),
-                                         baseOnBalls: .init(value: statsDTO?.catcherInterference),
+                                         baseOnBalls: .init(value: statsDTO?.baseOnBalls),
                                          catcherInterference: .init(value: statsDTO?.catcherInterference),
                                          caughtStealing: .init(value: statsDTO?.caughtStealing),
                                          doubles: .init(value: statsDTO?.doubles),

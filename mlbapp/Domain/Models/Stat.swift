@@ -12,7 +12,7 @@ protocol StatProtocol {
 }
 
 enum StatFormatType {
-    case int, decimal, pitchingRecord, dash
+    case int, decimal, pitchingRecord, dash, none
     
     var emptyText: String {
         switch self {
@@ -24,6 +24,8 @@ enum StatFormatType {
             return "0-0"
         case .dash:
             return "-"
+        case .none:
+            return ""
         }
     }
 }

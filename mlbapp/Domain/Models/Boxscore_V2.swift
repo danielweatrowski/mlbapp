@@ -30,10 +30,10 @@ struct Boxscore_V2 {
         let name: String
         let teamStats: Statistics.SeasonStats?
         let players: [String: Boxscore_V2.Player]
-        let batters: [String]
-        let pitchers: [String]
-        let bench: [String]
-        let battingOrder: [String]
+        let batters: [Int]
+        let pitchers: [Int]
+        let bench: [Int]
+        let battingOrder: [Int]
         let info: Info
         let note: [ListItem]
         
@@ -45,7 +45,8 @@ struct Boxscore_V2 {
             // map batter keys with players hash
             // return players who were not substituted
             var batterPlayers: [Boxscore_V2.Player] = []
-            for batterKey in batters {
+            for batterID in batters {
+                let batterKey = "ID\(batterID)"
                 if let player = self.players[batterKey], player.isInStartingLineup {
                     batterPlayers.append(player)
                 }
@@ -68,7 +69,7 @@ struct Boxscore_V2 {
         let baserunning: [ListItem]
     }
     
-    struct ListItem {
+    struct ListItem: Hashable {
         let value: String
         let label: String
     }
@@ -99,6 +100,13 @@ struct Boxscore_V2 {
             }
             
             return false
+        }
+        
+        var isSubstitution: Bool {
+            guard let battingOrderIndex = battingOrder else {
+                return false
+            }
+            return battingOrderIndex % 100 != 0
         }
     }
 }

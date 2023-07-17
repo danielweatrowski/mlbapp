@@ -220,7 +220,7 @@ extension DetailGamePresenter {
                                           details: [
                                             .init(text: pitchingStats.era.formatted(), secondaryText: "ERA"),
                                             .init(text: pitchingStats.strikeOuts.formatted(), secondaryText: "SO"),
-                                            .init(text: pitchingStats.balls.formatted(), secondaryText: "BB")
+                                            .init(text: pitchingStats.baseOnBalls.formatted(), secondaryText: "BB")
                                           ])
     }
 }
