@@ -32,7 +32,7 @@ struct MLBSchedule: Codable {
             struct TeamInfo: Codable {
                 
                 let score: Int?
-                let team: Team
+                let team: MLBTeam
                 let leagueRecord: LeagueRecord
                 let probablePitcher: ProbablePitcher?
                 

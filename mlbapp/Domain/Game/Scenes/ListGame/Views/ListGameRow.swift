@@ -80,7 +80,7 @@ struct ListGameRow: View {
                 if viewModel.showLinescore {
                     Divider()
                     LinescoreGridView(viewModel: .constant(viewModel.linescoreViewModel),
-                                      embedInScrollView: false)
+                                      embedInScrollView: true)
                     .listRowInsets(EdgeInsets())
                 }
                 

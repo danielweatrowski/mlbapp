@@ -24,7 +24,6 @@ struct LineupDetailInteractor: LineupDetailBusinessLogic, LineupDetailDataStore 
     let presenter: LineupDetailPresentationLogic?
     
     func getLineups() {
-        print(boxscore?.home.players.count)
         if let boxscore = boxscore {
             let lineups = LineupDetail.GameLineups(home: boxscore.home.startingLineup,
                                                    away: boxscore.away.startingLineup)

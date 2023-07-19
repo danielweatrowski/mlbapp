@@ -45,8 +45,9 @@ public extension SwiftMLBRequest {
             }
             if options.includeDecisions {
                 hydrations.append("decisions")
-
             }
+            
+            hydrations.append("team")
             
             if !hydrations.isEmpty {
                 let value = hydrations.joined(separator: ",")

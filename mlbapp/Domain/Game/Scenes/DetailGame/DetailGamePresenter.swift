@@ -33,12 +33,12 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         
         let bannerViewModel = formatBanner(game: game)
         let headerViewModel = DetailGameHeaderViewModel(homeTeamID: game.homeTeam.id,
-                                                        homeTeamName: game.homeTeam.name,
+                                                        homeTeamName: game.homeTeam.teamName,
                                                         homeTeamAbbreviation: game.homeTeam.abbreviation,
                                                         homeTeamScore: String(game.homeTeamScore),
                                                         homeTeamRecord: homeTeamRecord.formatted(),
                                                         awayTeamID: game.awayTeam.id,
-                                                        awayTeamName: game.awayTeam.name,
+                                                        awayTeamName: game.awayTeam.teamName,
                                                         awayTeamAbbreviation: game.awayTeam.abbreviation,
                                                         awayTeamScore: String(game.awayTeamScore),
                                                         awayTeamRecord: awayTeamRecord.formatted(),
@@ -50,14 +50,42 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         formatInfoItems(game: game)
         formatDecisions(game: game)
         
+        var navigationTitle = "\(game.awayTeam.abbreviation) @ \(game.homeTeam.abbreviation)"
+        if game.status == .final {
+            navigationTitle = "\(game.awayTeam.abbreviation)(\(game.awayTeamScore)) @ \(game.homeTeam.abbreviation)(\(game.homeTeamScore))"
+        }
+        
+        let previewViewModel = PreviewHeaderViewModel(homeTeamName: game.homeTeam.teamName,
+                                                      homeTeamRecord: homeTeamRecord.formatted(),
+                                                      homeTeamAbbreviation: game.homeTeam.abbreviation,
+                                                      awayTeamName: game.awayTeam.teamName,
+                                                      awayTeamRecord: awayTeamRecord.formatted(),
+                                                      awayTeamAbbreviation: game.awayTeam.abbreviation,
+                                                      gameDateString: game.date.formatted(),
+                                                      venueName: game.venue.name)
+        
         DispatchQueue.main.async {
-            viewModel.navigationTitle = "\(game.awayTeam.abbreviation) @ \(game.homeTeam.abbreviation)"
+            viewModel.navigationTitle = navigationTitle
+            viewModel.previewHeaderViewModel = previewViewModel
             viewModel.headerViewModel = headerViewModel
             viewModel.lineScoreViewModel = lineScoreViewModel
             viewModel.homeTeamAbbreviation = game.homeTeam.abbreviation
             viewModel.awayTeamAbbreviation = game.awayTeam.abbreviation
             viewModel.gameStatus = game.status
-            viewModel.state = .loaded
+            viewModel.state = .loaded(sections: getLayout(for: game.status))
+        }
+    }
+    
+    private func getLayout(for gameStatus: GameStatus) -> [DetailGame.Section] {
+        switch gameStatus {
+        case .live:
+            return DetailGame.Layout.liveLayout
+        case .final:
+            return DetailGame.Layout.finalLayout
+        case .preview:
+            return DetailGame.Layout.previewLayout
+        case .other:
+            return []
         }
     }
    
@@ -171,6 +199,8 @@ extension DetailGamePresenter {
                 } else {
                     item = DetailGame.GameInfoItem(type: type, value: "-")
                 }
+            case .date:
+                item = DetailGame.GameInfoItem(type: type, value: game.date.formatted())
             }
             
             if let item = item {
@@ -220,7 +250,8 @@ extension DetailGamePresenter {
                                           details: [
                                             .init(text: pitchingStats.era.formatted(), secondaryText: "ERA"),
                                             .init(text: pitchingStats.strikeOuts.formatted(), secondaryText: "SO"),
-                                            .init(text: pitchingStats.baseOnBalls.formatted(), secondaryText: "BB")
+                                            .init(text: pitchingStats.baseOnBalls.formatted(), secondaryText: "BB"),
+                                            .init(text: pitchingStats.whip.formatted(), secondaryText: "WHIP")
                                           ])
     }
 }

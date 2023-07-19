@@ -23,46 +23,29 @@ struct LineupDetailPresenter: LineupDetailPresentationLogic {
     
     func presentLineups(output: LineupDetail.Output) {
         
-        guard let homeLineup = output.lineups.home else {
-            return
-        }
-        
-        // TODO: DRY
-        let players: [LineupRowViewModel] = homeLineup
-            .compactMap { player in
-                guard let battingIndex = player.battingOrderIndex else {
-                    return nil
-                }
-                return LineupRowViewModel(systemImageName: "\(battingIndex).circle.fill",
-                                          playerNameText: player.fullName,
-                                          playerPositionText: player.position.abbreviation ?? "-",
-                                          playerInfoText: "")
-            }
-        
-        
         DispatchQueue.main.async {
-            viewModel.homeLineup = players
-        }
-        
-        guard let awayLineup = output.lineups.away else {
-            return
-        }
-        
-        let awayPlayers: [LineupRowViewModel] = awayLineup
-            .compactMap { player in
-                guard let battingIndex = player.battingOrderIndex else {
-                    return nil
-                }
-                return LineupRowViewModel(systemImageName: "\(battingIndex).circle.fill",
-                                          playerNameText: player.fullName,
-                                          playerPositionText: player.position.abbreviation ?? "-",
-                                          playerInfoText: "")
-            }
-        
-        
-        DispatchQueue.main.async {
-            viewModel.awayLineup = awayPlayers
+            viewModel.homeLineup = formatLineup(players: output.lineups.home)
+            viewModel.awayLineup = formatLineup(players: output.lineups.away)
             viewModel.state = .loaded
         }
+    }
+    
+    func formatLineup(players: [Boxscore_V2.Player]?) -> [LineupRowViewModel] {
+        guard let lineupPlayers = players else {
+            return []
+        }
+        
+        let lineupRows: [LineupRowViewModel] = lineupPlayers
+            .compactMap { player in
+                guard let battingIndex = player.battingOrderIndex else {
+                    return nil
+                }
+                return LineupRowViewModel(systemImageName: "\(battingIndex).circle.fill",
+                                          playerNameText: player.fullName,
+                                          playerPositionText: player.position.abbreviation ?? "-",
+                                          playerInfoText: "")
+            }
+        
+        return lineupRows
     }
 }

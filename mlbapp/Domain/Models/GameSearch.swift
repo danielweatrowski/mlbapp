@@ -38,6 +38,8 @@ enum GameSearch {
         struct Team: Codable {
             let id: Int
             let name: String
+            let teamName: String
+            let abbreviation: String
             let score: Int
             let wins: Int
             let losses: Int

@@ -10,7 +10,7 @@ import Foundation
 enum DetailGame {
     
     enum State {
-        case loading, loaded, error
+        case loading, loaded(sections: [Section]), error
     }
     
     class ViewModel: ObservableObject {
@@ -33,6 +33,9 @@ enum DetailGame {
         
         @Published var probableHomeStarter: GameDetailPitcherViewModel?
         @Published var probableAwayStarter: GameDetailPitcherViewModel?
+        
+        @Published var previewHeaderViewModel: PreviewHeaderViewModel?
+        //@Published var sections: [Section] = []
 
         // errors
         @Published var sceneError: SceneError = SceneError()
@@ -50,10 +53,11 @@ enum DetailGame {
     struct GameInfoItem: Hashable {
         
         enum InfoType: CaseIterable {
-            case firstPitchTime, duration, attendance, weather, wind, venue
+            case date, firstPitchTime, duration, attendance, weather, wind, venue
             
             var title: String {
                 switch(self) {
+                case .date: return "Scheduled"
                 case .firstPitchTime: return "First Pitch"
                 case .venue: return "Venue"
                 case .duration: return "Duration"
@@ -72,5 +76,44 @@ enum DetailGame {
         struct Response {
             var game: Game
         }
+    }
+}
+
+// MARK: Layout
+extension DetailGame {
+    
+    enum Section: String, CaseIterable, Hashable {
+        case previewHeader
+        case header
+        case probablePitchers
+        case decisions
+        case gameInfo
+        case teamInfo
+        case about
+        
+    }
+    
+    enum Layout {
+        static var previewLayout: [Section] = [
+            .previewHeader,
+            .probablePitchers,
+            .teamInfo,
+            .about
+        ]
+        
+        static var liveLayout: [Section] = [
+            .header,
+            .gameInfo,
+            .teamInfo,
+            .about
+        ]
+        
+        static var finalLayout: [Section] = [
+            .header,
+            .decisions,
+            .gameInfo,
+            .teamInfo,
+            .about
+        ]
     }
 }

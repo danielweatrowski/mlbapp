@@ -17,6 +17,11 @@ struct ScoresListView: View {
         GridItem(.flexible(), spacing: 0)
     ]
     
+    var gridColumns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     var body: some View {
         ZStack {
             Group {
@@ -26,6 +31,7 @@ struct ScoresListView: View {
                 case .loaded:
                     ScrollView {
                         gameList
+                            .padding(.bottom, 48)
                     }
                 case .error:
                     EmptyView()
@@ -53,10 +59,19 @@ struct ScoresListView: View {
         }
         .toolbar {
             Menu {
-                Picker(selection: $viewModel.filterType, label: Text("Filter Games")) {
-                    ForEach(ScoresList.FilterType.allCases) { option in
-                         Text(String(describing: option))
-                     }
+                Section {
+                    Picker(selection: $viewModel.filterType, label: Text("Filter Games")) {
+                        ForEach(ScoresList.FilterType.allCases) { option in
+                            Text(String(describing: option))
+                        }
+                    }
+                }
+                Section {
+                    Picker(selection: $viewModel.listType, label: Text("List Type")) {
+                        ForEach(ScoresList.ListType.allCases) { option in
+                            Text(String(describing: option))
+                        }
+                    }
                 }
             } label: {
                 Image(systemName: "ellipsis.circle")
@@ -77,31 +92,23 @@ struct ScoresListView: View {
             viewModel.state = .loading
             interactor.loadScores(for: newDate)
         }
-
     }
     
     @ViewBuilder
     var gameList: some View {
-        if let rows = viewModel.filteredRows {
-            LazyVGrid(columns: columns, spacing: 0) {
-                ForEach(rows, id: \.id) { row in
-                    
-                    NavigationLink(value: RouterDestination.gameDetail(gameID: row.gameID)) {
-                        ListGameRow(viewModel: row)
-                            .background()
-                            .cornerRadius(12)
-                    }
-                    .buttonStyle(PlainButtonStyle())
+        LazyVGrid(columns: viewModel.selectedColumns) {
+            ForEach(viewModel.listItems, id: \.id) { item in
+                
+                NavigationLink(value: RouterDestination.gameDetail(gameID: item.gameID)) {
+                    ScoresListGridItemView(viewModel: item)
+                        .background()
+                        .cornerRadius(12)
                 }
-                .padding([
-                    .bottom,
-                    .leading,
-                    .trailing
-                ])
+                .buttonStyle(PlainButtonStyle())
             }
-        } else {
-            EmptyView()
         }
+        .padding(.horizontal)
+        
     }
 }
 

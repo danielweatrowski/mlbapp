@@ -17,6 +17,7 @@ struct GameDecisionsSectionView: View {
         
         Section("Decisions") {
             DetailGamePitcherView(viewModel: winnerViewModel)
+//                .listRowSeparator(.hidden)
             
             DetailGamePitcherView(viewModel: loserViewModel)
             

@@ -44,17 +44,17 @@ struct DetailGamePitcherView: View {
             
             HStack {
                 ForEach(viewModel.details, id: \.id) { detail in
-                    Group {
+                    HStack(alignment: .bottom) {
                         Text(detail.text)
-                        + Text(" \(detail.secondaryText)")
+                        Text("\(detail.secondaryText)")
                             .foregroundColor(.secondary)
-                            .font(.footnote)
                             .bold()
+                            .font(.footnote)
                     }
+
                     
                     if detail.id != viewModel.details.last?.id {
                         Divider()
-                            .padding(.horizontal)
                             .frame(height: 20)
                     }
                 }

@@ -11,6 +11,12 @@ struct Decisions: Codable {
     struct Player: Codable {
         let id: Int
         let fullName: String
+        
+        func displayName() -> String {
+            let formatter = PersonNameComponentsFormatter()
+            let components = formatter.personNameComponents(from: fullName)
+            return components?.familyName ?? fullName
+        }
     }
     
     let winner: Player

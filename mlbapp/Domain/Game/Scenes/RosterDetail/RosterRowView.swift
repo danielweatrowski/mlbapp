@@ -28,7 +28,7 @@ struct RosterRowView: View {
     let viewModel: RosterRowViewModel
     
     var body: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 16) {
+        HStack(alignment: .center, spacing: 16) {
             numberView
             VStack(alignment: .leading, spacing: 6) {
                 HStack {
@@ -64,14 +64,14 @@ struct RosterRowView: View {
     @ViewBuilder
     var numberView: some View {
         Text(viewModel.playerNumberText)
-            .font(.system(size: 13))
+            .font(.system(size: 17))
             .bold()
             .foregroundColor(.white)
             .background(
                 Circle()
                     .fill(.blue)
-                    .frame(width: 25, height: 25)
+                    .frame(width: 46, height: 46)
             )
-            .frame(width: 25, height: 25, alignment: .center)
+            .frame(width: 46, height: 46, alignment: .center)
     }
 }

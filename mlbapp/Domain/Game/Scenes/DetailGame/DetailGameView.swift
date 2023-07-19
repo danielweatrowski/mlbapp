@@ -18,8 +18,8 @@ struct DetailGameView: View {
             switch viewModel.state {
             case .loading:
                 ProgressView()
-            case .loaded:
-                list
+            case .loaded(let sections):
+                list(for: sections)
             case .error:
                 EmptyView()
             }
@@ -31,56 +31,69 @@ struct DetailGameView: View {
     }
     
     @ViewBuilder
-    var list: some View {
+    func list(for sections: [DetailGame.Section]) -> some View {
         List {
-            Section {
-                DetailGameHeaderView(viewModel: $viewModel.headerViewModel)
-                    .listRowInsets(EdgeInsets())
-                
-                if viewModel.isGameLiveOrFinal {
-                    LinescoreGridView(viewModel: $viewModel.lineScoreViewModel,
-                                      embedInScrollView: true)
+            ForEach(sections, id: \.self) { section in
+                switch section {
+                case .previewHeader:
+                    Section {
+                        if let viewModel = viewModel.previewHeaderViewModel {
+                            PreviewHeaderView(viewModel: viewModel)
+                                .listRowInsets(EdgeInsets())
+                        }
+                    }
+                case .header:
+                Section {
+                    if viewModel.isGameLiveOrFinal {
+                        DetailGameHeaderView(viewModel: $viewModel.headerViewModel)
+                            .listRowInsets(EdgeInsets())
+                        
+                        LinescoreGridView(viewModel: $viewModel.lineScoreViewModel,
+                                          embedInScrollView: true)
                         .listRowInsets(EdgeInsets())
                         .padding()
-                    NavigationLink("Plays", value: RouterDestination.summaryGame(gameID: viewModel.gameID,
-                                                                                   homeTeamName: viewModel.homeTeamAbbreviation,
-                                                                                   awayTeamName: viewModel.awayTeamAbbreviation))
-                    NavigationLink("Boxscore", value: RouterDestination.boxscore(gameID: viewModel.gameID,
-                                                                                 formattedGameDate: viewModel.gameDate,
-                                                                                 homeTeamAbbreviation: viewModel.homeTeamAbbreviation,
-                                                                                 awayTeamAbbreviation: viewModel.awayTeamAbbreviation, boxscore: interactor.boxscore,
-                                                                                 players: interactor.playerHash ?? [:]))
-                    NavigationLink("Videos", value: RouterDestination.videosList(viewModel.gameID))
+                    }
                 }
-            }
-            
-            if viewModel.gameStatus == .preview {
-                ProbablePitchersSectionView(home: viewModel.probableHomeStarter,
-                                            away: viewModel.probableAwayStarter)
-            }
-            
-            if let winner = viewModel.winnerViewModel, let loser = viewModel.loserViewModel {
-                
-                GameDecisionsSectionView(winnerViewModel: winner,
-                                         loserViewModel: loser,
-                                         saverViewModel: viewModel.saverViewModel)
-                
-            }
-            
-            Section("Team Info") {
-                NavigationLink("Starting Lineups", value: RouterDestination.lineupDetail(gameID: viewModel.gameID,
-                                                                                         boxscore: interactor.boxscore))
-                NavigationLink("Rosters", value: RouterDestination.rosterDetail(homeTeam: interactor.homeTeam,
-                                                                                awayTeam: interactor.awayTeam,
-                                                                                gameDate: interactor.gameDate))
-            }
-            
-            Section("Game Info") {
-                ForEach(viewModel.infoItems, id: \.self) { item in
-                    HStack {
-                        Text(item.type.title)
-                        Spacer()
-                        Text(item.value)
+                case .probablePitchers:
+                    ProbablePitchersSectionView(home: viewModel.probableHomeStarter,
+                                                away: viewModel.probableAwayStarter)
+                case .decisions:
+                    if let winner = viewModel.winnerViewModel, let loser = viewModel.loserViewModel {
+                        
+                        GameDecisionsSectionView(winnerViewModel: winner,
+                                                 loserViewModel: loser,
+                                                 saverViewModel: viewModel.saverViewModel)
+                        
+                    }
+                case .gameInfo:
+                    Section("Game Info") {
+                        NavigationLink("Plays", value: RouterDestination.summaryGame(gameID: viewModel.gameID,
+                                                                                       homeTeamName: viewModel.homeTeamAbbreviation,
+                                                                                       awayTeamName: viewModel.awayTeamAbbreviation))
+                        NavigationLink("Boxscore", value: RouterDestination.boxscore(gameID: viewModel.gameID,
+                                                                                     formattedGameDate: viewModel.gameDate,
+                                                                                     homeTeamAbbreviation: viewModel.homeTeamAbbreviation,
+                                                                                     awayTeamAbbreviation: viewModel.awayTeamAbbreviation, boxscore: interactor.boxscore,
+                                                                                     players: interactor.playerHash ?? [:]))
+                        NavigationLink("Videos", value: RouterDestination.videosList(viewModel.gameID))
+                    }
+                case .teamInfo:
+                    Section("Team Info") {
+                        NavigationLink("Starting Lineups", value: RouterDestination.lineupDetail(gameID: viewModel.gameID,
+                                                                                                 boxscore: interactor.boxscore))
+                        NavigationLink("Rosters", value: RouterDestination.rosterDetail(homeTeam: interactor.homeTeam,
+                                                                                        awayTeam: interactor.awayTeam,
+                                                                                        gameDate: interactor.gameDate))
+                    }
+                case .about:
+                    Section("About") {
+                        ForEach(viewModel.infoItems, id: \.self) { item in
+                            HStack {
+                                Text(item.type.title)
+                                Spacer()
+                                Text(item.value)
+                            }
+                        }
                     }
                 }
             }
