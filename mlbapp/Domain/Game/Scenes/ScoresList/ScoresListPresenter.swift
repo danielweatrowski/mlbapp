@@ -25,17 +25,21 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
         
         let gridItems = output.results.map { result in
             
-            let bannerViewModel = formatBanner(gameResult: result, includeVenue: false)
+            let bannerViewModel = formatBanner(gameResult: result)
+            
+            let homeScore = result.status == .preview ? "" : String(result.homeTeam.score)
+            let awayScore = result.status == .preview ? "" : String(result.awayTeam.score)
             
             return ScoresListItemViewModel(gameID: result.id,
+                                           gameStatus: result.status,
                                            homeTeamName: result.homeTeam.teamName,
                                            homeTeamRecord: result.homeTeam.record,
                                            homeTeamAbbreviation: result.homeTeam.abbreviation,
-                                           homeTeamScore: result.homeTeam.score,
+                                           homeTeamScore: homeScore,
                                            awayTeamName: result.awayTeam.teamName,
                                            awayTeamRecord: result.awayTeam.record,
                                            awayTeamAbbreviation: result.awayTeam.abbreviation,
-                                           awayTeamScore: result.awayTeam.score,
+                                           awayTeamScore: awayScore,
                                            bannerViewModel: bannerViewModel)
             
             
@@ -58,8 +62,8 @@ struct ScoresListPresenter: ScoresListPresentationLogic {
                                       linescore)
     }
     
-    private func formatBanner(gameResult: GameSearch.Result, includeVenue: Bool = true) -> StatusBannerViewModel {
-        let venueName = includeVenue ? gameResult.venueName : ""
+    private func formatBanner(gameResult: GameSearch.Result) -> StatusBannerViewModel {
+        let venueName = gameResult.venueName
         switch gameResult.status {
         case .live:
             

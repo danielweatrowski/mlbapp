@@ -12,15 +12,6 @@ struct ScoresListView: View {
     @EnvironmentObject var router: Router
     @StateObject var interactor: ScoresListInteractor
     @StateObject private var viewModel: ScoresList.ViewModel
-        
-    var columns = [
-        GridItem(.flexible(), spacing: 0)
-    ]
-    
-    var gridColumns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
     
     var body: some View {
         ZStack {
@@ -40,7 +31,7 @@ struct ScoresListView: View {
             VStack(alignment: .trailing) {
                 Spacer()
                 
-                ScoresListDatePickerView(selectedDate: $viewModel.selectedDate, didTapDate: {
+                ScoresListDatePickerView(selectedDate: $viewModel.selectedDate, filterType: viewModel.filterType, didTapDate: {
                     viewModel.showCalendarSheet = true
                 }, didTapNextDate: {
                     viewModel.selectedDate = interactor.getNextDay(from: viewModel.selectedDate)
@@ -96,11 +87,11 @@ struct ScoresListView: View {
     
     @ViewBuilder
     var gameList: some View {
-        LazyVGrid(columns: viewModel.selectedColumns) {
-            ForEach(viewModel.listItems, id: \.id) { item in
+        LazyVGrid(columns: viewModel.selectedColumns, spacing: 16) {
+            ForEach(viewModel.filteredListItems, id: \.id) { item in
                 
                 NavigationLink(value: RouterDestination.gameDetail(gameID: item.gameID)) {
-                    ScoresListGridItemView(viewModel: item)
+                    ScoresListGridItemView(viewModel: item, showSecondaryText: viewModel.listType == .list)
                         .background()
                         .cornerRadius(12)
                 }

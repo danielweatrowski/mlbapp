@@ -10,23 +10,28 @@ import SwiftUI
 struct ScoresListItemViewModel {
     let id: UUID = UUID()
     let gameID: Int
+    let gameStatus: GameStatus
     let homeTeamName: String
     let homeTeamRecord: String
     let homeTeamAbbreviation: String
-    let homeTeamScore: Int
+    let homeTeamScore: String
     let awayTeamName: String
     let awayTeamRecord: String
     let awayTeamAbbreviation: String
-    let awayTeamScore: Int
+    let awayTeamScore: String
 
     let bannerViewModel: StatusBannerViewModel
 }
 
 struct ScoresListGridItemView: View {
+    
     let viewModel: ScoresListItemViewModel
+    
+    var showSecondaryText: Bool
+    
     var body: some View {
         VStack(spacing: 0) {
-            StatusBannerView(viewModel: viewModel.bannerViewModel)
+            banner
             
             HStack() {
                 VStack(alignment: .leading) {
@@ -45,7 +50,6 @@ struct ScoresListGridItemView: View {
                 
                 Text(String(viewModel.homeTeamScore))
                     .padding(.vertical)
-                    .bold(viewModel.homeTeamScore > viewModel.awayTeamScore)
                     .font(.title3)
                     .minimumScaleFactor(0.8)
                     .lineLimit(1)
@@ -71,7 +75,6 @@ struct ScoresListGridItemView: View {
                 
                 Text(String(viewModel.awayTeamScore))
                     .padding(.vertical)
-                    .bold(viewModel.homeTeamScore < viewModel.awayTeamScore)
                     .font(.title3)
                     .minimumScaleFactor(0.8)
                     .lineLimit(1)
@@ -81,12 +84,36 @@ struct ScoresListGridItemView: View {
             .padding(.horizontal)
         }
     }
-}
-
-struct ScoresListGridItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScoresListGridItemView(viewModel: .init(gameID: 1, homeTeamName: "Dodgers", homeTeamRecord: "0-0", homeTeamAbbreviation: "LAD", homeTeamScore: 10, awayTeamName: "Giants", awayTeamRecord: "0-0", awayTeamAbbreviation: "SF", awayTeamScore: 5, bannerViewModel: .init(statusText: "Top 8", backgroundColor: Color.green, chevronIndicator: false)))
-            .frame(width: 200)
-            .border(.red)
+    
+    @ViewBuilder
+    var banner: some View {
+        VStack(spacing: 0) {
+            HStack {
+                Text(viewModel.bannerViewModel.statusText)
+                    .bold()
+                    .foregroundColor(viewModel.bannerViewModel.statusTextColor)
+                    .font(.subheadline)
+                
+                Spacer()
+                if showSecondaryText, let secondaryStatusText = viewModel.bannerViewModel.secondaryStatusText {
+                    Spacer()
+                    Text(secondaryStatusText)
+                        .font(.subheadline)
+                        .foregroundColor(viewModel.bannerViewModel.secondaryStatusTextColor)
+                    
+                }
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.secondary)
+                    .font(.caption)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal)
+            .padding(.vertical, 8)
+            .background(viewModel.bannerViewModel.backgroundColor)
+        }
+        
+        if viewModel.bannerViewModel.divider {
+            Divider()
+        }
     }
 }

@@ -16,6 +16,7 @@ enum ScoresList {
         }
         
         let navigationTitle = "Scores"
+        
         @Published var state: State = .loading
         @Published var filterType: ScoresList.FilterType = .all
         @Published var listType: ScoresList.ListType = .grid
@@ -27,17 +28,17 @@ enum ScoresList {
         
         @Published var sceneError: SceneError = SceneError()
         
-        // TOTO: REIMPLEMENT
-//        var filteredItems: [ListGameRowViewModel]? {
-//            switch filterType {
-//            case .all:
-//                return rows
-//            case .inProgess:
-//                return rows?.filter({$0.gameStatus == .live})
-//            case .final:
-//                return rows?.filter({$0.gameStatus == .final})
-//            }
-//        }
+        var filteredListItems: [ScoresListItemViewModel] {
+            switch filterType {
+            case .all:
+                return listItems
+            case .inProgess:
+                return listItems.filter({$0.gameStatus == .live})
+            case .final:
+                return listItems.filter({$0.gameStatus == .final})
+
+            }
+        }
         
         var selectedColumns: [GridItem] {
             switch listType {
@@ -47,8 +48,8 @@ enum ScoresList {
                 ]
             case .grid:
                 return [
-                    GridItem(.flexible()),
-                    GridItem(.flexible())
+                    GridItem(.flexible(), spacing: 16),
+                    GridItem(.flexible(), spacing: 16)
                 ]
             }
         }

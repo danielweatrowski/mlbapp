@@ -10,23 +10,31 @@ import UIKit
 
 struct ScoresListDatePickerView: View {
     @Binding var selectedDate: Date
+    var filterType: ScoresList.FilterType
     
     var didTapDate: (() -> ())?
     var didTapNextDate: (() -> ())?
     var didTapPreviousDate: (() -> ())?
-    
+
     @ViewBuilder
     private var dateText: some View {
-        Calendar.current.isDateInToday(selectedDate)
-        ? Text("Today")
-        :                 Text(selectedDate, style: .date)
-
-        
+        if Calendar.current.isDateInToday(selectedDate), filterType == .all {
+            Text("Today")
+        } else if Calendar.current.isDateInToday(selectedDate), filterType != .all {
+            Text("Today")
+            + Text(" (\(filterType.description))")
+                .font(.subheadline)
+        } else if !Calendar.current.isDateInToday(selectedDate), filterType != .all {
+            Text(selectedDate, style: .date)
+            + Text(" (\(filterType.description))")
+                .font(.subheadline)
+        } else {
+            Text(selectedDate, style: .date)
+        }
     }
     
     var body: some View {
         VStack(spacing: 0) {
-            //Divider()
             HStack {
                 Button(action: {
                     didTapPreviousDate?()
