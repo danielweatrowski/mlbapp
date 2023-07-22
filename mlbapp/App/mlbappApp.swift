@@ -11,6 +11,8 @@ import SwiftUI
 struct mlbappApp: App {
     
     @StateObject var router = Router()
+    @StateObject var theme = Theme()
+    
     let dataProvider: DataProvider = DataProvider()
     
     var body: some Scene {
@@ -22,6 +24,7 @@ struct mlbappApp: App {
                 }
                 .environmentObject(MLBLogoService())
                 .environmentObject(router)
+                .environmentObject(theme)
                 
                 StandingsTab(dataProvider: dataProvider)
                     .tabItem {

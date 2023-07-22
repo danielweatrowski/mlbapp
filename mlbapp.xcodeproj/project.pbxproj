@@ -199,6 +199,9 @@
 		66EBDF3329189EAA00BEF1A5 /* DetailGamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EBDF3229189EAA00BEF1A5 /* DetailGamePresenter.swift */; };
 		66EBDF3A2921D0E900BEF1A5 /* SwiftMLB+LinescoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EBDF392921D0E900BEF1A5 /* SwiftMLB+LinescoreData.swift */; };
 		66EBDF3D292EAA5900BEF1A5 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EBDF3C292EAA5900BEF1A5 /* Game.swift */; };
+		66F354752A6B6CC4007E63F9 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F354742A6B6CC4007E63F9 /* ColorTheme.swift */; };
+		66F354772A6B854B007E63F9 /* ThemeViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F354762A6B854B007E63F9 /* ThemeViewModifiers.swift */; };
+		66F354792A6B85C3007E63F9 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F354782A6B85C3007E63F9 /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -406,6 +409,9 @@
 		66EBDF3229189EAA00BEF1A5 /* DetailGamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGamePresenter.swift; sourceTree = "<group>"; };
 		66EBDF392921D0E900BEF1A5 /* SwiftMLB+LinescoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftMLB+LinescoreData.swift"; sourceTree = "<group>"; };
 		66EBDF3C292EAA5900BEF1A5 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		66F354742A6B6CC4007E63F9 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
+		66F354762A6B854B007E63F9 /* ThemeViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewModifiers.swift; sourceTree = "<group>"; };
+		66F354782A6B85C3007E63F9 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -843,6 +849,7 @@
 		66ADAC6D298DF596004DD82F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				66F354732A6B6CB1007E63F9 /* Theme */,
 				6695086D2A5CD5E800DB011B /* Router */,
 				664616FA2A50A07B006FFDD6 /* SceneError.swift */,
 				66ADAC6E298DF5CC004DD82F /* InterfaceSize.swift */,
@@ -976,6 +983,16 @@
 				661C64E62A65DD7800748E4A /* PreviewHeaderView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		66F354732A6B6CB1007E63F9 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				66F354742A6B6CC4007E63F9 /* ColorTheme.swift */,
+				66F354762A6B854B007E63F9 /* ThemeViewModifiers.swift */,
+				66F354782A6B85C3007E63F9 /* Theme.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1150,6 +1167,7 @@
 				66A88B7629B3DB720040817F /* GameSearch.swift in Sources */,
 				66D4D07F29BEB8D300F4AB26 /* LogoWorker.swift in Sources */,
 				662001DD29D7CA040027727A /* BoxscoreDetailInteractor.swift in Sources */,
+				66F354792A6B85C3007E63F9 /* Theme.swift in Sources */,
 				66589E512A180492009380D6 /* LineupDetail.swift in Sources */,
 				6617F7FB29468EE600BC1BBF /* DetailPlayerPresenter.swift in Sources */,
 				66291E26290783000055DC93 /* SearchGameView.swift in Sources */,
@@ -1203,6 +1221,7 @@
 				669BC5902A1C5F7900934A96 /* ScoresListView.swift in Sources */,
 				66ADAC6F298DF5CD004DD82F /* InterfaceSize.swift in Sources */,
 				66510D4A2A2D2DFB00DB41B8 /* Decisions.swift in Sources */,
+				66F354772A6B854B007E63F9 /* ThemeViewModifiers.swift in Sources */,
 				66DEEB1929BFC5AF003FFB21 /* BoxscoreRowViewModel.swift in Sources */,
 				6652D70D29F34B6A00DEE161 /* PlaysListView.swift in Sources */,
 				6652D70B29F3495900DEE161 /* PlaysList.swift in Sources */,
@@ -1219,6 +1238,7 @@
 				66589E4B2A17FE87009380D6 /* LineupDetailView.swift in Sources */,
 				66139FD42A5B9FB700244001 /* VideosList.swift in Sources */,
 				66C0C4C729B2DF0600C42F11 /* LogoView.swift in Sources */,
+				66F354752A6B6CC4007E63F9 /* ColorTheme.swift in Sources */,
 				66221BFA2A357DA2004D37D7 /* Count.swift in Sources */,
 				661F20C32941A18B00D925C7 /* LineScoreViewItem.swift in Sources */,
 				66C3CF0F29739E84001E6CC7 /* GameBuilder.swift in Sources */,

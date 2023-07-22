@@ -25,9 +25,11 @@ struct ScoresListItemViewModel {
 
 struct ScoresListGridItemView: View {
     
+    @EnvironmentObject private var theme: Theme
+    
     let viewModel: ScoresListItemViewModel
     
-    var showSecondaryText: Bool
+    var isCompact: Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -35,12 +37,16 @@ struct ScoresListGridItemView: View {
             
             HStack() {
                 VStack(alignment: .leading) {
-                    Text(viewModel.homeTeamName)
-                        .bold()
-                    + Text(" \(viewModel.homeTeamAbbreviation)")
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
-                        .bold()
+                    HStack(alignment: .bottom) {
+                        Text(viewModel.homeTeamName)
+                            .bold()
+                        if !isCompact {
+                            Text(viewModel.homeTeamAbbreviation)
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                                .bold()
+                        }
+                    }
                     Text(viewModel.homeTeamRecord)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
@@ -60,12 +66,16 @@ struct ScoresListGridItemView: View {
             
             HStack() {
                 VStack(alignment: .leading) {
-                    Text(viewModel.awayTeamName)
-                        .bold()
-                    + Text(" \(viewModel.awayTeamAbbreviation)")
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
-                        .bold()
+                    HStack(alignment: .bottom) {
+                        Text(viewModel.awayTeamName)
+                            .bold()
+                        if !isCompact {
+                            Text(viewModel.awayTeamAbbreviation)
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                                .bold()
+                        }
+                    }
                     Text(viewModel.awayTeamRecord)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
@@ -83,6 +93,7 @@ struct ScoresListGridItemView: View {
             .font(.system(size: 17, weight: .medium, design: .default))
             .padding(.horizontal)
         }
+        .applyThemeSecondaryBackround(theme)
     }
     
     @ViewBuilder
@@ -95,7 +106,7 @@ struct ScoresListGridItemView: View {
                     .font(.subheadline)
                 
                 Spacer()
-                if showSecondaryText, let secondaryStatusText = viewModel.bannerViewModel.secondaryStatusText {
+                if !isCompact, let secondaryStatusText = viewModel.bannerViewModel.secondaryStatusText {
                     Spacer()
                     Text(secondaryStatusText)
                         .font(.subheadline)

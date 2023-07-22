@@ -91,7 +91,7 @@ struct ScoresListView: View {
             ForEach(viewModel.filteredListItems, id: \.id) { item in
                 
                 NavigationLink(value: RouterDestination.gameDetail(gameID: item.gameID)) {
-                    ScoresListGridItemView(viewModel: item, showSecondaryText: viewModel.listType == .list)
+                    ScoresListGridItemView(viewModel: item, isCompact: viewModel.listType == .grid)
                         .background()
                         .cornerRadius(12)
                 }
