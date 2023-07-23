@@ -26,6 +26,8 @@ class StandingsListInteractor<S: StandingsStoreProtocol>: StandingsListBusinessL
     var nationalLeagueStandings: Standings.LeagueRecord?
     var americanLeagueStandings: Standings.LeagueRecord?
     
+    let wildcardFormatter = WildcardFormatter()
+    
     init(presenter: StandingsListPresentationLogic, standingsStore: S, nationalLeagueStandings: Standings.LeagueRecord? = nil, americanLeagueStandings: Standings.LeagueRecord? = nil) {
         self.presenter = presenter
         self.nationalLeagueStandings = nationalLeagueStandings
@@ -38,11 +40,11 @@ class StandingsListInteractor<S: StandingsStoreProtocol>: StandingsListBusinessL
         do {
             let standings = try await standingsService.fetchStandings(for: Date())
             
-            let output = StandingsList.Output(nationalLeagueStandings: standings.nationalLeagueRecords,
-                                              americanLeagueStandings: standings.americanLeagueRecords)
-            
             nationalLeagueStandings = standings.nationalLeagueRecords
             americanLeagueStandings = standings.americanLeagueRecords
+            
+            let output = StandingsList.LoadStandings.Output(nationalLeagueStandings: standings.nationalLeagueRecords,
+                                                            americanLeagueStandings: standings.americanLeagueRecords)
             
             presenter.presentStandingsList(output: output)
         } catch {
@@ -59,36 +61,12 @@ class StandingsListInteractor<S: StandingsStoreProtocol>: StandingsListBusinessL
             return
         }
         
-        // TODO: Format standings into wildcard standings
-        // TODO: Use SET!! To more easily filter?
-        let nationalLeagueLeaders = nationalLeagueStandings.allRecords.filter({Int($0.rank) == 1})
-        let americanLeagueLeaders = americanLeagueStandings.allRecords.filter({Int($0.rank) == 1})
+        let nlWildcard = wildcardFormatter.formatWildcardStandings(forLeague: nationalLeagueStandings)
+        let alWildcard = wildcardFormatter.formatWildcardStandings(forLeague: americanLeagueStandings)
         
-        let nationalLeagueContenders = nationalLeagueStandings.allRecords.subtracting(nationalLeagueLeaders)
-        let americanLeagueContenders = americanLeagueStandings.allRecords.subtracting(americanLeagueLeaders)
-        
-        let nlContendersSorted = nationalLeagueContenders.sorted {
-            return $0.wildCardRank < $1.wildCardRank
-        }
-        
-        let alContendersSorted = americanLeagueContenders.sorted {
-            return $0.wildCardRank < $1.wildCardRank
-        }
-        
-        print(nlContendersSorted.map({$0.teamAbbreviation}))
-                
-        let nationalWildcard = Standings.Wildcard.LeagueStanding(league: .national,
-                                                                teamLeaders: Array(nationalLeagueLeaders),
-                                                                wildcardTeamStandings: nlContendersSorted)
-        
-        let americanWildcard = Standings.Wildcard.LeagueStanding(league: .american,
-                                                                 teamLeaders: Array(americanLeagueLeaders),
-                                                                 wildcardTeamStandings: alContendersSorted)
-        
-        let output = StandingsList.Wildcard.Output(nationalLeagueWildcard: nationalWildcard,
-                                                   americanLeagueWildcard: americanWildcard)
+        let output = StandingsList.FormatWildcard.Output(nationalLeagueWildcard: nlWildcard,
+                                                   americanLeagueWildcard: alWildcard)
         
         presenter.presentWildcardStandingsList(output: output)
-
     }
 }

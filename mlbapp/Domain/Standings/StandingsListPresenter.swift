@@ -8,17 +8,16 @@
 import Foundation
 
 protocol StandingsListPresentationLogic: SceneErrorPresentable {
-    func presentStandingsList(output: StandingsList.Output)
-    func presentWildcardStandingsList(output: StandingsList.Wildcard.Output)
+    func presentStandingsList(output: StandingsList.LoadStandings.Output)
+    func presentWildcardStandingsList(output: StandingsList.FormatWildcard.Output)
 }
 
-struct StandingsListPresenter: StandingsListPresentationLogic {
+struct StandingsListPresenter<V: StandingsListRenderingLogic>: StandingsListPresentationLogic {
 
-    let viewModel: StandingsList.ViewModel
+    let viewModel: V
     
-    func presentStandingsList(output: StandingsList.Output) {
+    func presentStandingsList(output: StandingsList.LoadStandings.Output) {
         
-        // TODO: Use tuple for extra safety
         var lists: [StandingsList.ListViewModel] = []
         for league in [output.nationalLeagueStandings, output.americanLeagueStandings] {
             
@@ -33,15 +32,12 @@ struct StandingsListPresenter: StandingsListPresentationLogic {
             lists.append(listViewModel)
         }
         
-        DispatchQueue.main.async {
-            viewModel.nationalListViewModel = lists[0]
-            viewModel.americanListViewModel = lists[1]
-            
-            viewModel.state = .loaded
-        }
+        let output = StandingsList.LoadStandings.ViewModel(nationalStandingsList: lists[0],
+                                                           americanStandingsList: lists[1])
+        viewModel.renderStandingsList(viewModel: output)
     }
     
-    func presentWildcardStandingsList(output: StandingsList.Wildcard.Output) {
+    func presentWildcardStandingsList(output: StandingsList.FormatWildcard.Output) {
         var wildcardSections = [StandingsList.ListViewModel.SectionItem]()
         
         for wildcard in [output.nationalLeagueWildcard, output.americanLeagueWildcard] {
@@ -56,16 +52,14 @@ struct StandingsListPresenter: StandingsListPresentationLogic {
 
         }
         
-        DispatchQueue.main.async {
-            viewModel.wildcardListViewModel = StandingsList.ListViewModel(sections: wildcardSections)
-        }
+        let wildcardList = StandingsList.ListViewModel(sections: wildcardSections)
+        let output = StandingsList.FormatWildcard.ViewModel(wildcardStandingsList: wildcardList)
+        viewModel.renderWildcardStandingsList(viewModel: output)
     }
 
     
     func presentSceneError(_ sceneError: SceneError) {
-        DispatchQueue.main.async {
-            self.viewModel.sceneError.presentAlert(sceneError)
-        }
+        viewModel.renderSceneError(sceneError)
     }
     
     private func formatDivision(_ division: Standings.DivisionRecord) -> [StandingsRowViewModel] {

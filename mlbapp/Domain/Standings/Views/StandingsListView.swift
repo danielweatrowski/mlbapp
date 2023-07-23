@@ -10,8 +10,7 @@ import SwiftUI
 
 struct StandingsListView: View {
     
-    @StateObject var viewModel: StandingsList.ViewModel
-    let interactor: StandingsListBusinessLogic?
+    @StateObject var viewModel: StandingsListViewModel
     
     @State private var selectedLeague: Int = 0
     
@@ -42,11 +41,11 @@ struct StandingsListView: View {
         .navigationTitle(viewModel.navigationTitle)
         .withSceneError($viewModel.sceneError)
         .task {
-            await interactor?.loadStandings()
+            await viewModel.interactor?.loadStandings()
         }
         .onChange(of: selectedLeague) { selection in
             guard selection == 2 else { return }
-            interactor?.loadWildcardStandings()
+            viewModel.interactor?.loadWildcardStandings()
         }
     }
     
@@ -83,9 +82,13 @@ struct StandingsListView: View {
 
 extension StandingsListView {
     static func configure<S: StandingsStoreProtocol>(with store: S) -> Self {
-        let viewModel = StandingsList.ViewModel()
+        let viewModel = StandingsListViewModel()
         let presenter = StandingsListPresenter(viewModel: viewModel)
-        let interactor = StandingsListInteractor(presenter: presenter, standingsStore: store)
-        return StandingsListView(viewModel: viewModel, interactor: interactor)
+        
+        let interactor = StandingsListInteractor(presenter: presenter,
+                                                 standingsStore: store)
+        
+        viewModel.interactor = interactor
+        return StandingsListView(viewModel: viewModel)
     }
 }

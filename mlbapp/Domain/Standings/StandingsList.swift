@@ -10,10 +10,6 @@ import Foundation
 
 enum StandingsList {
     
-    enum State {
-        case loading, loaded, error
-    }
-    
     struct ListViewModel {
         
         struct SectionItem {
@@ -25,27 +21,26 @@ enum StandingsList {
         let sections: [SectionItem]
     }
     
-    class ViewModel: ObservableObject {
-        @Published var state: State = .loading
-        let navigationTitle: String = "Standings"
+    struct LoadStandings {
+        struct Output {
+            let nationalLeagueStandings: Standings.LeagueRecord
+            let americanLeagueStandings: Standings.LeagueRecord
+        }
         
-        @Published var americanListViewModel: ListViewModel?
-        @Published var nationalListViewModel: ListViewModel?
-        @Published var wildcardListViewModel: ListViewModel?
-        
-        // errors
-        @Published var sceneError: SceneError = SceneError()
+        struct ViewModel {
+            let nationalStandingsList: StandingsList.ListViewModel
+            let americanStandingsList: StandingsList.ListViewModel
+        }
     }
     
-    struct Output {
-        let nationalLeagueStandings: Standings.LeagueRecord
-        let americanLeagueStandings: Standings.LeagueRecord
-    }
-    
-    enum Wildcard {
+    enum FormatWildcard {
         struct Output {
             let nationalLeagueWildcard: Standings.Wildcard.LeagueStanding
             let americanLeagueWildcard: Standings.Wildcard.LeagueStanding
+        }
+        
+        struct ViewModel {
+            let wildcardStandingsList: StandingsList.ListViewModel
         }
     }
 }
