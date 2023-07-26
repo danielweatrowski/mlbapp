@@ -17,7 +17,7 @@ struct VideosListView: View {
     var body: some View {
         Group {
             ScrollView {
-                LazyVStack {
+                LazyVStack(spacing: 16) {
                     ForEach(viewModel.videoRows, id: \.id) { rowViewModel in
                         VideosListRowView(viewModel: rowViewModel)
                             .onTapGesture {
