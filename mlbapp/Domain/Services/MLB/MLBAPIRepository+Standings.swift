@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftMLB
 
 extension MLBAPIRepository: StandingsStoreProtocol {
     func fetchStandings(for date: Date) async throws -> Standings {
@@ -27,7 +28,7 @@ extension MLBAPIRepository: StandingsStoreProtocol {
                 
                 guard let division = ActiveDivision(rawValue: teamRecordDTO.team.division.id), let league = ActiveLeague(rawValue: teamRecordDTO.team.league.id) else {
                     // TODO: Handle error here
-                    throw SwiftMLBError.notFound
+                    fatalError()
                 }
                 let standing = Standings.TeamRecord(teamID: teamRecordDTO.team.id,
                                                     teamAbbreviation: teamRecordDTO.team.abbreviation,

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftMLB
 
 struct BoxscoreAdapter {
     
@@ -45,10 +46,6 @@ struct BoxscoreAdapter {
     }
     
     private func formatPlayerKeys(_ ids: [Int]?) -> [Int] {
-//        if let ids = ids {
-//            return ids.map { "ID\($0)" }
-//        }
-        
         return ids ?? []
     }
     

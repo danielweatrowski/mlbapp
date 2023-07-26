@@ -79,7 +79,7 @@ struct Boxscore_V2 {
         let fullName: String
         let jerseyNumber: String
         let battingOrder: Int?
-        let position: MLBPosition
+        let position: Position
         let stats: Statistics.GameStats?
         let seasonStats: Statistics.SeasonStats?
         

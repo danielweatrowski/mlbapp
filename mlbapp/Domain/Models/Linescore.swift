@@ -25,9 +25,6 @@ struct Linescore: Codable {
     var homeTotal: LineItem?
     var awayTotal: LineItem?
     
-//    var winner: MLBPitcher?
-//    var loser: MLBPitcher?
-    
 }
 
 
