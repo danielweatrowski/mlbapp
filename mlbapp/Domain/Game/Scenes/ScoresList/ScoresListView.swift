@@ -28,6 +28,7 @@ struct ScoresListView: View {
                     EmptyView()
                 }
             }
+            .groupedBackground()
             VStack(alignment: .trailing) {
                 Spacer()
                 

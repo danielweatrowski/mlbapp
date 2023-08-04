@@ -18,7 +18,6 @@ struct VideosListRowViewModel: Hashable {
 
 struct VideosListRowView: View {
     
-    @EnvironmentObject private var theme: Theme
     let viewModel: VideosListRowViewModel
     
     var body: some View {
@@ -60,7 +59,7 @@ struct VideosListRowView: View {
                 .font(.subheadline)
         }
         .padding()
-        .applyThemeSecondaryBackround(theme)
+        .applyThemeSecondaryBackround()
         .cornerRadius(12)
         
     }

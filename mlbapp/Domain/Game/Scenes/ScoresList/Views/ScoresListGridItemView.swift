@@ -24,9 +24,7 @@ struct ScoresListItemViewModel {
 }
 
 struct ScoresListGridItemView: View {
-    
-    @EnvironmentObject private var theme: Theme
-    
+        
     let viewModel: ScoresListItemViewModel
     
     var isCompact: Bool
@@ -93,7 +91,7 @@ struct ScoresListGridItemView: View {
             .font(.system(size: 17, weight: .medium, design: .default))
             .padding(.horizontal)
         }
-        .applyThemeSecondaryBackround(theme)
+        .gridItemBackground()
     }
     
     @ViewBuilder
