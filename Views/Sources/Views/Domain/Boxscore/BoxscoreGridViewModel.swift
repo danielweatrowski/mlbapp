@@ -7,9 +7,22 @@
 
 import Foundation
 
-struct BoxscoreGridViewModel {
+public struct BoxscoreGridViewModel {
     
-    enum BoxType {
+    public init(homeTeamAbbreviation: String, homeNotes: [String], homeRows: [BoxscoreRowViewModel], homeTotalsRow: BoxscoreRowViewModel, awayTeamAbbreviation: String, awayNotes: [String], awayRows: [BoxscoreRowViewModel], awayTotalsRow: BoxscoreRowViewModel, type: BoxscoreGridViewModel.BoxType) {
+        self.homeTeamAbbreviation = homeTeamAbbreviation
+        self.homeNotes = homeNotes
+        self.homeRows = homeRows
+        self.homeTotalsRow = homeTotalsRow
+        self.awayTeamAbbreviation = awayTeamAbbreviation
+        self.awayNotes = awayNotes
+        self.awayRows = awayRows
+        self.awayTotalsRow = awayTotalsRow
+        self.type = type
+    }
+    
+    
+    public enum BoxType {
         case batters, pitchers
         
         var header: BoxscoreRowViewModel {
@@ -41,16 +54,16 @@ struct BoxscoreGridViewModel {
         }
     }
     
-    var homeTeamAbbreviation: String
-    var homeNotes: [String]
-    var homeRows: [BoxscoreRowViewModel]
-    var homeTotalsRow: BoxscoreRowViewModel
-    var awayTeamAbbreviation: String
-    var awayNotes: [String]
-    var awayRows: [BoxscoreRowViewModel]
-    var awayTotalsRow: BoxscoreRowViewModel
+    public var homeTeamAbbreviation: String
+    public var homeNotes: [String]
+    public var homeRows: [BoxscoreRowViewModel]
+    public var homeTotalsRow: BoxscoreRowViewModel
+    public var awayTeamAbbreviation: String
+    public var awayNotes: [String]
+    public var awayRows: [BoxscoreRowViewModel]
+    public var awayTotalsRow: BoxscoreRowViewModel
     
-    var type: BoxType
+    public var type: BoxType
     
     func battingHeader(withTitle title: String) -> BoxscoreRowViewModel {
         return BoxscoreRowViewModel(title: title,

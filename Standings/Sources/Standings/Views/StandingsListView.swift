@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Models
+import Views
 
 public struct StandingsListView: View {
     
@@ -34,8 +35,8 @@ public struct StandingsListView: View {
             VStack(spacing: 0) {
                 Spacer()
                 
-//                ToolbarPickerView(title: "League", item0Title: ActiveLeague.national.nameShort, item1Title: ActiveLeague.american.nameShort, item2Title: "Wildcard", selection: $selectedLeague)
-//                    .frame(maxWidth: .infinity, alignment: .center)
+                ToolbarPickerView(title: "League", item0Title: ActiveLeague.national.nameShort, item1Title: ActiveLeague.american.nameShort, item2Title: "Wildcard", selection: $selectedLeague)
+                    .frame(maxWidth: .infinity, alignment: .center)
             }
         }
         .navigationTitle(viewModel.navigationTitle)

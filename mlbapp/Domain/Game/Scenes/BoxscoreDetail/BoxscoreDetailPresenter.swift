@@ -8,6 +8,7 @@
 import Foundation
 import Common
 import Models
+import Views
 
 protocol BoxscoreDetailPresentationLogic: SceneErrorPresentable {
     func presentBoxscore(output: BoxscoreDetail.Output)

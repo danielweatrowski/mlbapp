@@ -16,14 +16,14 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         .package(name: "Models", path: "../Models"),
         .package(name: "Common", path: "../Common"),
-
+        .package(name: "Views", path: "../Views")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "Standings",
-            dependencies: []),
+            dependencies: ["Models", "Views", "Common"]),
         .testTarget(
             name: "StandingsTests",
             dependencies: ["Standings"]),

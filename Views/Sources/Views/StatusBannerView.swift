@@ -7,21 +7,35 @@
 
 import SwiftUI
 
-struct StatusBannerViewModel {
-    let statusText: String
-    var statusTextColor: Color = .black
-    var secondaryStatusText: String?
-    var secondaryStatusTextColor: Color = .black
-    let backgroundColor: Color
-    var divider: Bool = false
-    var chevronIndicator: Bool = true
+public struct StatusBannerViewModel {
+    public init(statusText: String, statusTextColor: Color = .black, secondaryStatusText: String? = nil, secondaryStatusTextColor: Color = .black, backgroundColor: Color, divider: Bool = false, chevronIndicator: Bool = true) {
+        self.statusText = statusText
+        self.statusTextColor = statusTextColor
+        self.secondaryStatusText = secondaryStatusText
+        self.secondaryStatusTextColor = secondaryStatusTextColor
+        self.backgroundColor = backgroundColor
+        self.divider = divider
+        self.chevronIndicator = chevronIndicator
+    }
+    
+    public let statusText: String
+    public var statusTextColor: Color = .black
+    public var secondaryStatusText: String?
+    public var secondaryStatusTextColor: Color = .black
+    public let backgroundColor: Color
+    public var divider: Bool = false
+    public var chevronIndicator: Bool = true
 }
 
-struct StatusBannerView: View {
-
-    let viewModel: StatusBannerViewModel
+public struct StatusBannerView: View {
     
-    var body: some View {
+    public init(viewModel: StatusBannerViewModel) {
+        self.viewModel = viewModel
+    }
+
+    public let viewModel: StatusBannerViewModel
+    
+    public var body: some View {
         VStack(spacing: 0) {
             HStack {
                 Text(viewModel.statusText)

@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-
+import Common
+import Views
 struct ScoresListView: View {
     
     @EnvironmentObject var router: Router

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Views
+import Common
 
 struct VideosListView: View {
     

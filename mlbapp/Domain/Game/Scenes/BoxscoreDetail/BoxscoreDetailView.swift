@@ -8,6 +8,7 @@
 import SwiftUI
 import Common
 import Models
+import Views
 
 struct BoxscoreDetailView: View {
     
@@ -27,7 +28,7 @@ struct BoxscoreDetailView: View {
                 case .loaded:
                     List {
                         Section {
-                            BoxscoreGridView(viewModel: $viewModel.battingBoxscoreViewModel, teamBoxSelection: $teamBoxSelection)
+                            BoxscoreGridView(viewModel: viewModel.battingBoxscoreViewModel, teamBoxSelection: $teamBoxSelection)
                         }
                         
                         battingDetailsSection
@@ -35,7 +36,7 @@ struct BoxscoreDetailView: View {
                         fieldingDetailsSection
                         
                         Section {
-                            BoxscoreGridView(viewModel: $viewModel.pitchingBoxscoreViewModel, teamBoxSelection: $teamBoxSelection)
+                            BoxscoreGridView(viewModel: viewModel.pitchingBoxscoreViewModel, teamBoxSelection: $teamBoxSelection)
                         }
                     }
                     .listStyle(.insetGrouped)
@@ -160,15 +161,5 @@ extension BoxscoreDetailView {
         
         return .init(interactor: interactor,
                      viewModel: viewModel)
-    }
-}
-
-struct BoxscoreDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        BoxscoreDetailView(interactor: nil,
-                           viewModel: .init(gameID: 0,
-                                            formattedGameDate: "03/31/2023 7:10 PM",
-                                            homeTeamAbbreviation: "LAD",
-                                            awayTeamAbbreviation: "SF"))
     }
 }

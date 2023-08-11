@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Views
 
 struct PreviewHeaderViewModel {
     var homeTeamName: String

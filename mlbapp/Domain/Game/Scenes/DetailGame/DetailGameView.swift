@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Views
 
 struct DetailGameView: View {
         
@@ -48,7 +49,7 @@ struct DetailGameView: View {
                         DetailGameHeaderView(viewModel: $viewModel.headerViewModel)
                             .listRowInsets(EdgeInsets())
                         
-                        LinescoreGridView(viewModel: $viewModel.lineScoreViewModel,
+                        LinescoreGridView(viewModel: viewModel.lineScoreViewModel,
                                           embedInScrollView: true)
                         .listRowInsets(EdgeInsets())
                         .padding()
@@ -100,7 +101,6 @@ struct DetailGameView: View {
         }
         .listStyle(.insetGrouped)
     }
-    
 }
 
 

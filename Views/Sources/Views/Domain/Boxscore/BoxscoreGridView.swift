@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Common
 
 struct EmptyGridItem: View {
     let color: Color = .clear
@@ -16,7 +17,7 @@ struct EmptyGridItem: View {
     }
 }
 
-struct BoxscoreGridView: View {
+public struct BoxscoreGridView: View {
     
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
@@ -25,10 +26,15 @@ struct BoxscoreGridView: View {
         return InterfaceSize(horizontalSizeClass: horizontalSizeClass, verticalSizeClass: verticalSizeClass)
     }
     
-    @Binding var viewModel: BoxscoreGridViewModel?
+    public init(viewModel: BoxscoreGridViewModel? = nil, teamBoxSelection: Binding<Int>) {
+        self.viewModel = viewModel
+        self._teamBoxSelection = teamBoxSelection
+    }
+    
+    var viewModel: BoxscoreGridViewModel?
     @Binding var teamBoxSelection: Int
 
-    var body: some View {
+    public var body: some View {
         if let viewModel = viewModel {
             VStack {
                 // boxscore content
@@ -111,12 +117,3 @@ struct BoxscoreGridView: View {
         : viewModel?.awayNotes ?? []
     }
 }
-
-// TODO: Add Preview
-/*
-struct BoxscoreView_Previews: PreviewProvider {
-    static var previews: some View {
-        BoxscoreGridView(viewModel: .constant(BoxscoreViewModel.Seed.viewModel), teamBoxSelection: .constant(0))
-    }
-}
-*/

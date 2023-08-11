@@ -8,6 +8,7 @@
 import Foundation
 import Common
 import Models
+import Views
 
 enum DetailGame {
     

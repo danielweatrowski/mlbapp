@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import Common
 
-struct LinescoreGridView: View {
+public struct LinescoreGridView: View {
     
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
@@ -16,10 +17,15 @@ struct LinescoreGridView: View {
         return InterfaceSize(horizontalSizeClass: horizontalSizeClass, verticalSizeClass: verticalSizeClass)
     }
     
-    @Binding var viewModel: LinescoreGridViewModel?
+    var viewModel: LinescoreGridViewModel?
     var embedInScrollView: Bool
     
-    var body: some View {
+    public init(viewModel: LinescoreGridViewModel? = nil, embedInScrollView: Bool) {
+        self.viewModel = viewModel
+        self.embedInScrollView = embedInScrollView
+    }
+    
+    public var body: some View {
         if let viewModel = viewModel {
             
             if interfaceSize.portrait, embedInScrollView {

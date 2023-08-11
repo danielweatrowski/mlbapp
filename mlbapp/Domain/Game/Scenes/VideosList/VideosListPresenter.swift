@@ -8,6 +8,7 @@
 import Foundation
 import Common
 import Models
+import Views
 
 protocol VideosListPresentationLogic: SceneErrorPresentable {
     func presentVideos(output: VideosList.Output)

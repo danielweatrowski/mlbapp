@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ToolbarPickerView<S: StringProtocol>: View {
+public struct ToolbarPickerView<S: StringProtocol>: View {
     
     let title: S
     
@@ -17,7 +17,15 @@ struct ToolbarPickerView<S: StringProtocol>: View {
     
     @Binding var selection: Int
     
-    var body: some View {
+    public init(title: S, item0Title: String, item1Title: String, item2Title: String? = nil, selection: Binding<Int>) {
+        self.title = title
+        self.item0Title = item0Title
+        self.item1Title = item1Title
+        self.item2Title = item2Title
+        self._selection = selection
+    }
+    
+    public var body: some View {
         HStack(alignment: .center, spacing: 0) {
             Picker(title, selection: $selection) {
                 Text(item0Title).tag(0)

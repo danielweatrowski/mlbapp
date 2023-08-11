@@ -8,6 +8,7 @@
 import SwiftUI
 import Common
 import Models
+import Views
 
 protocol DetailGamePresentationLogic {
     func presentGame(response: DetailGame.DetailGame.Response)

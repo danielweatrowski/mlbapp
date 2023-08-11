@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Models
+import Views
 
 struct ScoresListItemViewModel {
     let id: UUID = UUID()

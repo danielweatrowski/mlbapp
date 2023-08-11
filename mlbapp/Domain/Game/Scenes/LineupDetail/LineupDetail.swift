@@ -8,6 +8,7 @@
 import Foundation
 import Models
 import Common
+import Views
 
 enum LineupDetail {
     

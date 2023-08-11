@@ -8,7 +8,7 @@
 import SwiftUI
 import Models
 
-struct LinescoreGridViewModel {
+public struct LinescoreGridViewModel {
     
     static let empty: [LineScoreViewItem] = [
         LineScoreViewItem(type: .team, value: ""),
@@ -33,7 +33,7 @@ struct LinescoreGridViewModel {
     var awayLineItems: [LineScoreViewItem]
 }
 
-extension LinescoreGridViewModel {
+public extension LinescoreGridViewModel {
     init(homeAbbreviation: String, awayAbbreviation: String, _ linescore: Linescore) {
         
         var spacer: LineScoreViewItem {

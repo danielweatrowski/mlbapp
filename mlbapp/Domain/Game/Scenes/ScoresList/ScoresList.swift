@@ -8,6 +8,7 @@
 import SwiftUI
 import Models
 import Common
+import Views
 
 enum ScoresList {
     

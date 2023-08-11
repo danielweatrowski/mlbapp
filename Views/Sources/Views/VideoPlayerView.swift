@@ -8,15 +8,19 @@
 import SwiftUI
 import AVKit
 
-struct VideoPlayerView: View {
+public struct VideoPlayerView: View {
     
-    let videoURL: URL
+    public let videoURL: URL
     
     var player: AVPlayer {
         return AVPlayer(url: videoURL)
     }
     
-    var body: some View {
+    public init(videoURL: URL) {
+        self.videoURL = videoURL
+    }
+    
+    public var body: some View {
         VStack {
             VideoPlayer(player: player)
                 .ignoresSafeArea()

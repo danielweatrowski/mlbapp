@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Views
 
 struct DetailGameHeaderView: View {
     @Binding var viewModel: DetailGameHeaderViewModel?

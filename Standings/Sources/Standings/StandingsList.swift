@@ -7,7 +7,7 @@
 
 import Foundation
 import Models
-
+import Views
 
 enum StandingsList {
     

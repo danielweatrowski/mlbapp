@@ -8,6 +8,7 @@
 import Foundation
 import Common
 import Models
+import Views
 
 protocol LineupDetailPresentationLogic: SceneErrorPresentable {
     func presentLineups(output: LineupDetail.Output)
