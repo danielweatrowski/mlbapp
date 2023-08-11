@@ -11,8 +11,6 @@ import Models
 
 enum RouterDestination: Hashable {
     case empty
-    case gameList(results: [GameSearch.Result])
-    case searchGame
     case gameDetail(gameID: Int)
     case boxscore(gameID: Int, formattedGameDate: String, homeTeamAbbreviation: String, awayTeamAbbreviation: String, boxscore: Boxscore_V2?, players: [Int: Player])
     case summaryGame(gameID: Int, homeTeamName: String, awayTeamName: String)
@@ -38,10 +36,6 @@ extension View {
     func withRouter() -> some View {
         navigationDestination(for: RouterDestination.self) { destination in
             switch destination {
-            case let .gameList(results):
-                ListGameView.configure(results: results)
-            case .searchGame:
-                SearchGameView.configure()
             case let .gameDetail(id):
                 DetailGameConfigurator.configure(for: id)
             case let .boxscore(id, date, homeAbbr, awayAbbr, boxscore, players):
