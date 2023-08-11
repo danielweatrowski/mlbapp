@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Common
+import Models
 
 protocol BoxscoreDetailPresentationLogic: SceneErrorPresentable {
     func presentBoxscore(output: BoxscoreDetail.Output)

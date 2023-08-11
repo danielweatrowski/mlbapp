@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Models
+import Common
 
 protocol BoxscoreDetailBusinessLogic {
     func loadBoxscore() async

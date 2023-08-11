@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Models
+
 protocol SearchGameDisplayLogic {
     func displayLookupError(error: SearchGame.LookupGameError)
     func displayLookupResults(viewModel: ListGame.ViewModel)
@@ -62,6 +64,7 @@ struct SearchGameView: View {
                 .navigationTitle("Game Lookup")
                 .alert(viewModel.errorMessage ?? "Something went wrong. Try again.", isPresented: $viewModel.didError, actions: {})
         }
+        /*
         .onReceive(viewModel.$searchResults) { results in
             guard let results = results, !results.isEmpty else {
                 return
@@ -71,6 +74,7 @@ struct SearchGameView: View {
         .onAppear {
             viewModel.searchResults = nil
         }
+         */
     }
     
     private func createGameSearch() {

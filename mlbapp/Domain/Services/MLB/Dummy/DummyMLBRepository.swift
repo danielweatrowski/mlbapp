@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Models
 
 struct DummyMLBRepository {
     func fetchPlayEventTypes() async throws -> [String: Play.EventType] {

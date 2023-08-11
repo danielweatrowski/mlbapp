@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Common
+import Models
 
 protocol RosterDetailPresentationLogic: SceneErrorPresentable {
     func presentRoster(output: RosterDetail.Output)

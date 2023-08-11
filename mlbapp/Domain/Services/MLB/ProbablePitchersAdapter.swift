@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftMLB
+import Models
 
 struct ProbablePitchersAdapter {
     
@@ -19,16 +20,15 @@ struct ProbablePitchersAdapter {
             return nil
         }
         
-        var homePitcher: ProbablePitchers.Pitcher?
+        var homePitcher: Person?
         if let homePitcherDTO = ppDTO.home {
-            homePitcher = ProbablePitchers.Pitcher(id: homePitcherDTO.id, fullName: homePitcherDTO.fullName)
+            homePitcher = Person(id: homePitcherDTO.id, fullName: homePitcherDTO.fullName)
         }
         
-        var awayPitcher: ProbablePitchers.Pitcher?
+        var awayPitcher: Person?
         if let awayPitcherDTO = ppDTO.away {
-            awayPitcher = ProbablePitchers.Pitcher(id: awayPitcherDTO.id, fullName: awayPitcherDTO.fullName)
+            awayPitcher = Person(id: awayPitcherDTO.id, fullName: awayPitcherDTO.fullName)
         }
-        
         
         return ProbablePitchers(home: homePitcher,
                                 away: awayPitcher)

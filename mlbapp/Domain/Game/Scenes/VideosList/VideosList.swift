@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Models
+import Common
 
 enum VideosList {
     

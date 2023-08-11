@@ -5,8 +5,8 @@
 //  Created by Daniel Weatrowski on 11/23/22.
 //
 
-import Foundation
 import SwiftUI
+import Models
 
 struct LinescoreGridViewModel {
     

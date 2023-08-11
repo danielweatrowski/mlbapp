@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Combine
+import Models
 
 protocol ListGameBusinessLogic {
     func loadGames()

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Common
+import Models
 
 struct BoxscoreDetailView: View {
     

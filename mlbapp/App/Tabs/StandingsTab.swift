@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Standings
 
 struct StandingsTab: View {
     

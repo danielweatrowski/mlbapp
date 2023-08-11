@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Common
+import Models
 
 enum DetailGame {
     

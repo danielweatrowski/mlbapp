@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import Models
 enum ListGame {
     
     class ViewModel: ObservableObject {

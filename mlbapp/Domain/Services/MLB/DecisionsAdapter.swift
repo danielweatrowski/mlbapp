@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftMLB
+import Models
 
 struct DecisionsAdapter {
     
@@ -15,7 +16,7 @@ struct DecisionsAdapter {
     func toDomain() -> Decisions? {
         
         var decisions: Decisions?
-        var save: Decisions.Player?
+        var save: Person?
         if let decisionsDTO = dataObject {
             
             if let saverDTO = decisionsDTO.save {

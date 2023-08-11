@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Common
+import Models
 
 protocol DetailGamePresentationLogic {
     func presentGame(response: DetailGame.DetailGame.Response)

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Models
 
 class LogoViewModel: ObservableObject {
     let teamID: Int

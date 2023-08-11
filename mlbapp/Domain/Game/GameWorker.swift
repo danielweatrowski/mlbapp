@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Models
 
 protocol GameStoreProtocol {
     func fetchGame(withID id: Int) async throws -> Game

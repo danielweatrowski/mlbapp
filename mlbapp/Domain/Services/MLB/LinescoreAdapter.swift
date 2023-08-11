@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftMLB
+import Models
 
 
 struct LinescoreAdapter {

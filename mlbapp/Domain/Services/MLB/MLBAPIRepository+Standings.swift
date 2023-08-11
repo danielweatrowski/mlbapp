@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftMLB
+import Standings
+import Models
 
 extension MLBAPIRepository: StandingsStoreProtocol {
     func fetchStandings(for date: Date) async throws -> Standings {

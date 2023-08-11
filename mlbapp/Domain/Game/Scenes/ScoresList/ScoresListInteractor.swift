@@ -6,7 +6,8 @@
 //
 
 import Foundation
-
+import Models
+import Common
 
 protocol ScoresListBusinessLogic {
     func loadScores(for date: Date)
