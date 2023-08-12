@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import Common
 
 struct StandingsRowViewModel: Hashable {
+    let teamID: Int
     let teamRank: Int
     let teamAbbreviation: String
     let wins: String
@@ -34,6 +36,7 @@ struct StandingsRowView: View {
             Text(viewModel.teamAbbreviation)
                 .frame(width: 46, alignment: .leading)
                 .bold()
+                .teamForegroundColor(teamID: viewModel.teamID)
             Text(viewModel.wins)
             Text(viewModel.losses)
             Text(viewModel.winningPCT)

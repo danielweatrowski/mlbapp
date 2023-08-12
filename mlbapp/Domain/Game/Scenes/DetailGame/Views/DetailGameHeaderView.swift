@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Views
+import Common
 
 struct DetailGameHeaderView: View {
     @Binding var viewModel: DetailGameHeaderViewModel?
@@ -22,13 +23,16 @@ struct DetailGameHeaderView: View {
                     HStack() {
                         //LogoView(teamID: viewModel.homeTeamID, teamAbbreviation: viewModel.homeTeamAbbreviation)
                         VStack(alignment: .leading) {
-                            Text(viewModel.homeTeamName)
-                                .font(.title2)
-                                .bold()
-                            + Text(" \(viewModel.homeTeamAbbreviation)")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                                .bold()
+                            HStack(alignment: .bottom, spacing: 2) {
+                                Text(viewModel.homeTeamName)
+                                    .font(.title2)
+                                    .bold()
+                                    .teamForegroundColor(teamID: viewModel.homeTeamID)
+                                Text(" \(viewModel.homeTeamAbbreviation)")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .bold()
+                            }
                             Text(viewModel.homeTeamRecord)
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
@@ -54,13 +58,16 @@ struct DetailGameHeaderView: View {
                     HStack() {
                         //LogoView(teamID: viewModel.awayTeamID, teamAbbreviation: viewModel.awayTeamAbbreviation)
                         VStack(alignment: .leading) {
-                            Text(viewModel.awayTeamName)
-                                .font(.title2)
-                                .bold()
-                            + Text(" \(viewModel.awayTeamAbbreviation)")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                                .bold()
+                            HStack(alignment: .bottom, spacing: 2) {
+                                Text(viewModel.awayTeamName)
+                                    .font(.title2)
+                                    .bold()
+                                    .teamForegroundColor(teamID: viewModel.awayTeamID)
+                                Text(" \(viewModel.awayTeamAbbreviation)")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .bold()
+                            }
                             Text(viewModel.awayTeamRecord)
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)

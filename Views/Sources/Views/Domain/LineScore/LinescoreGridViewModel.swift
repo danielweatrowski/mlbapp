@@ -72,8 +72,8 @@ public extension LinescoreGridViewModel {
         
         // Innings
         for inning in innings {
-            let homeInningRuns = inning.away.runs
-            let awayInningRuns = inning.home.runs
+            let homeInningRuns = inning.home.runs
+            let awayInningRuns = inning.away.runs
             
             let h_runItem = LineScoreViewItem(id: UUID(), type: .run, value: homeInningRuns.formattedStat())
             let a_runItem = LineScoreViewItem(id: UUID(), type: .run, value: awayInningRuns.formattedStat())

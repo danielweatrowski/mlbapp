@@ -9,9 +9,11 @@ import SwiftUI
 import Views
 
 struct PreviewHeaderViewModel {
+    var homeTeamID: Int
     var homeTeamName: String
     var homeTeamRecord: String
     var homeTeamAbbreviation: String
+    var awayTeamID: Int
     var awayTeamName: String
     var awayTeamRecord: String
     var awayTeamAbbreviation: String
@@ -34,6 +36,7 @@ struct PreviewHeaderView: View {
                     Text(viewModel.awayTeamName)
                         .bold()
                         .font(.title2)
+                        .teamForegroundColor(teamID: viewModel.awayTeamID)
                     Text(viewModel.awayTeamAbbreviation)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
@@ -47,6 +50,7 @@ struct PreviewHeaderView: View {
                     Text(viewModel.homeTeamName)
                         .bold()
                         .font(.title2)
+                        .teamForegroundColor(teamID: viewModel.homeTeamID)
                     Text(viewModel.homeTeamAbbreviation)
                         .font(.subheadline)
                         .foregroundColor(.secondary)

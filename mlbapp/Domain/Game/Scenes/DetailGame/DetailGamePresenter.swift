@@ -58,9 +58,11 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
             navigationTitle = "\(game.awayTeam.abbreviation)(\(game.awayTeamScore)) @ \(game.homeTeam.abbreviation)(\(game.homeTeamScore))"
         }
         
-        let previewViewModel = PreviewHeaderViewModel(homeTeamName: game.homeTeam.teamName,
+        let previewViewModel = PreviewHeaderViewModel(homeTeamID: game.homeTeam.id,
+                                                      homeTeamName: game.homeTeam.teamName,
                                                       homeTeamRecord: homeTeamRecord.formatted(),
                                                       homeTeamAbbreviation: game.homeTeam.abbreviation,
+                                                      awayTeamID: game.awayTeam.id,
                                                       awayTeamName: game.awayTeam.teamName,
                                                       awayTeamRecord: awayTeamRecord.formatted(),
                                                       awayTeamAbbreviation: game.awayTeam.abbreviation,
