@@ -32,6 +32,11 @@ extension MLBAPIRepository: StandingsStoreProtocol {
                     // TODO: Handle error here
                     fatalError()
                 }
+                
+                var lastTenRecord: String?
+                if let splitRecords = teamRecordDTO.records.splitRecords, let lastTen = splitRecords.first(where: {$0.type == "lastTen"}) {
+                    lastTenRecord = "\(lastTen.wins)-\(lastTen.losses)"
+                }
                 let standing = Standings.TeamRecord(teamID: teamRecordDTO.team.id,
                                                     teamAbbreviation: teamRecordDTO.team.abbreviation,
                                                     teamName: teamRecordDTO.team.name,
@@ -44,7 +49,7 @@ extension MLBAPIRepository: StandingsStoreProtocol {
                                                     losses: teamRecordDTO.losses,
                                                     gamesBehind: teamRecordDTO.gamesBack,
                                                     winPercentage: teamRecordDTO.winningPercentage,
-                                                    last10Record: "",
+                                                    last10Record: lastTenRecord ?? "",
                                                     streak: teamRecordDTO.streak?.streakCode ?? "-")
                                 
                 // append to respective division arr

@@ -78,13 +78,13 @@ struct StandingsListPresenter<V: StandingsListRenderingLogic>: StandingsListPres
     }
     
     private func formatTeam(_ team: Standings.TeamRecord, isWildcard: Bool = false) -> StandingsRowViewModel {
-        return StandingsRowViewModel(teamRank: team.wildCardRank,
+        return StandingsRowViewModel(teamRank: isWildcard ? team.wildCardRank : team.rank,
                                      teamAbbreviation: team.teamAbbreviation,
                                      wins: String(team.wins),
                                      losses: String(team.losses),
                                      winningPCT: team.winPercentage,
                                      gamesBehind: isWildcard ? team.wildCardGamesBack : team.gamesBehind,
-                                     lastTenRecord: "-",
+                                     lastTenRecord: team.last10Record,
                                      streak: team.streak)
     }
 

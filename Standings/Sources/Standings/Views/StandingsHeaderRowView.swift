@@ -11,6 +11,8 @@ struct StandingsHeaderRowView: View {
     var body: some View {
         GridRow {
             Text("")
+                .frame(width: 17, alignment: .leading)
+            Text("")
                 .frame(width: 46, alignment: .leading)
             Text("W")
             Text("L")

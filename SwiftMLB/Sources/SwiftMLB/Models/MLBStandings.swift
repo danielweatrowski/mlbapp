@@ -25,12 +25,26 @@ public struct MLBStandings: Decodable {
         public let wildCardGamesBack: String
         public let streak: Streak?
         public let team: MLBTeam
+        public let records: RecordVariants
     }
     
     public struct Streak: Decodable {
         public let streakType: String
         public let streakNumber: Int
         public let streakCode: String
+    }
+    
+    public struct RecordVariants: Decodable {
+        public let splitRecords: [SplitRecord]?
+    }
+    
+    public struct SplitRecord: Decodable {
+        
+        public let wins: Int
+        public let losses: Int
+        public let type: String
+        public let pct: String
+        
     }
     
    public let records: [MLBStandings.Record]

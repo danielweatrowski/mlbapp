@@ -28,20 +28,6 @@ struct PreviewHeaderView: View {
             
             StatusBannerView(viewModel: StatusBannerViewModel(statusText: "Scheduled", statusTextColor: .secondary, secondaryStatusText: viewModel.venueName, secondaryStatusTextColor: .secondary, backgroundColor: .clear, divider: true, chevronIndicator: false))
             
-            VStack {
-                Text(viewModel.gameDateString)
-                    .padding()
-                    .lineLimit(1)
-                    .background(
-                        Color
-                            .secondary
-                            .opacity(0.1)
-                            .frame(maxWidth: .infinity)
-                    )
-                    .cornerRadius(12)
-            }
-            .padding(.top)
-            
             HStack {
                 Spacer()
                 VStack {
@@ -71,6 +57,21 @@ struct PreviewHeaderView: View {
                 Spacer()
             }
             .padding(.vertical)
+            .padding(.top)
+            
+            VStack {
+                Text(viewModel.gameDateString)
+                    .padding()
+                    .lineLimit(1)
+                    .background(
+                        Color
+                            .secondary
+                            .opacity(0.1)
+                            .frame(maxWidth: .infinity)
+                    )
+                    .cornerRadius(12)
+            }
+            .padding(.bottom)
         }
     }
 }

@@ -16,6 +16,10 @@ struct StandingsRowViewModel: Hashable {
     let gamesBehind: String
     let lastTenRecord: String
     let streak: String
+    
+    var teamRankText: String {
+        String(teamRank)
+    }
 }
 
 struct StandingsRowView: View {
@@ -24,6 +28,9 @@ struct StandingsRowView: View {
     
     var body: some View {
         GridRow {
+            Text(viewModel.teamRankText)
+                .foregroundColor(.secondary)
+                .frame(alignment: .leading)
             Text(viewModel.teamAbbreviation)
                 .frame(width: 46, alignment: .leading)
                 .bold()
@@ -34,6 +41,8 @@ struct StandingsRowView: View {
             Text(viewModel.lastTenRecord)
             Text(viewModel.streak)
         }
+        .font(.subheadline)
+        .padding(.vertical, 4)
     }
 }
 
