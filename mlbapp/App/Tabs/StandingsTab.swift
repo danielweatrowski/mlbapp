@@ -7,18 +7,19 @@
 
 import SwiftUI
 import Standings
+import Common
 
 struct StandingsTab: View {
     
-    @StateObject var router = Router()
+    @StateObject var sceneProvider = SceneProvider()
     let dataProvider: DataProvider
     
     var body: some View {
-        NavigationStack(path: $router.path) {
+        NavigationStack(path: $sceneProvider.path) {
             StandingsListView
                 .configure(with: dataProvider.mlbAPIRepository)
-                .withRouter()
+                .withSceneProvider()
         }
-        .environmentObject(router)
+        .environmentObject(sceneProvider)
     }
 }

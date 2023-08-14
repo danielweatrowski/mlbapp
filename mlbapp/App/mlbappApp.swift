@@ -10,7 +10,6 @@ import SwiftUI
 @main
 struct mlbappApp: App {
     
-    @StateObject var router = Router()
     @StateObject var theme = Theme()
     
     let dataProvider: DataProvider = DataProvider()
@@ -23,14 +22,12 @@ struct mlbappApp: App {
                     Label("Scores", systemImage: "squareshape.split.2x2")
                 }
                 .environmentObject(MLBLogoService())
-                .environmentObject(router)
                 .environmentObject(theme)
                 
                 StandingsTab(dataProvider: dataProvider)
                     .tabItem {
                         Label("Standings", systemImage: "flag.2.crossed")
                     }
-                    .environmentObject(router)
             }
             .onAppear {
                 let tabBarAppearance = UITabBarAppearance()

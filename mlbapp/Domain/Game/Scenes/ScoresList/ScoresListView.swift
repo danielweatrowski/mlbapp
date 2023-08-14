@@ -10,7 +10,7 @@ import Common
 import Views
 struct ScoresListView: View {
     
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var sceneProvider: SceneProvider
     @StateObject var interactor: ScoresListInteractor
     @StateObject private var viewModel: ScoresList.ViewModel
     
@@ -92,7 +92,7 @@ struct ScoresListView: View {
         LazyVGrid(columns: viewModel.selectedColumns, spacing: 16) {
             ForEach(viewModel.filteredListItems, id: \.id) { item in
                 
-                NavigationLink(value: RouterDestination.gameDetail(gameID: item.gameID)) {
+                NavigationLink(value: AppScene.gameDetail(gameID: item.gameID)) {
                     ScoresListGridItemView(viewModel: item, isCompact: viewModel.listType == .grid)
                         .background()
                         .cornerRadius(12)

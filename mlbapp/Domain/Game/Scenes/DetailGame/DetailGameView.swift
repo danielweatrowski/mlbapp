@@ -7,11 +7,12 @@
 
 import SwiftUI
 import Views
+import Common
 
 struct DetailGameView: View {
         
     @StateObject var interactor: DetailGameInteractor
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var sceneProvider: SceneProvider
     @StateObject var viewModel: DetailGame.ViewModel
     
     var body: some View {
@@ -68,21 +69,21 @@ struct DetailGameView: View {
                     }
                 case .gameInfo:
                     Section("Game Info") {
-                        NavigationLink("Plays", value: RouterDestination.summaryGame(gameID: viewModel.gameID,
+                        NavigationLink("Plays", value: AppScene.summaryGame(gameID: viewModel.gameID,
                                                                                        homeTeamName: viewModel.homeTeamAbbreviation,
                                                                                        awayTeamName: viewModel.awayTeamAbbreviation))
-                        NavigationLink("Boxscore", value: RouterDestination.boxscore(gameID: viewModel.gameID,
+                        NavigationLink("Boxscore", value: AppScene.boxscore(gameID: viewModel.gameID,
                                                                                      formattedGameDate: viewModel.gameDate,
                                                                                      homeTeamAbbreviation: viewModel.homeTeamAbbreviation,
                                                                                      awayTeamAbbreviation: viewModel.awayTeamAbbreviation, boxscore: interactor.boxscore,
                                                                                      players: interactor.playerHash ?? [:]))
-                        NavigationLink("Videos", value: RouterDestination.videosList(viewModel.gameID))
+                        NavigationLink("Videos", value: AppScene.videosList(viewModel.gameID))
                     }
                 case .teamInfo:
                     Section("Team Info") {
-                        NavigationLink("Starting Lineups", value: RouterDestination.lineupDetail(gameID: viewModel.gameID,
+                        NavigationLink("Starting Lineups", value: AppScene.lineupDetail(gameID: viewModel.gameID,
                                                                                                  boxscore: interactor.boxscore))
-                        NavigationLink("Rosters", value: RouterDestination.rosterDetail(homeTeam: interactor.homeTeam,
+                        NavigationLink("Rosters", value: AppScene.rosterDetail(homeTeam: interactor.homeTeam,
                                                                                         awayTeam: interactor.awayTeam,
                                                                                         gameDate: interactor.gameDate))
                     }

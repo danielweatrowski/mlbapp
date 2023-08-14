@@ -14,7 +14,7 @@ struct VideosListView: View {
     @StateObject var viewModel: VideosList.ViewModel
     let interactor: VideosListBusinessLogic
     
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var sceneProvider: SceneProvider
         
     var body: some View {
         Group {
@@ -24,7 +24,7 @@ struct VideosListView: View {
                         VideosListRowView(viewModel: rowViewModel)
                             .onTapGesture {
                                 let url = URL(string: rowViewModel.urlString)!
-                                router.presentedSheet = .videoPlayer(url)
+                                sceneProvider.present(scene: .videoPlayer(url))
                             }
                     }
                 }

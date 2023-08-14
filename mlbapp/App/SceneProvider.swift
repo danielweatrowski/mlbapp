@@ -1,42 +1,19 @@
 //
-//  Router.swift
+//  SceneProvider.swift
 //  mlbapp
 //
-//  Created by Daniel Weatrowski on 3/19/23.
+//  Created by Daniel Weatrowski on 8/14/23.
 //
 
-import Foundation
 import SwiftUI
-import Models
 import Standings
-
-enum RouterDestination: Hashable {
-    case empty
-    case gameDetail(gameID: Int)
-    case boxscore(gameID: Int, formattedGameDate: String, homeTeamAbbreviation: String, awayTeamAbbreviation: String, boxscore: Boxscore_V2?, players: [Int: Player])
-    case summaryGame(gameID: Int, homeTeamName: String, awayTeamName: String)
-    case lineupDetail(gameID: Int, boxscore: Boxscore_V2?)
-    case rosterDetail(homeTeam: Team?, awayTeam: Team?, gameDate: Date?)
-    case videosList(_ gameID: Int)
-    case teamStandingDetail(_ standing: Standings.TeamRecord)
-}
-
-@MainActor
-class Router: ObservableObject {
-    
-    @Published public var path: [RouterDestination] = []
-    @Published public var presentedSheet: Sheet?
-
-    public func navigate(to: RouterDestination) {
-      path.append(to)
-    }
-}
-
+import Common
+import Views
 
 @MainActor
 extension View {
-    func withRouter() -> some View {
-        navigationDestination(for: RouterDestination.self) { destination in
+    func withSceneProvider() -> some View {
+        navigationDestination(for: AppScene.self) { destination in
             switch destination {
             case let .gameDetail(id):
                 DetailGameConfigurator.configure(for: id)
@@ -54,6 +31,21 @@ extension View {
                 StandingsDetailView.configure(standing: standing)
             case .empty:
                 EmptyView()
+            case .videoPlayer(let url):
+                VideoPlayerView(videoURL: url)
+            }
+        }
+    }
+}
+
+@MainActor
+extension View {
+    func withSceneSheetProvider(sheetItem: Binding<AppScene?>) -> some View {
+        sheet(item: sheetItem) { sheet in
+            switch sheet {
+            case .videoPlayer(let url):
+                VideoPlayerView(videoURL: url)
+            default: EmptyView()
             }
         }
     }

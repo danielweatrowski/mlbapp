@@ -6,19 +6,20 @@
 //
 
 import SwiftUI
+import Common
 
 struct ScoresTab: View {
     
-    @StateObject var router = Router()
+    @StateObject var sceneProvider = SceneProvider()
     let dataProvider: DataProvider
 
     var body: some View {
-        NavigationStack(path: $router.path) {
+        NavigationStack(path: $sceneProvider.path) {
             ScoresListView
                 .configure(gameStore: dataProvider.mlbAPIRepository)
-                .withRouterSheets(sheetItem: $router.presentedSheet)
-                .withRouter()
+                .withSceneSheetProvider(sheetItem: $sceneProvider.presentedSheet)
+                .withSceneProvider()
         }
-        .environmentObject(router)
+        .environmentObject(sceneProvider)
     }
 }
