@@ -15,6 +15,8 @@ public struct Standings {
         public let teamAbbreviation: String
         public let teamName: String
         
+        public let season: String
+        
         public let rank: Int
         public let wildCardRank: Int
         public let wildCardGamesBack: Stat<String>
@@ -39,7 +41,7 @@ public struct Standings {
             return teamID
         }
         
-        public init(teamID: Int, teamAbbreviation: String, teamName: String, rank: Int, wildCardRank: Int, wildCardGamesBack: Stat<String>, division: ActiveDivision, league: ActiveLeague, wins: Stat<Int>, losses: Stat<Int>, gamesBehind: Stat<String>, winPercentage: Stat<String>, last10Record: Stat<String>, streak: Stat<String>) {
+        public init(teamID: Int, teamAbbreviation: String, teamName: String, season: String, rank: Int, wildCardRank: Int, wildCardGamesBack: Stat<String>, division: ActiveDivision, league: ActiveLeague, wins: Stat<Int>, losses: Stat<Int>, gamesBehind: Stat<String>, winPercentage: Stat<String>, last10Record: Stat<String>, streak: Stat<String>) {
             self.teamID = teamID
             self.teamAbbreviation = teamAbbreviation
             self.teamName = teamName
@@ -54,6 +56,7 @@ public struct Standings {
             self.winPercentage = winPercentage
             self.last10Record = last10Record
             self.streak = streak
+            self.season = season
         }
         
         public static func == (lhs: Standings.TeamRecord, rhs: Standings.TeamRecord) -> Bool {

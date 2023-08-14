@@ -8,9 +8,11 @@
 import SwiftUI
 import Models
 import Views
+import Common
 
 public struct StandingsListView: View {
     
+    @EnvironmentObject var sceneProvider: SceneProvider
     @StateObject var viewModel: StandingsListViewModel
     
     @State private var selectedLeague: Int = 0
@@ -49,6 +51,10 @@ public struct StandingsListView: View {
             viewModel.state = .loading
             viewModel.interactor?.loadWildcardStandings()
         }
+        .onChange(of: viewModel.standingDetail) { teamStanding in
+            guard let teamStanding = teamStanding else { return }
+            sceneProvider.push(scene: .teamStandingDetail(teamStanding))
+        }
     }
     
     @ViewBuilder
@@ -63,6 +69,9 @@ public struct StandingsListView: View {
                         
                         ForEach(section.rows, id: \.self) { rowViewModel in
                             StandingsRowView(viewModel: rowViewModel)
+                                .onTapGesture {
+                                    viewModel.interactor?.loadStanding(forTeam: rowViewModel.teamID)
+                                }
 
                             if rowViewModel != section.rows.last {
                                 Divider()

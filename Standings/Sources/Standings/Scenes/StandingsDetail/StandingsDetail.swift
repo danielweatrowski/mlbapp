@@ -14,14 +14,34 @@ enum StandingsDetail {
         case wins, losses, winningPCT, gamesBehind, wildcardGamesBehind, last10
         case runsAllowed, runsScored, runDiff
         case xRecord, xSeasonRecord
+        
+        var title: String {
+            get {
+                switch self {
+                case .wins:
+                    return "Wins"
+                case .losses:
+                    return "Losses"
+                case .winningPCT:
+                    return "Winning Percentage"
+                case .gamesBehind:
+                    return "Games Back"
+                case .wildcardGamesBehind:
+                    return "Wildcard Games Back"
+                case .last10:
+                    return "Last 10 Record"
+                default: return ""
+                }
+            }
+        }
     }
     
-    struct ItemViewModel {
+    struct ItemViewModel: Hashable {
         var item: Item
         var value: String
     }
     
-    struct SectionViewModel {
+    struct SectionViewModel: Hashable {
         let title: String
         let items: [ItemViewModel]
     }

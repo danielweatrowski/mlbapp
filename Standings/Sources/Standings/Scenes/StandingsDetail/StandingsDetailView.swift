@@ -13,7 +13,31 @@ public struct StandingsDetailView: View {
     @StateObject var viewModel: StandingsDetailViewModel
 
     public var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Group {
+            switch viewModel.state {
+            case .loaded:
+                List {
+                    ForEach(viewModel.sections, id: \.self) { section in
+                        Section(section.title) {
+                            ForEach(section.items, id: \.self) { item in
+                                HStack {
+                                    Text(item.item.title)
+                                    Spacer()
+                                    Text(item.value)
+                                }
+                            }
+                        }
+                    }
+                }
+            case .loading:
+                ProgressView()
+            default: EmptyView()
+            }
+        }
+        .navigationTitle(viewModel.navigationTitle)
+        .onAppear {
+            viewModel.interactor?.loadTeamStanding()
+        }
     }
 }
 
@@ -24,6 +48,7 @@ extension StandingsDetailView {
         let interactor = StandingsDetailInteractor(teamStanding: standing,
                                                    presenter: presenter)
         
+        viewModel.interactor = interactor
         return StandingsDetailView(viewModel: viewModel)
     }
 }

@@ -13,6 +13,7 @@ import Views
 protocol StandingsListPresentationLogic: SceneErrorPresentable {
     func presentStandingsList(output: StandingsList.LoadStandings.Output)
     func presentWildcardStandingsList(output: StandingsList.FormatWildcard.Output)
+    func presentTeamStandingDetail(ouput: StandingsList.LoadDetail.Output)
 }
 
 struct StandingsListPresenter<V: StandingsListRenderingLogic>: StandingsListPresentationLogic {
@@ -64,6 +65,11 @@ struct StandingsListPresenter<V: StandingsListRenderingLogic>: StandingsListPres
     func presentSceneError(_ sceneError: SceneError) {
         viewModel.renderSceneError(sceneError)
     }
+    
+    func presentTeamStandingDetail(ouput: StandingsList.LoadDetail.Output) {
+        viewModel.renderStandingsDetail(teamStanding: ouput.standing)
+    }
+
     
     private func formatDivision(_ division: Standings.DivisionRecord) -> [StandingsRowViewModel] {
         return division.teamStandings.map { team in

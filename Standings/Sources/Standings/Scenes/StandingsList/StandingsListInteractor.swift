@@ -12,6 +12,7 @@ import Common
 protocol StandingsListBusinessLogic {
     func loadStandings() async
     func loadWildcardStandings()
+    func loadStanding(forTeam teamID: Int)
 }
 
 protocol StandingsListDataStore {
@@ -70,4 +71,19 @@ class StandingsListInteractor<S: StandingsStoreProtocol>: StandingsListBusinessL
         
         presenter.presentWildcardStandingsList(output: output)
     }
+    
+    func loadStanding(forTeam teamID: Int) {
+        for league in [americanLeagueStandings, nationalLeagueStandings] {
+            guard let records = league?.allRecords else {
+                continue
+            }
+            for teamRecord in records {
+                if teamRecord.teamID == teamID {
+                    presenter.presentTeamStandingDetail(ouput: .init(standing: teamRecord))
+                    break
+                }
+            }
+        }
+    }
+
 }

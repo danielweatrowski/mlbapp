@@ -40,6 +40,7 @@ extension MLBAPIRepository: StandingsStoreProtocol {
                 let standing = Standings.TeamRecord(teamID: teamRecordDTO.team.id,
                                                     teamAbbreviation: teamRecordDTO.team.abbreviation,
                                                     teamName: teamRecordDTO.team.name,
+                                                    season: teamRecordDTO.season,
                                                     rank: Int(teamRecordDTO.divisionRank)!,
                                                     wildCardRank: Int(teamRecordDTO.wildCardRank ?? "0")!,
                                                     wildCardGamesBack: Stat<String>(value: teamRecordDTO.wildCardGamesBack),

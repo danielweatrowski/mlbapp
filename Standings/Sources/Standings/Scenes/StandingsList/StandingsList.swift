@@ -44,4 +44,10 @@ enum StandingsList {
             let wildcardStandingsList: StandingsList.ListViewModel
         }
     }
+    
+    enum LoadDetail {
+        struct Output {
+            let standing: Standings.TeamRecord
+        }
+    }
 }
