@@ -26,6 +26,10 @@ public struct MLBStandings: Decodable {
         public let streak: Streak?
         public let team: MLBTeam
         public let records: RecordVariants
+        public let runsAllowed: Int?
+        public let runsScored: Int?
+        public let gamesPlayed: Int?
+        public let runDifferential: Int?
     }
     
     public struct Streak: Decodable {
@@ -36,6 +40,10 @@ public struct MLBStandings: Decodable {
     
     public struct RecordVariants: Decodable {
         public let splitRecords: [SplitRecord]?
+        public let expectedRecords: [SplitRecord]?
+        public let leagueRecords: [LeagueRecord]?
+        public let overallRecords: [SplitRecord]?
+
     }
     
     public struct SplitRecord: Decodable {
@@ -45,6 +53,14 @@ public struct MLBStandings: Decodable {
         public let type: String
         public let pct: String
         
+    }
+    
+    public struct LeagueRecord: Decodable {
+        public let wins: Int
+        public let losses: Int
+        public let pct: String
+        
+        public let league: MLBLeague
     }
     
    public let records: [MLBStandings.Record]

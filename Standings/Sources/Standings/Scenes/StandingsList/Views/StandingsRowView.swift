@@ -34,7 +34,7 @@ struct StandingsRowView: View {
                 .foregroundColor(.secondary)
                 .frame(alignment: .leading)
             Text(viewModel.teamAbbreviation)
-                .frame(width: 46, alignment: .leading)
+//                .frame(width: 46, alignment: .leading)
                 .bold()
                 .teamForegroundColor(teamID: viewModel.teamID)
             Text(viewModel.wins)

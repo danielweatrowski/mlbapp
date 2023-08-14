@@ -13,7 +13,7 @@ struct StandingsHeaderRowView: View {
             Text("")
                 .frame(width: 17, alignment: .leading)
             Text("")
-                .frame(width: 46, alignment: .leading)
+//                .frame(width: 46, alignment: .leading)
             Text("W")
             Text("L")
             Text("PCT")

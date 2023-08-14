@@ -28,7 +28,7 @@ struct DetailGamePitcherView: View {
             HStack {
                 Text(viewModel.titleText)
                     .font(.subheadline)
-                    .foregroundColor(.blue)
+                    .foregroundColor(.secondary)
                     .bold()
                 Spacer()
             }

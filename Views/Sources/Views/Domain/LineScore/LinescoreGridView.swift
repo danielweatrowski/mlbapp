@@ -62,7 +62,7 @@ public struct LinescoreGridView: View {
             }
             //Divider()
             GridRow {
-                ForEach(viewModel.homeLineItems, id: \.id) { item in
+                ForEach(viewModel.awayLineItems, id: \.id) { item in
                     switch(item.type) {
                     case .team:
                         Text(item.value)
@@ -79,7 +79,7 @@ public struct LinescoreGridView: View {
                 }
             }
             GridRow {
-                ForEach(viewModel.awayLineItems, id: \.id) { item in
+                ForEach(viewModel.homeLineItems, id: \.id) { item in
                     switch(item.type) {
                     case .team:
                         Text(item.value)

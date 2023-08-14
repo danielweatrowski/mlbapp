@@ -46,6 +46,7 @@ public struct StandingsListView: View {
         }
         .onChange(of: selectedLeague) { selection in
             guard selection == 2 else { return }
+            viewModel.state = .loading
             viewModel.interactor?.loadWildcardStandings()
         }
     }

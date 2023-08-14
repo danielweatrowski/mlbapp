@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Models
+import Standings
 
 enum RouterDestination: Hashable {
     case empty
@@ -17,6 +18,7 @@ enum RouterDestination: Hashable {
     case lineupDetail(gameID: Int, boxscore: Boxscore_V2?)
     case rosterDetail(homeTeam: Team?, awayTeam: Team?, gameDate: Date?)
     case videosList(_ gameID: Int)
+    case teamStandingDetail(_ standing: Standings.TeamRecord)
 }
 
 @MainActor
@@ -48,6 +50,8 @@ extension View {
                 RosterDetailView.configure(homeTeam: homeTeam, awayTeam: awayTeam, gameDate: gameDate)
             case let .videosList(gameID):
                 VideosListView.configure(gameID: gameID)
+            case let .teamStandingDetail(standing):
+                StandingsDetailView.configure(standing: standing)
             case .empty:
                 EmptyView()
             }

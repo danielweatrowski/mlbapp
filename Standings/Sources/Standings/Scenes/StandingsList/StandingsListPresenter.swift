@@ -81,12 +81,12 @@ struct StandingsListPresenter<V: StandingsListRenderingLogic>: StandingsListPres
         return StandingsRowViewModel(teamID: team.id,
                                      teamRank: isWildcard ? team.wildCardRank : team.rank,
                                      teamAbbreviation: team.teamAbbreviation,
-                                     wins: String(team.wins),
-                                     losses: String(team.losses),
-                                     winningPCT: team.winPercentage,
-                                     gamesBehind: isWildcard ? team.wildCardGamesBack : team.gamesBehind,
-                                     lastTenRecord: team.last10Record,
-                                     streak: team.streak)
+                                     wins: team.wins.formatted(),
+                                     losses: team.losses.formatted(),
+                                     winningPCT: team.winPercentage.formatted(.decimal),
+                                     gamesBehind: isWildcard ? team.wildCardGamesBack.formatted() : team.gamesBehind.formatted(),
+                                     lastTenRecord: team.last10Record.formatted(),
+                                     streak: team.streak.formatted())
     }
 
 }

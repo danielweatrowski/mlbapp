@@ -42,15 +42,15 @@ extension MLBAPIRepository: StandingsStoreProtocol {
                                                     teamName: teamRecordDTO.team.name,
                                                     rank: Int(teamRecordDTO.divisionRank)!,
                                                     wildCardRank: Int(teamRecordDTO.wildCardRank ?? "0")!,
-                                                    wildCardGamesBack: teamRecordDTO.wildCardGamesBack,
+                                                    wildCardGamesBack: Stat<String>(value: teamRecordDTO.wildCardGamesBack),
                                                     division: division,
                                                     league: league,
-                                                    wins: teamRecordDTO.wins,
-                                                    losses: teamRecordDTO.losses,
-                                                    gamesBehind: teamRecordDTO.gamesBack,
-                                                    winPercentage: teamRecordDTO.winningPercentage,
-                                                    last10Record: lastTenRecord ?? "",
-                                                    streak: teamRecordDTO.streak?.streakCode ?? "-")
+                                                    wins: Stat<Int>(value: teamRecordDTO.wins),
+                                                    losses: Stat<Int>(value: teamRecordDTO.losses),
+                                                    gamesBehind: Stat<String>(value: teamRecordDTO.gamesBack),
+                                                    winPercentage: Stat<String>(value: teamRecordDTO.winningPercentage),
+                                                    last10Record: Stat<String>(value: lastTenRecord),
+                                                    streak: Stat<String>(value: teamRecordDTO.streak?.streakCode))
                                 
                 // append to respective division arr
                 switch division {

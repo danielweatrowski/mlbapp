@@ -40,4 +40,5 @@ public struct MLBDivision: Codable {
 public struct MLBLeague: Codable {
     public let id: Int
     public let name: String
+    public let link: String
 }

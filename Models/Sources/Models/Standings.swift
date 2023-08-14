@@ -17,24 +17,29 @@ public struct Standings {
         
         public let rank: Int
         public let wildCardRank: Int
-        public let wildCardGamesBack: String
+        public let wildCardGamesBack: Stat<String>
         
         public let division: ActiveDivision
         public let league: ActiveLeague
         
-        public let wins: Int
-        public let losses: Int
-        public let gamesBehind: String
+        public let wins: Stat<Int>
+        public let losses: Stat<Int>
+        public let gamesBehind: Stat<String>
         
-        public let winPercentage: String
-        public let last10Record: String
-        public let streak: String
+        public let winPercentage: Stat<String>
+        public let last10Record: Stat<String>
+        public let streak: Stat<String>
+        
+//        public let runsAllowed: Stat<Int>
+//        public let runsScored: Stat<Int>
+//        public let runDifferential: Stat<Int>
+//        public let gamesPlayed: Stat<Int>
         
         public var id: Int {
             return teamID
         }
         
-        public init(teamID: Int, teamAbbreviation: String, teamName: String, rank: Int, wildCardRank: Int, wildCardGamesBack: String, division: ActiveDivision, league: ActiveLeague, wins: Int, losses: Int, gamesBehind: String, winPercentage: String, last10Record: String, streak: String) {
+        public init(teamID: Int, teamAbbreviation: String, teamName: String, rank: Int, wildCardRank: Int, wildCardGamesBack: Stat<String>, division: ActiveDivision, league: ActiveLeague, wins: Stat<Int>, losses: Stat<Int>, gamesBehind: Stat<String>, winPercentage: Stat<String>, last10Record: Stat<String>, streak: Stat<String>) {
             self.teamID = teamID
             self.teamAbbreviation = teamAbbreviation
             self.teamName = teamName
@@ -49,6 +54,14 @@ public struct Standings {
             self.winPercentage = winPercentage
             self.last10Record = last10Record
             self.streak = streak
+        }
+        
+        public static func == (lhs: Standings.TeamRecord, rhs: Standings.TeamRecord) -> Bool {
+            return lhs.teamID == rhs.teamID
+        }
+        
+        public func hash(into hasher: inout Hasher) {
+            return hasher.combine(id)
         }
     }
     
