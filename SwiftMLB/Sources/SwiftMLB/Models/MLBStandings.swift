@@ -19,7 +19,7 @@ public struct MLBStandings: Decodable {
         public let season: String
         public let wins: Int
         public let losses: Int
-        public let winningPercentage: String
+        public let winningPercentage: String?
         public let divisionRank: String
         public let wildCardRank: String?
         public let gamesBack: String

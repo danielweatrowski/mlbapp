@@ -30,6 +30,12 @@ enum StandingsDetail {
                     return "Wildcard Games Back"
                 case .last10:
                     return "Last 10 Record"
+                case .runDiff:
+                    return "Run Differential"
+                case .runsAllowed:
+                    return "Runs Allowed"
+                case .runsScored:
+                    return "Runs Scored"
                 default: return ""
                 }
             }

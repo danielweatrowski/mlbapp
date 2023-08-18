@@ -48,6 +48,18 @@ public struct Stat<T>: StatProtocol {
     }
 }
 
+public extension Optional where Wrapped == String {
+    func asStat() -> Stat<String> {
+        return Stat<String>(value: self)
+    }
+}
+
+public extension Optional where Wrapped == Int {
+    func asStat() -> Stat<Int> {
+        return Stat<Int>(value: self)
+    }
+}
+
 public extension Optional where Wrapped == Int {
     func formattedStat() -> String {
         if let stat = self {

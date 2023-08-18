@@ -32,19 +32,27 @@ public struct Standings {
         public let last10Record: Stat<String>
         public let streak: Stat<String>
         
-//        public let runsAllowed: Stat<Int>
-//        public let runsScored: Stat<Int>
-//        public let runDifferential: Stat<Int>
-//        public let gamesPlayed: Stat<Int>
+        public let runsAllowed: Stat<Int>
+        public let runsScored: Stat<Int>
+        public let runDifferential: Stat<Int>
+        public let gamesPlayed: Stat<Int>
         
-        public var id: Int {
-            return teamID
-        }
+        public let homeRecord: WinLossRecord?
+        public let awayRecord: WinLossRecord?
+        public let extraInningRecord: WinLossRecord?
+        public let last10: WinLossRecord?
         
-        public init(teamID: Int, teamAbbreviation: String, teamName: String, season: String, rank: Int, wildCardRank: Int, wildCardGamesBack: Stat<String>, division: ActiveDivision, league: ActiveLeague, wins: Stat<Int>, losses: Stat<Int>, gamesBehind: Stat<String>, winPercentage: Stat<String>, last10Record: Stat<String>, streak: Stat<String>) {
+        public let xWinLossRecord: WinLossRecord?
+        public let xSeasonWinLossRecord: WinLossRecord?
+        
+        public let americanLeagueRecord: WinLossRecord?
+        public let nationalLeagueRecord: WinLossRecord?
+        
+        public init(teamID: Int, teamAbbreviation: String, teamName: String, season: String, rank: Int, wildCardRank: Int, wildCardGamesBack: Stat<String>, division: ActiveDivision, league: ActiveLeague, wins: Stat<Int>, losses: Stat<Int>, gamesBehind: Stat<String>, winPercentage: Stat<String>, last10Record: Stat<String>, streak: Stat<String>, runsAllowed: Stat<Int>, runsScored: Stat<Int>, runDifferential: Stat<Int>, gamesPlayed: Stat<Int>, homeRecord: WinLossRecord? = nil, awayRecord: WinLossRecord? = nil, extraInningRecord: WinLossRecord? = nil, last10: WinLossRecord? = nil, xWinLossRecord: WinLossRecord? = nil, xSeasonWinLossRecord: WinLossRecord? = nil, americanLeagueRecord: WinLossRecord? = nil, nationalLeagueRecord: WinLossRecord? = nil) {
             self.teamID = teamID
             self.teamAbbreviation = teamAbbreviation
             self.teamName = teamName
+            self.season = season
             self.rank = rank
             self.wildCardRank = wildCardRank
             self.wildCardGamesBack = wildCardGamesBack
@@ -56,8 +64,25 @@ public struct Standings {
             self.winPercentage = winPercentage
             self.last10Record = last10Record
             self.streak = streak
-            self.season = season
+            self.runsAllowed = runsAllowed
+            self.runsScored = runsScored
+            self.runDifferential = runDifferential
+            self.gamesPlayed = gamesPlayed
+            self.homeRecord = homeRecord
+            self.awayRecord = awayRecord
+            self.extraInningRecord = extraInningRecord
+            self.last10 = last10
+            self.xWinLossRecord = xWinLossRecord
+            self.xSeasonWinLossRecord = xSeasonWinLossRecord
+            self.americanLeagueRecord = americanLeagueRecord
+            self.nationalLeagueRecord = nationalLeagueRecord
         }
+        
+        public var id: Int {
+            return teamID
+        }
+        
+
         
         public static func == (lhs: Standings.TeamRecord, rhs: Standings.TeamRecord) -> Bool {
             return lhs.teamID == rhs.teamID

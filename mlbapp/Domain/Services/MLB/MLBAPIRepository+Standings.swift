@@ -49,9 +49,13 @@ extension MLBAPIRepository: StandingsStoreProtocol {
                                                     wins: Stat<Int>(value: teamRecordDTO.wins),
                                                     losses: Stat<Int>(value: teamRecordDTO.losses),
                                                     gamesBehind: Stat<String>(value: teamRecordDTO.gamesBack),
-                                                    winPercentage: Stat<String>(value: teamRecordDTO.winningPercentage),
+                                                    winPercentage: teamRecordDTO.winningPercentage.asStat(),
                                                     last10Record: Stat<String>(value: lastTenRecord),
-                                                    streak: Stat<String>(value: teamRecordDTO.streak?.streakCode))
+                                                    streak: Stat<String>(value: teamRecordDTO.streak?.streakCode),
+                                                    runsAllowed: teamRecordDTO.runsAllowed.asStat(),
+                                                    runsScored: teamRecordDTO.runsScored.asStat(),
+                                                    runDifferential: teamRecordDTO.runDifferential.asStat(),
+                                                    gamesPlayed: teamRecordDTO.gamesPlayed.asStat())
                                 
                 // append to respective division arr
                 switch division {

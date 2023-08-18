@@ -26,8 +26,17 @@ struct StandingsDetailPresenter<V>: StandingsDetailPresentationLogic where V: St
             .init(item: .gamesBehind, value: standing.gamesBehind.formatted()),
             .init(item: .wildcardGamesBehind, value: standing.wildCardGamesBack.formatted())
         ]
+        
+        // runs
+        let runInfoItems: [StandingsDetail.ItemViewModel] = [
+            .init(item: .runsAllowed, value: standing.runsAllowed.formatted()),
+            .init(item: .runsScored, value: standing.runsScored.formatted()),
+            .init(item: .runDiff, value: standing.runDifferential.formatted())
+        ]
+        
         let basicInfoSection = StandingsDetail.SectionViewModel(title: "General", items: basicInfoItems)
-        let viewInput = StandingsDetail.ViewInput(sections: [basicInfoSection])
+        let runsInfoSection = StandingsDetail.SectionViewModel(title: "Runs", items: runInfoItems)
+        let viewInput = StandingsDetail.ViewInput(sections: [basicInfoSection, runsInfoSection])
         
         viewModel.renderNavigationTitle("\(standing.teamAbbreviation) (\(standing.season))")
         viewModel.renderStandingsDetail(input: viewInput)

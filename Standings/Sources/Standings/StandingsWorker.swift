@@ -12,11 +12,37 @@ public protocol StandingsStoreProtocol {
     func fetchStandings(for date: Date) async throws -> Standings
 }
 
-struct StandingsWorker<Store: StandingsStoreProtocol>: StandingsStoreProtocol {
+class StandingsWorker<Store: StandingsStoreProtocol>: StandingsStoreProtocol {
     
     let store: Store
+    private(set) var standings: Standings?
+    
+    init(store: Store) {
+        self.store = store
+    }
     
     func fetchStandings(for date: Date) async throws -> Standings {
-        return try await store.fetchStandings(for: date)
+        let standings = try await store.fetchStandings(for: date)
+        
+        self.standings = standings
+        return standings
+    }
+    
+    func fetchTeamRecord(teamId: Int) -> Standings.TeamRecord? {
+        guard let standings = standings else {
+            return nil
+        }
+        
+        for league in [standings.americanLeagueRecords, standings.nationalLeagueRecords] {
+
+            for teamRecord in league.allRecords {
+                if teamRecord.teamID == teamId {
+                    return teamRecord
+                }
+            }
+        }
+        
+        // not found
+        return nil
     }
 }
