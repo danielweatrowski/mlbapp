@@ -13,6 +13,7 @@ enum StandingsDetail {
     enum Item {
         case wins, losses, winningPCT, gamesBehind, wildcardGamesBehind, last10
         case runsAllowed, runsScored, runDiff
+        case home, away, lastTen, extraInnings, american, national
         case xRecord, xSeasonRecord
         
         var title: String {
@@ -29,13 +30,27 @@ enum StandingsDetail {
                 case .wildcardGamesBehind:
                     return "Wildcard Games Back"
                 case .last10:
-                    return "Last 10 Record"
+                    return "Last 10"
                 case .runDiff:
                     return "Run Differential"
                 case .runsAllowed:
                     return "Runs Allowed"
                 case .runsScored:
                     return "Runs Scored"
+                case .home:
+                    return "Home"
+                case .away:
+                    return "Away"
+                case .american:
+                    return "American League"
+                case .national:
+                    return "National League"
+                case .extraInnings:
+                    return "Extra Innings"
+                case .xRecord:
+                    return "xWinLoss"
+                case .xSeasonRecord:
+                    return "xWinLossSeason"
                 default: return ""
                 }
             }

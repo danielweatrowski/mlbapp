@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol StatProtocol {
-    
-}
-
 public enum StatFormatType {
     case int, decimal, pitchingRecord, dash, none
     
@@ -30,7 +26,7 @@ public enum StatFormatType {
     }
 }
 
-public struct Stat<T>: StatProtocol {
+public struct Stat<T> {
     
     let value: T?
     

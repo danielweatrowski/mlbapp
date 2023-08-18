@@ -55,7 +55,13 @@ extension MLBAPIRepository: StandingsStoreProtocol {
                                                     runsAllowed: teamRecordDTO.runsAllowed.asStat(),
                                                     runsScored: teamRecordDTO.runsScored.asStat(),
                                                     runDifferential: teamRecordDTO.runDifferential.asStat(),
-                                                    gamesPlayed: teamRecordDTO.gamesPlayed.asStat())
+                                                    gamesPlayed: teamRecordDTO.gamesPlayed.asStat(),
+                                                    homeRecord: getRecordSplit(forType: .home, splitsDTO: teamRecordDTO.records.splitRecords),
+                                                    awayRecord: getRecordSplit(forType: .away, splitsDTO: teamRecordDTO.records.splitRecords), extraInningRecord: getRecordSplit(forType: .extraInning, splitsDTO: teamRecordDTO.records.splitRecords), last10: getRecordSplit(forType: .lastTen, splitsDTO: teamRecordDTO.records.splitRecords),
+                                                    xWinLossRecord: getRecordSplit(forType: .xWinLoss, splitsDTO: teamRecordDTO.records.expectedRecords),
+                                                    xSeasonWinLossRecord: getRecordSplit(forType: .xWinLossSeason, splitsDTO: teamRecordDTO.records.expectedRecords),
+                                                    americanLeagueRecord: getRecordSplit(forLeague: .american, leagueRecordsDTO: teamRecordDTO.records.leagueRecords),
+                                                    nationalLeagueRecord: getRecordSplit(forLeague: .national, leagueRecordsDTO: teamRecordDTO.records.leagueRecords))
                                 
                 // append to respective division arr
                 switch division {
@@ -78,5 +84,38 @@ extension MLBAPIRepository: StandingsStoreProtocol {
                                                                          westTeamRecords: alWestRecords)
         return Standings(nationalLeagueRecords: nationalLeague,
                          americanLeagueRecords: americanLeague)
+    }
+    
+    func getRecordSplit(forType type: RecordSplitType, splitsDTO: [MLBStandings.SplitRecord]?) -> WinLossRecord? {
+        guard let splitsDTO = splitsDTO else {
+            return nil
+        }
+        
+        let record = splitsDTO.first(where: {$0.type == type.rawValue})
+        
+        guard let record = record else {
+            return nil
+        }
+        
+        return WinLossRecord(wins: record.wins, losses: record.losses, winningPct: record.pct)
+    }
+    
+    func getRecordSplit(forLeague league: ActiveLeague, leagueRecordsDTO: [MLBStandings.LeagueRecord]?) -> WinLossRecord? {
+        guard let records = leagueRecordsDTO else {
+            return nil
+        }
+        
+        switch league {
+        case .national:
+            if let split = leagueRecordsDTO?.first(where: {$0.league.name == ActiveLeague.national.name}) {
+                return WinLossRecord(wins: split.wins, losses: split.losses, winningPct: split.pct)
+            }
+        case .american:
+            if let split = leagueRecordsDTO?.first(where: {$0.league.name == ActiveLeague.american.name}) {
+                return WinLossRecord(wins: split.wins, losses: split.losses, winningPct: split.pct)
+            }
+        }
+        
+        return nil
     }
 }
