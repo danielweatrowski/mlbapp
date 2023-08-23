@@ -40,6 +40,7 @@ struct StandingsDetailPresenter<V>: StandingsDetailPresentationLogic where V: St
         let americanLeagueRecordStat = standing.americanLeagueRecord?.asStat()
         let nationalLeagueRecordStat = standing.nationalLeagueRecord?.asStat()
         
+        // record splits
         let recordSplitItems: [StandingsDetail.ItemViewModel] = [
             .init(item: .home, value: homeRecordStat.unwrappedAndFormatted()),
             .init(item: .away, value: awayRecordStat.unwrappedAndFormatted()),
@@ -52,6 +53,7 @@ struct StandingsDetailPresenter<V>: StandingsDetailPresentationLogic where V: St
         let xRecordStat = standing.xWinLossRecord?.asStat()
         let xSeasonRecordStat = standing.xSeasonWinLossRecord?.asStat()
         
+        // expected splits
         let expectedRecordItems: [StandingsDetail.ItemViewModel] = [
             .init(item: .xRecord, value: xRecordStat.unwrappedAndFormatted()),
             .init(item: .xSeasonRecord, value: xSeasonRecordStat.unwrappedAndFormatted())
@@ -64,7 +66,6 @@ struct StandingsDetailPresenter<V>: StandingsDetailPresentationLogic where V: St
         
         let viewInput = StandingsDetail.ViewInput(sections: [basicInfoSection, runsInfoSection, recordSplitInfoSection, expectedRecordInfoItems])
         
-        viewModel.renderNavigationTitle("\(standing.teamAbbreviation) (\(standing.season))")
         viewModel.renderStandingsDetail(input: viewInput)
     }
 }

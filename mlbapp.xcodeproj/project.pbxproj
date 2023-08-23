@@ -80,9 +80,6 @@
 		66C919872A86A97700273D58 /* Views in Frameworks */ = {isa = PBXBuildFile; productRef = 66C919862A86A97700273D58 /* Views */; };
 		66D4D07F29BEB8D300F4AB26 /* LogoWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D07E29BEB8D300F4AB26 /* LogoWorker.swift */; };
 		66D4D08129BEBA6D00F4AB26 /* MLBLogoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D08029BEBA6D00F4AB26 /* MLBLogoService.swift */; };
-		66E063752A6C53B000E164F8 /* StandingsListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E063742A6C53B000E164F8 /* StandingsListInteractorTests.swift */; };
-		66E063772A6DCF4B00E164F8 /* StandingsListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E063762A6DCF4B00E164F8 /* StandingsListPresenterTests.swift */; };
-		66E063792A6DD0A300E164F8 /* StandingsListSeeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E063782A6DD0A300E164F8 /* StandingsListSeeds.swift */; };
 		66E7DB4A2A8AC70D003355E2 /* SceneProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7DB492A8AC70D003355E2 /* SceneProvider.swift */; };
 		66EBDF2729184EA800BEF1A5 /* DetailGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EBDF2629184EA800BEF1A5 /* DetailGameView.swift */; };
 		66EBDF2B29188C7D00BEF1A5 /* DetailGameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EBDF2A29188C7D00BEF1A5 /* DetailGameInteractor.swift */; };
@@ -180,9 +177,6 @@
 		66C919852A86A92F00273D58 /* Views */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Views; sourceTree = "<group>"; };
 		66D4D07E29BEB8D300F4AB26 /* LogoWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoWorker.swift; sourceTree = "<group>"; };
 		66D4D08029BEBA6D00F4AB26 /* MLBLogoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBLogoService.swift; sourceTree = "<group>"; };
-		66E063742A6C53B000E164F8 /* StandingsListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsListInteractorTests.swift; sourceTree = "<group>"; };
-		66E063762A6DCF4B00E164F8 /* StandingsListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsListPresenterTests.swift; sourceTree = "<group>"; };
-		66E063782A6DD0A300E164F8 /* StandingsListSeeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsListSeeds.swift; sourceTree = "<group>"; };
 		66E7DB492A8AC70D003355E2 /* SceneProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneProvider.swift; sourceTree = "<group>"; };
 		66EBDF2629184EA800BEF1A5 /* DetailGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGameView.swift; sourceTree = "<group>"; };
 		66EBDF2A29188C7D00BEF1A5 /* DetailGameInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGameInteractor.swift; sourceTree = "<group>"; };
@@ -509,27 +503,8 @@
 		66C3CEE729597DF8001E6CC7 /* mlbappTests */ = {
 			isa = PBXGroup;
 			children = (
-				66E063702A6C533100E164F8 /* Scenes */,
 			);
 			path = mlbappTests;
-			sourceTree = "<group>";
-		};
-		66E063702A6C533100E164F8 /* Scenes */ = {
-			isa = PBXGroup;
-			children = (
-				66E063712A6C533700E164F8 /* Standings */,
-			);
-			path = Scenes;
-			sourceTree = "<group>";
-		};
-		66E063712A6C533700E164F8 /* Standings */ = {
-			isa = PBXGroup;
-			children = (
-				66E063742A6C53B000E164F8 /* StandingsListInteractorTests.swift */,
-				66E063762A6DCF4B00E164F8 /* StandingsListPresenterTests.swift */,
-				66E063782A6DD0A300E164F8 /* StandingsListSeeds.swift */,
-			);
-			path = Standings;
 			sourceTree = "<group>";
 		};
 		66EBDF2529184E9500BEF1A5 /* DetailGame */ = {
@@ -758,9 +733,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66E063792A6DD0A300E164F8 /* StandingsListSeeds.swift in Sources */,
-				66E063772A6DCF4B00E164F8 /* StandingsListPresenterTests.swift in Sources */,
-				66E063752A6C53B000E164F8 /* StandingsListInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -912,7 +884,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.danielweatrowski.mlbapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielweatrowski.slgrapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -943,7 +915,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.danielweatrowski.mlbapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielweatrowski.slgrapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

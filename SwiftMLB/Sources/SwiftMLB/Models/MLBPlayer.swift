@@ -20,7 +20,7 @@ public struct MLBPlayer: Codable {
     public var firstName: String
     public var lastName: String
     public var fullName: String
-    public var primaryNumber: String
+    public var primaryNumber: String?
     public var nickname: String?
     public var lastInitName: String?
     public var boxscoreName: String?

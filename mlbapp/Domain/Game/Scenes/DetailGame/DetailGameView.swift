@@ -26,6 +26,7 @@ struct DetailGameView: View {
                 EmptyView()
             }
         }
+        .withSceneError($viewModel.sceneError)
         .navigationTitle(viewModel.navigationTitle)
         .onAppear {
             interactor.loadGame()

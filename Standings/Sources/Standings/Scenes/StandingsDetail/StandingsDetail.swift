@@ -50,7 +50,7 @@ enum StandingsDetail {
                 case .xRecord:
                     return "xWinLoss"
                 case .xSeasonRecord:
-                    return "xWinLossSeason"
+                    return "Season xWinLoss"
                 default: return ""
                 }
             }

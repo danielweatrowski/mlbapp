@@ -43,7 +43,7 @@ public struct StandingsDetailView: View {
 
 extension StandingsDetailView {
     public static func configure(standing: Standings.TeamRecord) -> Self {
-        let viewModel = StandingsDetailViewModel()
+        let viewModel = StandingsDetailViewModel(teamAbbreviation: standing.teamAbbreviation, season: standing.season)
         let presenter = StandingsDetailPresenter(viewModel: viewModel)
         let interactor = StandingsDetailInteractor(teamStanding: standing,
                                                    presenter: presenter)
