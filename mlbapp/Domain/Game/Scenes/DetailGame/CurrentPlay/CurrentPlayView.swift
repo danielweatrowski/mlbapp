@@ -7,78 +7,115 @@
 
 import SwiftUI
 
+
 struct CurrentPlayView: View {
     let viewModel: CurrentPlayViewModel
     
     var body: some View {
-        HStack(alignment: .top, spacing: 16) {
-    
-            VStack(alignment: .center, spacing: 24) {
-                
-                // TODO: Make Diamond
-                VStack {
-                    Rectangle()
-                        .fill(viewModel.isRunnerOn1B ? .blue : .secondary)
-                        .frame(width: viewModel.baseIndicatorWidth, height: viewModel.baseIndicatorWidth)
-                        .rotationEffect(Angle(degrees: 45))
-                        .padding(.bottom, -10)
-                    
-                    HStack(spacing: 20) {
-                        Rectangle()
-                            .fill(viewModel.isRunnerOn2B ? .blue : .secondary)
-                            .frame(width: viewModel.baseIndicatorWidth, height: viewModel.baseIndicatorWidth)
-                            .rotationEffect(Angle(degrees: 45))
-                        
-                        Rectangle()
-                            .fill(viewModel.isRunnerOn3B ? .blue : .secondary)
-                            .frame(width: viewModel.baseIndicatorWidth, height: viewModel.baseIndicatorWidth)
-                            .rotationEffect(Angle(degrees: 45))
-                    }
-                }
-                
-                VStack {
-                    // Out indicators
-                    HStack {
-                        ForEach(1..<4, id: \.self) { outNumber in
-                            Circle()
-                                .fill(color(forOutNumber: outNumber))
-                                .frame(width: viewModel.outIndicatorWidth, height: viewModel.outIndicatorWidth)
-                        }
-                    }
-                    
-                    // Count label
-                    Text(viewModel.countText)
-                        .bold()
-                }
-            }
-            .padding(.trailing)
+        VStack {
+            currentPlayHeaderView
             
-            VStack(alignment: .leading, spacing: 16) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(viewModel.batterTitleText)
-                        .font(.footnote)
-                    Text(viewModel.batterNameText)
-                        .bold()
-                    Text(viewModel.batterStatsText)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-                //.frame(maxWidth: .infinity, alignment: .leading)
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(viewModel.pitcherTitleText)
-                        .font(.footnote)
-                    Text(viewModel.pitcherNameText)
-                        .bold()
-                    Text(viewModel.pitcherStatsText)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-               // .frame(maxWidth: .infinity, alignment: .leading)
-
+            if let onDeckBatterName = viewModel.onDeckBatterNameText {
+                onDeckView(batterName: onDeckBatterName)
+            }
+            
+            if let pitchSequenceVM = viewModel.pitchSequenceViewModel {
+                PitchSequenceView(viewModel: pitchSequenceVM)
             }
         }
-        .padding()
-        .padding([.leading, .top])
+    }
+    
+    @ViewBuilder
+    func onDeckView(batterName: String) -> some View {
+        Divider()
+        HStack(alignment: .center, spacing: 2) {
+            Text(viewModel.onDeckTitleText)
+            Text(batterName)
+                .bold()
+        }
+        .font(.footnote)
+        Divider()
+    }
+    
+    @ViewBuilder var currentPlayHeaderView: some View {
+        HStack(alignment: .center, spacing: 16) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(viewModel.pitcherTitleText)
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                Text(viewModel.pitcherNameText)
+                    .bold()
+                    .font(.title2)
+                VStack(alignment: .leading) {
+                    Text(viewModel.pitcherStatsText1)
+                    Text(viewModel.pitcherStatsText2)
+                }
+                .padding(.top, 2)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+
+            VStack(alignment: .center, spacing: 16) {
+                diamondView
+                numberOfOutsView
+                Text(viewModel.countText)
+                    .bold()
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+
+            VStack(alignment: .trailing, spacing: 2) {
+                Text(viewModel.batterTitleText)
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                Text(viewModel.batterNameText)
+                    .bold()
+                    .font(.title2)
+                VStack(alignment: .trailing) {
+                    Text(viewModel.batterStatsText1)
+                    Text(viewModel.batterStatsText2)
+                }
+                .padding(.top, 2)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+        }
+    }
+    
+    @ViewBuilder
+    var diamondView: some View {
+        // TODO: Make Diamond
+        VStack {
+            Rectangle()
+                .fill(viewModel.isRunnerOn1B ? .blue : Color(uiColor: .tertiaryLabel))
+                .frame(width: viewModel.baseIndicatorWidth, height: viewModel.baseIndicatorWidth)
+                .rotationEffect(Angle(degrees: 45))
+                .padding(.bottom, -10)
+            
+            HStack(spacing: 13) {
+                Rectangle()
+                    .fill(viewModel.isRunnerOn2B ? .blue : Color(uiColor: .tertiaryLabel))
+                    .frame(width: viewModel.baseIndicatorWidth, height: viewModel.baseIndicatorWidth)
+                    .rotationEffect(Angle(degrees: 45))
+                
+                Rectangle()
+                    .fill(viewModel.isRunnerOn3B ? .blue : Color(uiColor: .tertiaryLabel))
+                    .frame(width: viewModel.baseIndicatorWidth, height: viewModel.baseIndicatorWidth)
+                    .rotationEffect(Angle(degrees: 45))
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var numberOfOutsView: some View {
+        HStack {
+            ForEach(1..<4, id: \.self) { outNumber in
+                Circle()
+                    .fill(color(forOutNumber: outNumber))
+                    .frame(width: viewModel.outIndicatorWidth, height: viewModel.outIndicatorWidth)
+            }
+        }
     }
     
     func color(forOutNumber out: Int) -> Color {
@@ -86,7 +123,7 @@ struct CurrentPlayView: View {
         
         return numberOfOuts >= out
         ? .yellow
-        : .secondary
+        : Color(uiColor: .tertiaryLabel)
         
         // outNumber, numberOfOuts -> Color
         // 1, 0 -> secondary
@@ -108,8 +145,20 @@ struct CurrentPlayView: View {
     }
 }
 
-//struct CurrentPlayView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CurrentPlayView()
-//    }
-//}
+struct CurrentPlayView_Previews: PreviewProvider {
+    static var previews: some View {
+        let vm = CurrentPlayViewModel(batterNameText: "Slugger, D",
+                                      batterStatsText1: "1-1, 2B",
+                                      batterStatsText2: ".200 AVG",
+                                      pitcherNameText: "Cannon, S",
+                                      pitcherStatsText1: "1.0 IP, 20 P",
+                                      pitcherStatsText2: "4K, 1 ER",
+                                      countText: "1-1",
+                                      pitchSequenceRows: [],
+                                      onDeckBatterNameText: nil)
+        ScrollView {
+            CurrentPlayView(viewModel: vm)
+                .padding()
+        }
+    }
+}

@@ -8,16 +8,27 @@
 import Foundation
 
 struct CurrentPlayViewModel {
-    var numberOfOuts: Int = 0
-    let countText: String
     
     let batterTitleText: String = "Batting"
     let batterNameText: String
-    let batterStatsText: String
+    let batterStatsText1: String
+    let batterStatsText2: String
     
     let pitcherTitleText: String = "Pitching"
     let pitcherNameText: String
-    let pitcherStatsText: String
+    let pitcherStatsText1: String
+    let pitcherStatsText2: String
+
+    var numberOfOuts: Int = 0
+    let countText: String
+    
+    let pitchSequenceRows: [PitchSequenceViewModel.PitchRow]
+    var pitchSequenceViewModel: PitchSequenceViewModel? {
+        return pitchSequenceRows.isEmpty ? nil : .init(rows: pitchSequenceRows)
+    }
+    
+    let onDeckTitleText = "On-deck:"
+    let onDeckBatterNameText: String?
     
     var isRunnerOn1B: Bool = false
     var isRunnerOn2B: Bool = false
