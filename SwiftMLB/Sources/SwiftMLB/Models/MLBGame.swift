@@ -13,7 +13,7 @@ public struct MLBGame: Decodable {
     public let type: String
     public let season: String
     public let venue: MLBVenue
-    public let gameDate: Date
+    public let gameDate: String
     public let status: MLBGameStatus
     public let gameInfo: GameInfo?
     public let weather: WeatherInfo?
@@ -23,6 +23,7 @@ public struct MLBGame: Decodable {
     public let players: [MLBPlayer]
     public let decisions: MLBGameDecision?
     public let probablePitchers: MLBProbablePitcher?
+    public let currentPlay: MLBPlay?
     
     public struct GameTeams: Codable {
         public let away: MLBTeam

@@ -38,6 +38,13 @@ struct DetailGameView: View {
         List {
             ForEach(sections, id: \.self) { section in
                 switch section {
+                case .currentPlay:
+                    Section("At-Bat") {
+                        if let viewModel = viewModel.currentPlayViewModel {
+                            CurrentPlayView(viewModel: viewModel)
+                                .padding(.vertical)
+                        }
+                    }
                 case .previewHeader:
                     Section {
                         if let viewModel = viewModel.previewHeaderViewModel {

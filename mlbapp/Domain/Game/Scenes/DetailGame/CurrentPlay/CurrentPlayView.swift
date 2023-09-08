@@ -45,11 +45,12 @@ struct CurrentPlayView: View {
                     .foregroundColor(.secondary)
                 Text(viewModel.pitcherNameText)
                     .bold()
-                    .font(.title2)
+                    .font(.title3)
                 VStack(alignment: .leading) {
                     Text(viewModel.pitcherStatsText1)
                     Text(viewModel.pitcherStatsText2)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 2)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
@@ -70,11 +71,14 @@ struct CurrentPlayView: View {
                     .foregroundColor(.secondary)
                 Text(viewModel.batterNameText)
                     .bold()
-                    .font(.title2)
+                    .font(.title3)
+                    //.minimumScaleFactor(0.8)
+                    .lineLimit(1)
                 VStack(alignment: .trailing) {
                     Text(viewModel.batterStatsText1)
                     Text(viewModel.batterStatsText2)
                 }
+                .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.top, 2)
                 .font(.subheadline)
                 .foregroundColor(.secondary)

@@ -52,6 +52,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         formatProbablePitchers(game: game)
         formatInfoItems(game: game)
         formatDecisions(game: game)
+        formatCurrentPlay(game.currentPlay, playerHash: game.players, boxscore: game.boxscore)
         
         var navigationTitle = "\(game.awayTeam.abbreviation) @ \(game.homeTeam.abbreviation)"
         if game.status == .final {
@@ -66,7 +67,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
                                                       awayTeamName: game.awayTeam.teamName,
                                                       awayTeamRecord: awayTeamRecord.formatted(),
                                                       awayTeamAbbreviation: game.awayTeam.abbreviation,
-                                                      gameDateString: game.date.formatted(),
+                                                      gameDateString: game.date?.formatted() ?? "-",
                                                       venueName: game.venue.name)
         
         DispatchQueue.main.async {
@@ -118,7 +119,7 @@ struct DetailGamePresenter: DetailGamePresentationLogic {
         case .final:
             return StatusBannerViewModel(statusText: "FINAL", statusTextColor: .red, secondaryStatusText: game.venue.name, secondaryStatusTextColor: .secondary, backgroundColor: .clear, divider: true, chevronIndicator: false)
         default:
-            let text = game.date.formatted(date: .omitted, time: .shortened)
+            let text = game.date?.formatted(date: .omitted, time: .shortened) ?? "-"
             return StatusBannerViewModel(statusText: text, statusTextColor: .secondary, secondaryStatusText: game.venue.name, secondaryStatusTextColor: .secondary, backgroundColor: .clear, divider: true, chevronIndicator: false)
         }
     }
@@ -205,7 +206,7 @@ extension DetailGamePresenter {
                     item = DetailGame.GameInfoItem(type: type, value: "-")
                 }
             case .date:
-                item = DetailGame.GameInfoItem(type: type, value: game.date.formatted())
+                item = DetailGame.GameInfoItem(type: type, value: game.date?.formatted() ?? "-")
             }
             
             if let item = item {
@@ -261,3 +262,37 @@ extension DetailGamePresenter {
     }
 }
 
+// MARK: - Current Play
+extension DetailGamePresenter {
+    func formatCurrentPlay(_ play: Play?, playerHash: [Int: Player], boxscore: Boxscore_V2?) {
+        guard let play = play, let batter = playerHash[play.matchup.batter.id], let bxBatter = boxscore?.player(withID: play.matchup.batter.id), let pitcher = playerHash[play.matchup.pitcher.id], let bxPitcher = boxscore?.player(withID: play.matchup.pitcher.id) else {
+            return
+        }
+        
+        let batterGameAverage: String = bxBatter.stats?.battingAverage.formatted(.none) ?? ""
+        let batterGameHitSummary: String = bxBatter.stats?.hitsSummary.formatted(.none) ?? ""
+        let battterSeasonAverage: String = bxBatter.seasonStats?.battingAverageFormatted ?? ""
+        
+        let pitcherIP = bxPitcher.stats?.inningsPitchedFormatted ?? ""
+        let pitcherStrikeouts = bxPitcher.stats?.strikeoutsFormatted ?? ""
+        let pitcherWalks = bxPitcher.stats?.walksFormatted ?? ""
+        let pitcherPitchesThrown = bxPitcher.stats?.pitchesThrownFormatted ?? ""
+        let pitcherEarnedRuns = bxPitcher.stats?.earnedRunsFormatted ?? ""
+        
+        let currentPlayViewModel = CurrentPlayViewModel(batterNameText: batter.boxscoreName ?? play.matchup.batter.fullName,
+                                    batterStatsText1: "\(batterGameAverage) \(batterGameHitSummary)",
+                                    batterStatsText2: "\(battterSeasonAverage)",
+                                    pitcherNameText: pitcher.boxscoreName ?? play.matchup.pitcher.fullName,
+                                    pitcherStatsText1: "\(pitcherIP) \(pitcherPitchesThrown)",
+                                    pitcherStatsText2: "\(pitcherStrikeouts) \(pitcherWalks) \(pitcherEarnedRuns)",
+                                    numberOfOuts: play.count?.outs ?? 0,
+                                    countText: play.count?.ballsStrikesFormatted() ?? "-",
+                                    pitchSequenceRows: [],
+                                    onDeckBatterNameText: nil)
+        
+        DispatchQueue.main.async {
+            viewModel.currentPlayViewModel = currentPlayViewModel
+        }
+        
+    }
+}

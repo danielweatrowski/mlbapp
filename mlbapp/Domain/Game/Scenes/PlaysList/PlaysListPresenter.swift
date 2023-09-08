@@ -35,13 +35,17 @@ struct PlaysListPresenter: PlaysListPresentationLogic {
         
         for play in output.plays {
             
+            guard let eventType = play.result.eventType, let desc = play.result.description else {
+                continue
+            }
+            
             let inningHashID = play.about.inning
-            let timeFormatted = play.about.endTime.formatted(date: .omitted, time: .shortened)
+            let timeFormatted = play.about.endTime?.formatted(date: .omitted, time: .shortened)
             
             let playViewModel = PlaysList.InningPlayViewModel(playID: play.about.atBatIndex,
-                                                                eventName: play.result.event,
-                                                                description: play.result.description,
-                                                                time: timeFormatted,
+                                                                eventName: eventType,
+                                                                description: desc,
+                                                                time: timeFormatted ?? "-",
                                                                 numberOfOuts: nil)
             if play.isAwayTeam {
                 if awayInningPlays[inningHashID] != nil {

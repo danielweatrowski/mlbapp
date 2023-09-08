@@ -41,9 +41,12 @@ struct GameBuilder: JSONBuilder {
         guard let awayData = teamInfo["away"] as? [String: Any] else {
             throw SwiftMLBError.keyNotFound(key: "teams.away")
         }
-        
         guard let playerData = gameData["players"] as? [String: [String: Any]] else {
             throw SwiftMLBError.keyNotFound(key: "gameData.players")
+        }
+        guard let playsData = liveData["plays"] as? [String: Any] else {
+            throw SwiftMLBError.keyNotFound(key: "liveData.plays")
+
         }
         
         var playersJSON = [[String: Any]]()
@@ -58,6 +61,7 @@ struct GameBuilder: JSONBuilder {
         let gameInfoJSON = gameData["gameInfo"] as? [String: Any]
         let linescoreJSON = liveData["linescore"] as? [String: Any]
         let boxscoreJSON = liveData["boxscore"] as? [String: Any]
+        let currentPlayJSON = playsData["currentPlay"] as? [String: Any]
         let venueJSON = buildVenue(venueDict: venueInfo)
         let awayJSON = try buildTeam(teamDict: awayData)
         let homeJSON = try buildTeam(teamDict: homeData)
@@ -71,6 +75,7 @@ struct GameBuilder: JSONBuilder {
             "venue": venueJSON,
             "boxscore": boxscoreJSON,
             "linescore": linescoreJSON,
+            "currentPlay": currentPlayJSON,
             "players": playersJSON,
             "decisions": decisionJSON,
             "probablePitchers": probablePitchersJSON,

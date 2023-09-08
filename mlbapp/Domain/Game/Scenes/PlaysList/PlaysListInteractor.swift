@@ -8,6 +8,7 @@
 import Foundation
 import Models
 import Common
+import OSLog
 
 protocol PlaysListBusinessLogic {
     func loadAllPlays() async
@@ -50,6 +51,8 @@ class PlaysListInteractor: ObservableObject, PlaysListBusinessLogic & PlaysListD
                                             totalInningsPlayed: data.plays.last?.about.inning ?? 0)
             presenter?.presentPlaysList(output: output)
         } catch {
+            Logger.game.error("Did fail to load all plays: \(error, privacy: .public)")
+            
             let sceneError = SceneError(errorDescription: error.localizedDescription)
             presenter?.presentSceneError(sceneError)
         }
@@ -66,7 +69,8 @@ class PlaysListInteractor: ObservableObject, PlaysListBusinessLogic & PlaysListD
             present(plays: allPlays, thru: inningsPlayed)
         case .hits:
             var hitPlays = allPlays.filter({
-                let isHit = eventTypeHash[$0.result.eventType]?.hit ?? false
+                guard let eventType = $0.result.eventType else { return false }
+                let isHit = eventTypeHash[eventType]?.hit ?? false
                 return isHit
             })
             present(plays: hitPlays, thru: inningsPlayed)
@@ -119,7 +123,8 @@ class PlaysListInteractor: ObservableObject, PlaysListBusinessLogic & PlaysListD
     }
     
     private func loadPlays() async throws -> [Play] {
-        return try await gameWorker.fetchAllPlays(forGameID: gameID)
+        let playDetail = try await gameWorker.fetchAllPlays(forGameID: gameID)
+        return playDetail.allPlays
     }
     
     private func loadEvents() async throws -> [String: Play.EventType] {

@@ -11,7 +11,7 @@ import Models
 protocol GameStoreProtocol {
     func fetchGame(withID id: Int) async throws -> Game
     func searchGame(with parameters: GameSearch.SearchParameters) async throws -> [GameSearch.Result]
-    func fetchAllPlays(forGameID id: Int) async throws -> [Play]
+    func fetchAllPlays(forGameID id: Int) async throws -> PlayDetail
     func fetchBoxscore(forGameID id: Int) async throws -> Boxscore_V2
     func fetchRoster(teamID id: Int, date: Date) async throws -> Roster
     func fetchPlayEventTypes() async throws -> [String: Play.EventType]
@@ -30,7 +30,7 @@ struct GameWorker<Store: GameStoreProtocol> {
         return try await store.searchGame(with: parameters)
     }
     
-    func fetchAllPlays(forGameID id: Int) async throws -> [Play] {
+    func fetchAllPlays(forGameID id: Int) async throws -> PlayDetail {
         return try await store.fetchAllPlays(forGameID: id)
     }
     

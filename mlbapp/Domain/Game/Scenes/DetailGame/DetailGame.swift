@@ -93,6 +93,7 @@ extension DetailGame {
         case gameInfo
         case teamInfo
         case about
+        case currentPlay
         
     }
     
@@ -106,6 +107,7 @@ extension DetailGame {
         
         static var liveLayout: [Section] = [
             .header,
+            .currentPlay,
             .gameInfo,
             .teamInfo,
             .about

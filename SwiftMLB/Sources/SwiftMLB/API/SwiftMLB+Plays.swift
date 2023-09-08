@@ -6,18 +6,25 @@
 //
 
 import Foundation
+import OSLog
 
 public extension SwiftMLB {
     
     static func plays(for gameID: Int) async throws -> MLBPlays {
         let request: SwiftMLBRequest = .plays(gameID)
-        let data = try await networkService.load(request)
         
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(.iso8601TimeZoneOmitted)
-        let plays = try decoder.decode(MLBPlays.self, from: data)
-        
-        return plays
+        do {
+            let data = try await networkService.load(request)
+            
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(.iso8601TimeZoneOmitted)
+            
+            let plays = try decoder.decode(MLBPlays.self, from: data)
+            return plays
+        } catch {
+            Logger.swiftmlb.error("\(error, privacy: .public)")
+            throw error
+        }
     }
 }
 
@@ -28,4 +35,4 @@ extension DateFormatter {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         return dateFormatter
     }()
-  }
+}

@@ -8,6 +8,7 @@
 import Foundation
 import Common
 import Models
+import OSLog
 
 protocol DetailGameBusinessLogic {
     func loadGame()
@@ -53,6 +54,7 @@ class DetailGameInteractor: DetailGameBusinessLogic & DetailGameDataStore, Obser
                 
                 presenter.presentGame(response: response)
             } catch {
+                Logger.game.error("Did fail to load game: \(error, privacy: .public)")
                 let sceneError = SceneError(errorDescription: error.localizedDescription)
                 self.presenter.presentSceneError(sceneError)
             }

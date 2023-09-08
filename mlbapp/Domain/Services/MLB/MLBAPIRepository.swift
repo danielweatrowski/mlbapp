@@ -162,6 +162,9 @@ struct MLBAPIRepository: GameStoreProtocol {
         let probablePitchersAdapter = ProbablePitchersAdapter(dataObject: gameDTO.probablePitchers)
         let probablePitchers = probablePitchersAdapter.toDomain()
         
+        let playMapper = PlayMapper(dataObject: gameDTO.currentPlay)
+        let currentPlay = playMapper.toDomain()
+        
         let gameStatus = GameStatus(rawValue: gameDTO.status.abstractGameState) ?? .other
         
         let gameInfo = Game.Info(weatherTempurature: gameDTO.weather?.temp,
@@ -178,9 +181,9 @@ struct MLBAPIRepository: GameStoreProtocol {
                              currentInningHalf: half)
         }
                                  
-        
+        let gameDate = ISO8601DateFormatter().date(from: gameDTO.gameDate)
         let game = Game(id: id,
-                        date: gameDTO.gameDate,
+                        date: gameDate,
                         homeTeam: homeTeam,
                         homeTeamScore: gameDTO.linescore.teams.home?.runs ?? 0,
                         awayTeam: awayTeam,
@@ -193,7 +196,8 @@ struct MLBAPIRepository: GameStoreProtocol {
                         probablePitchers: probablePitchers,
                         linescore: linescore,
                         boxscore: boxscore,
-                        liveInfo: liveInfo)
+                        liveInfo: liveInfo,
+                        currentPlay: currentPlay)
         
         return game
     }
@@ -207,36 +211,12 @@ struct MLBAPIRepository: GameStoreProtocol {
         return boxscore
     }
     
-    func fetchAllPlays(forGameID id: Int) async throws -> [Play] {
+    func fetchAllPlays(forGameID id: Int) async throws -> PlayDetail {
         let dto = try await SwiftMLB.plays(for: id)
         
-        let plays: [Play?] = dto.allPlays.map { playDTO in
-            
-            guard let event = playDTO.result.event, let eventType = playDTO.result.eventType, let desc = playDTO.result.description else {
-                return nil
-            }
-            
-            let result = Play.Result(type: playDTO.result.type,
-                                     event: event,
-                                     eventType: eventType,
-                                     description: desc,
-                                     rbi: playDTO.result.rbi ?? 0,
-                                     awayScore: playDTO.result.awayScore,
-                                     homeScore: playDTO.result.homeScore,
-                                     isOut: playDTO.result.isOut ?? false)
-            
-            let about = Play.Detail(atBatIndex: playDTO.about.atBatIndex,
-                                    halfInning: playDTO.about.halfInning,
-                                    inning: playDTO.about.inning,
-                                    hasOut: playDTO.about.hasOut,
-                                    endTime: playDTO.about.endTime,
-                                    isScoringPlay: playDTO.about.isScoringPlay ?? false)
-            
-            return Play(result: result, about: about)
-        }
-        
-        return plays
-            .compactMap({$0})
+        let mapper = PlayDetailMapper(dataObject: dto)
+        let playDetail = mapper.toDomain()
+        return playDetail
     }
     
     func fetchPlayEventTypes() async throws -> [String: Play.EventType] {

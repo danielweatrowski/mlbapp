@@ -63,6 +63,8 @@
 		666EBB832A7DA44100852992 /* Standings in Frameworks */ = {isa = PBXBuildFile; productRef = 666EBB822A7DA44100852992 /* Standings */; };
 		666EBB862A7DAC3700852992 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 666EBB852A7DAC3700852992 /* Models */; };
 		6672990C29AD48D900E4E453 /* GameWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6672990B29AD48D900E4E453 /* GameWorker.swift */; };
+		669192292AAB982B00657697 /* PlayDetailMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669192282AAB982B00657697 /* PlayDetailMapper.swift */; };
+		6691922B2AABA2E900657697 /* GameLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6691922A2AABA2E900657697 /* GameLogger.swift */; };
 		669BC5902A1C5F7900934A96 /* ScoresListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BC58F2A1C5F7900934A96 /* ScoresListView.swift */; };
 		669BC5922A1C601600934A96 /* ScoresListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BC5912A1C601600934A96 /* ScoresListInteractor.swift */; };
 		669BC5942A1C602000934A96 /* ScoresListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BC5932A1C602000934A96 /* ScoresListPresenter.swift */; };
@@ -159,6 +161,8 @@
 		666EBB812A7DA36100852992 /* Standings */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Standings; sourceTree = "<group>"; };
 		666EBB842A7DA55D00852992 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Models; sourceTree = "<group>"; };
 		6672990B29AD48D900E4E453 /* GameWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWorker.swift; sourceTree = "<group>"; };
+		669192282AAB982B00657697 /* PlayDetailMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayDetailMapper.swift; sourceTree = "<group>"; };
+		6691922A2AABA2E900657697 /* GameLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogger.swift; sourceTree = "<group>"; };
 		669BC58F2A1C5F7900934A96 /* ScoresListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresListView.swift; sourceTree = "<group>"; };
 		669BC5912A1C601600934A96 /* ScoresListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresListInteractor.swift; sourceTree = "<group>"; };
 		669BC5932A1C602000934A96 /* ScoresListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresListPresenter.swift; sourceTree = "<group>"; };
@@ -323,6 +327,7 @@
 				66D4D08029BEBA6D00F4AB26 /* MLBLogoService.swift */,
 				66510D4B2A2D302200DB41B8 /* DecisionsAdapter.swift */,
 				66510D572A2E738A00DB41B8 /* ProbablePitchersAdapter.swift */,
+				669192282AAB982B00657697 /* PlayDetailMapper.swift */,
 			);
 			path = MLB;
 			sourceTree = "<group>";
@@ -343,6 +348,7 @@
 			children = (
 				6672990B29AD48D900E4E453 /* GameWorker.swift */,
 				66291E2B2908DCBD0055DC93 /* Scenes */,
+				6691922A2AABA2E900657697 /* GameLogger.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -696,6 +702,7 @@
 				66589E532A180ABE009380D6 /* LineupDetailPresenter.swift in Sources */,
 				66139FC02A587A6800244001 /* MLBAPIRepository+Standings.swift in Sources */,
 				66139FDC2A5BA04000244001 /* VideosListRowView.swift in Sources */,
+				669192292AAB982B00657697 /* PlayDetailMapper.swift in Sources */,
 				66EBDF312918924400BEF1A5 /* DetailGame.swift in Sources */,
 				66139FD82A5BA01E00244001 /* VideosListInteractor.swift in Sources */,
 				66E7DB4A2A8AC70D003355E2 /* SceneProvider.swift in Sources */,
@@ -712,6 +719,7 @@
 				6612584729BBCE6A00C704AE /* BoxscoreAdapter.swift in Sources */,
 				66589E4B2A17FE87009380D6 /* LineupDetailView.swift in Sources */,
 				66139FD42A5B9FB700244001 /* VideosList.swift in Sources */,
+				6691922B2AABA2E900657697 /* GameLogger.swift in Sources */,
 				66F354752A6B6CC4007E63F9 /* ColorTheme.swift in Sources */,
 				66510D642A34F3EC00DB41B8 /* DummyMLBRepository.swift in Sources */,
 				66247C2F2A5F9E5F00C67963 /* StandingsTab.swift in Sources */,

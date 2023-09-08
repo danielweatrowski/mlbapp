@@ -345,6 +345,88 @@ extension Statistics {
             self.fielding = fielding
             self.pitching = pitching
         }
+        
+        public var pitchesThrownFormatted: String {
+            if let p = pitching?.pitchesThrown.value, p > 0 {
+                return  "\(p) P"
+            } else {
+                return ""
+            }
+        }
+        
+        public var earnedRunsFormatted: String {
+            if let er = pitching?.earnedRuns.value, er > 0 {
+                return  "\(er) ER"
+            } else {
+                return ""
+            }
+        }
+        
+        public var walksFormatted: String {
+            if let walks = pitching?.baseOnBalls.value, walks > 0 {
+                return  "\(walks) BB"
+            } else {
+                return ""
+            }
+        }
+        
+        public var strikeoutsFormatted: String {
+            if let ks = pitching?.strikeOuts.value, ks > 0 {
+                return  "\(ks) K"
+            } else {
+                return ""
+            }
+        }
+        
+        public var inningsPitchedFormatted: String {
+            
+            if let ipValue = pitching?.inningsPitched.value, let ip = Double(ipValue), ip > 0 {
+                return  "\(ip) IP"
+            } else {
+                return ""
+            }
+        }
+        
+        public var battingAverage: Stat<String> {
+            let hits = batting?.hits
+            let atBats = batting?.atBats
+            
+            return Stat<String>(value: "\(hits?.value ?? 0)-\(atBats?.value ?? 0)")
+        }
+        
+        public var hitsSummary: Stat<String> {
+            var retStr: [String] = []
+            
+            if let num2B = batting?.doubles.value {
+                if num2B > 1 {
+                    retStr.append("\(num2B) 2B")
+                } else if num2B == 1 {
+                    retStr.append("2B")
+                }
+            }
+            
+            if let num3B = batting?.triples.value {
+                if num3B > 1 {
+                    retStr.append("\(num3B) 3B")
+                } else if num3B == 1 {
+                    retStr.append("3B")
+                }
+            }
+            
+            if let numHR = batting?.homeRuns.value {
+                if numHR > 1 {
+                    retStr.append("\(numHR) HR")
+                } else if numHR == 1 {
+                    retStr.append("HR")
+                }
+            }
+            
+            if retStr.isEmpty {
+                return Stat<String>(value: nil)
+            }
+            
+            return Stat<String>(value: retStr.joined(separator: ","))
+        }
     }
     
     public struct SeasonStats {
@@ -357,6 +439,22 @@ extension Statistics {
             self.batting = batting
             self.fielding = fielding
             self.pitching = pitching
+        }
+        
+        public var ERAFormatted: String {
+            if let era = pitching?.era.value {
+                return  "\(era) ERA"
+            } else {
+                return ""
+            }
+        }
+        
+        public var battingAverageFormatted: String {
+            if let avg = batting?.avg.value {
+                return "\(avg) AVG"
+            } else {
+                return ""
+            }
         }
     }
 }
